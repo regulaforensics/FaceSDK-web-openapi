@@ -1,0 +1,91 @@
+openapi: 3.0.3
+paths:
+
+  /compare:
+    post:
+      tags:
+        - matching
+      summary: "Compare given persons among themselves and return similarity score for each pair."
+      operationId: compare
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompareRequest"
+      responses:
+        200:
+          description: "Successful operation; return compare results with their score and similarity."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompareResponse"
+        403:
+          $ref: "./common.yml#/components/responses/BadLicense"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+
+components:
+  schemas:
+
+    CompareRequest:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompareRequestFields"
+
+    CompareRequestFields:
+      type: object
+      required:
+        - data
+      properties:
+        index:
+          type: number
+        format:
+          type: string
+        type:
+          $ref: "#/components/schemas/ImageSource"
+        data:
+          $ref: "./common.yml#/components/schemas/ImageData"
+
+    CompareResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompareResponseFields"
+
+    CompareResponseFields:
+      type: object
+      properties:
+        firstIndex:
+          type: number
+        secondIndex:
+          type: number
+        score:
+          type: number
+        similarity:
+          type: number
+        errorCode:
+          type: string
+        errorMsg:
+          type: string
+
+    ImageSource:
+      description: "todo add description here"
+      type: number
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      x-enum-varnames:
+        - DOCUMENT_PRINTED
+        - DOCUMENT_RFID
+        - LIVE
+        - DOCUMENT_WITH_LIVE
+        - EXTERNAL

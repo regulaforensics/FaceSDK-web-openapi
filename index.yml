@@ -1,0 +1,8 @@
+openapi: 3.0.3
+info:
+  title: Regula Face Recognition Web API
+  description: Regula Face Recognition Web API
+  version: 0.1.0
+paths:
+  /compare:
+    $ref: './comparison.yml#/paths/~1compare'
