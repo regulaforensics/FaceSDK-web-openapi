@@ -75,7 +75,7 @@ components:
           type: string
 
     ImageSource:
-      description: "todo add description here"
+      description: "Face photo image source"
       type: number
       enum:
         - 1
