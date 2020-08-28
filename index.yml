@@ -7,4 +7,4 @@ paths:
   /compare:
     $ref: './comparison.yml#/paths/~1compare'
   /detect:
-    $ref: './detect.yml#/paths/~detect'
+    $ref: './detect.yml#/paths/~1detect'
