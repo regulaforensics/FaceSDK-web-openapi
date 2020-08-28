@@ -5,7 +5,7 @@ paths:
     post:
       tags:
         - matching
-      summary: "Compare given persons among themselves and return similarity score for each pair."
+      summary: "Compare provided face images in all combinations and return similarity score for each pair."
       operationId: compare
       requestBody:
         required: true
