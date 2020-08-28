@@ -1,0 +1,33 @@
+openapi: 3.0.3
+
+components:
+
+  responses:
+    BadLicense:
+      description: "Bad license. Either server or request does not contain valid license."
+    BadRequest:
+      description: "Bad request. Check your input data."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OperationLog"
+
+
+  schemas:
+
+    ImageData:
+      description: "Base64 encoded image"
+      type: string
+      format: byte
+
+    OperationLog:
+      type: object
+      properties:
+        success:
+          type: boolean
+        type:
+          type: string
+        msg:
+          type: string
+        payload:
+          type: object
