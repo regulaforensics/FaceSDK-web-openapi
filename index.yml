@@ -6,3 +6,5 @@ info:
 paths:
   /compare:
     $ref: './comparison.yml#/paths/~1compare'
+  /detect:
+    $ref: './comparison.yml#/paths/~detect'

@@ -1,0 +1,84 @@
+openapi: 3.0.3
+paths:
+
+  /detect:
+    post:
+      tags:
+        - functionality
+      summary: "Detect facial coordinates"
+      operationId: detect
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetectRequest"
+      responses:
+        200:
+          description: "Successful operation; return detection faces with their coordinates."
+          content:
+            application/json:
+              schena:
+                $ref: ""
+        400:
+          $ref: "./common.yml#/components/responses/BadLicense"
+        403:
+          $ref: "./common.yml#/components/responses/BadRequest"
+
+components:
+  schemas:
+
+    DetectRequest:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DetectRequestFields"
+
+    DetectRequestFields:
+      type: object
+      properties:
+        image:
+          $ref: "./common.yml#/components/schemas/ImageData"
+        only_central_face:
+          description: "True - main face; false - all faces."
+          type: boolean
+          default: false
+
+    DetectResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DetectResponseFields"
+
+    DetectResponseFields:
+      type: object
+      properties:
+        detections:
+          type: array
+          items:
+            $ref: "#/components/schemas/Detection"
+
+    Detection:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DetectionFields"
+
+    DetectionFields:
+      type: object
+      properties:
+        landmarks:
+          descriptions: "Main coordinates of the detected face."
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+          example: [[x, y]]
+        roi:
+          description: "Rectangular area of the detected face."
+          type: array
+          items:
+            type: number
+          example: [x, y, weight, height]
+        detectorType:
+          type: number
+        landmarksType:
+          type: number
