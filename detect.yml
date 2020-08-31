@@ -4,7 +4,7 @@ paths:
   /detect:
     post:
       tags:
-        - functionality
+        - matching
       summary: "Detect facial coordinates"
       operationId: detect
       requestBody:
@@ -18,8 +18,8 @@ paths:
           description: "Successful operation; return detection faces with their coordinates."
           content:
             application/json:
-              schena:
-                $ref: ""
+              schema:
+                $ref: "#/components/schemas/DetectResponse"
         400:
           $ref: "./common.yml#/components/responses/BadLicense"
         403:
@@ -29,11 +29,6 @@ components:
   schemas:
 
     DetectRequest:
-      type: object
-      allOf:
-        - $ref: "#/components/schemas/DetectRequestFields"
-
-    DetectRequestFields:
       type: object
       properties:
         image:
@@ -45,27 +40,21 @@ components:
 
     DetectResponse:
       type: object
-      allOf:
-        - $ref: "#/components/schemas/DetectResponseFields"
-
-    DetectResponseFields:
-      type: object
       properties:
         detections:
           type: array
           items:
             $ref: "#/components/schemas/Detection"
+        detectorType:
+          type: integer
+        landmarksType:
+          type: integer
 
     Detection:
       type: object
-      allOf:
-        - $ref: "#/components/schemas/DetectionFields"
-
-    DetectionFields:
-      type: object
       properties:
         landmarks:
-          descriptions: "Main coordinates of the detected face."
+          description: "Main coordinates of the detected face."
           type: array
           items:
             type: array
@@ -78,7 +67,3 @@ components:
           items:
             type: number
           example: [x, y, weight, height]
-        detectorType:
-          type: number
-        landmarksType:
-          type: number
