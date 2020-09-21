@@ -30,13 +30,15 @@ components:
 
     CompareRequest:
       type: object
+      required:
+        - images
       properties:
         images:
           type: array
           items:
-            $ref: "#/components/schemas/CompareRequestFields"
+            $ref: "#/components/schemas/CompareImage"
 
-    CompareRequestFields:
+    CompareImage:
       type: object
       required:
         - data
@@ -56,9 +58,9 @@ components:
         results:
           type: array
           items:
-            $ref: "#/components/schemas/CompareResponseFields"
+            $ref: "#/components/schemas/CompareImageResult"
 
-    CompareResponseFields:
+    CompareImageResult:
       type: object
       properties:
         firstIndex:
