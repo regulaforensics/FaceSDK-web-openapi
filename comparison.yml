@@ -20,10 +20,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CompareResponse"
-        403:
-          $ref: "./common.yml#/components/responses/BadLicense"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
+        403:
+          $ref: "./common.yml#/components/responses/BadLicense"
 
 components:
   schemas:

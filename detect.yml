@@ -21,9 +21,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/DetectResponse"
         400:
-          $ref: "./common.yml#/components/responses/BadLicense"
-        403:
           $ref: "./common.yml#/components/responses/BadRequest"
+        403:
+          $ref: "./common.yml#/components/responses/BadLicense"
 
 components:
   schemas:
@@ -46,8 +46,10 @@ components:
           items:
             $ref: "#/components/schemas/Detection"
         detectorType:
+          description: "The internal type of detector. Used to calculate the rectangular area of the detected face (roi)."
           type: integer
         landmarksType:
+          description: "The internal type of detector. Used to calculate the main coordinate of the detected face (landmarks)."
           type: integer
 
     Detection:
