@@ -46,26 +46,31 @@ components:
           items:
             $ref: "#/components/schemas/Detection"
         detectorType:
-          description: "The internal type of detector. Used to calculate the rectangular area of the detected face (roi)."
+          description: "Internal."
           type: integer
         landmarksType:
-          description: "The internal type of detector. Used to calculate the main coordinate of the detected face (landmarks)."
+          description: "Internal."
           type: integer
 
     Detection:
       type: object
       properties:
         landmarks:
-          description: "Main coordinates of the detected face."
+          description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
           type: array
           items:
+            description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
             type: array
             items:
               type: number
+              example: [x, y]
           example: [[x, y]]
         roi:
-          description: "Rectangular area of the detected face."
-          type: array
-          items:
-            type: number
-          example: [x, y, weight, height]
+          $ref: "#/components/schemas/FaceRectangular"
+
+    FaceRectangular:
+      description: "Rectangular area of the detected face. First element - X-axis coordinate. Second element - Y-axis coordinate. Third element - rectangular weight. Fourth element - rectangular."
+      type: array
+      items:
+        type: number
+      example: [x, y, weight, height]
