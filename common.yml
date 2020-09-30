@@ -31,3 +31,7 @@ components:
           type: string
         payload:
           type: object
+
+    Bytes:
+      type: string
+      format: binary

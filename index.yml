@@ -13,3 +13,5 @@ paths:
     $ref: './comparison.yml#/paths/~1compare'
   /detect:
     $ref: './detect.yml#/paths/~1detect'
+  /liveness:
+    $ref: './liveness.yml#/paths/~1liveness'

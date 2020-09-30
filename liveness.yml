@@ -1,0 +1,142 @@
+openapi: 3.0.3
+paths:
+
+ /liveness:
+    post:
+      tags:
+        - liveness
+      summary: ""
+      operationId: check_video_liveness
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "./common.yml#/components/schemas/Bytes"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LivenessResultItem"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        403:
+          $ref: "./common.yml#/components/responses/BadLicense"
+
+/liveness/depth:
+  post:
+    tags:
+      - liveness
+    summary: ""
+    operationId: check_depth_liveness
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DepthLiveness"
+    responses:
+      200:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LivenessResult"
+      400:
+        $ref: "./common.yml#/components/responses/BadRequest"
+      403:
+        $ref: "./common.yml#/components/responses/BadLicense"
+
+/liveness/image:
+  post:
+    tags:
+      - liveness
+    sumary: ""
+    operationId: check_image_liveness
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ImageLiveness"
+    responses:
+      200:
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LivenessResult"
+      400:
+        $ref: "./common.yml#/components/responses/BadRequest"
+      403:
+        $ref: "./common.yml#/components/responses/BadLicense"
+
+components:
+  schemas:
+
+    DepthLiveness:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/DepthLivenessItem"
+
+    DepthLivenessItem:
+      type: object
+      properties:
+        dataScene:
+          $ref: "./common.yml#/components/schemas/ImageData"
+        dataDepth:
+          $ref: "./common.yml#/components/schemas/ImageData"
+        depthScale:
+          description: ""
+          type: number
+
+    ImageLiveness:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/ImageLivenessItem"
+
+    ImageLivenessItem:
+      type: object
+      properties:
+        data:
+          $ref: "./common.yml#/components/schemas/ImageData"
+
+    LivenessResult:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/LivenessResultItem"
+
+    LivenessResultItem:
+      type: object
+      required:
+        - face
+        - livenessStatus
+      properties:
+        face:
+          $ref: "./common.yml#/components/schemas/ImageData"
+        livenessStatus:
+          $ref: "#/components/schemas/LivenessStatus"
+        code:
+          description: ""
+          type: number
+        index:
+          description: ""
+          type: number
+
+    LivenessStatus:
+      description: ""
+      type: number
+      enum:
+        - 0
+        - 1
+      x-enum-varnames:
+        - REAL
+        - FAKE
