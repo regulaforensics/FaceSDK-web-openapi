@@ -69,7 +69,7 @@ components:
           $ref: "#/components/schemas/FaceRectangular"
 
     FaceRectangular:
-      description: "Rectangular area of the detected face. First element - X-axis coordinate. Second element - Y-axis coordinate. Third element - rectangular width. Fourth element - rectangular height."
+      description: "Rectangular area of the detected face. First element - X-axis coordinate. Second element - Y-axis coordinate. (X, Y) - left top point. Third element - rectangular width. Fourth element - rectangular height."
       type: array
       items:
         type: number
