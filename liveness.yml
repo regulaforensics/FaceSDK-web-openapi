@@ -5,7 +5,7 @@ paths:
     post:
       tags:
         - liveness
-      summary: ""
+      summary: "Detect face from the video and check its liveness status."
       operationId: check_video_liveness
       requestBody:
         required: true
@@ -15,7 +15,7 @@ paths:
               $ref: "./common.yml#/components/schemas/Bytes"
       responses:
         200:
-          description: ""
+          description: "Successful operation; return detected face with its liveness status."
           content:
             application/json:
               schema:
@@ -29,7 +29,7 @@ paths:
     post:
       tags:
         - liveness
-      summary: ""
+      summary: "Detect faces from the images and check their liveness status. Liveness status depends on color depth."
       operationId: check_depth_liveness
       requestBody:
         required: true
@@ -39,7 +39,7 @@ paths:
               $ref: "#/components/schemas/DepthLiveness"
       responses:
         200:
-          description: ""
+          description: "Successful operation; return detected faces with their liveness status."
           content:
             application/json:
               schema:
@@ -53,7 +53,7 @@ paths:
     post:
       tags:
         - liveness
-      sumary: ""
+      sumary: "Detect faces from the images and check their liveness status."
       operationId: check_image_liveness
       requestBody:
         required: true
@@ -63,7 +63,7 @@ paths:
               $ref: "#/components/schemas/ImageLiveness"
       responses:
         200:
-          description: ""
+          description: "Successful operation; return detected faces with their liveness status."
           content:
             application/json:
               schema:
@@ -92,7 +92,7 @@ components:
         dataDepth:
           $ref: "./common.yml#/components/schemas/ImageData"
         depthScale:
-          description: ""
+          description: "Normalized factor for color depth."
           type: number
 
     ImageLiveness:
@@ -128,14 +128,11 @@ components:
         livenessStatus:
           $ref: "#/components/schemas/LivenessStatus"
         code:
-          description: ""
           type: number
         index:
-          description: ""
           type: number
 
     LivenessStatus:
-      description: ""
       type: number
       enum:
         - 0
