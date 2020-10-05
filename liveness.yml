@@ -110,12 +110,9 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
 
     LivenessResult:
-      type: object
-      properties:
-        images:
-          type: array
-          items:
-            $ref: "#/components/schemas/LivenessResultItem"
+      type: array
+      items:
+        $ref: "#/components/schemas/LivenessResultItem"
 
     LivenessResultItem:
       type: object
