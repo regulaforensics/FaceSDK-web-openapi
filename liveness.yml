@@ -1,13 +1,14 @@
 openapi: 3.0.3
 paths:
 
- /liveness:
+  /liveness:
     post:
       tags:
         - liveness
       summary: ""
       operationId: check_video_liveness
       requestBody:
+        required: true
         content:
           application/octet-stream:
             schema:
@@ -24,51 +25,53 @@ paths:
         403:
           $ref: "./common.yml#/components/responses/BadLicense"
 
-/liveness/depth:
-  post:
-    tags:
-      - liveness
-    summary: ""
-    operationId: check_depth_liveness
-    requestBody:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/DepthLiveness"
-    responses:
-      200:
-        description: ""
+  /liveness/depth:
+    post:
+      tags:
+        - liveness
+      summary: ""
+      operationId: check_depth_liveness
+      requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LivenessResult"
-      400:
-        $ref: "./common.yml#/components/responses/BadRequest"
-      403:
-        $ref: "./common.yml#/components/responses/BadLicense"
+              $ref: "#/components/schemas/DepthLiveness"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LivenessResult"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        403:
+          $ref: "./common.yml#/components/responses/BadLicense"
 
-/liveness/image:
-  post:
-    tags:
-      - liveness
-    sumary: ""
-    operationId: check_image_liveness
-    requestBody:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ImageLiveness"
-    responses:
-      200:
-        description: ""
+  /liveness/image:
+    post:
+      tags:
+        - liveness
+      sumary: ""
+      operationId: check_image_liveness
+      requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LivenessResult"
-      400:
-        $ref: "./common.yml#/components/responses/BadRequest"
-      403:
-        $ref: "./common.yml#/components/responses/BadLicense"
+              $ref: "#/components/schemas/ImageLiveness"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LivenessResult"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        403:
+          $ref: "./common.yml#/components/responses/BadLicense"
 
 components:
   schemas:
@@ -138,5 +141,5 @@ components:
         - 0
         - 1
       x-enum-varnames:
-        - REAL
-        - FAKE
+        - POSITIVE
+        - UNDETERMINED

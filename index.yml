@@ -15,3 +15,7 @@ paths:
     $ref: './detect.yml#/paths/~1detect'
   /liveness:
     $ref: './liveness.yml#/paths/~1liveness'
+  /liveness/depth:
+    $ref: './liveness.yml#/paths/~1liveness~1depth'
+  /liveness/image:
+    $ref: './liveness.yml#/paths/~1liveness~1image'
