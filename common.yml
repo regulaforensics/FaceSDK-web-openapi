@@ -35,3 +35,71 @@ components:
     Bytes:
       type: string
       format: binary
+
+    FaceRecognitionResultCode:
+      type: integer
+      description: "Result codes from core lib."
+      enum:
+        - 0
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 209
+        - 210
+        - 211
+        - 212
+        - 213
+        - 214
+        - 215
+        - 216
+        - 217
+        - 218
+        - 219
+        - 220
+        - 221
+        - 222
+        - 223
+        - 224
+        - 225
+        - 226
+        - 227
+        - 228
+        - 229
+      x-enum-varnames:
+        - FACER_OK
+        - FACER_NO_LICENSE
+        - FACER_IS_NOT_INITIALIZED
+        - FACER_COMMAND_IS_NOT_SUPPORTED
+        - FACER_COMMAND_PARAMS_READ_ERROR
+        - FACER_SEARCHER_INDEX_FILE_NOT_EXIST
+        - FACER_SEARCHER_INDEX_FILE_READ_ERROR
+        - FACER_SEARCHER_INDEX_FILE_DECRYPTION_ERROR
+        - FACER_SEARCHER_INDEX_LOAD_ERROR
+        - FACER_SEARCHER_WRONG_DESCRIPTOR_VERSION
+        - FACER_SEARCHER_INDEX_FILE_ENCRYPTION_ERROR
+        - FACER_SEARCHER_INDEX_FILE_SAVE_ERROR
+        - FACER_SEARCHER_IMAGE_DECODE_ERROR
+        - FACER_SEARCHER_ID_EXISTS_IN_INDEX
+        - FACER_SEARCHER_ID_NOT_IN_INDEX
+        - FACER_SEARCHER_NO_FACES
+        - FACER_SEARCHER_DESCRIPTOR_EXTRACTOR_ERROR
+        - FACER_SEARCHER_METADATA_READ_ERROR
+        - FACER_SEARCHER_NO_SEARCH_LICENSE
+        - FACER_SEARCHER_DESCRIPTOR_DECODE_ERROR
+        - FACER_SEARCHER_DESCRIPTOR_WRONG_SIZE
+        - FACER_SEARCHER_ZIP_IMAGE_READ_ERROR
+        - FACER_SEARCHER_ZIP_META_READ_ERROR
+        - FACER_SEARCHER_SIMILAR_PHOTOS_EXIST
+        - FACER_SEARCHER_PERSON_ZIP_READ_ERROR
+        - FACER_LESS_THAN_TWO_IMAGES_IN_REQUEST
+        - FACER_SEARCHER_WRONG_ID
+        - FACER_SEARCHER_ID_EXISTS_IN_DELETED
+        - FACER_VIDEO_DECODE_ERROR
+        - FACER_NOT_ENOUGH_FRAMES
+        - FACER_OUTPUT_IS_NOT_DEFINED

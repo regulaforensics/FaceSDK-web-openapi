@@ -125,7 +125,7 @@ components:
         livenessStatus:
           $ref: "#/components/schemas/LivenessStatus"
         code:
-          type: number
+          $ref: "./common.yml#/components/schemas/FaceRecognitionResultCode"
         index:
           type: number
 
