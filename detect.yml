@@ -40,6 +40,8 @@ components:
 
     DetectResponse:
       type: object
+      required:
+        - detections
       properties:
         detections:
           type: array
@@ -54,6 +56,9 @@ components:
 
     Detection:
       type: object
+      required:
+        - landmarks
+        - roi
       properties:
         landmarks:
           description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."

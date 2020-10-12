@@ -44,7 +44,7 @@ components:
         - data
       properties:
         index:
-          type: number
+          type: integer
         type:
           $ref: "#/components/schemas/ImageSource"
         data:
@@ -52,6 +52,8 @@ components:
 
     CompareResponse:
       type: object
+      required:
+        - results
       properties:
         results:
           type: array
@@ -62,9 +64,9 @@ components:
       type: object
       properties:
         firstIndex:
-          type: number
+          type: integer
         secondIndex:
-          type: number
+          type: integer
         score:
           type: number
         similarity:
@@ -76,7 +78,7 @@ components:
 
     ImageSource:
       description: "Face photo image source"
-      type: number
+      type: integer
       enum:
         - 1
         - 2

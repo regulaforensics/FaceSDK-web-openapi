@@ -78,6 +78,8 @@ components:
 
     DepthLiveness:
       type: object
+      required:
+        - images
       properties:
         images:
           type: array
@@ -86,6 +88,10 @@ components:
 
     DepthLivenessItem:
       type: object
+      required:
+        - dataScene
+        - dataDepth
+        - depthScale
       properties:
         dataScene:
           $ref: "./common.yml#/components/schemas/ImageData"
@@ -94,9 +100,12 @@ components:
         depthScale:
           description: "Normalized factor for color depth."
           type: number
+          format: float
 
     ImageLiveness:
       type: object
+      required:
+        - images
       properties:
         images:
           type: array
@@ -105,6 +114,8 @@ components:
 
     ImageLivenessItem:
       type: object
+      required:
+        - data
       properties:
         data:
           $ref: "./common.yml#/components/schemas/ImageData"
@@ -127,10 +138,10 @@ components:
         code:
           $ref: "./common.yml#/components/schemas/FaceRecognitionResultCode"
         index:
-          type: number
+          type: integer
 
     LivenessStatus:
-      type: number
+      type: integer
       enum:
         - 0
         - 1
