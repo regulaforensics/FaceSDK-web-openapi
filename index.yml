@@ -9,13 +9,13 @@ servers:
     description: Local on-premise installation
   
 paths:
-  /compare:
+  /api/compare:
     $ref: './comparison.yml#/paths/~1compare'
-  /detect:
+  /api/detect:
     $ref: './detect.yml#/paths/~1detect'
-  /liveness:
+  /api/liveness:
     $ref: './liveness.yml#/paths/~1liveness'
-  /liveness/depth:
+  /api/liveness/depth:
     $ref: './liveness.yml#/paths/~1liveness~1depth'
-  /liveness/image:
+  /api/liveness/image:
     $ref: './liveness.yml#/paths/~1liveness~1image'
