@@ -7,15 +7,9 @@ info:
 servers:
   - url: http://localhost:41101/
     description: Local on-premise installation
-  
+
 paths:
   /api/compare:
     $ref: './comparison.yml#/paths/~1compare'
   /api/detect:
     $ref: './detect.yml#/paths/~1detect'
-  /api/liveness:
-    $ref: './liveness.yml#/paths/~1liveness'
-  /api/liveness/depth:
-    $ref: './liveness.yml#/paths/~1liveness~1depth'
-  /api/liveness/image:
-    $ref: './liveness.yml#/paths/~1liveness~1image'
