@@ -33,7 +33,7 @@ components:
       properties:
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
-        only_central_face:
+        onlyCentralFace:
           description: "True - main face; false - all faces."
           type: boolean
           default: false
