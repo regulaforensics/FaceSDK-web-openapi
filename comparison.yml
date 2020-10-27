@@ -51,14 +51,16 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
 
     CompareResponse:
-      type: object
-      required:
-        - results
-      properties:
-        results:
-          type: array
-          items:
-            $ref: "#/components/schemas/CompareImageResult"
+      allOf:
+        - $ref: './common.yml#/components/schemas/FaceRecognitionResult'
+        - type: object
+          required:
+            - results
+          properties:
+            results:
+              type: array
+              items:
+                $ref: "#/components/schemas/CompareImageResult"
 
     CompareImageResult:
       type: object

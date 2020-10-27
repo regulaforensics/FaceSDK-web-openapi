@@ -15,6 +15,14 @@ components:
 
   schemas:
 
+    FaceRecognitionResult:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          $ref: '#/components/schemas/FaceRecognitionResultCode'
+
     ImageData:
       description: "Base64 encoded image"
       type: string
