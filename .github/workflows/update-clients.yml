@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Specification Repo
         uses: actions/checkout@v2
         with:
-          path: 'spec'
+          path: 'FaceRecognition-web-openapi'
       - name: Checkout JS Client Repo
         uses: actions/checkout@v2
         with:
@@ -25,7 +25,6 @@ jobs:
         working-directory: js-client
         run: |
           npm install
-          export FACER_DEFINITION_FOLDER="$GITHUB_WORKSPACE/spec"
           ./update-models.sh
       - name: Push Changes Back To Client Repo
         working-directory: js-client
@@ -51,7 +50,7 @@ jobs:
       - name: Checkout Specification Repo
         uses: actions/checkout@v2
         with:
-          path: 'spec'
+          path: 'FaceRecognition-web-openapi'
       - name: Checkout Java Client Repo
         uses: actions/checkout@v2
         with:
@@ -61,7 +60,6 @@ jobs:
       - name: Update Model According To Specification
         working-directory: java-client
         run: |
-          export FACER_DEFINITION_FOLDER="$GITHUB_WORKSPACE/spec"
           ./update-models.sh
       - name: Push Changes Back To Client Repo
         working-directory: java-client
@@ -82,7 +80,7 @@ jobs:
       - name: Checkout Specification Repo
         uses: actions/checkout@v2
         with:
-          path: 'spec'
+          path: 'FaceRecognition-web-openapi'
       - name: Checkout Python Client Repo
         uses: actions/checkout@v2
         with:
@@ -92,7 +90,6 @@ jobs:
       - name: Update Model According To Specification
         working-directory: python-client
         run: |
-          export FACER_DEFINITION_FOLDER="$GITHUB_WORKSPACE/spec"
           ./update-models.sh
       - name: Push Changes Back To Client Repo
         working-directory: python-client
