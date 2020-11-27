@@ -1,0 +1,25 @@
+name: release clients
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version"
+        required: true
+      options:
+        description: "Possible options: --prerelease"
+        required: false
+        default: ""
+
+jobs:
+
+  release-clients:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release clients
+        run: |
+          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceRecognition-web-js-client
+          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceRecognition-web-java-client
+          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceRecognition-web-python-client
+        env:
+          GITHUB_TOKEN: ${{ secrets.REGULA_GITHUB_PUSH_TOKEN }}
