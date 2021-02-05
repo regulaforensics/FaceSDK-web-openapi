@@ -84,18 +84,6 @@ components:
               example: [x, y]
           example: [[x, y]]
         roi:
-          $ref: "#/components/schemas/FaceRectangular"
+          $ref: "./common.yml#/components/schemas/FaceRectangular"
         thumbnail:
-          $ref: "#/components/schemas/Thumbnail"
-
-    Thumbnail:
-      description: "Formatted base64 face detection image."
-      type: string
-      format: byte
-
-    FaceRectangular:
-      description: "Rectangular area of the detected face. First element - X-axis coordinate. Second element - Y-axis coordinate. (X, Y) - left top point. Third element - rectangular width. Fourth element - rectangular height."
-      type: array
-      items:
-        type: number
-      example: [x, y, width, height]
+          $ref: "./common.yml#/components/schemas/Thumbnail"
