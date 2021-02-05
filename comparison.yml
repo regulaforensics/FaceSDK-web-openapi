@@ -33,6 +33,8 @@ components:
       required:
         - images
       properties:
+        thumbnails:
+          type: boolean
         images:
           type: array
           items:
@@ -56,11 +58,16 @@ components:
         - type: object
           required:
             - results
+            - detections
           properties:
             results:
               type: array
               items:
                 $ref: "#/components/schemas/CompareImageResult"
+            detections:
+              type: array
+              items:
+                $ref: "#/components/schemas/CompareImageDetection"
 
     CompareImageResult:
       type: object
@@ -78,6 +85,37 @@ components:
         errorMsg:
           type: string
 
+    CompareImageDetection:
+      type: object
+      properties:
+        faces:
+          $ref: "#/components/schemas/DetectionFaces"
+        imageIndex : integer
+        status : integer
+
+    DetectionFaces:
+      type: array
+      items:
+        $ref: "#/components/schemas/DetectionFace"
+
+    DetectionFace:
+      type: object
+      properties:
+        faceIndex: integer
+        landmarks:
+          description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
+          type: array
+          items:
+            description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
+            type: array
+            items:
+              type: number
+              example: [x, y]
+          example: [[x, y]]
+        roi:
+          $ref: "./common.yml#/components/schemas/FaceRectangular"
+        thumbnail:
+          $ref: "./common.yml#/components/schemas/Thumbnail"
     ImageSource:
       description: "Face photo image source"
       type: integer

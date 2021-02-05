@@ -111,3 +111,15 @@ components:
         - FACER_VIDEO_DECODE_ERROR
         - FACER_NOT_ENOUGH_FRAMES
         - FACER_OUTPUT_IS_NOT_DEFINED
+
+    Thumbnail:
+      description: "Formatted base64 face detection image."
+      type: string
+      format: byte
+
+    FaceRectangular:
+      description: "Rectangular area of the detected face. First element - X-axis coordinate. Second element - Y-axis coordinate. (X, Y) - left top point. Third element - rectangular width. Fourth element - rectangular height."
+      type: array
+      items:
+        type: number
+      example: [x, y, width, height]
