@@ -36,6 +36,10 @@ components:
           description: "Enable formatted detections' thumbnails in the response"
           type: boolean
           default: false
+        attributes:
+          description: "Enable face attributions detection, such as age or emotion and etc."
+          type: boolean
+          default: false
         onlyCentralFace:
           description: "True - main face; false - all faces."
           type: boolean
@@ -73,6 +77,12 @@ components:
         - landmarks
         - roi
       properties:
+        attributes:
+          type: object
+          additionalProperties: true
+          example:
+            age: adult
+            emotion: smile
         landmarks:
           description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
           type: array
@@ -81,9 +91,19 @@ components:
             type: array
             items:
               type: number
-              example: [x, y]
-          example: [[x, y]]
+              example: [ x, y ]
+          example: [ [ x, y ] ]
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
         thumbnail:
           $ref: "./common.yml#/components/schemas/Thumbnail"
+
+    FaceAttribute:
+      description: "Face attributes, such as age or emotion"
+      type: string
+      enum:
+        - age
+        - emotion
+      x-enum-varnames:
+        - AGE
+        - EMOTION
