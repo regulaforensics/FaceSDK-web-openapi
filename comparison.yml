@@ -35,6 +35,7 @@ components:
       properties:
         thumbnails:
           type: boolean
+          default: false
         images:
           type: array
           items:
