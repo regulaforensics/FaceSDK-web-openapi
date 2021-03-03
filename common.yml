@@ -31,14 +31,12 @@ components:
     OperationLog:
       type: object
       properties:
-        success:
-          type: boolean
+        status_code:
+          type: integer
         type:
           type: string
         msg:
           type: string
-        payload:
-          type: object
 
     Bytes:
       type: string
