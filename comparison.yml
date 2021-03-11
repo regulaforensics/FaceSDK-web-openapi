@@ -41,13 +41,22 @@ components:
           items:
             $ref: "#/components/schemas/CompareImage"
 
+    CompareImageIndex:
+      type: integer
+      description: "Image index used to identify input photos between themselves.
+      If not specified, than input list index is used"
+
+    CompareFaceIndex:
+      type: integer
+      description: "Faces index used to identify faces in scope of one photo."
+
     CompareImage:
       type: object
       required:
         - data
       properties:
         index:
-          type: integer
+          $ref: "#/components/schemas/CompareImageIndex"
         type:
           $ref: "#/components/schemas/ImageSource"
         data:
@@ -57,9 +66,6 @@ components:
       allOf:
         - $ref: './common.yml#/components/schemas/FaceRecognitionResult'
         - type: object
-          required:
-            - results
-            - detections
           properties:
             results:
               type: array
@@ -72,37 +78,47 @@ components:
 
     CompareImageResult:
       type: object
+      required:
+        - firstIndex
+        - secondIndex
       properties:
         firstIndex:
-          type: integer
+          $ref: "#/components/schemas/CompareImageIndex"
+        firstFaceIndex:
+          $ref: "#/components/schemas/CompareFaceIndex"
         secondIndex:
-          type: integer
+          $ref: "#/components/schemas/CompareImageIndex"
+        secondFaceIndex:
+          $ref: "#/components/schemas/CompareFaceIndex"
         score:
           type: number
         similarity:
           type: number
         errorCode:
-          type: string
+          $ref: './common.yml#/components/schemas/FaceRecognitionResultCode'
         errorMsg:
           type: string
 
     CompareImageDetection:
       type: object
+      required:
+        - imageIndex
+        - status
       properties:
         faces:
           type: array
           items:
             $ref: "#/components/schemas/DetectionFace"
         imageIndex:
-          type: integer
+          $ref: "#/components/schemas/CompareImageIndex"
         status:
-          type: integer
+          $ref: './common.yml#/components/schemas/FaceRecognitionResultCode'
 
     DetectionFace:
       type: object
       properties:
         faceIndex:
-          type: integer
+          $ref: "#/components/schemas/CompareFaceIndex"
         landmarks:
           description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
           type: array
