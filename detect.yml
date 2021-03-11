@@ -49,8 +49,6 @@ components:
       allOf:
         - $ref: './common.yml#/components/schemas/FaceRecognitionResult'
         - type: object
-          required:
-            - results
           properties:
             results:
               $ref: '#/components/schemas/DetectResult'
