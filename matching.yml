@@ -1,34 +1,32 @@
 openapi: 3.0.3
 paths:
 
-  /compare:
+  /match:
     post:
       tags:
         - matching
       summary: "Compare provided face images in all combinations and return similarity score for each pair."
-      operationId: compare
+      operationId: match
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CompareRequest"
+              $ref: "#/components/schemas/MatchRequest"
       responses:
         200:
           description: "Successful operation; return compare results with their score and similarity."
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CompareResponse"
-        400:
-          $ref: "./common.yml#/components/responses/BadRequest"
+                $ref: "#/components/schemas/MatchResponse"
         403:
           $ref: "./common.yml#/components/responses/BadLicense"
 
 components:
   schemas:
 
-    CompareRequest:
+    MatchRequest:
       type: object
       required:
         - images
@@ -39,67 +37,67 @@ components:
         images:
           type: array
           items:
-            $ref: "#/components/schemas/CompareImage"
+            $ref: "#/components/schemas/MatchImage"
 
-    CompareImageIndex:
+    MatchImageIndex:
       type: integer
       description: "Image index used to identify input photos between themselves.
       If not specified, than input list index is used"
 
-    CompareFaceIndex:
+    MatchFaceIndex:
       type: integer
       description: "Faces index used to identify faces in scope of one photo."
 
-    CompareImage:
+    MatchImage:
       type: object
       required:
         - data
       properties:
         index:
-          $ref: "#/components/schemas/CompareImageIndex"
+          $ref: "#/components/schemas/MatchImageIndex"
         type:
           $ref: "#/components/schemas/ImageSource"
         data:
           $ref: "./common.yml#/components/schemas/ImageData"
 
-    CompareResponse:
+    MatchResponse:
       allOf:
-        - $ref: './common.yml#/components/schemas/FaceRecognitionResult'
+        - $ref: './common.yml#/components/schemas/FaceSDKResult'
         - type: object
           properties:
             results:
               type: array
               items:
-                $ref: "#/components/schemas/CompareImageResult"
+                $ref: "#/components/schemas/MatchImageResult"
             detections:
               type: array
               items:
-                $ref: "#/components/schemas/CompareImageDetection"
+                $ref: "#/components/schemas/MatchImageDetection"
 
-    CompareImageResult:
+    MatchImageResult:
       type: object
       required:
         - firstIndex
         - secondIndex
       properties:
         firstIndex:
-          $ref: "#/components/schemas/CompareImageIndex"
+          $ref: "#/components/schemas/MatchImageIndex"
         firstFaceIndex:
-          $ref: "#/components/schemas/CompareFaceIndex"
+          $ref: "#/components/schemas/MatchFaceIndex"
         secondIndex:
-          $ref: "#/components/schemas/CompareImageIndex"
+          $ref: "#/components/schemas/MatchImageIndex"
         secondFaceIndex:
-          $ref: "#/components/schemas/CompareFaceIndex"
+          $ref: "#/components/schemas/MatchFaceIndex"
         score:
           type: number
         similarity:
           type: number
         errorCode:
-          $ref: './common.yml#/components/schemas/FaceRecognitionResultCode'
+          $ref: './common.yml#/components/schemas/FaceSDKResultCode'
         errorMsg:
           type: string
 
-    CompareImageDetection:
+    MatchImageDetection:
       type: object
       required:
         - imageIndex
@@ -110,15 +108,15 @@ components:
           items:
             $ref: "#/components/schemas/DetectionFace"
         imageIndex:
-          $ref: "#/components/schemas/CompareImageIndex"
+          $ref: "#/components/schemas/MatchImageIndex"
         status:
-          $ref: './common.yml#/components/schemas/FaceRecognitionResultCode'
+          $ref: './common.yml#/components/schemas/FaceSDKResultCode'
 
     DetectionFace:
       type: object
       properties:
         faceIndex:
-          $ref: "#/components/schemas/CompareFaceIndex"
+          $ref: "#/components/schemas/MatchFaceIndex"
         landmarks:
           description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
           type: array

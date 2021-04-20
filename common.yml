@@ -15,13 +15,13 @@ components:
 
   schemas:
 
-    FaceRecognitionResult:
+    FaceSDKResult:
       type: object
       required:
         - code
       properties:
         code:
-          $ref: '#/components/schemas/FaceRecognitionResultCode'
+          $ref: '#/components/schemas/FaceSDKResultCode'
 
     ImageData:
       description: "Base64 encoded image"
@@ -42,7 +42,7 @@ components:
       type: string
       format: binary
 
-    FaceRecognitionResultCode:
+    FaceSDKResultCode:
       type: integer
       description: "Result codes from core lib."
       enum:

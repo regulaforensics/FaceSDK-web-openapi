@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Regula Face Recognition Web API
-  description: Regula Face Recognition Web API
+  title: Regula FaceSDK Web API
+  description: Regula FaceSDK Web API
   version: 0.1.0
 
 servers:
@@ -9,7 +9,7 @@ servers:
     description: Local on-premise installation
 
 paths:
-  /api/compare:
-    $ref: './comparison.yml#/paths/~1compare'
+  /api/match:
+    $ref: './matching.yml#/paths/~1match'
   /api/detect:
     $ref: './detect.yml#/paths/~1detect'

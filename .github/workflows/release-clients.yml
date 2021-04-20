@@ -18,8 +18,9 @@ jobs:
     steps:
       - name: Release clients
         run: |
-          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceRecognition-web-js-client
-          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceRecognition-web-java-client
-          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceRecognition-web-python-client
+          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceSDK-web-js-client
+          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceSDK-web-java-client
+          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceSDK-web-python-client
+          gh release create v${{github.event.inputs.version}} ${{github.event.inputs.options}} --title ${{github.event.inputs.version}} --repo regulaforensics/FaceSDK-web-csharp-client
         env:
           GITHUB_TOKEN: ${{ secrets.REGULA_GITHUB_PUSH_TOKEN }}

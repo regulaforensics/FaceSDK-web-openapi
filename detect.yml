@@ -20,8 +20,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DetectResponse"
-        400:
-          $ref: "./common.yml#/components/responses/BadRequest"
         403:
           $ref: "./common.yml#/components/responses/BadLicense"
 
@@ -47,7 +45,7 @@ components:
 
     DetectResponse:
       allOf:
-        - $ref: './common.yml#/components/schemas/FaceRecognitionResult'
+        - $ref: './common.yml#/components/schemas/FaceSDKResult'
         - type: object
           properties:
             results:
