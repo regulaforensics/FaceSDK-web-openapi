@@ -8,6 +8,17 @@
 * [Python](https://github.com/regulaforensics/FaceSDK-web-python-client) 3.5+ client
 * [C# (WORKS ONLY ON 3.0+ VERSION)](https://github.com/regulaforensics/FaceSDK-web-csharp-client) client for .NET & .NET Core
 
+
+## Updating clients according to the current spec
+
+To update clients, use `update clients` GitHub action. Specify title PR and press run. For each client **PR** with changes will be created.
+
+:warning: NOTE: Static typed clients, such as Java or C#, require adding all new **enums** to `update-models.sh` ENUM_MAPPINGS section.
+
+:warning: NOTE: For some clients generator produces not-valid client code. See `update-models.sh` for ad-hocks fixing generator issues.   
+
+:warning: NOTE: Do **not edit** generated code. Create wrappers, decorators, etc in ext folder.
+
 ##  Scheme validation
 ```
 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli validate --recommend -i /local/index.yml 
