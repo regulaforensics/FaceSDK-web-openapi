@@ -107,6 +107,10 @@ jobs:
   update-csharp-client:
     runs-on: ubuntu-latest
     steps:
+      - name: Specify Dotnet Version
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
       - name: Checkout Specification Repo
         uses: actions/checkout@v2
         with:
@@ -133,6 +137,3 @@ jobs:
           gh pr create --fill --draft
         env:
           GITHUB_TOKEN: ${{ secrets.REGULA_GITHUB_PUSH_TOKEN }}
-
-
-
