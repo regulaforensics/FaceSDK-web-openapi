@@ -26,9 +26,15 @@ docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli validate -
 
 ## Generate html page
 ```bash
-npx redoc-cli bundle "$PWD/index.yml" --output facesdk-static-doc.html \
+npx redoc-cli bundle "$PWD/index.yml" --output facesdk-api-doc.html \
 --options.maxDisplayedEnumValues=5 --options.theme.logo.gutter="20px" \
 --options.theme.colors.primary.main="#8a53cb" --options.expandResponses="all" \
 --options.expandSingleSchemaField --options.hideDownloadButton --options.jsonSampleExpandLevel="6"
 ```
+
+```bash
+npx redoc-cli bundle "$PWD/index-identification-module.yml" --output facesdk-api-identification-module-doc.html \
+--options.maxDisplayedEnumValues=5 --options.theme.logo.gutter="20px" \
+--options.theme.colors.primary.main="#8a53cb" --options.expandResponses="all" \
+--options.expandSingleSchemaField --options.hideDownloadButton --options.jsonSampleExpandLevel="6"
 ```
