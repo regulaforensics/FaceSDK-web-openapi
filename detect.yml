@@ -79,6 +79,9 @@ components:
           example:
             age: adult
             emotion: smile
+        # todo faceQuality
+        # details { attribute, score }
+        # score: float
         landmarks:
           description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
           type: array
@@ -91,6 +94,7 @@ components:
           example: [ [ x, y ] ]
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
+        # todo rotationAngle : float
         thumbnail:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
