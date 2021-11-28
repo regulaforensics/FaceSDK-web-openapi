@@ -74,11 +74,7 @@ components:
         - roi
       properties:
         attributes:
-          type: object
-          additionalProperties: true
-          example:
-            age: adult
-            emotion: smile
+          $ref: "#/components/schemas/Attributes"
         faceQuality:
           $ref: "#/components/schemas/FaceQuality"
         landmarks:
@@ -137,6 +133,72 @@ components:
       example:
         attribute: "symmetry"
         score: 0.371
+
+    Attributes:
+      type: object
+      additionalProperties: true
+      properties:
+        age:
+          $ref: "#/components/schemas/AttributeValues"
+        artMask:
+          $ref: "#/components/schemas/AttributeValues"
+        electronicDevice:
+          $ref: "#/components/schemas/AttributeValues"
+        emotion:
+          $ref: "#/components/schemas/AttributeValues"
+        eyes:
+          type: object
+          properties:
+            left:
+              $ref: "#/components/schemas/AttributeValues"
+            right:
+              $ref: "#/components/schemas/AttributeValues"
+        livenessView:
+          $ref: "#/components/schemas/AttributeValues"
+        occlusion:
+          type: object
+          properties:
+            foreheadGlasses:
+              $ref: "#/components/schemas/AttributeValues"
+            glasses:
+              $ref: "#/components/schemas/AttributeValues"
+            hat:
+              $ref: "#/components/schemas/AttributeValues"
+            medecineMask:
+              $ref: "#/components/schemas/AttributeValues"
+            mouth:
+              $ref: "#/components/schemas/AttributeValues"
+            occlusionOther:
+              $ref: "#/components/schemas/AttributeValues"
+            sunglasses:
+              $ref: "#/components/schemas/AttributeValues"
+        quality:
+          type: object
+          properties:
+            blur:
+              type: number
+              format: float
+            brightness:
+              type: number
+              format: float
+            noise:
+              type: number
+              format: float
+        shades:
+          $ref: "#/components/schemas/AttributeValues"
+        symmetry:
+          $ref: "#/components/schemas/AttributeValues"
+
+    AttributeValues:
+      description: ""
+      type: object
+      properties:
+        pred:
+          type: number
+        prob:
+          type: number
+        value:
+          type: string
 
 
 
