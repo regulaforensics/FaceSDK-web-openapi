@@ -35,7 +35,7 @@ components:
           type: boolean
           default: false
         attributes:
-          description: "Enable face attributions detection, such as age or emotion and etc."
+          description: "Enable face attributions detection and face quality details"
           type: boolean
           default: false
         onlyCentralFace:
@@ -74,7 +74,7 @@ components:
         - roi
       properties:
         attributes:
-          $ref: "#/components/schemas/Attributes"
+          $ref: "#/components/schemas/FaceAttributes"
         faceQuality:
           $ref: "#/components/schemas/FaceQuality"
         landmarks:
@@ -90,88 +90,80 @@ components:
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
         rotationAngle:
+          description: "Angle of rotation from the camera"
           type: number
           format: float
           example: -0.841
         thumbnail:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
-    FaceAttribute:
-      description: "Face attributes, such as age or emotion"
-      type: string
-      enum:
-        - age
-        - emotion
-      x-enum-varnames:
-        - AGE
-        - EMOTION
-
     FaceQuality:
-      description: ""
+      description: "List of face details"
       type: object
       properties:
         details:
           type: array
-          description: ""
           items:
-            $ref: "#/components/schemas/Detail"
+            $ref: "#/components/schemas/FaceQualityDetails"
         score:
           type: number
           format: float
           example:
             score: 0.528
 
-    Detail:
-      description: ""
+    FaceQualityDetails:
+      description: "Face detail such as medicine mask, glasses, eyes etc."
       type: object
       properties:
         attribute:
           type: string
+          description: "Attribute of face"
         score:
           type: number
           format: float
+          description: "Probability of predicted value"
       example:
         attribute: "symmetry"
         score: 0.371
 
-    Attributes:
+    FaceAttributes:
       type: object
       additionalProperties: true
       properties:
         age:
-          $ref: "#/components/schemas/AttributeValues"
+          $ref: "#/components/schemas/AttributeValue"
         artMask:
-          $ref: "#/components/schemas/AttributeValues"
+          $ref: "#/components/schemas/AttributeValue"
         electronicDevice:
-          $ref: "#/components/schemas/AttributeValues"
+          $ref: "#/components/schemas/AttributeValue"
         emotion:
-          $ref: "#/components/schemas/AttributeValues"
+          $ref: "#/components/schemas/AttributeValue"
         eyes:
           type: object
           properties:
             left:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
             right:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
         livenessView:
-          $ref: "#/components/schemas/AttributeValues"
+          $ref: "#/components/schemas/AttributeValue"
         occlusion:
           type: object
           properties:
             foreheadGlasses:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
             glasses:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
             hat:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
             medecineMask:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
             mouth:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
             occlusionOther:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
             sunglasses:
-              $ref: "#/components/schemas/AttributeValues"
+              $ref: "#/components/schemas/AttributeValue"
         quality:
           type: object
           properties:
@@ -185,20 +177,23 @@ components:
               type: number
               format: float
         shades:
-          $ref: "#/components/schemas/AttributeValues"
+          $ref: "#/components/schemas/AttributeValue"
         symmetry:
-          $ref: "#/components/schemas/AttributeValues"
+          $ref: "#/components/schemas/AttributeValue"
 
-    AttributeValues:
-      description: ""
+    AttributeValue:
+      description: "Standard value for attribute"
       type: object
       properties:
         pred:
           type: number
+          description: "Prediction of neural network"
         prob:
           type: number
+          description: "Probability that the current answer is correct"
         value:
           type: string
+          description: "Translating prediction into the value of human language"
 
 
 
