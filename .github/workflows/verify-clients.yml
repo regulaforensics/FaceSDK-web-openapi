@@ -1,0 +1,92 @@
+name: verify clients
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  verify-js-client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Specification Repo
+        uses: actions/checkout@v2
+        with:
+          path: 'FaceSDK-web-openapi'
+      - name: Checkout JS Client Repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'regulaforensics/FaceSDK-web-js-client'
+          token: ${{ secrets.REGULA_GITHUB_PUSH_TOKEN }}
+          path: 'js-client'
+      - name: Update Model According To Specification
+        working-directory: js-client
+        run: |
+          npm install
+          ./update-models.sh
+
+  verify-java-client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Specify Java Version
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          java-package: jdk
+      - name: Checkout Specification Repo
+        uses: actions/checkout@v2
+        with:
+          path: 'FaceSDK-web-openapi'
+      - name: Checkout Java Client Repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'regulaforensics/FaceSDK-web-java-client'
+          token: ${{ secrets.REGULA_GITHUB_PUSH_TOKEN }}
+          path: 'java-client'
+      - name: Update Model According To Specification
+        working-directory: java-client
+        run: |
+          ./update-models.sh
+
+  verify-python-client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Specification Repo
+        uses: actions/checkout@v2
+        with:
+          path: 'FaceSDK-web-openapi'
+      - name: Checkout Python Client Repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'regulaforensics/FaceSDK-web-python-client'
+          token: ${{ secrets.REGULA_GITHUB_PUSH_TOKEN }}
+          path: 'python-client'
+      - name: Update Model According To Specification
+        working-directory: python-client
+        run: |
+          ./update-models.sh
+
+  verify-csharp-client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Specify Dotnet Version
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+      - name: Checkout Specification Repo
+        uses: actions/checkout@v2
+        with:
+          path: 'FaceSDK-web-openapi'
+      - name: Checkout CSharp Client Repo
+        uses: actions/checkout@v2
+        with:
+          repository: 'regulaforensics/FaceSDK-web-csharp-client'
+          token: ${{ secrets.REGULA_GITHUB_PUSH_TOKEN }}
+          path: 'csharp-client'
+      - name: Update Model According To Specification
+        working-directory: csharp-client
+        run: |
+          ./update-models.sh
