@@ -28,6 +28,8 @@ components:
     DetectRequest:
       type: object
       properties:
+        tag:
+          type: string
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
         thumbnails:

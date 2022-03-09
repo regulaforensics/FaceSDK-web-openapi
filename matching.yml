@@ -31,6 +31,8 @@ components:
       required:
         - images
       properties:
+        tag:
+          type: string
         thumbnails:
           type: boolean
           default: false
