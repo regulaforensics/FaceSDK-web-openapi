@@ -14,6 +14,67 @@ components:
 
 
   schemas:
+    QualityRequest:
+      type: object
+      description: "" # todo quality request description
+      properties:
+        align:
+          $ref: "#/components/schemas/Align"
+        background:
+          $ref: "#/components/schemas/RGB"
+        config:
+          $ref: "#/components/schemas/QualityConfig"
+
+    Align:
+      type: object
+      description: "" # todo align description
+      properties:
+        type:
+          $ref: "#/components/schemas/FaceAlignTypeQuality"
+          example: 1
+        pad:
+          $ref: "#/components/schemas/RGB"
+          description: "" # todo padding description
+        cropSize:
+          type: array
+          items:
+            type: integer
+          minItems: 2
+          maxItems: 2
+          description: "" # todo add crop description
+          example: [420, 525]
+
+    QualityConfig:
+      type: object
+      description: ""
+      properties:
+        name:
+          type: string
+          description: ""
+          example: "Roll"
+        range:
+          type: array
+          items:
+            type: float
+          minItems: 2
+          maxItems: 2
+          description: ""
+          example: [-5.0, 5.0]
+        unit:
+          type: string  # enum?
+          description: ""  # todo add unit description
+          example: "degrees"
+
+
+    RGB:
+      type: array
+      items:
+        type: integer
+      minItems: 3
+      maxItems: 3
+      description: "Array of RGB color" # todo add rgb description
+      example: [128, 128, 128]
+
 
     FaceSDKResult:
       type: object
@@ -41,6 +102,16 @@ components:
     Bytes:
       type: string
       format: binary
+
+    FaceAlignTypeQuality:
+      type: integer
+      description: "" # todo add align type description
+      enum:
+        - 0
+        - 1
+      x-enum-varnames:
+        - QUALITY_ALIGN_3x4
+        - ALIGN_4x5
 
     FaceSDKResultCode:
       type: integer
