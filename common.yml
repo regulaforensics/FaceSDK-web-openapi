@@ -59,12 +59,38 @@ components:
           minItems: 2
           maxItems: 2
           description: ""
-          example: [-5.0, 5.0]
+          example: [x, y]
         unit:
           type: string  # enum?
           description: ""  # todo add unit description
           example: "degrees"
 
+    QualityDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "" # todo detail name description
+          example: "Roll"
+        range:
+          type: array
+          description: "" # todo detail range description
+          items:
+            type: float
+          minItems: 2
+          maxItems: 2
+          example: [x, y]
+        status:
+          $ref: '#/components/schemas/FaceQualityStatus'
+          example: 1
+        unit:
+          type: string
+          description: ""
+          example: "degrees"
+        value:
+          type: float
+          description: ""
+          example: 2.602179527282715
 
     RGB:
       type: array
@@ -75,6 +101,16 @@ components:
       description: "Array of RGB color" # todo add rgb description
       example: [128, 128, 128]
 
+    FaceQualityStatus:
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+      x-enum-varnames:
+        - QUALITY_STATUS_FALSE
+        - QUALITY_STATUS_TRUE
+        - QUALITY_STATUS_UNDETERMINED
 
     FaceSDKResult:
       type: object

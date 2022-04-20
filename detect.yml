@@ -77,6 +77,8 @@ components:
         - landmarks
         - roi
       properties:
+        crop:
+          $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
           additionalProperties: true
@@ -93,6 +95,30 @@ components:
               type: number
               example: [ x, y ]
           example: [ [ x, y ] ]
+        quality:
+          type: object
+          description: ""
+          properties:
+            aligned:
+              type: boolean
+              description: "" # todo aligned description
+              example: true
+            compliant:
+              type: boolean
+              description: "" # todo compliant description
+              example: true
+            details:
+              type: array
+              items:
+                $ref: "./common.yml#/components/schemas/QualityDetail"
+            resized:
+              type: boolean
+              description: "" # todo resized description
+              example: false
+            score:
+              type: float
+              description: "" # todo score description
+              example: -1.0
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
         thumbnail:
