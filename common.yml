@@ -61,7 +61,7 @@ components:
           description: ""
           example: [x, y]
         unit:
-          type: string  # enum?
+          $ref: "#/components/schemas/FaceQualityUnit"
           description: ""  # todo add unit description
           example: "degrees"
 
@@ -81,10 +81,10 @@ components:
           maxItems: 2
           example: [x, y]
         status:
-          $ref: '#/components/schemas/FaceQualityStatus'
+          $ref: "#/components/schemas/FaceQualityStatus"
           example: 1
         unit:
-          type: string
+          $ref: "#/components/schemas/FaceQualityUnit"
           description: ""
           example: "degrees"
         value:
@@ -112,13 +112,33 @@ components:
         - QUALITY_STATUS_TRUE
         - QUALITY_STATUS_UNDETERMINED
 
+    FaceQualityUnit:
+      type: string
+      enum:
+        - "pixels"
+        - "relative"
+        - "pcs"
+        - "degrees"
+        - "percent"
+        - "bits"
+        - "quantity"
+      x-enum-varnames:
+        - QUALITY_UNIT_PIXELS
+        - QUALITY_UNIT_RELATIVE
+        - QUALITY_UNIT_PSC
+        - QUALITY_UNIT_DEGREES
+        - QUALITY_UNIT_PERCENT
+        - QUALITY_UNIT_BITS
+        - QUALITY_UNIT_QUANTITY
+
+
     FaceSDKResult:
       type: object
       required:
         - code
       properties:
         code:
-          $ref: '#/components/schemas/FaceSDKResultCode'
+          $ref: "#/components/schemas/FaceSDKResultCode"
 
     ImageData:
       description: "Base64 encoded image"
