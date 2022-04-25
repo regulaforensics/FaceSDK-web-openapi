@@ -16,41 +16,44 @@ components:
   schemas:
     QualityRequest:
       type: object
-      description: "" # todo quality request description
+      description: "If set, the portrait quality check is performed."
       properties:
         align:
           $ref: "#/components/schemas/Align"
         background:
           $ref: "#/components/schemas/RGB"
+          description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
         config:
           $ref: "#/components/schemas/QualityConfig"
 
     Align:
       type: object
-      description: "" # todo align description
+      description: "Face image alignment and cutting, includes type, pad, cropSize."
       properties:
         type:
           $ref: "#/components/schemas/FaceAlignTypeQuality"
+          description: "The dimensions ratio to the height of the required pattern, see the FaceAlignTypeQuality enum."
           example: 1
         pad:
           $ref: "#/components/schemas/RGB"
-          description: "" # todo padding description
+          description: "The RGB value for the color that will complement the image if this is needed for alignment."
         cropSize:
           type: array
           items:
             type: integer
           minItems: 2
           maxItems: 2
-          description: "" # todo add crop description
+          description: "The resize value in case type matches this value. It it doesn't match, no resize is done."
           example: [420, 525]
 
     QualityConfig:
       type: object
-      description: ""
+      description: "The configuration that defines the list of returned quality check characteristics.
+       For every characteristic, includes name, range, unit."
       properties:
         name:
           $ref: "#/components/schemas/FaceQualityConfigName"
-          description: ""
+          description: "The name of the characteristic."
           example: "Roll"
         range:
           type: array
@@ -58,11 +61,13 @@ components:
             type: float
           minItems: 2
           maxItems: 2
-          description: ""
+          description: "The range of applicable values for this characteristic.
+          If the returned in the Response value fits this range,
+          the value is identified as compliant with the requirements."
           example: [x, y]
         unit:
           $ref: "#/components/schemas/FaceQualityUnit"
-          description: ""  # todo add unit description
+          description: "The units of measurement for the value."
           example: "degrees"
 
     QualityDetail:
@@ -70,11 +75,11 @@ components:
       properties:
         name:
           $ref: "#/components/schemas/FaceQualityConfigName"
-          description: "" # todo detail name description
+          description: "The name of the characteristic."
           example: "Roll"
         range:
           type: array
-          description: "" # todo detail range description
+          description: "The range of set values for this characteristic."
           items:
             type: float
           minItems: 2
@@ -83,13 +88,14 @@ components:
         status:
           $ref: "#/components/schemas/FaceQualityStatus"
           example: 1
+          description: "The assessment status, see FaceQualityStatus enum"
         unit:
           $ref: "#/components/schemas/FaceQualityUnit"
-          description: ""
+          description: "The units of measurement for the value."
           example: "degrees"
         value:
           type: float
-          description: ""
+          description: "The assessed value for the characteristic, returned in the set units."
           example: 2.602179527282715
 
     RGB:
@@ -98,7 +104,6 @@ components:
         type: integer
       minItems: 3
       maxItems: 3
-      description: "Array of RGB color" # todo add rgb description
       example: [128, 128, 128]
 
     FaceQualityStatus:
@@ -253,7 +258,6 @@ components:
 
     FaceAlignTypeQuality:
       type: integer
-      description: "" # todo add align type description
       enum:
         - 0
         - 1

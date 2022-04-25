@@ -97,15 +97,16 @@ components:
           example: [ [ x, y ] ]
         quality:
           type: object
-          description: ""
+          description: "Returned if the quality assessment was performed."
           properties:
             aligned:
               type: boolean
-              description: "" # todo aligned description
+              description: "Returns true if alignment was done. Otherwise, false."
               example: true
             compliant:
               type: boolean
-              description: "" # todo compliant description
+              description: "Returns the portrait quality assessment result.
+              True if all the checked characteristics returned values that fit into the range. Otherwise, false."
               example: true
             details:
               type: array
@@ -113,11 +114,12 @@ components:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
             resized:
               type: boolean
-              description: "" # todo resized description
+              description: "Returns true if the image was resized according to the set dimensions. Otherwise, false."
               example: false
             score:
               type: float
-              description: "" # todo score description
+              description: "Returns the estimated portrait quality assessment result,
+               a number from 0 to 1, where 1 is for absolute compliance."
               example: -1.0
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
