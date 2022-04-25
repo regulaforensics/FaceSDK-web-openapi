@@ -49,7 +49,7 @@ components:
       description: ""
       properties:
         name:
-          type: string
+          $ref: "#/components/schemas/FaceQualityConfigName"
           description: ""
           example: "Roll"
         range:
@@ -69,7 +69,7 @@ components:
       type: object
       properties:
         name:
-          type: string
+          $ref: "#/components/schemas/FaceQualityConfigName"
           description: "" # todo detail name description
           example: "Roll"
         range:
@@ -131,6 +131,98 @@ components:
         - QUALITY_UNIT_BITS
         - QUALITY_UNIT_QUANTITY
 
+    FaceQualityConfigName:
+      type: string
+      enum:
+        - "BackgroundUniformity"
+        - "BlurLevel"
+        - "ContactLenses"
+        - "DarkGlasses"
+        - "ExpressionLevel"
+        - "EyeLeftClosed"
+        - "EyeLeftCoveredWithHair"
+        - "EyeLeftOccluded"
+        - "EyeRightClosed"
+        - "EyeRightCoveredWithHair"
+        - "EyeRightOccluded"
+        - "EyesDistance"
+        - "EyesRed"
+        - "FaceDynamicRange"
+        - "FaceGlare"
+        - "FaceMidPointHorizontalPosition"
+        - "FaceMidPointVerticalPosition"
+        - "FaceOccluded"
+        - "ForeheadCovering"
+        - "FramesTooHeavy"
+        - "HeadCovering"
+        - "HeadHeightRatio"
+        - "HeadWidthRatio"
+        - "ImageChannelsNumber"
+        - "ImageHeight"
+        - "ImageWidth"
+        - "ImageWidthToHeight"
+        - "MouthOpen"
+        - "NoiseLevel"
+        - "OffGaze"
+        - "OtherFaces"
+        - "PaddingRatio"
+        - "Pitch"
+        - "ReflectionOnGlasses"
+        - "Roll"
+        - "ShadowsOnBackground"
+        - "ShadowsOnFace"
+        - "ShouldersPose"
+        - "Smile"
+        - "StrongMakeup"
+        - "TooDark"
+        - "TooLight"
+        - "UnnaturalSkinTone"
+        - "Yaw"
+      x-enum-varnames:
+        - BACKGROUND_UNIFORMITY
+        - BLUR_LEVEL
+        - CONTACT_LENSES
+        - DARK_GLASSES
+        - EXPRESSION_LEVEL
+        - EYES_DISTANCE
+        - EYES_RED
+        - EYE_LEFT_CLOSED
+        - EYE_LEFT_COVERED_WITH_HAIR
+        - EYE_LEFT_OCCLUDED
+        - EYE_RIGHT_CLOSED
+        - EYE_RIGHT_COVERED_WITH_HAIR
+        - EYE_RIGHT_OCCLUDED
+        - FACE_DYNAMIC_RANGE
+        - FACE_GLARE
+        - FACE_MID_POINT_HORIZONTAL_POSITION
+        - FACE_MID_POINT_VERTICAL_POSITION
+        - FACE_OCCLUDED
+        - FOREHEAD_COVERING
+        - FRAMES_TOO_HEAVY
+        - HEAD_COVERING
+        - HEAD_HEIGHT_RATIO
+        - HEAD_WIDTH_RATIO
+        - IMAGE_CHANNELS_NUMBER
+        - IMAGE_HEIGHT
+        - IMAGE_WIDTH
+        - IMAGE_WIDTH_TO_HEIGHT
+        - MOUTH_OPEN
+        - NOISE_LEVEL
+        - OFF_GAZE
+        - OTHER_FACES
+        - PADDING_RATIO
+        - PITCH
+        - REFLECTION_ON_GLASSES
+        - ROLL
+        - SHADOWS_ON_BACKGROUND
+        - SHADOWS_ON_FACE
+        - SHOULDERS_POSE
+        - SMILE
+        - STRONG_MAKEUP
+        - TOO_DARK
+        - TOO_LIGHT
+        - UNNATURAL_SKIN_TONE
+        - YAW
 
     FaceSDKResult:
       type: object
