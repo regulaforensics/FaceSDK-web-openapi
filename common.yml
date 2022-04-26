@@ -74,7 +74,9 @@ components:
       type: object
       properties:
         groupId:
+          description: ""
           $ref: "#/components/schemas/FaceQualityDetailsGroups"
+          example: 0
         name:
           $ref: "#/components/schemas/FaceQualityConfigName"
           description: "The name of the characteristic."
