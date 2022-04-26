@@ -108,6 +108,16 @@ components:
               description: "Returns the portrait quality assessment result.
               True if all the checked characteristics returned values that fit into the range. Otherwise, false."
               example: true
+            nonCompliant:
+              type: array
+              description: "" # todo non compliant description
+              items:
+                $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
+              detailsGroups:
+                description: "" # todo details groups description
+                type: array
+                items:
+                  $ref: "./common.yml#/components/schemas/FaceQualityDetailsGroups"
             details:
               type: array
               items:

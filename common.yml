@@ -73,6 +73,8 @@ components:
     QualityDetail:
       type: object
       properties:
+        groupId:
+          $ref: "#/components/schemas/FaceQualityDetailsGroups"
         name:
           $ref: "#/components/schemas/FaceQualityConfigName"
           description: "The name of the characteristic."
@@ -135,6 +137,27 @@ components:
         - QUALITY_UNIT_PERCENT
         - QUALITY_UNIT_BITS
         - QUALITY_UNIT_QUANTITY
+
+    FaceQualityDetailsGroups:
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+      x-enum-varnames:
+        - IMAGE_CHARACTERISTICS
+        - HEAD_SIZE_AND_POSITIONS
+        - FACE_QUALITY
+        - EYES_CHARACTERISTICS
+        - SHADOWS_AND_LIGHTNING
+        - POSE_AND_EXPRESSION
+        - HEAD_OCCLUSION
+        - BACKGROUND
 
     FaceQualityConfigName:
       type: string
