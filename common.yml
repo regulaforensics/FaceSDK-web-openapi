@@ -70,6 +70,27 @@ components:
           description: "The units of measurement for the value."
           example: "degrees"
 
+    QualityDetailsGroups:
+      type: object
+      properties:
+        groupId:
+          description: ""
+          example: 1
+          $ref: "#/components/schemas/FaceQualityDetailsGroups"
+        name:
+          # todo is enum too?
+          type: string
+          description: ""
+          example: "ImageCharacteristics"
+        total:
+          type: integer
+          description: ""
+          example: 5
+        compliant:
+          type: integer
+          description: ""
+          example: 4
+
     QualityDetail:
       type: object
       properties:

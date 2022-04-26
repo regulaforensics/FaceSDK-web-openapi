@@ -113,11 +113,12 @@ components:
               description: "" # todo non compliant description
               items:
                 $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
-              detailsGroups:
-                description: "" # todo details groups description
-                type: array
-                items:
-                  $ref: "./common.yml#/components/schemas/FaceQualityDetailsGroups"
+              example: ["ImageWidthToHeight", "Yaw"]
+            detailsGroups:
+              description: "" # todo details groups description
+              type: array
+              items:
+                $ref: "./common.yml#/components/schemas/QualityDetailsGroups"
             details:
               type: array
               items:
