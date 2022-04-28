@@ -110,12 +110,13 @@ components:
               example: true
             nonCompliant:
               type: array
-              description: "" # todo non compliant description
+              description: "The array of all the non-compliant assessment characteristics."
               items:
                 $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
               example: ["ImageWidthToHeight", "Yaw"]
             detailsGroups:
-              description: "" # todo details groups description
+              description: "The array of the assessment results for each group of characteristics.
+              Includes groupId, name, total, compliantCount."
               type: array
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetailsGroups"

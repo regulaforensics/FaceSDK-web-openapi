@@ -74,29 +74,28 @@ components:
       type: object
       properties:
         groupId:
-          description: ""
+          description: "The ID of the characteristics group, see the FaceImageQualityGroups enum."
           example: 1
-          $ref: "#/components/schemas/FaceQualityDetailsGroups"
+          $ref: "#/components/schemas/FaceImageQualityGroups"
         name:
-          # todo is enum too?
           type: string
-          description: ""
+          description: "The name of the characteristics group."
           example: "ImageCharacteristics"
-        total:
+        totalCount:
           type: integer
-          description: ""
+          description: "The total number of characteristics in the group."
           example: 5
-        compliant:
+        compliantCount:
           type: integer
-          description: ""
+          description: "The number of compliant characteristics in the group."
           example: 4
 
     QualityDetail:
       type: object
       properties:
         groupId:
-          description: ""
-          $ref: "#/components/schemas/FaceQualityDetailsGroups"
+          description: "The ID of the characteristics group, see the FaceImageQualityGroups enum."
+          $ref: "#/components/schemas/FaceImageQualityGroups"
           example: 0
         name:
           $ref: "#/components/schemas/FaceQualityConfigName"
@@ -161,16 +160,16 @@ components:
         - QUALITY_UNIT_BITS
         - QUALITY_UNIT_QUANTITY
 
-    FaceQualityDetailsGroups:
+    FaceImageQualityGroups:
       type: integer
       enum:
-        - 0
+        - 1
         - 2
         - 3
         - 4
         - 5
         - 6
-        - 7
+        - 8
       x-enum-varnames:
         - IMAGE_CHARACTERISTICS
         - HEAD_SIZE_AND_POSITIONS
