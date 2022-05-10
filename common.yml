@@ -21,8 +21,8 @@ components:
         align:
           $ref: "#/components/schemas/Align"
         background:
-          $ref: "#/components/schemas/RGB"
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
+          $ref: "#/components/schemas/RGB"
         config:
           $ref: "#/components/schemas/QualityConfig"
 

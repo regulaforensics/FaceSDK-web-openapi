@@ -78,6 +78,7 @@ components:
         - roi
       properties:
         crop:
+          description: "Base64 of the aligned and cropped portrait. Returned if align is set."
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
@@ -97,7 +98,7 @@ components:
           example: [ [ x, y ] ]
         quality:
           type: object
-          description: "Returned if the quality assessment was performed."
+          description: "Field for checking the portrait quality. If it is not mentioned, no quality check is performed."
           properties:
             aligned:
               type: boolean
@@ -122,6 +123,7 @@ components:
                 $ref: "./common.yml#/components/schemas/QualityDetailsGroups"
             details:
               type: array
+              description: "The array of the assessment characteristics that were set in the request. Includes name, range, status, unit, value."
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
             resized:
