@@ -251,6 +251,28 @@ paths:
   /persons/{person_id}/images/{image_id}:
     parameters:
       - $ref: '#/components/parameters/person_id'
+    get:
+      tags:
+        - person
+      summary: Get person image by id
+      operationId: get_image_of_person
+      parameters:
+        - $ref: '#/components/parameters/image_id'
+      responses:
+        404:
+          $ref: 'NotFound'
+          description: Such image don't exists
+        400:
+          $ref: 'BadParams'
+          description: Person have not such image
+        200:
+          description: Successful operation, return image
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+
     delete:
       tags:
         - person
