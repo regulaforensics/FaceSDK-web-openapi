@@ -13,3 +13,7 @@ paths:
     $ref: './matching.yml#/paths/~1match'
   /api/detect:
     $ref: './detect.yml#/paths/~1detect'
+  $ref: './identification.yml#/paths'
+
+
+
