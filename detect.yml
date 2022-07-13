@@ -70,6 +70,12 @@ components:
         landmarksType:
           description: "Internal."
           type: integer
+        scenario:
+          description: "Scenario from Request processParam"
+          $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
+        timer:
+          type: float
+          example: 0.84793560000000001
 
     Detection:
       type: object
@@ -100,15 +106,6 @@ components:
           type: object
           description: "Field for checking the portrait quality. If it is not mentioned, no quality check is performed."
           properties:
-            aligned:
-              type: boolean
-              description: "Returns true if alignment was done. Otherwise, false."
-              example: true
-            compliant:
-              type: boolean
-              description: "Returns the portrait quality assessment result.
-              True if all the checked characteristics returned values that fit into the range. Otherwise, false."
-              example: true
             nonCompliant:
               type: array
               description: "The array of all the non-compliant assessment characteristics."
@@ -126,15 +123,15 @@ components:
               description: "The array of the assessment characteristics that were set in the request. Includes name, range, status, unit, value."
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
-            resized:
-              type: boolean
-              description: "Returns true if the image was resized according to the set dimensions. Otherwise, false."
-              example: false
+
             score:
               type: float
               description: "Returns the estimated portrait quality assessment result,
                a number from 0 to 1, where 1 is for absolute compliance."
               example: -1.0
+            timer:
+              type: float
+              example: 0.42036411166191101
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
         thumbnail:

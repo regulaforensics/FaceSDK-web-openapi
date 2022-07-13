@@ -103,12 +103,10 @@ components:
       properties:
         groupId:
           description: "The ID of the characteristics group, see the FaceImageQualityGroups enum."
-          example: 1
           $ref: "#/components/schemas/FaceImageQualityGroups"
         name:
-          type: string
+          $ref: "#/components/schemas/FaceQualityConfigName"
           description: "The name of the characteristics group."
-          example: "ImageCharacteristics"
         totalCount:
           type: integer
           description: "The total number of characteristics in the group."
@@ -141,14 +139,10 @@ components:
           $ref: "#/components/schemas/FaceQualityStatus"
           example: 1
           description: "The assessment status, see FaceQualityStatus enum"
-        unit:
-          $ref: "#/components/schemas/FaceQualityUnit"
-          description: "The units of measurement for the value."
-          example: "degrees"
         value:
           type: float
           description: "The assessed value for the characteristic, returned in the set units."
-          example: 2.602179527282715
+          example: 0.0
 
     RGB:
       type: array
@@ -188,25 +182,6 @@ components:
         - CROP_ALL_FACES
         - THUMBNAIL
 
-    FaceQualityUnit:
-      type: string
-      enum:
-        - "pixels"
-        - "relative"
-        - "pcs"
-        - "degrees"
-        - "percent"
-        - "bits"
-        - "quantity"
-      x-enum-varnames:
-        - QUALITY_UNIT_PIXELS
-        - QUALITY_UNIT_RELATIVE
-        - QUALITY_UNIT_PSC
-        - QUALITY_UNIT_DEGREES
-        - QUALITY_UNIT_PERCENT
-        - QUALITY_UNIT_BITS
-        - QUALITY_UNIT_QUANTITY
-
     FaceImageQualityGroups:
       type: integer
       enum:
@@ -234,7 +209,6 @@ components:
         - "ImageHeight"
         - "ImageWidthToHeight"
         - "ImageChannelsNumber"
-
         - "FaceMidPointHorizontalPosition"
         - "FaceMidPointVerticalPosition"
         - "HeadWidthRatio"
@@ -243,10 +217,8 @@ components:
         - "Yaw"
         - "Pitch"
         - "Roll"
-
         - "BlurLevel"
         - "NoiseLevel"
-
         - "EyeRightClosed"
         - "EyeLeftClosed"
         - "EyeRightOccluded"
