@@ -30,8 +30,8 @@ components:
       properties:
         tag:
           type: string
-        quality:
-          $ref: "./common.yml#/components/schemas/QualityRequest"
+        processParam:
+          $ref: "./common.yml#/components/schemas/ProcessParam"
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
         thumbnails:

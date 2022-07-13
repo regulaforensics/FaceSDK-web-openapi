@@ -14,37 +14,69 @@ components:
 
 
   schemas:
+    ProcessParam:
+      type: object
+      description: ""
+      properties:
+        scenario:
+          $ref: "#/components/schemas/FaceQualityScenarios"
+        onlyCentralFace:
+          type: boolean
+          description: "" # todo desc
+          example: false
+        outputImageParams:
+          $ref: "#/components/schemas/OutputImageParams"
+        quality:
+          $ref: "#/components/schemas/QualityRequest"
+
+    OutputImageParams:
+      type: object
+      description: ""
+      properties:
+        backgroundColor:
+          description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
+          $ref: "#/components/schemas/RGB"
+        crop:
+          description: "Face image alignment and cutting, includes type, pad, size."
+          $ref: "#/components/schemas/Crop"
+
     QualityRequest:
       type: object
       description: "If set, the portrait quality check is performed."
       properties:
-        align:
-          $ref: "#/components/schemas/Align"
-        background:
+        backgroundMatchColor:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
           $ref: "#/components/schemas/RGB"
         config:
-          $ref: "#/components/schemas/QualityConfig"
+          $ref: "#/components/schemas/QualityConfigList"
 
-    Align:
+    Crop:
       type: object
-      description: "Face image alignment and cutting, includes type, pad, cropSize."
       properties:
         type:
           $ref: "#/components/schemas/FaceAlignTypeQuality"
           description: "The dimensions ratio to the height of the required pattern, see the FaceAlignTypeQuality enum."
           example: 1
-        pad:
+        padColor:
           $ref: "#/components/schemas/RGB"
           description: "The RGB value for the color that will complement the image if this is needed for alignment."
-        cropSize:
+        size:
           type: array
           items:
             type: integer
           minItems: 2
           maxItems: 2
           description: "The resize value in case type matches this value. It it doesn't match, no resize is done."
-          example: [420, 525]
+          example: [300, 400]
+        returnOriginalRect:
+          type: boolean
+          description: ""  # todo desc
+          example: true
+
+    QualityConfigList:
+      type: array
+      items:
+        $ref: "#/components/schemas/QualityConfig"
 
     QualityConfig:
       type: object
@@ -52,8 +84,8 @@ components:
        For every characteristic, includes name, range, unit."
       properties:
         name:
-          $ref: "#/components/schemas/FaceQualityConfigName"
           description: "The name of the characteristic."
+          $ref: "#/components/schemas/FaceQualityConfigName"
           example: "Roll"
         range:
           type: array
@@ -65,10 +97,6 @@ components:
           If the returned in the Response value fits this range,
           the value is identified as compliant with the requirements."
           example: [x, y]
-        unit:
-          $ref: "#/components/schemas/FaceQualityUnit"
-          description: "The units of measurement for the value."
-          example: "degrees"
 
     QualityDetailsGroups:
       type: object
@@ -141,6 +169,25 @@ components:
         - QUALITY_STATUS_TRUE
         - QUALITY_STATUS_UNDETERMINED
 
+    FaceQualityScenarios:
+      type: string
+      enum:
+        - "QualityFull"
+        - "QualityICAO"
+        - "QualityVisaSchengen"
+        - "QualityVisaUSA"
+        - "CropCentralFace"
+        - "CropAllFaces"
+        - "Thumbnail"
+      x-enum-varnames:
+        - QUALITY_FULL
+        - QUALITY_ICAO
+        - QUALITY_VISA_SCHENGEN
+        - QUALITY_VISA_USA
+        - CROP_CENTRAL_FACE
+        - CROP_ALL_FACES
+        - THUMBNAIL
+
     FaceQualityUnit:
       type: string
       enum:
@@ -187,6 +234,7 @@ components:
         - "ImageHeight"
         - "ImageWidthToHeight"
         - "ImageChannelsNumber"
+
         - "FaceMidPointHorizontalPosition"
         - "FaceMidPointVerticalPosition"
         - "HeadWidthRatio"
@@ -195,8 +243,10 @@ components:
         - "Yaw"
         - "Pitch"
         - "Roll"
+
         - "BlurLevel"
         - "NoiseLevel"
+
         - "EyeRightClosed"
         - "EyeLeftClosed"
         - "EyeRightOccluded"
@@ -224,9 +274,7 @@ components:
         - "MouthOpen"
         - "ContactLenses"
         - "ForeheadCovering"
-        - "StrongMakeup"
         - "Smile"
-        - "PaddingRatio"
       x-enum-varnames:
         - IMAGE_WIDTH
         - IMAGE_HEIGHT
@@ -269,9 +317,7 @@ components:
         - MOUTH_OPEN
         - CONTACT_LENSES
         - FOREHEAD_COVERING
-        - STRONG_MAKEUP
         - SMILE
-        - PADDING_RATIO
 
     FaceSDKResult:
       type: object
@@ -305,9 +351,15 @@ components:
       enum:
         - 0
         - 1
+        - 2
+        - 3
+        - 4
       x-enum-varnames:
-        - QUALITY_ALIGN_3x4
+        - ALIGN_3x4
         - ALIGN_4x5
+        - ALIGN_2x3
+        - ALIGN_1x1
+        - ALIGN_7x9
 
     FaceSDKResultCode:
       type: integer
