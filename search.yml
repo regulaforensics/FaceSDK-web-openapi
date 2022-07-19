@@ -1,0 +1,75 @@
+openapi: 3.0.3
+
+
+paths:
+  /search:
+    post:
+      tags:
+        - search
+      summary: Find person by image in groups scope
+      operationId: search
+      requestBody:
+        description: Search argument
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SearchRequest"
+      responses:
+        200:
+          description: Successful operation; return search result
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/definitions/SearchResult"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+
+definitions:
+  SearchArguments:
+    type: object
+    properties:
+      max_distance:
+        type: number
+        required: false
+      min_score:
+        description: Min recognition score, range 0..1
+        type: number
+        format: double
+        required: false
+      result_size:
+        type: number
+        required: false
+
+  SearchRequest:
+    allOf:
+      - $ref: "#/definitions/SearchArguments"
+      - type: object
+        properties:
+          group_ids:
+            required: false
+            type: array
+            items:
+              type: number
+          image:
+            $ref: "./persons.yml#/components/schemas/ImageFields"
+
+  RecognizeImage:
+    allOf:
+      - $ref: "./persons.yml#/components/schemas/ImageFields"
+      - type: object
+        properties:
+          similarity:
+            type: number
+
+  SearchResult:
+    type: object
+    properties:
+      person:
+        $ref: "./persons.yml#/definitions/Person"
+      images:
+        type: array
+        items:
+          $ref: "#/definitions/RecognizeImage"
