@@ -1,0 +1,176 @@
+openapi: 3.0.3
+paths:
+  /persons:
+    get:
+      tags:
+        - person
+      summary: Get persons
+      operationId: get_all_persons
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+        - name: name
+          in: query
+          required: false
+          description: Person name keywords
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation, return all persons
+          content:
+            applications/json:
+              schema:
+                $ref: "#/definitions/PersonsPage"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+    post:
+      tags:
+        - person
+      summary: Create person
+      operationId: create_person
+      requestBody:
+        description: Future person
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/PersonFields"
+      responses:
+        201:
+          $ref: "#/components/responses/SuccessPerson"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+  /persons/{person_id}:
+    parameters:
+      - $ref: '#/components/parameters/person_id'
+    get:
+      tags:
+        - person
+      summary: Get person
+      operationId: get_person
+      responses:
+        200:
+          $ref: "#/components/responses/SuccessPerson"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: '#/components/responses/PersonNotFound'
+    put:
+      tags:
+        - person
+      summary: Update person
+      operationId: update_person
+      requestBody:
+        description: Metadata
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/PersonFields"
+      responses:
+        204:
+          $ref: "#/components/responses/SuccessEmpty"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: '#/components/responses/PersonNotFound'
+    delete:
+      tags:
+        - person
+      summary: Delete person
+      operationId: delete_person
+      responses:
+        204:
+          $ref: "#/components/responses/SuccessEmpty"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: '#/components/responses/PersonNotFound'
+
+components:
+  parameters:
+    group_id:
+      name: group_id
+      in: path
+      description: Group id
+      required: true
+      schema:
+        type: number
+    person_id:
+      name: person_id
+      in: path
+      description: Person id
+      required: true
+      schema:
+        type: number
+    image_id:
+      name: image_id
+      in: path
+      description: Image id
+      required: true
+      schema:
+        type: number
+    page:
+      name: page
+      in: query
+      required: true
+      description: Current page
+      schema:
+        type: number
+    size:
+      name: size
+      in: query
+      required: true
+      description: Page size
+      schema:
+        type: number
+  responses:
+    SuccessEmpty:
+      description: Successful operation, return nothing
+    SuccessPerson:
+      description: Successful operation; return person
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/Person"
+    PersonNotFound:
+      description: Person with person_id not found
+      content:
+        application/json:
+          schema:
+            $ref: "./common.yml#/components/schemas/OperationLog"
+
+definitions:
+  PersonsPage:
+    allOf:
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: "#/definitions/Person"
+      - $ref: '#/definitions/Page'
+  Person:
+    allOf:
+      - $ref: '#/definitions/PersonFields'
+      - type: object
+        properties:
+          id:
+            type: number
+  PersonFields:
+    type: object
+    properties:
+      name:
+        type: string
+      metadata:
+        type: object
+  Page:
+    type: object
+    properties:
+      page:
+        type: number
+        example: 1
+      total_pages:
+        type: number
+        example: 2

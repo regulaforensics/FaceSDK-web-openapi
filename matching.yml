@@ -47,7 +47,7 @@ components:
       If not specified, than input list index is used"
 
     MatchFaceIndex:
-      type: integer
+      type: number
       description: "Faces index used to identify faces in scope of one photo."
 
     MatchImage:

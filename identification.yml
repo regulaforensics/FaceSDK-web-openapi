@@ -13,82 +13,7 @@ info:
     - **Group**. A set of **Persons**. You can create any number of **Groups**, add or remove **Persons** from them at any
       time. By default, **Person** don't belong to any **Group**. Each **Person** can be member of many **Groups**.
       **Groups** allow limiting identification scope.
-    - **Storage**. Storage for **Images** of **Person**. Can be multiple storages per application. During **Person**
-      creation, you specify which storage to use for saving photos. Thus, you can split for further processing or other
-      needs you photo catalog. Main property of storage is __uri__, allowing to use not only local filesystem, but other
-      remote staff, for example aws s3 buckets etc. (Currently on filesystem is supported). Each **Person** can have only
-      one **Storage**.
 
-components:
-  parameters:
-    group_id:
-      name: group_id
-      in: path
-      description: Group id
-      required: true
-      schema:
-        type: integer
-    person_id:
-      name: person_id
-      in: path
-      description: Person id
-      required: true
-      schema:
-        type: integer
-    image_id:
-      name: image_id
-      in: path
-      description: Image id
-      required: true
-      schema:
-        type: integer
-    page:
-      name: page
-      in: query
-      required: true
-      description: Current page
-      schema:
-        type: integer
-    size:
-      name: size
-      in: query
-      required: true
-      description: Page size
-      schema:
-        type: integer
-  responses:
-    SuccessEmpty:
-      description: Successful operation, return nothing
-    SuccessGroup:
-      description: Successful operation; return group
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/Group"
-    SuccessPerson:
-      description: Successful operation; return person
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/Person"
-    BadRequest:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/OperationLog"
-    GroupNotFound:
-      description: Group with group_id not found
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/OperationLog"
-    PersonNotFound:
-      description: Person with person_id not found
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/OperationLog"
 
 paths:
   /persons:
@@ -234,7 +159,7 @@ paths:
           content:
             applications/json:
               schema:
-                type: integer
+                type: number
         400:
           $ref: "#/components/responses/BadRequest"
         409:
@@ -448,87 +373,6 @@ paths:
         404:
           $ref: "#/components/responses/GroupNotFound"
 
-
-  /storage:
-    get:
-      tags:
-        - images storage
-      summary: Get storage options
-      operationId: get_all_storage_options
-      parameters:
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/size'
-      responses:
-        200:
-          description: Successful operation, return all storage options
-          content:
-            application/json:
-              schema:
-                $ref: "#/definitions/StoragePage"
-        400:
-          $ref: "#/components/responses/BadRequest"
-    post:
-      tags:
-        - images storage
-      summary: Add storage option
-      operationId: add_storage_option
-      requestBody:
-        description: Storage uri
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/definitions/StorageOptionToCreate"
-      responses:
-        201:
-          description: Successful operation; return storage option id
-          content:
-            application/json:
-              schema:
-                $ref: "#/definitions/StorageOption"
-        400:
-          $ref: "#/components/responses/BadRequest"
-
-  /storage/default:
-    get:
-      tags:
-        - images storage
-      summary: Get default option
-      operationId: get_default_storage_option
-      responses:
-        200:
-          description: Successful operation, return default storage option
-          content:
-            application/json:
-              schema:
-                $ref: "#/definitions/StorageOption"
-        400:
-          $ref: "#/components/responses/BadRequest"
-    put:
-      tags:
-        - images storage
-      summary: Set default option
-      operationId: set_default_storage_option
-      requestBody:
-        description: Storage id
-        required: true
-        content:
-          application/json:
-            schema:
-              type: integer
-              example: 123
-      responses:
-        201:
-          $ref: "#/components/responses/SuccessEmpty"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        404:
-          description: Storage with storage id not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/definitions/OperationLog"
-
   /search:
     post:
       tags:
@@ -554,16 +398,88 @@ paths:
         400:
           $ref: "#/components/responses/BadRequest"
 
+components:
+  parameters:
+    group_id:
+      name: group_id
+      in: path
+      description: Group id
+      required: true
+      schema:
+        type: number
+    person_id:
+      name: person_id
+      in: path
+      description: Person id
+      required: true
+      schema:
+        type: number
+    image_id:
+      name: image_id
+      in: path
+      description: Image id
+      required: true
+      schema:
+        type: number
+    page:
+      name: page
+      in: query
+      required: true
+      description: Current page
+      schema:
+        type: number
+    size:
+      name: size
+      in: query
+      required: true
+      description: Page size
+      schema:
+        type: number
+
+  responses:
+    SuccessEmpty:
+      description: Successful operation, return nothing
+    SuccessGroup:
+      description: Successful operation; return group
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/Group"
+    SuccessPerson:
+      description: Successful operation; return person
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/Person"
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/OperationLog"
+    GroupNotFound:
+      description: Group with group_id not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/OperationLog"
+    PersonNotFound:
+      description: Person with person_id not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/OperationLog"
+
 
 definitions:
   Page:
     type: object
     properties:
       page:
-        type: integer
+        type: number
         example: 1
       total_pages:
-        type: integer
+        type: number
         example: 2
 
   GroupToCreate:
@@ -580,7 +496,7 @@ definitions:
       - type: object
         properties:
           id:
-            type: integer
+            type: number
 
   GroupPage:
     allOf:
@@ -598,12 +514,12 @@ definitions:
       addItems:
         type: array
         items:
-          type: integer
+          type: number
         example: [1,2,3]
       removeItems:
         type: array
         items:
-          type: integer
+          type: number
         example: [4,5,6]
 
   PersonFields:
@@ -613,9 +529,6 @@ definitions:
         type: string
       metadata:
         type: object
-      storage_id:
-        type: integer
-        required: false
 
   Person:
     allOf:
@@ -623,7 +536,7 @@ definitions:
       - type: object
         properties:
           id:
-            type: integer
+            type: number
 
   PersonsPage:
     allOf:
@@ -649,7 +562,7 @@ definitions:
     type: object
     properties:
       id:
-        type: integer
+        type: number
       content:
         $ref: '#/definitions/ImageContent'
 
@@ -673,7 +586,7 @@ definitions:
     type: object
     properties:
       max_distance:
-        type: integer
+        type: number
         required: false
       min_score:
         description: Min recognition score, range 0..1
@@ -681,7 +594,7 @@ definitions:
         format: double
         required: false
       result_size:
-        type: integer
+        type: number
         required: false
 
   SearchRequest:
@@ -693,7 +606,7 @@ definitions:
             required: false
             type: array
             items:
-              type: integer
+              type: number
           image:
             $ref: "#/definitions/ImageFields"
 
@@ -727,27 +640,3 @@ definitions:
         type: string
       payload:
         type: object
-
-  StorageOptionToCreate:
-    type: object
-    properties:
-      uri:
-        type: string
-
-  StorageOption:
-    type: object
-    properties:
-      id:
-        type: integer
-      uri:
-        type: string
-
-  StoragePage:
-    allOf:
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: "#/definitions/StorageOption"
-      - $ref: '#/definitions/Page'

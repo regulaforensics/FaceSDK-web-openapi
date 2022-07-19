@@ -13,22 +13,22 @@ paths:
     $ref: './matching.yml#/paths/~1match'
   /api/detect:
     $ref: './detect.yml#/paths/~1detect'
-
   /api/persons:
-    $ref: './identification.yml#/paths/~1persons'
+    $ref: './persons.yml#/paths/~1persons'
   /api/persons/{person_id}:
-    $ref: './identification.yml#/paths/~1persons~1{person_id}'
-  /api/persons/{person_id}/images:
-    $ref: './identification.yml#/paths/~1persons~1{person_id}~1images'
-  /api/persons/{person_id}/images/{image_id}:
-    $ref: './identification.yml#/paths/~1persons~1{person_id}~1images~1{image_id}'
-  /api/persons/{person_id}/groups:
-    $ref: './identification.yml#/paths/~1persons~1{person_id}~1groups:'
-  /api/groups:
-    $ref: './identification.yml#/paths/~1groups'
-  /api/groups/{group_id}:
-    $ref: './identification.yml#/paths/~1groups~1{group_id}'
-  /api/groups/{group_id}/persons:
-    $ref: './identification.yml#/paths/~1groups~1{group_id}~1persons'
-  /api/search:
-    $ref: './identification.yml#/paths/~1search'
+    $ref: './persons.yml#/paths/~1persons~1{person_id}'
+
+#  /api/persons/{person_id}/images:
+#    $ref: './identification.yml#/paths/~1persons~1{person_id}~1images'
+#  /api/persons/{person_id}/images/{image_id}:
+#    $ref: './identification.yml#/paths/~1persons~1{person_id}~1images~1{image_id}'
+#  /api/persons/{person_id}/groups:
+#    $ref: './identification.yml#/paths/~1persons~1{person_id}~1groups:'
+#  /api/groups:
+#    $ref: './identification.yml#/paths/~1groups'
+#  /api/groups/{group_id}:
+#    $ref: './identification.yml#/paths/~1groups~1{group_id}'
+#  /api/groups/{group_id}/persons:
+#    $ref: './identification.yml#/paths/~1groups~1{group_id}~1persons'
+#  /api/search:
+#    $ref: './identification.yml#/paths/~1search'
