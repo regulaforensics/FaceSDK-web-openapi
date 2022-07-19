@@ -7,8 +7,8 @@ paths:
       summary: Get persons
       operationId: get_all_persons
       parameters:
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/size'
+        - $ref: './common.yml#/components/parameters/page'
+        - $ref: './common.yml#/components/parameters/size'
         - name: name
           in: query
           required: false
@@ -96,8 +96,8 @@ paths:
       summary: Get person images
       operationId: get_all_images_by_person_id
       parameters:
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/size'
+        - $ref: './common.yml#/components/parameters/page'
+        - $ref: './common.yml#/components/parameters/size'
       responses:
         200:
           description: Successful operation; return all person images
@@ -178,16 +178,31 @@ paths:
             application/json:
               schema:
                 $ref: "./common.yml#/components/schemas/OperationLog"
+  /persons/{person_id}/groups:
+    parameters:
+      - $ref: '#/components/parameters/person_id'
+    get:
+      tags:
+        - person
+      summary: Get person groups
+      operationId: get_all_groups_by_person_id
+      parameters:
+        - $ref: './common.yml#/components/parameters/page'
+        - $ref: './common.yml#/components/parameters/size'
+      responses:
+        200:
+          description: Successful operation; return all groups
+          content:
+            application/json:
+              schema:
+                $ref: "./groups.yml#/definitions/GroupPage"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: '#/components/responses/PersonNotFound'
 
 components:
   parameters:
-    group_id:
-      name: group_id
-      in: path
-      description: Group id
-      required: true
-      schema:
-        type: number
     person_id:
       name: person_id
       in: path
@@ -250,7 +265,7 @@ definitions:
             type: array
             items:
               $ref: "#/definitions/Person"
-      - $ref: '#/definitions/Page'
+      - $ref: './common.yml#/components/schemas/Page'
   Person:
     allOf:
       - $ref: '#/definitions/PersonFields'
@@ -271,15 +286,7 @@ definitions:
         type: string
       metadata:
         type: object
-  Page:
-    type: object
-    properties:
-      page:
-        type: number
-        example: 1
-      total_pages:
-        type: number
-        example: 2
+
   ImageContent:
     type: string
     format: binary
@@ -305,7 +312,7 @@ definitions:
             type: array
             items:
               $ref: "#/definitions/Image"
-      - $ref: '#/definitions/Page'
+      - $ref: './common.yml#/components/schemas/Page'
   ImageMetadata:
     type: object
     properties:

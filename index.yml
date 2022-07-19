@@ -21,15 +21,14 @@ paths:
     $ref: './persons.yml#/paths/~1persons~1{person_id}~1images'
   /api/persons/{person_id}/images/{image_id}:
     $ref: './persons.yml#/paths/~1persons~1{person_id}~1images~1{image_id}'
+  /api/persons/{person_id}/groups:
+    $ref: './persons.yml#/paths/~1persons~1{person_id}~1groups'
+  /api/groups:
+    $ref: './groups.yml#/paths/~1groups'
+  /api/groups/{group_id}:
+    $ref: './groups.yml#/paths/~1groups~1{group_id}'
+  /api/groups/{group_id}/persons:
+    $ref: './groups.yml#/paths/~1groups~1{group_id}~1persons'
 
-#  /api/persons/{person_id}/groups:
-#    $ref: './identification.yml#/paths/~1persons~1{person_id}~1groups:'
-
-#  /api/groups:
-#    $ref: './identification.yml#/paths/~1groups'
-#  /api/groups/{group_id}:
-#    $ref: './identification.yml#/paths/~1groups~1{group_id}'
-#  /api/groups/{group_id}/persons:
-#    $ref: './identification.yml#/paths/~1groups~1{group_id}~1persons'
 #  /api/search:
 #    $ref: './identification.yml#/paths/~1search'

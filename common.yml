@@ -2,6 +2,29 @@ openapi: 3.0.3
 
 components:
 
+  parameters:
+    group_id:
+      name: group_id
+      in: path
+      description: Group id
+      required: true
+      schema:
+        type: number
+    page:
+      name: page
+      in: query
+      required: true
+      description: Current page
+      schema:
+        type: number
+    size:
+      name: size
+      in: query
+      required: true
+      description: Page size
+      schema:
+        type: number
+
   responses:
     BadLicense:
       description: "Bad license. Either server or request does not contain valid license."
@@ -37,6 +60,15 @@ components:
           type: string
         msg:
           type: string
+    Page:
+      type: object
+      properties:
+        page:
+          type: number
+          example: 1
+        total_pages:
+          type: number
+          example: 2
 
     Bytes:
       type: string

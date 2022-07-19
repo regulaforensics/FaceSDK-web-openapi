@@ -1,0 +1,203 @@
+openapi: 3.0.3
+
+# './common.yml#/components/parameters/group_id'
+paths:
+  /groups:
+    get:
+      tags:
+        - group
+      summary: Get groups
+      operationId: get_all_groups
+      parameters:
+        - $ref: './common.yml#/components/parameters/page'
+        - $ref: './common.yml#/components/parameters/size'
+        - name: name
+          in: query
+          required: false
+          description: Group name keywords
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation, return all groups
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/GroupPage"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+    post:
+      tags:
+        - group
+      summary: Create group
+      operationId: create_group
+      requestBody:
+        description: Group to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/GroupToCreate"
+      responses:
+        201:
+          $ref: "#/components/responses/SuccessGroup"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+  /groups/{group_id}:
+    parameters:
+      - $ref: '#/components/parameters/group_id'
+    get:
+      tags:
+        - group
+      summary: Get group
+      operationId: get_group
+      responses:
+        200:
+          $ref: "#/components/responses/SuccessGroup"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/GroupNotFound"
+    put:
+      tags:
+        - group
+      summary: Update group
+      operationId: update_group
+      requestBody:
+        description: Metadata
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/GroupToCreate"
+      responses:
+        204:
+          $ref: "#/components/responses/SuccessEmpty"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/GroupNotFound"
+    delete:
+      tags:
+        - group
+      summary: Delete group
+      operationId: delete_group
+      responses:
+        204:
+          $ref: "#/components/responses/SuccessEmpty"
+        404:
+          $ref: "#/components/responses/GroupNotFound"
+  /groups/{group_id}/persons:
+    parameters:
+      - $ref: "#/components/parameters/group_id"
+    get:
+      tags:
+        - group
+      summary: Get group persons
+      operationId: get_all_persons_by_group_id
+      parameters:
+        - $ref: './common.yml#/components/parameters/page'
+        - $ref: './common.yml#/components/parameters/size'
+      responses:
+        200:
+          description: Successful operation, return all persons
+          content:
+            application/json:
+              schema:
+                $ref: "./persons.yml#/definitions/PersonsPage"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          description: Group with group_id or persons with person_ids not found
+          content:
+            application/json:
+              schema:
+                $ref: "./common.yml#/components/schemas/OperationLog"
+    put:
+      tags:
+        - group
+      summary: Add/remove persons to group
+      operationId: update_persons_in_group
+      requestBody:
+        description: Person ids to add or remove
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/UpdateGroup"
+      responses:
+        204:
+          $ref: "#/components/responses/SuccessEmpty"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/GroupNotFound"
+
+components:
+  parameters:
+    group_id:
+      name: group_id
+      in: path
+      description: Group id
+      required: true
+      schema:
+        type: number
+  responses:
+    SuccessEmpty:
+      description: Successful operation, return nothing
+    SuccessGroup:
+      description: Successful operation; return group
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/Group"
+    GroupNotFound:
+      description: Group with group_id not found
+      content:
+        application/json:
+          schema:
+            $ref: "./common.yml#/components/schemas/OperationLog"
+
+definitions:
+  GroupToCreate:
+    type: object
+    properties:
+      name:
+        type: string
+      metadata:
+        type: object
+
+  Group:
+    allOf:
+      - $ref: '#/definitions/GroupToCreate'
+      - type: object
+        properties:
+          id:
+            type: number
+          created_at:
+            type: string
+            format: date-time
+
+  GroupPage:
+    allOf:
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: "#/definitions/Group"
+      - $ref: './common.yml#/components/schemas/Page'
+
+  UpdateGroup:
+    type: object
+    properties:
+      addItems:
+        type: array
+        items:
+          type: number
+        example: [ 1,2,3 ]
+      removeItems:
+        type: array
+        items:
+          type: number
+        example: [ 4,5,6 ]
