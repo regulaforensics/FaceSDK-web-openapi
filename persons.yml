@@ -87,6 +87,97 @@ paths:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
           $ref: '#/components/responses/PersonNotFound'
+  /persons/{person_id}/images:
+    parameters:
+      - $ref: '#/components/parameters/person_id'
+    get:
+      tags:
+        - person
+      summary: Get person images
+      operationId: get_all_images_by_person_id
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      responses:
+        200:
+          description: Successful operation; return all person images
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/ImagePage"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: '#/components/responses/PersonNotFound'
+    post:
+      tags:
+        - person
+      summary: Add person image
+      operationId: add_image_to_person
+      requestBody:
+        description: Image to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  $ref: "#/components/schemas/ImageFields"
+      responses:
+        200:
+          description: Successful operation; return image id
+          content:
+            applications/json:
+              schema:
+                type: object
+                $ref: "#/definitions/Image"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          $ref: '#/components/responses/PersonNotFound'
+  /persons/{person_id}/images/{image_id}:
+    parameters:
+      - $ref: '#/components/parameters/person_id'
+    get:
+      tags:
+        - person
+      summary: Get person image by id
+      operationId: get_image_of_person
+      parameters:
+        - $ref: '#/components/parameters/image_id'
+      responses:
+        404:
+          $ref: '#/components/responses/PersonNotFound'
+          description: Such image don't exists
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+          description: Person have not such image
+        200:
+          description: Successful operation, return image
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+    delete:
+      tags:
+        - person
+      summary: Delete image of person
+      operationId: delete_image_of_person
+      parameters:
+        - $ref: '#/components/parameters/image_id'
+      responses:
+        204:
+          $ref: "#/components/responses/SuccessEmpty"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+        404:
+          description: Person with person_id or image with image_id not found
+          content:
+            application/json:
+              schema:
+                $ref: "./common.yml#/components/schemas/OperationLog"
 
 components:
   parameters:
@@ -140,6 +231,15 @@ components:
         application/json:
           schema:
             $ref: "./common.yml#/components/schemas/OperationLog"
+  schemas:
+    ImageFields:
+      type: object
+      properties:
+        content_type:
+          type: string
+        content:
+          $ref: '#/definitions/ImageContent'
+
 
 definitions:
   PersonsPage:
@@ -158,6 +258,12 @@ definitions:
         properties:
           id:
             type: number
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
   PersonFields:
     type: object
     properties:
@@ -174,3 +280,34 @@ definitions:
       total_pages:
         type: number
         example: 2
+  ImageContent:
+    type: string
+    format: binary
+  Image:
+    type: object
+    properties:
+      id:
+        type: number
+      content_type:
+        type: string
+      created_at:
+        type: string
+        format: date-time
+      path:
+        type: string
+      url:
+        type: string
+  ImagePage:
+    allOf:
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: "#/definitions/Image"
+      - $ref: '#/definitions/Page'
+  ImageMetadata:
+    type: object
+    properties:
+      metadata:
+        type: object
