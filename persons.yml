@@ -220,17 +220,17 @@ components:
     page:
       name: page
       in: query
-      required: true
       description: Current page
       schema:
         type: number
+        default: 1
     size:
       name: size
       in: query
-      required: true
       description: Page size
       schema:
         type: number
+        default: 1000
   responses:
     SuccessEmpty:
       description: Successful operation, return nothing
