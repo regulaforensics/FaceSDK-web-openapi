@@ -29,5 +29,5 @@ paths:
     $ref: './groups.yml#/paths/~1groups~1{group_id}'
   /api/groups/{group_id}/persons:
     $ref: './groups.yml#/paths/~1groups~1{group_id}~1persons'
-#  /api/search:
-#    $ref: './search.yml#/paths/~1search'
+  /api/search:
+    $ref: './search.yml#/paths/~1search'

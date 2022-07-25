@@ -28,33 +28,25 @@ paths:
           $ref: "./common.yml#/components/responses/BadRequest"
 
 definitions:
-  SearchArguments:
-    type: object
-    properties:
-      max_distance:
-        type: number
-        required: false
-      min_score:
-        description: Min recognition score, range 0..1
-        type: number
-        format: double
-        required: false
-      result_size:
-        type: number
-        required: false
-
   SearchRequest:
-    allOf:
-      - $ref: "#/definitions/SearchArguments"
-      - type: object
-        properties:
-          group_ids:
-            required: false
-            type: array
-            items:
-              type: number
-          image:
-            $ref: "./persons.yml#/components/schemas/ImageFields"
+      type: object
+      properties:
+        limit:
+          type: number
+          required: false
+          default: 100
+        threshold:
+          type: number
+          format: float
+          required: false
+          default: 0.5
+        group_ids:
+          required: false
+          type: array
+          items:
+            type: number
+        image:
+          $ref: "./persons.yml#/components/schemas/ImageFields"
 
   RecognizeImage:
     allOf:
@@ -67,7 +59,7 @@ definitions:
   SearchResult:
     type: object
     properties:
-      person:
+      person:1
         $ref: "./persons.yml#/definitions/Person"
       images:
         type: array
