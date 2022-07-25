@@ -279,6 +279,7 @@ definitions:
           updated_at:
             type: string
             format: date-time
+
   PersonFields:
     type: object
     properties:

@@ -21,9 +21,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/definitions/SearchResult"
+                $ref: "#/definitions/SearchResult"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
 
@@ -50,18 +48,27 @@ definitions:
 
   RecognizeImage:
     allOf:
-      - $ref: "./persons.yml#/components/schemas/ImageFields"
+      - $ref: "./persons.yml#/definitions/Image"
       - type: object
         properties:
           similarity:
             type: number
+            forman: float
 
   SearchResult:
-    type: object
-    properties:
-      person:1
-        $ref: "./persons.yml#/definitions/Person"
-      images:
-        type: array
-        items:
-          $ref: "#/definitions/RecognizeImage"
+    allOf:
+      - $ref: "#/definitions/SearchPerson"
+      - type: object
+        properties:
+          code:
+            type: number
+
+  SearchPerson:
+    allOf:
+      - $ref: "./persons.yml#/definitions/Person"
+      - type: object
+        properties:
+          images:
+            type: array
+            items:
+              $ref: "#/definitions/RecognizeImage"
