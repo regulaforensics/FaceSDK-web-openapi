@@ -31,21 +31,17 @@ definitions:
       properties:
         limit:
           type: number
-          required: false
           default: 100
         threshold:
           type: number
           format: float
-          required: false
-          default: 0.5
+          default: 0.5f
         group_ids:
-          required: false
           type: array
           items:
             type: number
         image:
           $ref: "./persons.yml#/components/schemas/ImageFields"
-
   RecognizeImage:
     allOf:
       - $ref: "./persons.yml#/definitions/Image"
@@ -53,8 +49,7 @@ definitions:
         properties:
           similarity:
             type: number
-            forman: float
-
+            format: float
   SearchResult:
     allOf:
       - $ref: "#/definitions/SearchPerson"
@@ -62,7 +57,6 @@ definitions:
         properties:
           code:
             type: number
-
   SearchPerson:
     allOf:
       - $ref: "./persons.yml#/definitions/Person"
