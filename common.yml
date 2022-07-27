@@ -10,6 +10,7 @@ components:
       required: true
       schema:
         type: number
+        format: integer
     page:
       name: page
       in: query
@@ -17,6 +18,7 @@ components:
       description: Current page
       schema:
         type: number
+        format: integer
     size:
       name: size
       in: query
@@ -24,6 +26,7 @@ components:
       description: Page size
       schema:
         type: number
+        format: integer
 
   responses:
     BadLicense:
@@ -55,7 +58,8 @@ components:
       type: object
       properties:
         status_code:
-          type: integer
+          type: number
+          format: integer
         type:
           type: string
         msg:
@@ -65,9 +69,11 @@ components:
       properties:
         page:
           type: number
+          format: integer
           example: 1
         total_pages:
           type: number
+          format: integer
           example: 2
 
     Bytes:
