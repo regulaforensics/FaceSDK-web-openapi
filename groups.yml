@@ -65,11 +65,11 @@ paths:
       operationId: update_group
       requestBody:
         description: Update group
-          required: true
-          content:
-            application/json:
-              schema:
-                $ref: "./identification.yml#/components/schemas/GroupToCreate"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./identification.yml#/components/schemas/GroupToCreate"
       responses:
         204:
           $ref: "#/components/responses/SuccessEmpty"
