@@ -41,12 +41,12 @@ definitions:
           items:
             type: number
         image:
-          $ref: "./persons.yml#/components/schemas/ImageFields"
+          $ref: "./identification.yml#/components/schemas/ImageFields"
   RecognizeImage:
     allOf:
-      - $ref: "./persons.yml#/definitions/Image"
+      - $ref: "./identification.yml#/components/schemas/Image"
       - type: object
-        properties:
+        properties:=
           similarity:
             type: number
             format: float
@@ -59,7 +59,7 @@ definitions:
             type: number
   SearchPerson:
     allOf:
-      - $ref: "./persons.yml#/definitions/Person"
+      - $ref: "./identification.yml#/components/schemas/Person"
       - type: object
         properties:
           images:

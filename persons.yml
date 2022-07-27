@@ -21,7 +21,7 @@ paths:
           content:
             applications/json:
               schema:
-                $ref: "#/definitions/PersonsPage"
+                $ref: "./identification.yml#/components/schemas/PersonsPage"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
     post:
@@ -35,7 +35,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/PersonFields"
+              $ref: "./identification.yml#/components/schemas/PersonFields"
       responses:
         201:
           $ref: "#/components/responses/SuccessPerson"
@@ -67,7 +67,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/PersonFields"
+              $ref: "./identification.yml#/components/schemas/PersonFields"
       responses:
         204:
           $ref: "#/components/responses/SuccessEmpty"
@@ -123,7 +123,7 @@ paths:
               type: object
               properties:
                 image:
-                  $ref: "#/components/schemas/ImageFields"
+                  $ref: "./identification.yml#/components/schemas/ImageFields"
       responses:
         200:
           description: Successful operation; return image id
@@ -131,7 +131,7 @@ paths:
             applications/json:
               schema:
                 type: object
-                $ref: "#/definitions/Image"
+                $ref: "./identification.yml#/components/schemas/Image"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -195,7 +195,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./groups.yml#/definitions/GroupPage"
+                $ref: "./identification.yml#/components/schemas/GroupPage"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -239,81 +239,24 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/definitions/Person"
+            $ref: "./identification.yml#/components/schemas/Person"
     PersonNotFound:
       description: Person with person_id not found
       content:
         application/json:
           schema:
             $ref: "./common.yml#/components/schemas/OperationLog"
-  schemas:
-    ImageFields:
-      type: object
-      properties:
-        content_type:
-          type: string
-        content:
-          $ref: '#/definitions/ImageContent'
-
 
 definitions:
-  PersonsPage:
-    allOf:
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: "#/definitions/Person"
-      - $ref: './common.yml#/components/schemas/Page'
-  Person:
-    allOf:
-      - $ref: '#/definitions/PersonFields'
-      - type: object
-        properties:
-          id:
-            type: number
-          created_at:
-            type: string
-            format: date-time
-          updated_at:
-            type: string
-            format: date-time
-
-  PersonFields:
-    type: object
-    properties:
-      name:
-        type: string
-      metadata:
-        type: object
-
-  ImageContent:
-    type: string
-    format: binary
-  Image:
-    type: object
-    properties:
-      id:
-        type: number
-      content_type:
-        type: string
-      created_at:
-        type: string
-        format: date-time
-      path:
-        type: string
-      url:
-        type: string
   ImagePage:
     allOf:
+      - $ref: './common.yml#/components/schemas/Page'
       - type: object
         properties:
           items:
             type: array
             items:
-              $ref: "#/definitions/Image"
-      - $ref: './common.yml#/components/schemas/Page'
+              $ref: "./identification.yml#/components/schemas/Image"
   ImageMetadata:
     type: object
     properties:

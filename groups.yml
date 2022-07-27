@@ -1,6 +1,6 @@
 openapi: 3.0.3
 
-# './common.yml#/components/parameters/group_id'
+
 paths:
   /groups:
     get:
@@ -23,7 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/definitions/GroupPage"
+                $ref: "./identification.yml#/components/schemas/GroupPage"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
     post:
@@ -37,7 +37,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/GroupToCreate"
+              $ref: "./identification.yml#/components/schemas/GroupToCreate"
       responses:
         201:
           $ref: "#/components/responses/SuccessGroup"
@@ -69,7 +69,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/GroupToCreate"
+              $ref: "./identification.yml#/components/schemas/GroupToCreate"
       responses:
         204:
           $ref: "#/components/responses/SuccessEmpty"
@@ -104,7 +104,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./persons.yml#/definitions/PersonsPage"
+                $ref: "./identification.yml#/components/schemas/PersonsPage"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -150,7 +150,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/definitions/Group"
+            $ref: "./identification.yml#/components/schemas/Group"
     GroupNotFound:
       description: Group with group_id not found
       content:
@@ -159,35 +159,6 @@ components:
             $ref: "./common.yml#/components/schemas/OperationLog"
 
 definitions:
-  GroupToCreate:
-    type: object
-    properties:
-      name:
-        type: string
-      metadata:
-        type: object
-
-  Group:
-    allOf:
-      - $ref: '#/definitions/GroupToCreate'
-      - type: object
-        properties:
-          id:
-            type: number
-          created_at:
-            type: string
-            format: date-time
-
-  GroupPage:
-    allOf:
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: "#/definitions/Group"
-      - $ref: './common.yml#/components/schemas/Page'
-
   UpdateGroup:
     type: object
     properties:
