@@ -18,6 +18,7 @@ components:
           properties:
             id:
               type: number
+              format: integer
             created_at:
               type: string
               format: date-time
@@ -46,6 +47,7 @@ components:
       properties:
         id:
           type: number
+          format: integer
         content_type:
           type: string
         created_at:
@@ -71,6 +73,7 @@ components:
           properties:
             id:
               type: number
+              format: integer
             created_at:
               type: string
               format: date-time

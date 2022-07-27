@@ -142,6 +142,7 @@ components:
       required: true
       schema:
         type: number
+        format: integer
   responses:
     SuccessEmpty:
       description: Successful operation, return nothing
@@ -166,9 +167,11 @@ definitions:
         type: array
         items:
           type: number
+          format: integer
         example: [ 1,2,3 ]
       removeItems:
         type: array
         items:
           type: number
+          format: integer
         example: [ 4,5,6 ]

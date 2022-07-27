@@ -210,6 +210,7 @@ components:
       required: true
       schema:
         type: number
+        format: integer
     image_id:
       name: image_id
       in: path
@@ -217,12 +218,14 @@ components:
       required: true
       schema:
         type: number
+        format: integer
     page:
       name: page
       in: query
       description: Current page
       schema:
         type: number
+        format: integer
         default: 1
     size:
       name: size
@@ -230,6 +233,7 @@ components:
       description: Page size
       schema:
         type: number
+        format: integer
         default: 1000
   responses:
     SuccessEmpty:
