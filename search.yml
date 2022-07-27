@@ -46,7 +46,7 @@ definitions:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
       - type: object
-        properties:=
+        properties:
           similarity:
             type: number
             format: float
