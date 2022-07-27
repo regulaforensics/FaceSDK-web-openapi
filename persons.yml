@@ -120,17 +120,13 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                image:
-                  $ref: "./identification.yml#/components/schemas/ImageFields"
+                $ref: "./identification.yml#/components/schemas/ImageFields"
       responses:
         200:
           description: Successful operation; return image id
           content:
             applications/json:
               schema:
-                type: object
                 $ref: "./identification.yml#/components/schemas/Image"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
