@@ -99,15 +99,15 @@ paths:
         - $ref: './common.yml#/components/parameters/page'
         - $ref: './common.yml#/components/parameters/size'
       responses:
-        200:
+        '200':
           description: Successful operation, return all persons
           content:
             application/json:
               schema:
                 $ref: "./identification.yml#/components/schemas/PersonsPage"
-        400:
+        '400':
           $ref: "./common.yml#/components/responses/BadRequest"
-        404:
+        '404':
           description: Group with group_id or persons with person_ids not found
           content:
             application/json:

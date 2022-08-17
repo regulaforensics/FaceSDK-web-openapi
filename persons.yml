@@ -19,7 +19,7 @@ paths:
         200:
           description: Successful operation, return all persons
           content:
-            applications/json:
+            application/json:
               schema:
                 $ref: "./identification.yml#/components/schemas/PersonsPage"
         400:
@@ -125,7 +125,7 @@ paths:
         200:
           description: Successful operation; return image id
           content:
-            applications/json:
+            application/json:
               schema:
                 $ref: "./identification.yml#/components/schemas/Image"
         400:
