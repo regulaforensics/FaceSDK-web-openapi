@@ -32,6 +32,7 @@ components:
           type: string
         metadata:
           type: object
+          additionalProperties: true
     ImageFields:
       type: object
       properties:
@@ -84,3 +85,4 @@ components:
           type: string
         metadata:
           type: object
+          additionalProperties: true
