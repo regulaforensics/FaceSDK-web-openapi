@@ -20,10 +20,8 @@ components:
               type: integer
             created_at:
               type: string
-              format: date-time
             updated_at:
               type: string
-              format: date-time
     PersonFields:
       type: object
       properties:
@@ -41,8 +39,7 @@ components:
             content_type:
               type: string
             content:
-              type: string
-              format: byte
+              $ref: "./common.yml#/components/schemas/ImageData"
     Image:
       type: object
       properties:
@@ -52,7 +49,6 @@ components:
           type: string
         created_at:
           type: string
-          format: date-time
         path:
           type: string
         url:
@@ -75,7 +71,6 @@ components:
               type: integer
             created_at:
               type: string
-              format: date-time
     GroupToCreate:
       type: object
       properties:
