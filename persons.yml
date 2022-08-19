@@ -120,7 +120,7 @@ paths:
         content:
           application/json:
             schema:
-                $ref: "./identification.yml#/components/schemas/ImageFields"
+              $ref: "./identification.yml#/components/schemas/ImageFields"
       responses:
         200:
           description: Successful operation; return image id
@@ -205,31 +205,27 @@ components:
       description: Person id
       required: true
       schema:
-        type: number
-        format: integer
+        type: integer
     image_id:
       name: image_id
       in: path
       description: Image id
       required: true
       schema:
-        type: number
-        format: integer
+        type: integer
     page:
       name: page
       in: query
       description: Current page
       schema:
-        type: number
-        format: integer
+        type: integer
         default: 1
     size:
       name: size
       in: query
       description: Page size
       schema:
-        type: number
-        format: integer
+        type: integer
         default: 1000
   responses:
     SuccessEmpty:

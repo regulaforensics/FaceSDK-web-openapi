@@ -9,24 +9,21 @@ components:
       description: Group id
       required: true
       schema:
-        type: number
-        format: integer
+        type: integer
     page:
       name: page
       in: query
       required: true
       description: Current page
       schema:
-        type: number
-        format: integer
+        type: integer
     size:
       name: size
       in: query
       required: true
       description: Page size
       schema:
-        type: number
-        format: integer
+        type: integer
 
   responses:
     BadLicense:
@@ -58,8 +55,7 @@ components:
       type: object
       properties:
         status_code:
-          type: number
-          format: integer
+          type: integer
         type:
           type: string
         msg:
@@ -68,12 +64,10 @@ components:
       type: object
       properties:
         page:
-          type: number
-          format: integer
+          type: integer
           example: 1
         total_pages:
-          type: number
-          format: integer
+          type: integer
           example: 2
 
     Bytes:

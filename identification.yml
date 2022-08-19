@@ -17,8 +17,7 @@ components:
         - type: object
           properties:
             id:
-              type: number
-              format: integer
+              type: integer
             created_at:
               type: string
               format: date-time
@@ -36,19 +35,19 @@ components:
     ImageFields:
       type: object
       properties:
-        content_type:
-          type: string
-        content:
-          $ref: '#/components/schemas/ImageContent'
-    ImageContent:
-      type: string
-      format: binary
+        image:
+          type: object
+          properties:
+            content_type:
+              type: string
+            content:
+              type: string
+              format: byte
     Image:
       type: object
       properties:
         id:
-          type: number
-          format: integer
+          type: integer
         content_type:
           type: string
         created_at:
@@ -73,8 +72,7 @@ components:
         - type: object
           properties:
             id:
-              type: number
-              format: integer
+              type: integer
             created_at:
               type: string
               format: date-time

@@ -27,23 +27,21 @@ paths:
 
 definitions:
   SearchRequest:
-      type: object
-      properties:
-        limit:
-          type: number
-          format: integer
-          default: 100
-        threshold:
-          type: number
-          format: float
-          default: 0.5f
-        group_ids:
-          type: array
-          items:
+    allOf:
+      - type: object
+        properties:
+          limit:
+            type: integer
+            default: 100
+          threshold:
             type: number
-            format: integer
-        image:
-          $ref: "./identification.yml#/components/schemas/ImageFields"
+            format: float
+            default: 0.5f
+          group_ids:
+            type: array
+            items:
+              type: integer
+      - $ref: "./identification.yml#/components/schemas/ImageFields"
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
@@ -58,8 +56,7 @@ definitions:
       - type: object
         properties:
           code:
-            type: number
-            format: integer
+            type: integer
   SearchPerson:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Person"

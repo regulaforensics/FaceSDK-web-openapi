@@ -141,8 +141,7 @@ components:
       description: Group id
       required: true
       schema:
-        type: number
-        format: integer
+        type: integer
   responses:
     SuccessEmpty:
       description: Successful operation, return nothing
@@ -166,12 +165,10 @@ definitions:
       addItems:
         type: array
         items:
-          type: number
-          format: integer
+          type: integer
         example: [ 1,2,3 ]
       removeItems:
         type: array
         items:
-          type: number
-          format: integer
+          type: integer
         example: [ 4,5,6 ]
