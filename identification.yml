@@ -12,53 +12,70 @@ components:
                 $ref: "#/components/schemas/Person"
         - $ref: './common.yml#/components/schemas/Page'
     Person:
+      description: ""
       allOf:
         - $ref: '#/components/schemas/PersonFields'
         - type: object
           properties:
             id:
               type: integer
+              description: ""
             created_at:
               type: string
+              description: ""
             updated_at:
               type: string
+              description: ""
     PersonFields:
       type: object
+      description: ""
       properties:
         name:
           type: string
+          description: ""
         metadata:
           type: object
           additionalProperties: true
+          description: ""
     ImageFields:
       type: object
+      description: ""
       properties:
         image:
           type: object
+          description: ""
           properties:
             content_type:
               type: string
+              description: ""
             content:
               $ref: "./common.yml#/components/schemas/ImageData"
     Image:
       type: object
+      description: ""
       properties:
         id:
           type: integer
+          description: ""
         content_type:
           type: string
+          description: ""
         created_at:
           type: string
+          description: ""
         path:
           type: string
+          description: ""
         url:
           type: string
+          description: ""
     GroupPage:
       allOf:
         - type: object
           properties:
             items:
               type: array
+              description: ""
               items:
                 $ref: "#/components/schemas/Group"
         - $ref: './common.yml#/components/schemas/Page'
@@ -66,16 +83,22 @@ components:
       allOf:
         - $ref: '#/components/schemas/GroupToCreate'
         - type: object
+          description: ""
           properties:
             id:
               type: integer
+              description: ""
             created_at:
               type: string
+              description: ""
     GroupToCreate:
       type: object
+      description: ""
       properties:
         name:
           type: string
+          description: ""
         metadata:
           type: object
           additionalProperties: true
+          description: ""

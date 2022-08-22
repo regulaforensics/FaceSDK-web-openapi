@@ -3,25 +3,18 @@ openapi: 3.0.3
 components:
 
   parameters:
-    group_id:
-      name: group_id
-      in: path
-      description: Group id
-      required: true
-      schema:
-        type: integer
     page:
       name: page
       in: query
       required: true
-      description: Current page
+      description: ""
       schema:
         type: integer
     size:
       name: size
       in: query
       required: true
-      description: Page size
+      description: ""
       schema:
         type: integer
 
@@ -45,7 +38,7 @@ components:
           $ref: "#/components/schemas/FaceQualityScenarios"
         onlyCentralFace:
           type: boolean
-          description: "" # todo desc
+          description: ""
           example: false
         outputImageParams:
           $ref: "#/components/schemas/OutputImageParams"
@@ -93,7 +86,7 @@ components:
           example: [300, 400]
         returnOriginalRect:
           type: boolean
-          description: ""  # todo desc
+          description: ""
           example: true
 
     QualityConfigList:

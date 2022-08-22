@@ -202,42 +202,42 @@ components:
     person_id:
       name: person_id
       in: path
-      description: Person id
+      description: "Person Id"
       required: true
       schema:
         type: integer
     image_id:
       name: image_id
       in: path
-      description: Image id
+      description: "Image Id"
       required: true
       schema:
         type: integer
     page:
       name: page
       in: query
-      description: Current page
+      description: "Current page"
       schema:
         type: integer
         default: 1
     size:
       name: size
       in: query
-      description: Page size
+      description: "Page size"
       schema:
         type: integer
         default: 1000
   responses:
     SuccessEmpty:
-      description: Successful operation, return nothing
+      description: "Successful operation, return nothing"
     SuccessPerson:
-      description: Successful operation; return person
+      description: "Successful operation; return person"
       content:
         application/json:
           schema:
             $ref: "./identification.yml#/components/schemas/Person"
     PersonNotFound:
-      description: Person with person_id not found
+      description: "Person with person_id not found"
       content:
         application/json:
           schema:
@@ -248,14 +248,9 @@ definitions:
     allOf:
       - $ref: './common.yml#/components/schemas/Page'
       - type: object
+        description: ""
         properties:
           items:
             type: array
             items:
               $ref: "./identification.yml#/components/schemas/Image"
-  ImageMetadata:
-    type: object
-    properties:
-      metadata:
-        type: object
-        additionalProperties: true

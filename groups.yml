@@ -138,21 +138,21 @@ components:
     group_id:
       name: group_id
       in: path
-      description: Group id
+      description: "Group id"
       required: true
       schema:
         type: integer
   responses:
     SuccessEmpty:
-      description: Successful operation, return nothing
+      description: "Successful operation, return nothing"
     SuccessGroup:
-      description: Successful operation; return group
+      description: "Successful operation; return group"
       content:
         application/json:
           schema:
             $ref: "./identification.yml#/components/schemas/Group"
     GroupNotFound:
-      description: Group with group_id not found
+      description: "Group with group_id not found"
       content:
         application/json:
           schema:
@@ -161,14 +161,17 @@ components:
 definitions:
   UpdateGroup:
     type: object
+    description: ""
     properties:
       addItems:
         type: array
+        description: ""
         items:
           type: integer
         example: [ 1,2,3 ]
       removeItems:
         type: array
+        description: ""
         items:
           type: integer
         example: [ 4,5,6 ]
