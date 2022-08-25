@@ -9,15 +9,9 @@ paths:
       parameters:
         - $ref: './common.yml#/components/parameters/page'
         - $ref: './common.yml#/components/parameters/size'
-        - name: name
-          in: query
-          required: false
-          description: Person name keywords
-          schema:
-            type: string
       responses:
         200:
-          description: Successful operation, return all persons
+          description: "Successful operation, return all persons."
           content:
             application/json:
               schema:
@@ -30,7 +24,6 @@ paths:
       summary: Create person
       operationId: create_person
       requestBody:
-        description: Future person
         required: true
         content:
           application/json:
@@ -62,7 +55,7 @@ paths:
       summary: Update person
       operationId: update_person
       requestBody:
-        description: Metadata
+        description: "Request body for the Person to update."
         required: true
         content:
           application/json:
@@ -100,7 +93,7 @@ paths:
         - $ref: './common.yml#/components/parameters/size'
       responses:
         200:
-          description: Successful operation; return all person images
+          description: "Successful operation; return all person images."
           content:
             application/json:
               schema:
@@ -115,7 +108,7 @@ paths:
       summary: Add person image
       operationId: add_image_to_person
       requestBody:
-        description: Image to add
+        description: "Image to add."
         required: true
         content:
           application/json:
@@ -123,7 +116,7 @@ paths:
               $ref: "./identification.yml#/components/schemas/ImageFields"
       responses:
         200:
-          description: Successful operation; return image id
+          description: "Successful operation; return image ID."
           content:
             application/json:
               schema:
@@ -145,12 +138,12 @@ paths:
       responses:
         404:
           $ref: '#/components/responses/PersonNotFound'
-          description: Such image don't exists
+          description: "Such an image does not exists."
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
-          description: Person have not such image
+          description: "Person does not have such an image."
         200:
-          description: Successful operation, return image
+          description: "Successful operation, return image."
           content:
             image/*:
               schema:
@@ -169,7 +162,7 @@ paths:
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
-          description: Person with person_id or image with image_id not found
+          description: "Person with the person_id or image with the image_id is not found."
           content:
             application/json:
               schema:
@@ -187,7 +180,7 @@ paths:
         - $ref: './common.yml#/components/parameters/size'
       responses:
         200:
-          description: Successful operation; return all groups
+          description: "Successful operation; return all groups."
           content:
             application/json:
               schema:
@@ -202,42 +195,42 @@ components:
     person_id:
       name: person_id
       in: path
-      description: "Person Id"
+      description: "Person ID."
       required: true
       schema:
         type: integer
     image_id:
       name: image_id
       in: path
-      description: "Image Id"
+      description: "Image ID."
       required: true
       schema:
         type: integer
     page:
       name: page
       in: query
-      description: "Current page"
+      description: "Current page."
       schema:
         type: integer
         default: 1
     size:
       name: size
       in: query
-      description: "Page size"
+      description: "Page size."
       schema:
         type: integer
         default: 1000
   responses:
     SuccessEmpty:
-      description: "Successful operation, return nothing"
+      description: "Successful operation, return nothing."
     SuccessPerson:
-      description: "Successful operation; return person"
+      description: "Successful operation; return person."
       content:
         application/json:
           schema:
             $ref: "./identification.yml#/components/schemas/Person"
     PersonNotFound:
-      description: "Person with person_id not found"
+      description: "Person with the person_id is not found."
       content:
         application/json:
           schema:
@@ -248,7 +241,7 @@ definitions:
     allOf:
       - $ref: './common.yml#/components/schemas/Page'
       - type: object
-        description: ""
+        description: "Image page."
         properties:
           items:
             type: array

@@ -15,7 +15,7 @@ paths:
               $ref: "#/components/schemas/DetectRequest"
       responses:
         200:
-          description: "Successful operation; return detection faces with their coordinates."
+          description: "Successful operation; the coordinates of the detected faces are returned."
           content:
             application/json:
               schema:
@@ -35,15 +35,15 @@ components:
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
         thumbnails:
-          description: "Enable formatted detections' thumbnails in the response"
+          description: "Whether to return the cropped portrains with the detected faces."
           type: boolean
           default: false
         attributes:
-          description: "Enable face attributions detection, such as age or emotion and etc."
+          description: "Whether to evaluate attributes, such as age and emotions."
           type: boolean
           default: false
         onlyCentralFace:
-          description: "True - main face; false - all faces."
+          description: "Whether to detect the only central face (true) or all the faces (false)."
           type: boolean
           default: false
 
@@ -93,7 +93,7 @@ components:
             age: adult
             emotion: smile
         landmarks:
-          description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
+          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
           items:
             description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
@@ -113,14 +113,13 @@ components:
                 $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
               example: ["ImageWidthToHeight", "Yaw"]
             detailsGroups:
-              description: "The array of the assessment results for each group of characteristics.
-              Includes groupId, name, total, compliantCount."
+              description: "The array of the assessment results for each group of characteristics."
               type: array
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetailsGroups"
             details:
               type: array
-              description: "The array of the assessment characteristics that were set in the request. Includes name, range, status, unit, value."
+              description: "The array of the assessment characteristics that were set in the request."
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
 
@@ -138,7 +137,7 @@ components:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
     FaceAttribute:
-      description: "Face attributes, such as age or emotion"
+      description: "Face attributes, such as age or emotion."
       type: string
       enum:
         - age

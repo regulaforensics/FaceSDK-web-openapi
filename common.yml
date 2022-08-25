@@ -7,20 +7,20 @@ components:
       name: page
       in: query
       required: true
-      description: ""
+      description: "The page number to get a list of persons or groups."
       schema:
         type: integer
     size:
       name: size
       in: query
       required: true
-      description: ""
+      description: "The page size with a list of persons or groups, items."
       schema:
         type: integer
 
   responses:
     BadLicense:
-      description: "Bad license. Either server or request does not contain valid license."
+      description: "Bad license. Either the server or request does not contain a valid license."
     BadRequest:
       description: "Bad request. Check your input data."
       content:
@@ -32,13 +32,13 @@ components:
   schemas:
     ProcessParam:
       type: object
-      description: ""
+      description: "The processing parameters."
       properties:
         scenario:
           $ref: "#/components/schemas/FaceQualityScenarios"
         onlyCentralFace:
           type: boolean
-          description: ""
+          description: "Whether to process only the central face on the image (true) or all the faces (false)."
           example: false
         outputImageParams:
           $ref: "#/components/schemas/OutputImageParams"
@@ -47,18 +47,18 @@ components:
 
     OutputImageParams:
       type: object
-      description: ""
+      description: "Whether to process the uploaded image according to the indicated settings."
       properties:
         backgroundColor:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
           $ref: "#/components/schemas/RGB"
         crop:
-          description: "Face image alignment and cutting, includes type, pad, size."
+          description: "Whether to return the Base64 of an aligned and cropped portrait in the crop field."
           $ref: "#/components/schemas/Crop"
 
     QualityRequest:
       type: object
-      description: "If set, the portrait quality check is performed."
+      description: "whether to perform the portrait quality check."
       properties:
         backgroundMatchColor:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
@@ -71,7 +71,7 @@ components:
       properties:
         type:
           $ref: "#/components/schemas/FaceAlignTypeQuality"
-          description: "The dimensions ratio to the height of the required pattern, see the FaceAlignTypeQuality enum."
+          description: "The dimensions ratio to the height of the required pattern."
           example: 1
         padColor:
           $ref: "#/components/schemas/RGB"
@@ -86,7 +86,7 @@ components:
           example: [300, 400]
         returnOriginalRect:
           type: boolean
-          description: ""
+          description: "Whether to return the coordinates of the rectangle with the face in the original image prepared for the face crop."
           example: true
 
     QualityConfigList:
@@ -118,7 +118,7 @@ components:
       type: object
       properties:
         groupId:
-          description: "The ID of the characteristics group, see the FaceImageQualityGroups enum."
+          description: "The ID of the characteristics group."
           $ref: "#/components/schemas/FaceImageQualityGroups"
         name:
           $ref: "#/components/schemas/FaceQualityConfigName"
@@ -136,7 +136,7 @@ components:
       type: object
       properties:
         groupId:
-          description: "The ID of the characteristics group, see the FaceImageQualityGroups enum."
+          description: "The ID of the characteristics group."
           $ref: "#/components/schemas/FaceImageQualityGroups"
           example: 0
         name:
@@ -154,7 +154,7 @@ components:
         status:
           $ref: "#/components/schemas/FaceQualityStatus"
           example: 1
-          description: "The assessment status, see FaceQualityStatus enum"
+          description: "The assessment status."
         value:
           type: float
           description: "The assessed value for the characteristic, returned in the set units."
@@ -316,7 +316,7 @@ components:
           $ref: "#/components/schemas/FaceSDKResultCode"
 
     ImageData:
-      description: "Base64 encoded image"
+      description: "Base64 encoded image."
       type: string
       format: byte
 
@@ -427,7 +427,7 @@ components:
         - FACER_OUTPUT_IS_NOT_DEFINED
 
     Thumbnail:
-      description: "Formatted base64 face detection image."
+      description: "Base64 of the cropped portrait."
       type: string
       format: byte
 
