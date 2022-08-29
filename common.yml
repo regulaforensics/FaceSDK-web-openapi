@@ -348,6 +348,7 @@ components:
 
     FaceAlignTypeQuality:
       type: integer
+      description: "The aspect ratio according to which alignment is performed."
       enum:
         - 0
         - 1
