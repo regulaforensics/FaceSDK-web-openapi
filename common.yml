@@ -10,6 +10,7 @@ components:
       description: "The page number to get a list of persons or groups."
       schema:
         type: integer
+        default: 1
     size:
       name: size
       in: query
@@ -17,6 +18,7 @@ components:
       description: "The page size with a list of persons or groups, items."
       schema:
         type: integer
+        default: 1000
 
   responses:
     BadLicense:

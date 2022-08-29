@@ -206,20 +206,6 @@ components:
       required: true
       schema:
         type: integer
-    page:
-      name: page
-      in: query
-      description: "Current page."
-      schema:
-        type: integer
-        default: 1
-    size:
-      name: size
-      in: query
-      description: "Page size."
-      schema:
-        type: integer
-        default: 1000
   responses:
     SuccessEmpty:
       description: "Successful operation, return nothing."
