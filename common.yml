@@ -60,7 +60,7 @@ components:
 
     QualityRequest:
       type: object
-      description: "whether to perform the portrait quality check."
+      description: "Whether to perform the portrait quality check."
       properties:
         backgroundMatchColor:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
@@ -84,7 +84,7 @@ components:
             type: integer
           minItems: 2
           maxItems: 2
-          description: "The resize value in case type matches this value. It it doesn't match, no resize is done."
+          description: "The resize value in case type matches this value. It it doesn't, no resize is done."
           example: [300, 400]
         returnOriginalRect:
           type: boolean
@@ -333,6 +333,7 @@ components:
           type: string
     Page:
       type: object
+      description: "Information about current page number and total pages count"
       properties:
         page:
           type: integer
