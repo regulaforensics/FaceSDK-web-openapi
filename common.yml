@@ -2,9 +2,27 @@ openapi: 3.0.3
 
 components:
 
+  parameters:
+    page:
+      name: page
+      in: query
+      required: true
+      description: "The page number to get a list of persons or groups."
+      schema:
+        type: integer
+        default: 1
+    size:
+      name: size
+      in: query
+      required: true
+      description: "The page size with a list of persons or groups, items."
+      schema:
+        type: integer
+        default: 1000
+
   responses:
     BadLicense:
-      description: "Bad license. Either server or request does not contain valid license."
+      description: "Bad license. Either the server or request does not contain a valid license."
     BadRequest:
       description: "Bad request. Check your input data."
       content:
@@ -14,6 +32,282 @@ components:
 
 
   schemas:
+    ProcessParam:
+      type: object
+      description: "The processing parameters."
+      properties:
+        scenario:
+          $ref: "#/components/schemas/FaceQualityScenarios"
+        onlyCentralFace:
+          type: boolean
+          description: "Whether to process only the central face on the image (true) or all the faces (false)."
+          example: false
+        outputImageParams:
+          $ref: "#/components/schemas/OutputImageParams"
+        quality:
+          $ref: "#/components/schemas/QualityRequest"
+
+    OutputImageParams:
+      type: object
+      description: "Whether to process the uploaded image according to the indicated settings."
+      properties:
+        backgroundColor:
+          description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
+          $ref: "#/components/schemas/RGB"
+        crop:
+          description: "Whether to return the Base64 of an aligned and cropped portrait in the crop field."
+          $ref: "#/components/schemas/Crop"
+
+    QualityRequest:
+      type: object
+      description: "Whether to perform the portrait quality check."
+      properties:
+        backgroundMatchColor:
+          description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
+          $ref: "#/components/schemas/RGB"
+        config:
+          $ref: "#/components/schemas/QualityConfigList"
+
+    Crop:
+      type: object
+      properties:
+        type:
+          $ref: "#/components/schemas/FaceAlignTypeQuality"
+          description: "The dimensions ratio to the height of the required pattern."
+          example: 1
+        padColor:
+          $ref: "#/components/schemas/RGB"
+          description: "The RGB value for the color that will complement the image if this is needed for alignment."
+        size:
+          type: array
+          items:
+            type: integer
+          minItems: 2
+          maxItems: 2
+          description: "The resize value in case type matches this value. It it doesn't, no resize is done."
+          example: [300, 400]
+        returnOriginalRect:
+          type: boolean
+          description: "Whether to return the coordinates of the rectangle with the face in the original image prepared for the face crop."
+          example: true
+
+    QualityConfigList:
+      type: array
+      items:
+        $ref: "#/components/schemas/QualityConfig"
+
+    QualityConfig:
+      type: object
+      description: "The configuration that defines the list of returned quality check characteristics.
+       For every characteristic, includes name, range, unit."
+      properties:
+        name:
+          description: "The name of the characteristic."
+          $ref: "#/components/schemas/FaceQualityConfigName"
+          example: "Roll"
+        range:
+          type: array
+          items:
+            type: float
+          minItems: 2
+          maxItems: 2
+          description: "The range of applicable values for this characteristic.
+          If the returned in the Response value fits this range,
+          the value is identified as compliant with the requirements."
+          example: [x, y]
+
+    QualityDetailsGroups:
+      type: object
+      properties:
+        groupId:
+          description: "The ID of the characteristics group."
+          $ref: "#/components/schemas/FaceImageQualityGroups"
+        name:
+          $ref: "#/components/schemas/FaceQualityConfigName"
+          description: "The name of the characteristics group."
+        totalCount:
+          type: integer
+          description: "The total number of characteristics in the group."
+          example: 5
+        compliantCount:
+          type: integer
+          description: "The number of compliant characteristics in the group."
+          example: 4
+
+    QualityDetail:
+      type: object
+      properties:
+        groupId:
+          description: "The ID of the characteristics group."
+          $ref: "#/components/schemas/FaceImageQualityGroups"
+          example: 0
+        name:
+          $ref: "#/components/schemas/FaceQualityConfigName"
+          description: "The name of the characteristic."
+          example: "Roll"
+        range:
+          type: array
+          description: "The range of set values for this characteristic."
+          items:
+            type: float
+          minItems: 2
+          maxItems: 2
+          example: [x, y]
+        status:
+          $ref: "#/components/schemas/FaceQualityStatus"
+          example: 1
+          description: "The assessment status."
+        value:
+          type: float
+          description: "The assessed value for the characteristic, returned in the set units."
+          example: 0.0
+
+    RGB:
+      type: array
+      items:
+        type: integer
+      minItems: 3
+      maxItems: 3
+      example: [128, 128, 128]
+
+    FaceQualityStatus:
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+      x-enum-varnames:
+        - QUALITY_STATUS_FALSE
+        - QUALITY_STATUS_TRUE
+        - QUALITY_STATUS_UNDETERMINED
+
+    FaceQualityScenarios:
+      type: string
+      enum:
+        - "QualityFull"
+        - "QualityICAO"
+        - "QualityVisaSchengen"
+        - "QualityVisaUSA"
+        - "CropCentralFace"
+        - "CropAllFaces"
+        - "Thumbnail"
+      x-enum-varnames:
+        - QUALITY_FULL
+        - QUALITY_ICAO
+        - QUALITY_VISA_SCHENGEN
+        - QUALITY_VISA_USA
+        - CROP_CENTRAL_FACE
+        - CROP_ALL_FACES
+        - THUMBNAIL
+
+    FaceImageQualityGroups:
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 8
+      x-enum-varnames:
+        - IMAGE_CHARACTERISTICS
+        - HEAD_SIZE_AND_POSITIONS
+        - FACE_QUALITY
+        - EYES_CHARACTERISTICS
+        - SHADOWS_AND_LIGHTNING
+        - POSE_AND_EXPRESSION
+        - HEAD_OCCLUSION
+        - BACKGROUND
+
+    FaceQualityConfigName:
+      type: string
+      enum:
+        - "ImageWidth"
+        - "ImageHeight"
+        - "ImageWidthToHeight"
+        - "ImageChannelsNumber"
+        - "FaceMidPointHorizontalPosition"
+        - "FaceMidPointVerticalPosition"
+        - "HeadWidthRatio"
+        - "HeadHeightRatio"
+        - "EyesDistance"
+        - "Yaw"
+        - "Pitch"
+        - "Roll"
+        - "BlurLevel"
+        - "NoiseLevel"
+        - "EyeRightClosed"
+        - "EyeLeftClosed"
+        - "EyeRightOccluded"
+        - "EyeLeftOccluded"
+        - "EyesRed"
+        - "EyeRightCoveredWithHair"
+        - "EyeLeftCoveredWithHair"
+        - "OffGaze"
+        - "FaceDynamicRange"
+        - "UnnaturalSkinTone"
+        - "TooDark"
+        - "TooLight"
+        - "FaceGlare"
+        - "ShadowsOnFace"
+        - "DarkGlasses"
+        - "ReflectionOnGlasses"
+        - "FramesTooHeavy"
+        - "FaceOccluded"
+        - "HeadCovering"
+        - "BackgroundUniformity"
+        - "ShadowsOnBackground"
+        - "OtherFaces"
+        - "ShouldersPose"
+        - "ExpressionLevel"
+        - "MouthOpen"
+        - "ContactLenses"
+        - "ForeheadCovering"
+        - "Smile"
+      x-enum-varnames:
+        - IMAGE_WIDTH
+        - IMAGE_HEIGHT
+        - IMAGE_WIDTH_TO_HEIGHT
+        - IMAGE_CHANNELS_NUMBER
+        - FACE_MID_POINT_HORIZONTAL_POSITION
+        - FACE_MID_POINT_VERTICAL_POSITION
+        - HEAD_WIDTH_RATIO
+        - HEAD_HEIGHT_RATIO
+        - EYES_DISTANCE
+        - YAW
+        - PITCH
+        - ROLL
+        - BLUR_LEVEL
+        - NOISE_LEVEL
+        - EYE_RIGHT_CLOSED
+        - EYE_LEFT_CLOSED
+        - EYE_RIGHT_OCCLUDED
+        - EYE_LEFT_OCCLUDED
+        - EYES_RED
+        - EYE_RIGHT_COVERED_WITH_HAIR
+        - EYE_LEFT_COVERED_WITH_HAIR
+        - OFF_GAZE
+        - FACE_DYNAMIC_RANGE
+        - UNNATURAL_SKIN_TONE
+        - TOO_DARK
+        - TOO_LIGHT
+        - FACE_GLARE
+        - SHADOWS_ON_FACE
+        - DARK_GLASSES
+        - REFLECTION_ON_GLASSES
+        - FRAMES_TOO_HEAVY
+        - FACE_OCCLUDED
+        - HEAD_COVERING
+        - BACKGROUND_UNIFORMITY
+        - SHADOWS_ON_BACKGROUND
+        - OTHER_FACES
+        - SHOULDERS_POSE
+        - EXPRESSION_LEVEL
+        - MOUTH_OPEN
+        - CONTACT_LENSES
+        - FOREHEAD_COVERING
+        - SMILE
 
     FaceSDKResult:
       type: object
@@ -21,10 +315,10 @@ components:
         - code
       properties:
         code:
-          $ref: '#/components/schemas/FaceSDKResultCode'
+          $ref: "#/components/schemas/FaceSDKResultCode"
 
     ImageData:
-      description: "Base64 encoded image"
+      description: "Base64 encoded image."
       type: string
       format: byte
 
@@ -37,10 +331,36 @@ components:
           type: string
         msg:
           type: string
+    Page:
+      type: object
+      description: "Information about current page number and total pages count"
+      properties:
+        page:
+          type: integer
+          example: 1
+        total_pages:
+          type: integer
+          example: 2
 
     Bytes:
       type: string
       format: binary
+
+    FaceAlignTypeQuality:
+      type: integer
+      description: "The aspect ratio according to which alignment is performed."
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+      x-enum-varnames:
+        - ALIGN_3x4
+        - ALIGN_4x5
+        - ALIGN_2x3
+        - ALIGN_1x1
+        - ALIGN_7x9
 
     FaceSDKResultCode:
       type: integer
@@ -111,7 +431,7 @@ components:
         - FACER_OUTPUT_IS_NOT_DEFINED
 
     Thumbnail:
-      description: "Formatted base64 face detection image."
+      description: "Base64 of the cropped portrait."
       type: string
       format: byte
 

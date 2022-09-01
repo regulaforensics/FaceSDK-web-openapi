@@ -15,7 +15,7 @@ paths:
               $ref: "#/components/schemas/MatchRequest"
       responses:
         200:
-          description: "Successful operation; return compare results with their score and similarity."
+          description: "Successful operation; the compare results are returned."
           content:
             application/json:
               schema:
@@ -44,10 +44,10 @@ components:
     MatchImageIndex:
       type: integer
       description: "Image index used to identify input photos between themselves.
-      If not specified, than input list index is used"
+      If not specified, than input list index is used."
 
     MatchFaceIndex:
-      type: integer
+      type: number
       description: "Faces index used to identify faces in scope of one photo."
 
     MatchImage:
@@ -120,7 +120,7 @@ components:
         faceIndex:
           $ref: "#/components/schemas/MatchFaceIndex"
         landmarks:
-          description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
+          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
           items:
             description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
@@ -135,7 +135,7 @@ components:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
     ImageSource:
-      description: "Face photo image source"
+      description: "Face photo image source."
       type: integer
       enum:
         - 1

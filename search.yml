@@ -1,0 +1,74 @@
+openapi: 3.0.3
+
+
+paths:
+  /search:
+    post:
+      tags:
+        - search
+      summary: Find person by image in groups.
+      operationId: search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SearchRequest"
+      responses:
+        200:
+          description: "Successful operation; search result returned."
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/SearchResult"
+        400:
+          $ref: "./common.yml#/components/responses/BadRequest"
+
+definitions:
+  SearchRequest:
+    allOf:
+      - type: object
+        description: "Request search data."
+        properties:
+          limit:
+            type: integer
+            default: 100
+            description: "The number of returned Persons limit."
+          threshold:
+            type: number
+            format: float
+            default: 0.5f
+            description: "Similarity threshold."
+          group_ids:
+            type: array
+            description: "The IDs of the groups in which the search is performed."
+            items:
+              type: integer
+      - $ref: "./identification.yml#/components/schemas/ImageFields"
+  RecognizeImage:
+    allOf:
+      - $ref: "./identification.yml#/components/schemas/Image"
+      - type: object
+        properties:
+          similarity:
+            type: number
+            format: float
+            description: "The similarity score."
+  SearchResult:
+    allOf:
+      - $ref: "#/definitions/SearchPerson"
+      - type: object
+        properties:
+          code:
+            type: integer
+            description: "The search result code."
+  SearchPerson:
+    allOf:
+      - $ref: "./identification.yml#/components/schemas/Person"
+      - type: object
+        description: "The array of Person images."
+        properties:
+          images:
+            type: array
+            items:
+              $ref: "#/definitions/RecognizeImage"

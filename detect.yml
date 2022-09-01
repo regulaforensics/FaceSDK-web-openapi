@@ -15,7 +15,7 @@ paths:
               $ref: "#/components/schemas/DetectRequest"
       responses:
         200:
-          description: "Successful operation; return detection faces with their coordinates."
+          description: "Successful operation; the coordinates of the detected faces are returned."
           content:
             application/json:
               schema:
@@ -30,18 +30,20 @@ components:
       properties:
         tag:
           type: string
+        processParam:
+          $ref: "./common.yml#/components/schemas/ProcessParam"
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
         thumbnails:
-          description: "Enable formatted detections' thumbnails in the response"
+          description: "Whether to return the cropped portrains with the detected faces."
           type: boolean
           default: false
         attributes:
-          description: "Enable face attributions detection, such as age or emotion and etc."
+          description: "Whether to evaluate attributes, such as age and emotions."
           type: boolean
           default: false
         onlyCentralFace:
-          description: "True - main face; false - all faces."
+          description: "Whether to detect the only central face (true) or all the faces (false)."
           type: boolean
           default: false
 
@@ -68,6 +70,12 @@ components:
         landmarksType:
           description: "Internal."
           type: integer
+        scenario:
+          description: "Scenario from Request processParam"
+          $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
+        timer:
+          type: float
+          example: 0.84793560000000001
 
     Detection:
       type: object
@@ -75,6 +83,9 @@ components:
         - landmarks
         - roi
       properties:
+        crop:
+          description: "Base64 of the aligned and cropped portrait. Returned if align is set."
+          $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
           additionalProperties: true
@@ -82,7 +93,7 @@ components:
             age: adult
             emotion: smile
         landmarks:
-          description: "Main coordinates of the detected face (eyes, nose, lips, ears and etc.)."
+          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
           items:
             description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
@@ -91,13 +102,42 @@ components:
               type: number
               example: [ x, y ]
           example: [ [ x, y ] ]
+        quality:
+          type: object
+          description: "Field for checking the portrait quality. If it is not mentioned, no quality check is performed."
+          properties:
+            nonCompliant:
+              type: array
+              description: "The array of all the non-compliant assessment characteristics."
+              items:
+                $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
+              example: ["ImageWidthToHeight", "Yaw"]
+            detailsGroups:
+              description: "The array of the assessment results for each group of characteristics."
+              type: array
+              items:
+                $ref: "./common.yml#/components/schemas/QualityDetailsGroups"
+            details:
+              type: array
+              description: "The array of the assessment characteristics that were set in the request."
+              items:
+                $ref: "./common.yml#/components/schemas/QualityDetail"
+
+            score:
+              type: float
+              description: "Returns the estimated portrait quality assessment result,
+               a number from 0 to 1, where 1 is for absolute compliance."
+              example: -1.0
+            timer:
+              type: float
+              example: 0.42036411166191101
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
         thumbnail:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
     FaceAttribute:
-      description: "Face attributes, such as age or emotion"
+      description: "Face attributes, such as age or emotion."
       type: string
       enum:
         - age
