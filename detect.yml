@@ -30,6 +30,7 @@ components:
       properties:
         tag:
           type: string
+          description: "Session identificator."
         processParam:
           $ref: "./common.yml#/components/schemas/ProcessParam"
         image:
@@ -71,10 +72,11 @@ components:
           description: "Internal."
           type: integer
         scenario:
-          description: "Scenario from Request processParam"
+          description: "Scenario from Request processParam."
           $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
         timer:
           type: float
+          description: "The time "
           example: 0.84793560000000001
 
     Detection:
@@ -130,6 +132,7 @@ components:
               example: -1.0
             timer:
               type: float
+              description: "The total time the quality assessment has taken."
               example: 0.42036411166191101
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"

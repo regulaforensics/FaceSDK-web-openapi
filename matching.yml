@@ -33,11 +33,14 @@ components:
       properties:
         tag:
           type: string
+          description: "Session identificator."
         thumbnails:
           type: boolean
+          description: "Whether to return cropped portraits of the detected people."
           default: false
         images:
           type: array
+          description: "Base64 images."
           items:
             $ref: "#/components/schemas/MatchImage"
 
@@ -69,6 +72,7 @@ components:
           properties:
             results:
               type: array
+              description: "The array of matching results."
               items:
                 $ref: "#/components/schemas/MatchImageResult"
             detections:
@@ -92,12 +96,15 @@ components:
           $ref: "#/components/schemas/MatchFaceIndex"
         score:
           type: number
+          description: "The matching score."
         similarity:
           type: number
+          description: "The similarity score."
         errorCode:
           $ref: './common.yml#/components/schemas/FaceSDKResultCode'
         errorMsg:
           type: string
+          escription: "The error message if any."
 
     MatchImageDetection:
       type: object
