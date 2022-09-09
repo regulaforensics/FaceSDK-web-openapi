@@ -327,19 +327,24 @@ components:
       properties:
         status_code:
           type: integer
+          description: "Status code."
         type:
           type: string
+          description: "Error type."
         msg:
           type: string
+          description: "Error message."
     Page:
       type: object
       description: "Information about current page number and total pages count"
       properties:
         page:
           type: integer
+          description: "Current page number."
           example: 1
         total_pages:
           type: integer
+          description: "Total number of pages."
           example: 2
 
     Bytes:
