@@ -76,7 +76,7 @@ components:
           $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
         timer:
           type: float
-          description: "The time "
+          description: "The total time taken for the detection."
           example: 0.84793560000000001
 
     Detection:
