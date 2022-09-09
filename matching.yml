@@ -104,7 +104,7 @@ components:
           $ref: './common.yml#/components/schemas/FaceSDKResultCode'
         errorMsg:
           type: string
-          escription: "The error message if any."
+          description: "The error message if any."
 
     MatchImageDetection:
       type: object
