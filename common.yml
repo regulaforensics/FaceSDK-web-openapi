@@ -315,7 +315,6 @@ components:
         - SHOULDERS_POSE
         - EXPRESSION_LEVEL
         - MOUTH_OPEN
-        - CONTACT_LENSES
         - FOREHEAD_COVERING
         - SMILE
         - STRONG_MAKEUP
