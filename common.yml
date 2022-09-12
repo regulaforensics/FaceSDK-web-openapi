@@ -172,6 +172,7 @@ components:
 
     FaceQualityStatus:
       type: integer
+      description: "The processing status returned for each assessed quality characteristic." 
       enum:
         - 0
         - 1
