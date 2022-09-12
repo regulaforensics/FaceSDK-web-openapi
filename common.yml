@@ -183,6 +183,7 @@ components:
 
     FaceQualityScenarios:
       type: string
+      description: "Face detection scenarios."
       enum:
         - "QualityFull"
         - "QualityICAO"
@@ -202,6 +203,7 @@ components:
 
     FaceImageQualityGroups:
       type: integer
+      description: "Face image quality group types for face image quality assessment."
       enum:
         - 1
         - 2
@@ -209,6 +211,7 @@ components:
         - 4
         - 5
         - 6
+        - 7
         - 8
       x-enum-varnames:
         - IMAGE_CHARACTERISTICS
@@ -222,11 +225,13 @@ components:
 
     FaceQualityConfigName:
       type: string
+      description: "All image characteristics that can be assessed during face image quality assessment."
       enum:
         - "ImageWidth"
         - "ImageHeight"
         - "ImageWidthToHeight"
         - "ImageChannelsNumber"
+        - "PaddingRatio"
         - "FaceMidPointHorizontalPosition"
         - "FaceMidPointVerticalPosition"
         - "HeadWidthRatio"
@@ -262,14 +267,18 @@ components:
         - "ShouldersPose"
         - "ExpressionLevel"
         - "MouthOpen"
-        - "ContactLenses"
         - "ForeheadCovering"
         - "Smile"
+        - "StrongMakeup"
+        - "Headphones"
+        - "MedicalMask"
+        - "BackgroundColorMatch"
       x-enum-varnames:
         - IMAGE_WIDTH
         - IMAGE_HEIGHT
         - IMAGE_WIDTH_TO_HEIGHT
         - IMAGE_CHANNELS_NUMBER
+        - PADDING_RATIO
         - FACE_MID_POINT_HORIZONTAL_POSITION
         - FACE_MID_POINT_VERTICAL_POSITION
         - HEAD_WIDTH_RATIO
@@ -308,6 +317,10 @@ components:
         - CONTACT_LENSES
         - FOREHEAD_COVERING
         - SMILE
+        - STRONG_MAKEUP
+        - HEADPHONES
+        - MEDICAL_MASK
+        - BACKGROUND_COLOR_MATCH
 
     FaceSDKResult:
       type: object
@@ -353,7 +366,7 @@ components:
 
     FaceAlignTypeQuality:
       type: integer
-      description: "The aspect ratio according to which alignment is performed."
+      description: "The aspect ratio according to which face alignment is performed during face detection."
       enum:
         - 0
         - 1
