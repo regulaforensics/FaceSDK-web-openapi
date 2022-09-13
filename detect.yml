@@ -140,11 +140,33 @@ components:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
     FaceAttribute:
-      description: "Face attributes, such as age or emotion."
+      description: "Face attributes for evaluation."
       type: string
       enum:
-        - age
-        - emotion
+        - Age
+        - Emotion
+        - EyeLeft
+        - EyeRight
+        - Smile
+        - Glasses
+        - HeadCovering
+        - ForeheadCovering
+        - Mouth
+        - MedicalMask
+        - Occlusion
+        - StrongMakeup
+        - Headphones
       x-enum-varnames:
         - AGE
         - EMOTION
+        - EYE_LEFT
+        - EYE_RIGHT
+        - SMILE
+        - GLASSES
+        - HEAD_COVERING
+        - FOREHEAD_COVERING
+        - MOUTH
+        - MEDICAL_MASK
+        - OCCLUSION
+        - STRONG_MAKEUP
+        - HEADPHONES
