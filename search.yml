@@ -55,13 +55,16 @@ definitions:
             format: float
             description: "The similarity score."
   SearchResult:
-    allOf:
-      - $ref: "#/definitions/SearchPerson"
-      - type: object
-        properties:
-          code:
-            type: integer
-            description: "The search result code."
+    type: object
+    properties:
+      code:
+        type: integer
+        description: "The search result code."
+      persons:
+        type: array
+        items:
+          $ref: "#/definitions/SearchPerson"
+
   SearchPerson:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Person"
