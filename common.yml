@@ -72,7 +72,7 @@ components:
       type: object
       properties:
         type:
-          $ref: "#/components/schemas/FaceAlignTypeQuality"
+          $ref: "#/components/schemas/FaceImageQualityAlignType"
           description: "The dimensions ratio to the height of the required pattern."
           example: 1
         padColor:
@@ -154,7 +154,7 @@ components:
           maxItems: 2
           example: [x, y]
         status:
-          $ref: "#/components/schemas/FaceQualityStatus"
+          $ref: "#/components/schemas/FaceImageQualityStatus"
           example: 1
           description: "The assessment status."
         value:
@@ -170,7 +170,7 @@ components:
       maxItems: 3
       example: [128, 128, 128]
 
-    FaceQualityStatus:
+    FaceImageQualityStatus:
       type: integer
       description: "The processing status returned for each assessed quality characteristic." 
       enum:
@@ -228,6 +228,7 @@ components:
       type: string
       description: "All image characteristics that can be assessed during face image quality assessment."
       enum:
+        - "ArtFace"
         - "ImageWidth"
         - "ImageHeight"
         - "ImageWidthToHeight"
@@ -275,6 +276,7 @@ components:
         - "MedicalMask"
         - "BackgroundColorMatch"
       x-enum-varnames:
+        - ART_FACE
         - IMAGE_WIDTH
         - IMAGE_HEIGHT
         - IMAGE_WIDTH_TO_HEIGHT
@@ -364,7 +366,7 @@ components:
       type: string
       format: binary
 
-    FaceAlignTypeQuality:
+    FaceImageQualityAlignType:
       type: integer
       description: "The aspect ratio according to which face alignment is performed during face detection."
       enum:
