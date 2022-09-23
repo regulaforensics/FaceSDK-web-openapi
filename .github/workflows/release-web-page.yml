@@ -19,9 +19,10 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - name: Build html page
+        working-directory: master-branch
         run: |
           npm install -g redoc-cli;
-          npx redoc-cli build "$PWD/index.yml" --output doc.html \
+          npx redoc-cli build "./index.yml" --output doc.html \
           --options.maxDisplayedEnumValues=5 --options.theme.logo.gutter="20px" \
           --options.theme.colors.primary.main="#8a53cb" --options.expandResponses="all" \
           --options.expandSingleSchemaField --options.hideDownloadButton \
