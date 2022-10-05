@@ -35,9 +35,8 @@ definitions:
             default: 100
             description: "The number of returned Persons limit."
           threshold:
-            type: number
-            format: float
-            default: 0.5f
+            type: float
+            default: 0.5
             description: "Similarity threshold."
           group_ids:
             type: array
