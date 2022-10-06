@@ -2,6 +2,8 @@ openapi: 3.0.3
 paths:
 
   /match:
+    parameters:
+      - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
         - matching

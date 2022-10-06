@@ -3,6 +3,8 @@ openapi: 3.0.3
 
 paths:
   /search:
+    parameters:
+      - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
         - search

@@ -1,7 +1,6 @@
 openapi: 3.0.3
 
 components:
-
   parameters:
     page:
       name: page
@@ -19,6 +18,11 @@ components:
       schema:
         type: integer
         default: 1000
+    x-request:
+      in: header
+      name: X-RequestID
+      schema:
+        type: string
 
   responses:
     BadLicense:
