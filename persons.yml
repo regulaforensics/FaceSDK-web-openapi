@@ -1,12 +1,17 @@
 openapi: 3.0.3
+
+
 paths:
   /persons:
+    parameters:
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - person
       summary: Get persons
       operationId: get_all_persons
       parameters:
+        - $ref: './common.yml#/components/parameters/x-request'
         - $ref: './common.yml#/components/parameters/page'
         - $ref: './common.yml#/components/parameters/size'
       responses:
@@ -37,6 +42,7 @@ paths:
   /persons/{person_id}:
     parameters:
       - $ref: '#/components/parameters/person_id'
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - person
@@ -83,6 +89,7 @@ paths:
   /persons/{person_id}/images:
     parameters:
       - $ref: '#/components/parameters/person_id'
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - person
@@ -128,6 +135,7 @@ paths:
   /persons/{person_id}/images/{image_id}:
     parameters:
       - $ref: '#/components/parameters/person_id'
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - person
@@ -170,6 +178,7 @@ paths:
   /persons/{person_id}/groups:
     parameters:
       - $ref: '#/components/parameters/person_id'
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - person

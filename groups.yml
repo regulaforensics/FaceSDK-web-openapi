@@ -3,6 +3,8 @@ openapi: 3.0.3
 
 paths:
   /groups:
+    parameters:
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - group
@@ -40,6 +42,7 @@ paths:
   /groups/{group_id}:
     parameters:
       - $ref: '#/components/parameters/group_id'
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - group
@@ -84,6 +87,7 @@ paths:
   /groups/{group_id}/persons:
     parameters:
       - $ref: "#/components/parameters/group_id"
+      - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
         - group
