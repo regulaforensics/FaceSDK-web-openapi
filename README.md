@@ -1,5 +1,9 @@
 # Regula Face SDK OpenAPI definitions
 
+## Main GitHub repository
+
+* [https://github.com/regulaforensics/FaceSDK-web-openapi](https://github.com/regulaforensics/FaceSDK-web-openapi)
+
 ## Clients
 
 * [JavaScript](https://github.com/regulaforensics/FaceSDK-web-js-client) client for the browser and node.js based on axios
