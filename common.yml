@@ -88,7 +88,7 @@ components:
             type: integer
           minItems: 2
           maxItems: 2
-          description: "The resize value in case type matches this value. It it doesn't, no resize is done."
+          description: "The resize value in case type matches this value. If it doesn't, no resize is done."
           example: [300, 400]
         returnOriginalRect:
           type: boolean
