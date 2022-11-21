@@ -51,6 +51,10 @@ definitions:
       - $ref: "./identification.yml#/components/schemas/Image"
       - type: object
         properties:
+          similarity:
+            type: number
+            format: float
+            description: "The similarity score."
           distance:
             type: number
             format: float
