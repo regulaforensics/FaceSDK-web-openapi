@@ -38,8 +38,8 @@ definitions:
             description: "The number of returned Persons limit."
           threshold:
             type: float
-            default: 0.8
-            description: "Similarity threshold."
+            default: 1.0
+            description: "The similarity distance threshold."
           group_ids:
             type: array
             description: "The IDs of the groups in which the search is performed."
@@ -55,6 +55,10 @@ definitions:
             type: number
             format: float
             description: "The similarity score."
+          distance:
+            type: number
+            format: float
+            description: "The similarity distance score: the lower the distance, the higher the face's similarity."
   SearchResult:
     type: object
     properties:
