@@ -38,7 +38,7 @@ definitions:
             description: "The number of returned Persons limit."
           threshold:
             type: float
-            default: 1
+            default: 1.0
             description: "The similarity distance threshold."
           group_ids:
             type: array
