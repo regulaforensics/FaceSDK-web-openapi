@@ -29,23 +29,27 @@ paths:
 definitions:
   SearchRequest:
     allOf:
-      - type: object
-        description: "Request search data."
-        properties:
-          limit:
-            type: integer
-            default: 100
-            description: "The number of returned Persons limit."
-          threshold:
-            type: float
-            default: 1.0
-            description: "The similarity distance threshold."
-          group_ids:
-            type: array
-            description: "The IDs of the groups in which the search is performed."
-            items:
-              type: integer
+      - $ref: "#/definitions/SearchParameters"
       - $ref: "./identification.yml#/components/schemas/ImageFields"
+
+  SearchParameters:
+    type: object
+    description: "Request search data."
+    properties:
+      limit:
+        type: integer
+        default: 100
+        description: "The number of returned Persons limit."
+      threshold:
+        type: float
+        default: 1.0
+        description: "The similarity distance threshold."
+      group_ids:
+        type: array
+        description: "The IDs of the groups in which the search is performed."
+        items:
+          type: integer
+
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"

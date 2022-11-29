@@ -1,0 +1,88 @@
+openapi: 3.0.3
+paths:
+  /match_and_search:
+    parameters:
+      - $ref: './common.yml#/components/parameters/x-request'
+    post:
+      tags:
+        - matching
+      summary: 'Match and Search in one request'
+      operationId: match_and_search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchAndSearchRequest'
+      responses:
+        200:
+          description: 'Successful operation; the compare results are returned.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchAndSearchResponse'
+        403:
+          $ref: './common.yml#/components/responses/BadLicense'
+components:
+  schemas:
+    MatchAndSearchRequest:
+      allOf:
+        - type: object
+          properties:
+            images:
+              type: array
+              items:
+                type: object
+                properties:
+                  content:
+                    $ref: './common.yml#/components/schemas/ImageData'
+                  type:
+                    $ref: './matching.yml#/components/schemas/ImageSource'
+        - $ref: './search.yml#/definitions/SearchParameters'
+
+    MatchAndSearchResponse:
+      allOf:
+        - $ref: './common.yml#/components/schemas/FaceSDKResult'
+        - type: object
+          properties:
+            detections:
+              type: array
+              items:
+                type: object
+                properties:
+                  faces:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: './matching.yml#/components/schemas/DetectionFace'
+                        - type: object
+                          properties:
+                            persons:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/PersonWithImages'
+                            rotationAngle:
+                              type: float
+                              example: 2.1272900104522705
+                  imageIndex:
+                    $ref: './matching.yml#/components/schemas/MatchImageIndex'
+                  status:
+                    $ref: './common.yml#/components/schemas/FaceSDKResultCode'
+            results:
+              $ref: './matching.yml#/components/schemas/MatchImageResult'
+            elapsedTime:
+              type: float
+              example: 1.317137987
+            metadata:
+              type: object
+              additionalProperties: true
+              description: "A free-form object containing person's extended attributes."
+    PersonWithImages:
+      allOf:
+        - type: object
+          properties:
+            images:
+              type: array
+              items:
+                $ref: './search.yml#/definitions/RecognizeImage'
+        - $ref: './identification.yml#/components/schemas/Person'
