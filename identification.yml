@@ -63,12 +63,19 @@ components:
         created_at:
           type: string
           description: "The returned image creation date."
+        updated_at:
+          type: string
+          description: "The returned image update date."
         path:
           type: string
           description: "The returned image S3 path."
         url:
           type: string
           description: "The returned image URL."
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing person's extended attributes."
     GroupPage:
       allOf:
         - type: object
