@@ -45,6 +45,17 @@ components:
         - $ref: './common.yml#/components/schemas/FaceSDKResult'
         - type: object
           properties:
+            results:
+              type: array
+              items:
+                $ref: './matching.yml#/components/schemas/MatchImageResult'
+            elapsedTime:
+              type: float
+              example: 1.317137987
+            metadata:
+              type: object
+              additionalProperties: true
+              description: "A free-form object containing person's extended attributes."
             detections:
               type: array
               items:
@@ -53,30 +64,11 @@ components:
                   faces:
                     type: array
                     items:
-                      allOf:
-                        - $ref: './matching.yml#/components/schemas/DetectionFace'
-                        - type: object
-                          properties:
-                            persons:
-                              type: array
-                              items:
-                                $ref: '#/components/schemas/PersonWithImages'
-                            rotationAngle:
-                              type: float
-                              example: 2.1272900104522705
+                      $ref: '#/components/schemas/FacesResponse'
                   imageIndex:
                     $ref: './matching.yml#/components/schemas/MatchImageIndex'
                   status:
                     $ref: './common.yml#/components/schemas/FaceSDKResultCode'
-            results:
-              $ref: './matching.yml#/components/schemas/MatchImageResult'
-            elapsedTime:
-              type: float
-              example: 1.317137987
-            metadata:
-              type: object
-              additionalProperties: true
-              description: "A free-form object containing person's extended attributes."
     PersonWithImages:
       allOf:
         - type: object
@@ -86,3 +78,16 @@ components:
               items:
                 $ref: './search.yml#/definitions/RecognizeImage'
         - $ref: './identification.yml#/components/schemas/Person'
+
+    FacesResponse:
+      allOf:
+        - $ref: './matching.yml#/components/schemas/DetectionFace'
+        - type: object
+          properties:
+            persons:
+              type: array
+              items:
+                $ref: '#/components/schemas/PersonWithImages'
+            rotationAngle:
+              type: float
+              example: 2.1272900104522705
