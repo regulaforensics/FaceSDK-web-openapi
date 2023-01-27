@@ -17,6 +17,9 @@ servers:
   - url: http://localhost:41101/
     description: Local on-premise installation
 
+
+
+# ~1 means '/'
 paths:
   /api/match:
     $ref: './matching.yml#/paths/~1match'
@@ -42,3 +45,7 @@ paths:
     $ref: './groups.yml#/paths/~1groups~1{group_id}~1persons'
   /api/search:
     $ref: './search.yml#/paths/~1search'
+  /api/v2/liveness/video:
+    $ref: './liveness.yml#/paths/~1v2~1liveness~1video'
+  /api/v2/liveness/portrait:
+    $ref: './liveness.yml#/paths/~1v2~1liveness~1portrait'
