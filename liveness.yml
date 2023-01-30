@@ -39,7 +39,7 @@ paths:
     get:
       tags:
         - liveness   # groups of requests
-      summary: Liveness 2.0 portrait
+      summary: Liveness 2.0 metadata
       operationId: liveness_metadata # name for clients functions
       responses:
         200:
