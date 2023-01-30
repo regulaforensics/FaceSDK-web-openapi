@@ -45,7 +45,7 @@ paths:
         200:
           description: "Successful operation, return metadata"
           content:
-            application/json
+            application/json:
               schema:
                 type: object
                 additionalProperties: true
