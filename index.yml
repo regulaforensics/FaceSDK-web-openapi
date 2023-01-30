@@ -50,4 +50,4 @@ paths:
   /api/v2/liveness/portrait:
     $ref: './liveness.yml#/paths/~1v2~1liveness~1portrait'
   /api/v2/liveness/metadata:
-    $ref: './liveness.yml#/paths/~1v2~1liveness~metadata'
+    $ref: './liveness.yml#/paths/~1v2~1liveness~1metadata'

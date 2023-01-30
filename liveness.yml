@@ -45,9 +45,9 @@ paths:
         200:
           description: "Successful operation, return metadata"
           content:
-            application/octet-stream:   # response mimetype
+            application/json
               schema:
-                type: string
-                format: dict
+                type: object
+                additionalProperties: true
   
 
