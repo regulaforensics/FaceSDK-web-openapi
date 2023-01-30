@@ -17,6 +17,13 @@ paths:
               schema:
                 type: string
                 format: binary
+        400:
+          description: "Bad request, no video available"
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
   /v2/liveness/portrait:
     parameters:
       - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
@@ -33,6 +40,13 @@ paths:
               schema:
                 type: string
                 format: binary
+        400:
+          description: "Bad request, no portrait available"
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
   /v2/liveness/metadata:
     parameters:
       - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
@@ -46,6 +60,13 @@ paths:
           description: "Successful operation, return metadata"
           content:
             application/json
+              schema:
+                type: object
+                additionalProperties: true
+        400:
+          description: "Bad request, no metadata available"
+          content:
+            application/octet-stream:
               schema:
                 type: object
                 additionalProperties: true
