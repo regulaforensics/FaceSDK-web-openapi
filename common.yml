@@ -26,7 +26,7 @@ components:
     transactionId:
       in: query
       required: true
-      description: "Transaction Id"
+      description: "ID of the current liveness transaction."
       schema:
         type: integer
 
