@@ -23,6 +23,12 @@ components:
       name: X-RequestID
       schema:
         type: string
+    transactionId:
+      in: query
+      required: true
+      description: "ID of the current liveness transaction."
+      schema:
+        type: integer
 
   responses:
     BadLicense:

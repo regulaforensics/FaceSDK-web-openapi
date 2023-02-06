@@ -1,0 +1,74 @@
+openapi: 3.0.3
+
+paths:
+  /v2/liveness/video:
+    parameters:
+      - $ref: './common.yml#/components/parameters/transactionId'
+    get:
+      tags:
+        - liveness
+      summary: Liveness 2.0 video
+      operationId: liveness_video
+      responses:
+        200:
+          description: "Successful operation, return video"
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        400:
+          description: "Bad request, no video available"
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /v2/liveness/portrait:
+    parameters:
+      - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
+    get:
+      tags:
+        - liveness   # groups of requests
+      summary: Liveness 2.0 portrait
+      operationId: liveness_portrait  # name for clients functions
+      responses:
+        200:
+          description: "Successful operation, return portrait"
+          content:
+            application/octet-stream:   # response mimetype
+              schema:
+                type: string
+                format: binary
+        400:
+          description: "Bad request, no portrait available"
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /v2/liveness/metadata:
+    parameters:
+      - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
+    get:
+      tags:
+        - liveness   # groups of requests
+      summary: Liveness 2.0 metadata
+      operationId: liveness_metadata # name for clients functions
+      responses:
+        200:
+          description: "Successful operation, return metadata"
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        400:
+          description: "Bad request, no metadata available"
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+                additionalProperties: true
+  
+
