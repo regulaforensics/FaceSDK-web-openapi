@@ -57,7 +57,7 @@ paths:
       operationId: liveness_video
       responses:
         200:
-          description: "Successful operation, video returned"
+          description: "Successful operation, session video returned"
           content:
             application/octet-stream:
               schema:
