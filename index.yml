@@ -12,6 +12,11 @@ info:
     * [Java](https://github.com/regulaforensics/FaceSDK-web-java-client) client compatible with jvm and android
     * [Python](https://github.com/regulaforensics/FaceSDK-web-python-client) 3.5+ client
     * [C#](https://github.com/regulaforensics/FaceSDK-web-csharp-client) client for .NET & .NET Core
+  x-tagGroups:
+    name: liveness
+    tags:
+      - liveness
+      - match
 
 servers:
   - url: http://localhost:41101/
@@ -45,9 +50,9 @@ paths:
     $ref: './groups.yml#/paths/~1groups~1{group_id}~1persons'
   /api/search:
     $ref: './search.yml#/paths/~1search'
-  /api/v2/liveness/video:
-    $ref: './liveness.yml#/paths/~1v2~1liveness~1video'
-  /api/v2/liveness/portrait:
-    $ref: './liveness.yml#/paths/~1v2~1liveness~1portrait'
   /api/v2/liveness/metadata:
     $ref: './liveness.yml#/paths/~1v2~1liveness~1metadata'
+  /api/v2/liveness/portrait:
+    $ref: './liveness.yml#/paths/~1v2~1liveness~1portrait'
+  /api/v2/liveness/video:
+    $ref: './liveness.yml#/paths/~1v2~1liveness~1video'

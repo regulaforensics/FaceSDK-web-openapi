@@ -6,8 +6,8 @@ paths:
       - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
     get:
       tags:
-        - liveness   # groups of requests
-      summary: Liveness 2.0 metadata
+        - liveness 2.0   # groups of requests
+      summary: metadata
       operationId: liveness_metadata # name for clients functions
       responses:
         200:
@@ -29,8 +29,8 @@ paths:
       - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
     get:
       tags:
-        - liveness   # groups of requests
-      summary: Liveness 2.0 portrait
+        - liveness 2.0   # groups of requests
+      summary: portrait
       operationId: liveness_portrait  # name for clients functions
       responses:
         200:
@@ -52,8 +52,8 @@ paths:
       - $ref: './common.yml#/components/parameters/transactionId'
     get:
       tags:
-        - liveness
-      summary: Liveness 2.0 video
+        - liveness 2.0
+      summary: video
       operationId: liveness_video
       responses:
         200:
