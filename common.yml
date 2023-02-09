@@ -25,6 +25,7 @@ components:
         type: string
     transactionId:
       in: query
+      name: transactionId
       required: true
       description: "ID of the current liveness transaction."
       schema:

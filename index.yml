@@ -50,6 +50,8 @@ paths:
     $ref: './groups.yml#/paths/~1groups~1{group_id}~1persons'
   /api/search:
     $ref: './search.yml#/paths/~1search'
+  /api/v2/liveness:
+    $ref: './liveness.yml#/paths/~1v2~1liveness'
   /api/v2/liveness/metadata:
     $ref: './liveness.yml#/paths/~1v2~1liveness~1metadata'
   /api/v2/liveness/portrait:
