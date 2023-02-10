@@ -11,7 +11,7 @@ paths:
       operationId: get_liveness_transaction
       responses:
         200:
-          description: "Get the liveness detection status: 0 for liveness confirmed; 1 for liveness not confirmed"
+          description: "Returns attributes of transaction, including the liveness detection status: 0 for liveness confirmed; 1 for liveness not confirmed"
           content:
             application/json:
               schema:
@@ -108,6 +108,7 @@ components:
         status:
           type: integer
           default: null
+          description: "Whether the liveness detection is confirmed (0) or not (1)"
         transactionId:
           type: string
         video:
@@ -119,4 +120,4 @@ components:
     TransactionConfig:
       type: object
       additionalProperties: true
-      description: "A free-form object containing person's extended attributes."
+      description: "A free-form object containing additional transaction attributes."
