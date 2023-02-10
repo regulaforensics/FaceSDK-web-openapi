@@ -1,6 +1,22 @@
 openapi: 3.0.3
 
 paths:
+  /v2/liveness:
+    parameters:
+      - $ref: './common.yml#/components/parameters/transactionId'
+    get:
+      tags:
+        - liveness 2.0
+      summary: liveness
+      operationId: get_liveness_transaction
+      responses:
+        200:
+          description: "Returns attributes of transaction, including the liveness detection status: 0 for liveness confirmed; 1 for liveness not confirmed"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LivenessTransaction"
+
   /v2/liveness/metadata:
     parameters:
       - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
@@ -71,3 +87,37 @@ paths:
                 type: string
                 format: binary
 
+components:
+  schemas:
+    LivenessTransaction:
+      type: object
+      properties:
+        code:
+          type: integer
+          default: null
+        config:
+          $ref: "#/components/schemas/TransactionConfig"
+        elapsed:
+          type: integer
+          default: null
+        portrait:
+          type: string
+          description: "URL for portrait image"
+        sessionId:
+          type: string
+        status:
+          type: integer
+          default: null
+          description: "Whether the liveness detection is confirmed (0) or not (1)"
+        transactionId:
+          type: string
+        video:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing the request information (server time, client IP, etc.)."
+    TransactionConfig:
+      type: object
+      additionalProperties: true
+      description: "A free-form object containing additional transaction attributes."
