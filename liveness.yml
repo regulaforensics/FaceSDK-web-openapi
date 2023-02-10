@@ -116,7 +116,7 @@ components:
         metadata:
           type: object
           additionalProperties: true
-          description: "A free-form object containing person's extended attributes."
+          description: "A free-form object containing the request information (server time, client IP, etc.)."
     TransactionConfig:
       type: object
       additionalProperties: true
