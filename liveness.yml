@@ -11,7 +11,7 @@ paths:
       operationId: get_liveness_transaction
       responses:
         200:
-          description: "Get liveness transaction"
+          description: "Get the liveness detection status: 0 for liveness confirmed; 1 for liveness not confirmed"
           content:
             application/json:
               schema:
