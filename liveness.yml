@@ -95,14 +95,6 @@ components:
         code:
           type: integer
           default: null
-        config:
-          $ref: "#/components/schemas/TransactionConfig"
-        elapsed:
-          type: integer
-          default: null
-        portrait:
-          type: string
-          description: "URL for portrait image"
         sessionId:
           type: string
         status:
@@ -111,13 +103,10 @@ components:
           description: "Whether the liveness detection is confirmed (0) or not (1)"
         transactionId:
           type: string
-        video:
-          type: string
         metadata:
           type: object
           additionalProperties: true
-          description: "A free-form object containing the request information (server time, client IP, etc.)."
-    TransactionConfig:
-      type: object
-      additionalProperties: true
-      description: "A free-form object containing additional transaction attributes."
+          description: "A free-form object containing person's extended attributes."
+        elapsed:
+          type: integer
+          default: null
