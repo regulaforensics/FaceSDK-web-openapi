@@ -57,6 +57,10 @@ components:
           $ref: "#/components/schemas/OutputImageParams"
         quality:
           $ref: "#/components/schemas/QualityRequest"
+        attributes:
+          description: "Whether to evaluate attributes, such as age and emotions."
+          type: boolean
+          default: false
 
     OutputImageParams:
       type: object
