@@ -4,19 +4,7 @@ paths:
   /v2/liveness:
     parameters:
       - $ref: './common.yml#/components/parameters/transactionId'
-    post:
-      tags:
-        - liveness 2.0
-      summary: liveness
-      operationId: get_liveness_transaction
-      responses:
-        200:
-          description: "Returns attributes of transaction, including the liveness detection status: 0 for liveness confirmed; 1 for liveness not confirmed"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LivenessTransaction"
-    get:
+ы    get:
       tags:
         - liveness 2.0
       summary: liveness
