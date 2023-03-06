@@ -33,7 +33,7 @@ components:
           description: "Transaction ID"
         video:
           type: string
-          description: "S3 list to transaction video"
+          description: "S3 link to transaction video"
         portrait:
           type: string
           description: "S3 link to transaction portrait"
