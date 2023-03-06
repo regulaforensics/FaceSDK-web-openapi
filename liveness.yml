@@ -8,101 +8,44 @@ paths:
       tags:
         - liveness 2.0
       summary: liveness
-      operationId: get_liveness_transaction
+      operationId: get_liveness_transaction_info
       responses:
         200:
-          description: "Returns attributes of transaction, including the liveness detection status: 0 for liveness confirmed; 1 for liveness not confirmed"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LivenessTransaction"
+                $ref: "#/components/schemas/TransactionInfo"
 
-  /v2/liveness/metadata:
-    parameters:
-      - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
-    get:
-      tags:
-        - liveness 2.0   # groups of requests
-      summary: metadata
-      operationId: liveness_metadata # name for clients functions
-      responses:
-        200:
-          description: "Successful operation, metadata returned: device model, screen data, frame size, app ID and version, OS version, platform, SDK version, etc."
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-        400:
-          description: "Bad request, no metadata available"
-          content:
-            application/octet-stream:
-              schema:
-                type: object
-                additionalProperties: true
-  /v2/liveness/portrait:
-    parameters:
-      - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
-    get:
-      tags:
-        - liveness 2.0   # groups of requests
-      summary: portrait
-      operationId: liveness_portrait  # name for clients functions
-      responses:
-        200:
-          description: "Successful operation, portrait returned"
-          content:
-            application/octet-stream:   # response mimetype
-              schema:
-                type: string
-                format: binary
-        400:
-          description: "Bad request, no portrait available"
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-  /v2/liveness/video:
-    parameters:
-      - $ref: './common.yml#/components/parameters/transactionId'
-    get:
-      tags:
-        - liveness 2.0
-      summary: video
-      operationId: liveness_video
-      responses:
-        200:
-          description: "Successful operation, session video returned"
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-        400:
-          description: "Bad request, no session video available"
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
 
 components:
   schemas:
+    TransactionInfo:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: "Return code value"
+        sessionId:
+          type: integer
+          description: "Session ID"
+        transactionId:
+          type: string
+          description: "Transaction ID"
+        video:
+          type: string
+          description: "S3 link to transaction video"
+        portrait:
+          type: string
+          description: "S3 link to transaction portrait"
+        metadata:
+          type: object
+          additionalProperties: true
     LivenessTransaction:
       type: object
       properties:
         code:
           type: integer
           default: null
-        config:
-          $ref: "#/components/schemas/TransactionConfig"
-        elapsed:
-          type: integer
-          default: null
-        portrait:
-          type: string
-          description: "URL for portrait image"
         sessionId:
           type: string
         status:
@@ -111,13 +54,10 @@ components:
           description: "Whether the liveness detection is confirmed (0) or not (1)"
         transactionId:
           type: string
-        video:
-          type: string
         metadata:
           type: object
           additionalProperties: true
-          description: "A free-form object containing the request information (server time, client IP, etc.)."
-    TransactionConfig:
-      type: object
-      additionalProperties: true
-      description: "A free-form object containing additional transaction attributes."
+          description: "A free-form object containing person's extended attributes."
+        elapsed:
+          type: integer
+          default: null

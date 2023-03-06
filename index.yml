@@ -52,9 +52,3 @@ paths:
     $ref: './search.yml#/paths/~1search'
   /api/v2/liveness:
     $ref: './liveness.yml#/paths/~1v2~1liveness'
-  /api/v2/liveness/metadata:
-    $ref: './liveness.yml#/paths/~1v2~1liveness~1metadata'
-  /api/v2/liveness/portrait:
-    $ref: './liveness.yml#/paths/~1v2~1liveness~1portrait'
-  /api/v2/liveness/video:
-    $ref: './liveness.yml#/paths/~1v2~1liveness~1video'
