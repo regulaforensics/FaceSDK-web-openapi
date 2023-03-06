@@ -4,7 +4,7 @@ paths:
   /v2/liveness:
     parameters:
       - $ref: './common.yml#/components/parameters/transactionId'
-ы    get:
+    get:
       tags:
         - liveness 2.0
       summary: liveness
