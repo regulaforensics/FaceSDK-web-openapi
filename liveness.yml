@@ -4,7 +4,7 @@ paths:
   /v2/liveness:
     parameters:
       - $ref: './common.yml#/components/parameters/transactionId'
-    get:
+    post:
       tags:
         - liveness 2.0
       summary: liveness
@@ -16,79 +16,42 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LivenessTransaction"
-
-  /v2/liveness/metadata:
-    parameters:
-      - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
-    get:
-      tags:
-        - liveness 2.0   # groups of requests
-      summary: metadata
-      operationId: liveness_metadata # name for clients functions
-      responses:
-        200:
-          description: "Successful operation, metadata returned: device model, screen data, frame size, app ID and version, OS version, platform, SDK version, etc."
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-        400:
-          description: "Bad request, no metadata available"
-          content:
-            application/octet-stream:
-              schema:
-                type: object
-                additionalProperties: true
-  /v2/liveness/portrait:
-    parameters:
-      - $ref: './common.yml#/components/parameters/transactionId'  # required query arg
-    get:
-      tags:
-        - liveness 2.0   # groups of requests
-      summary: portrait
-      operationId: liveness_portrait  # name for clients functions
-      responses:
-        200:
-          description: "Successful operation, portrait returned"
-          content:
-            application/octet-stream:   # response mimetype
-              schema:
-                type: string
-                format: binary
-        400:
-          description: "Bad request, no portrait available"
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
-  /v2/liveness/video:
-    parameters:
-      - $ref: './common.yml#/components/parameters/transactionId'
     get:
       tags:
         - liveness 2.0
-      summary: video
-      operationId: liveness_video
+      summary: liveness
+      operationId: get_liveness_transaction_info
       responses:
         200:
-          description: "Successful operation, session video returned"
           content:
-            application/octet-stream:
+            application/json:
               schema:
-                type: string
-                format: binary
-        400:
-          description: "Bad request, no session video available"
-          content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
+                $ref: "#/components/schemas/TransactionInfo"
+
 
 components:
   schemas:
+    TransactionInfo:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: "Return code value"
+        sessionId:
+          type: integer
+          description: "Session ID"
+        transactionId:
+          type: string
+          description: "Transaction ID"
+        video:
+          type: string
+          description: "S3 list to transaction video"
+        portrait:
+          type: string
+          description: "S3 link to transaction portrait"
+        metadata:
+          type: object
+          additionalProperties: true
     LivenessTransaction:
       type: object
       properties:
