@@ -197,6 +197,7 @@ components:
       type: string
       description: "Face detection scenarios."
       enum:
+        - "OldMode"
         - "QualityFull"
         - "QualityICAO"
         - "QualityVisaSchengen"
@@ -205,6 +206,7 @@ components:
         - "CropAllFaces"
         - "Thumbnail"
       x-enum-varnames:
+        - OLD_MODE
         - QUALITY_FULL
         - QUALITY_ICAO
         - QUALITY_VISA_SCHENGEN
