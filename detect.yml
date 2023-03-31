@@ -46,11 +46,7 @@ components:
           description: "Whether to evaluate attributes, such as age and emotions."
           type: boolean
           default: false
-        onlyCentralFace:
-          description: "Whether to detect the only central face (true) or all the faces (false)."
-          type: boolean
-          default: false
-
+    
     DetectResponse:
       allOf:
         - $ref: './common.yml#/components/schemas/FaceSDKResult'
