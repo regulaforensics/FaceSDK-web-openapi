@@ -16,7 +16,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/TransactionInfo"
 
-
 components:
   schemas:
     TransactionInfo:
@@ -24,40 +23,24 @@ components:
       properties:
         code:
           type: integer
-          description: "Return code value"
-        sessionId:
-          type: integer
-          description: "Session ID"
-        transactionId:
-          type: string
-          description: "Transaction ID"
-        video:
-          type: string
-          description: "S3 link to transaction video"
-        portrait:
-          type: string
-          description: "S3 link to transaction portrait"
-        metadata:
-          type: object
-          additionalProperties: true
-    LivenessTransaction:
-      type: object
-      properties:
-        code:
-          type: integer
-          default: null
-        sessionId:
-          type: string
+          description: "The result code, one of the FaceSDKResultCode enum values. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/"
         status:
           type: integer
           default: null
-          description: "Whether the liveness detection is confirmed (0) or not (1)"
+          description: "Whether the liveness detection is confirmed (0) or not (1)."
+        sessionId:
+          type: integer
+          description: "Session ID, one session may include many transactions."
         transactionId:
           type: string
+          description: "Transaction ID, there can be several transactions within one session."
+        video:
+          type: string
+          description: "An S3 link to the session video."
+        portrait:
+          type: string
+          description: "An S3 link to the portrait."
         metadata:
           type: object
-          additionalProperties: true
+          additionalProperties: true          
           description: "A free-form object containing person's extended attributes."
-        elapsed:
-          type: integer
-          default: null
