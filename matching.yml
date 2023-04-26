@@ -42,7 +42,7 @@ components:
           default: false
         images:
           type: array
-          description: "The array of all images included in the comparison: data, index, detectAll, type **for each image**."
+          description: "The array of all images included in the comparison."
           items:
             $ref: "#/components/schemas/MatchImage"
 
@@ -66,7 +66,7 @@ components:
         data:
           $ref: "./common.yml#/components/schemas/ImageData"
         detectAll:
-          $ref: "./common.yml#/components/schemas/detectAll"
+          $ref: "#/components/schemas/detectAll"
 
     MatchResponse:
       allOf:
