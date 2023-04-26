@@ -154,6 +154,20 @@ components:
     ImageSource:
       description: "The type of the image, defines the way the comparison is performed. Should be set by a user. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
       type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      x-enum-varnames:
+        - DOCUMENT_PRINTED
+        - DOCUMENT_RFID
+        - LIVE
+        - DOCUMENT_WITH_LIVE
+        - EXTERNAL
+        - GHOST
 
     detectAll:
       type: boolean
