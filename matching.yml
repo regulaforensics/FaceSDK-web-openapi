@@ -145,7 +145,7 @@ components:
           example: [ [ x, y ] ]
         rotationAngle:
           description: "Angle of rotation of the face from the vertical axis, degrees."
-          type: array
+          type: float
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
         thumbnail:
