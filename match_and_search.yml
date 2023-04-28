@@ -29,6 +29,8 @@ components:
       allOf:
         - type: object
           properties:
+            tag:
+              type: string
             images:
               type: array
               items:

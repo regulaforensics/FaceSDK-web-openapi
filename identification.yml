@@ -30,6 +30,8 @@ components:
       type: object
       description: "Person Request body: name and metadata."
       properties:
+        tag:
+          type: string
         name:
           type: string
           description: "Person name."
@@ -41,6 +43,8 @@ components:
       type: object
       description: "Image in the request data, includes image and content_type."
       properties:
+        tag:
+          type: string
         image:
           type: object
           description: "The uploaded image."
@@ -102,6 +106,8 @@ components:
       type: object
       description: "Request body of the group to create data, includes name and metadata."
       properties:
+        tag:
+          type: string
         name:
           type: string
           description: "Group to create name."
