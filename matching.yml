@@ -75,6 +75,7 @@ components:
           properties:
             detections:
               type: array
+              description: "The array of detected faces."
               items:
                 $ref: "#/components/schemas/MatchImageDetection"
             results:
