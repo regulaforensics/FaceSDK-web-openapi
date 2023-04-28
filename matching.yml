@@ -73,15 +73,15 @@ components:
         - $ref: './common.yml#/components/schemas/FaceSDKResult'
         - type: object
           properties:
+            detections:
+              type: array
+              items:
+                $ref: "#/components/schemas/MatchImageDetection"
             results:
               type: array
               description: "The array of matching results."
               items:
                 $ref: "#/components/schemas/MatchImageResult"
-            detections:
-              type: array
-              items:
-                $ref: "#/components/schemas/MatchImageDetection"
 
     MatchImageResult:
       type: object
@@ -107,11 +107,6 @@ components:
         similarity:
           type: number
           description: "The detected faces similarity, %. 100%—absolutely identical faces, 0%—absolutely not identical."
-        errorCode:
-          $ref: './common.yml#/components/schemas/FaceSDKResultCode'
-        errorMsg:
-          type: string
-          description: "The error message if any."
 
     MatchImageDetection:
       type: object
