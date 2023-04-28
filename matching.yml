@@ -52,7 +52,7 @@ components:
 
     MatchFaceIndex:
       type: number
-      description: "The index number of each of the detected face. Can be given, if not given, the index numbers are set automatically starting from 0. All index numbers must be whole and unique—not repeated."
+      description: "The detected face index number."
 
     MatchImage:
       type: object
@@ -121,6 +121,7 @@ components:
       properties:
         faces:
           type: array
+          description: "The array of detected faces."
           items:
             $ref: "#/components/schemas/DetectionFace"
         imageIndex:
@@ -152,7 +153,7 @@ components:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
     ImageSource:
-      description: "The type of the image, defines the way the comparison is performed. Should be set by a user. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
+      description: "The type of the image, defines the way the comparison is performed. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
       type: integer
       enum:
         - 1

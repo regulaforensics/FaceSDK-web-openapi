@@ -475,7 +475,7 @@ components:
       format: byte
 
     FaceRectangular:
-      description: "The rectangular area of the detected face has four elements. The first element is the X-axis coordinate, the second element is the Y-axis coordinate, and together they form the left top point (X,Y). The third element is the rectangular width, and the fourth element is the rectangular height."
+      description: "The rectangular area of a detected face that is represented by a set of four elements: the X and Y coordinates of the top-left point, and the width and height dimensions of the rectangle."
       type: array
       items:
         type: number
