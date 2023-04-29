@@ -38,22 +38,21 @@ components:
           description: "Session identificator."
         thumbnails:
           type: boolean
-          description: "Whether to return cropped portraits of the detected people."
+          description: "Whether to return thumbnails: Base64 cropped images that contain vertically aligned faces."
           default: false
         images:
           type: array
-          description: "Base64 images."
+          description: "The array of all images included in the comparison."
           items:
             $ref: "#/components/schemas/MatchImage"
 
     MatchImageIndex:
       type: integer
-      description: "Image index used to identify input photos between themselves.
-      If not specified, than input list index is used."
+      description: "The image index number. Can be given; if not given, the index numbers are set automatically starting from 0. All index numbers must be whole and unique—not repeated."
 
     MatchFaceIndex:
       type: number
-      description: "Faces index used to identify faces in scope of one photo."
+      description: "The detected face index number."
 
     MatchImage:
       type: object
@@ -66,21 +65,24 @@ components:
           $ref: "#/components/schemas/ImageSource"
         data:
           $ref: "./common.yml#/components/schemas/ImageData"
+        detectAll:
+          $ref: "#/components/schemas/detectAll"
 
     MatchResponse:
       allOf:
         - $ref: './common.yml#/components/schemas/FaceSDKResult'
         - type: object
           properties:
+            detections:
+              type: array
+              description: "The array of detected faces."
+              items:
+                $ref: "#/components/schemas/MatchImageDetection"
             results:
               type: array
               description: "The array of matching results."
               items:
                 $ref: "#/components/schemas/MatchImageResult"
-            detections:
-              type: array
-              items:
-                $ref: "#/components/schemas/MatchImageDetection"
 
     MatchImageResult:
       type: object
@@ -92,21 +94,20 @@ components:
           $ref: "#/components/schemas/MatchImageIndex"
         firstFaceIndex:
           $ref: "#/components/schemas/MatchFaceIndex"
+        first:
+          $ref: "#/components/schemas/ImageSource"
         secondIndex:
           $ref: "#/components/schemas/MatchImageIndex"
         secondFaceIndex:
           $ref: "#/components/schemas/MatchFaceIndex"
+        second:
+          $ref: "#/components/schemas/ImageSource"
         score:
           type: number
-          description: "The matching score."
+          description: "A dimensionless number that shows how similar the compared faces are. 0—absolutely identical faces."
         similarity:
           type: number
-          description: "The similarity score."
-        errorCode:
-          $ref: './common.yml#/components/schemas/FaceSDKResultCode'
-        errorMsg:
-          type: string
-          description: "The error message if any."
+          description: "The detected faces similarity, %. 100%—absolutely identical faces, 0%—absolutely not identical."
 
     MatchImageDetection:
       type: object
@@ -116,6 +117,7 @@ components:
       properties:
         faces:
           type: array
+          description: "The array of detected faces."
           items:
             $ref: "#/components/schemas/DetectionFace"
         imageIndex:
@@ -138,13 +140,16 @@ components:
               type: number
               example: [ x, y ]
           example: [ [ x, y ] ]
+        rotationAngle:
+          description: "Angle of rotation of the face from the vertical axis, degrees."
+          type: float
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
         thumbnail:
           $ref: "./common.yml#/components/schemas/Thumbnail"
 
     ImageSource:
-      description: "Face photo image source."
+      description: "The type of the image, defines the way the comparison is performed. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
       type: integer
       enum:
         - 1
@@ -160,3 +165,8 @@ components:
         - DOCUMENT_WITH_LIVE
         - EXTERNAL
         - GHOST
+
+    detectAll:
+      type: boolean
+      description: "Whether to detect all faces in the image. If set to false, only one face is detected: the most central one."
+      default: true
