@@ -36,6 +36,8 @@ definitions:
     type: object
     description: "Request search data."
     properties:
+      tag:
+        type: string
       limit:
         type: integer
         default: 100
