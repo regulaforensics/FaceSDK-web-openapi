@@ -43,6 +43,8 @@ components:
       type: object
       description: "Image in the request data, includes image and content_type."
       properties:
+        tag:
+          type: string
         image:
           type: object
           description: "The uploaded image."
