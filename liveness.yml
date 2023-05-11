@@ -6,7 +6,7 @@ paths:
       - $ref: './common.yml#/components/parameters/transactionId'
     get:
       tags:
-        - liveness 2.0
+        - Liveness assessment
       summary: liveness
       operationId: get_liveness_transaction_info
       responses:
