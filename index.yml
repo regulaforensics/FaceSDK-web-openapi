@@ -32,6 +32,8 @@ paths:
     $ref: './match_and_search.yml#/paths/~1match_and_search'
   /api/detect:
     $ref: './detect.yml#/paths/~1detect'
+  /api/search:
+    $ref: './search.yml#/paths/~1search'
   /api/persons:
     $ref: './persons.yml#/paths/~1persons'
   /api/persons/{person_id}:
@@ -48,7 +50,5 @@ paths:
     $ref: './groups.yml#/paths/~1groups~1{group_id}'
   /api/groups/{group_id}/persons:
     $ref: './groups.yml#/paths/~1groups~1{group_id}~1persons'
-  /api/search:
-    $ref: './search.yml#/paths/~1search'
   /api/v2/liveness:
     $ref: './liveness.yml#/paths/~1v2~1liveness'

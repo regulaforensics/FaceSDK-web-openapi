@@ -7,7 +7,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - group
+        - search
       summary: Get groups
       operationId: get_all_groups
       parameters:

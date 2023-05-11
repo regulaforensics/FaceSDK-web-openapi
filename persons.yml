@@ -7,7 +7,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - search
       summary: Get persons
       operationId: get_all_persons
       parameters:
