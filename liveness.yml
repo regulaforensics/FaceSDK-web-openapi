@@ -28,9 +28,9 @@ components:
           type: integer
           default: null
           description: "Whether the liveness detection is confirmed (0) or not (1)."
-        sessionId:
-          type: integer
-          description: "Session ID, one session may include many transactions."
+        tag:
+          type: string
+          description: "Session identificator."
         transactionId:
           type: string
           description: "Transaction ID, there can be several transactions within one session."
