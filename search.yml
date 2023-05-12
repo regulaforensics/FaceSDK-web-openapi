@@ -38,6 +38,7 @@ definitions:
     properties:
       tag:
         type: string
+        description: "Session identificator."
       limit:
         type: integer
         default: 100
