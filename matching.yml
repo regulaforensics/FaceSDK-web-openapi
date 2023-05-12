@@ -6,7 +6,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - Face Comparison
+        - face comparison
       summary: "Compare provided face images in all combinations and return the similarity score for each pair."
       operationId: match
       requestBody:

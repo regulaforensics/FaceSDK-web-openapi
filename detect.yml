@@ -7,7 +7,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - Face Detection
+        - face detection
       summary: "Find a face in the image, evaluate its attributes, and assess the portrait quality."
       operationId: detect
       requestBody:

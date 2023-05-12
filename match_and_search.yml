@@ -5,7 +5,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - matching
+        - face comparison
       summary: 'Match and Search in one request'
       operationId: match_and_search
       requestBody:
