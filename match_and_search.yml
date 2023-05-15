@@ -6,7 +6,7 @@ paths:
     post:
       tags:
         - face comparison
-      summary: 'Match and Search in one request'
+      summary: 'Compare faces and look up a person in a database in one request'
       operationId: match_and_search
       requestBody:
         required: true

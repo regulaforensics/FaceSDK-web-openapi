@@ -8,7 +8,7 @@ paths:
     post:
       tags:
         - face detection
-      summary: "Find a face in the image, evaluate its attributes, and assess the portrait quality."
+      summary: "Find a face in the image, evaluate attributes, and assess the portrait quality"
       operationId: detect
       requestBody:
         required: true
@@ -40,10 +40,6 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         thumbnails:
           description: "Whether to return the cropped portrains with the detected faces."
-          type: boolean
-          default: false
-        attributes:
-          description: "Whether to evaluate attributes, such as age and emotions."
           type: boolean
           default: false
     
