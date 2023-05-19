@@ -58,15 +58,7 @@ components:
         quality:
           $ref: "#/components/schemas/QualityRequest"
         attributes:
-          description: "Whether to evaluate attributes, such as age and emotions."
-          type: boolean
-          default: false
-          properties: 
-            config:
-              description: "The configuration that defines the list of returned attributes."
-              properties:
-                name:
-                  $ref: "#/components/schemas/FaceAttribute"
+          $ref: "#/components/schemas/Attributes"
 
     OutputImageParams:
       type: object
@@ -186,7 +178,7 @@ components:
 
     RGB:
       type: array
-      description: "The RGB value of a color for filling the background color behind a person's silhouette and for aligning the image." 
+      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image." 
       items:
         type: integer
       minItems: 3
@@ -488,6 +480,17 @@ components:
       items:
         type: number
       example: [x, y, width, height]
+
+    Attributes:          
+    description: "Whether to evaluate attributes, such as age and emotions."
+    type: boolean
+    default: false
+    properties: 
+      config:
+        description: "The configuration that defines the list of returned attributes."
+        properties:
+          name:
+            $ref: "#/components/schemas/FaceAttribute"
 
     FaceAttribute:
       type: string
