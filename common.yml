@@ -67,7 +67,7 @@ components:
               description: "The configuration that defines the list of returned attributes."
               properties:
                 name:
-                  $ref: "#/components/schemas/FaceAttribute"
+                  $ref: "detect.yml#/components/schemas/FaceAttribute"
 
     OutputImageParams:
       type: object
@@ -489,35 +489,3 @@ components:
       items:
         type: number
       example: [x, y, width, height]
-
-    FaceAttribute:
-      type: string
-      description: "All face characteristics that can be assessed during attributes evaluation."
-      enum:
-        - "Age"
-        - "Emotion"
-        - "EyeLeft"
-        - "EyeRight"
-        - "Smile"
-        - "Glasses"
-        - "HeadCovering"
-        - "ForeheadCovering"
-        - "Mouth"
-        - "MedicalMask"
-        - "Occlusion"
-        - "StrongMakeup"
-        - "Headphones"
-      x-enum-varnames:
-        - AGE
-        - EMOTION
-        - EYE_LEFT
-        - EYE_RIGHT
-        - SMILE
-        - GLASSES
-        - HEAD_COVERING
-        - FOREHEAD_COVERING
-        - MOUTH
-        - MEDICAL_MASK
-        - OCCLUSION
-        - STRONG_MAKEUP
-        - HEADPHONES
