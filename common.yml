@@ -61,13 +61,6 @@ components:
           description: "Whether to evaluate attributes, such as age and emotions."
           type: boolean
           default: false
-          properties: 
-            config:
-              type: array
-              description: "The configuration that defines the list of returned attributes."
-              properties:
-                name:
-                  $ref: "detect.yml#/components/schemas/FaceAttribute"
 
     OutputImageParams:
       type: object
