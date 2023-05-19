@@ -7,7 +7,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - face identification
       summary: Get persons
       operationId: get_all_persons
       parameters:
@@ -25,7 +25,7 @@ paths:
           $ref: "./common.yml#/components/responses/BadRequest"
     post:
       tags:
-        - person
+        - face identification
       summary: Create person
       operationId: create_person
       requestBody:
@@ -45,7 +45,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - face identification
       summary: Get person
       operationId: get_person
       responses:
@@ -57,7 +57,7 @@ paths:
           $ref: '#/components/responses/PersonNotFound'
     put:
       tags:
-        - person
+        - face identification
       summary: Update person
       operationId: update_person
       requestBody:
@@ -76,7 +76,7 @@ paths:
           $ref: '#/components/responses/PersonNotFound'
     delete:
       tags:
-        - person
+        - face identification
       summary: Delete person
       operationId: delete_person
       responses:
@@ -92,7 +92,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - face identification
       summary: Get person images
       operationId: get_all_images_by_person_id
       parameters:
@@ -111,7 +111,7 @@ paths:
           $ref: '#/components/responses/PersonNotFound'
     post:
       tags:
-        - person
+        - face identification
       summary: Add person image
       operationId: add_image_to_person
       requestBody:
@@ -138,7 +138,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - face identification
       summary: Get person image by id
       operationId: get_image_of_person
       parameters:
@@ -159,7 +159,7 @@ paths:
                 format: binary
     delete:
       tags:
-        - person
+        - face identification
       summary: Delete image of person
       operationId: delete_image_of_person
       parameters:
@@ -181,7 +181,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - face identification
       summary: Get person groups
       operationId: get_all_groups_by_person_id
       parameters:

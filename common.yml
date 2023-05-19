@@ -57,7 +57,7 @@ components:
           $ref: "#/components/schemas/OutputImageParams"
         quality:
           $ref: "#/components/schemas/QualityRequest"
-        attributes:
+        attributes:         
           description: "Whether to evaluate attributes, such as age and emotions."
           type: boolean
           default: false
@@ -85,6 +85,7 @@ components:
 
     Crop:
       type: object
+      description: "Whether to return the Base64 of an aligned and cropped portrait in the crop field."
       properties:
         type:
           $ref: "#/components/schemas/FaceImageQualityAlignType"
@@ -108,13 +109,13 @@ components:
 
     QualityConfigList:
       type: array
+      description: "The configuration that defines the list of returned quality check characteristics."
       items:
         $ref: "#/components/schemas/QualityConfig"
 
     QualityConfig:
       type: object
-      description: "The configuration that defines the list of returned quality check characteristics.
-       For every characteristic, includes name, range, unit."
+      description: "The configuration that defines the list of returned quality check characteristics."
       properties:
         name:
           description: "The name of the characteristic."
@@ -179,6 +180,7 @@ components:
 
     RGB:
       type: array
+      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image." 
       items:
         type: integer
       minItems: 3
@@ -199,7 +201,7 @@ components:
 
     FaceQualityScenarios:
       type: string
-      description: "Face detection scenarios."
+      description: "Face detection scenario."
       enum:
         - "OldMode"
         - "QualityFull"

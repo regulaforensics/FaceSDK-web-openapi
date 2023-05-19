@@ -7,7 +7,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - group
+        - face identification
       summary: Get groups
       operationId: get_all_groups
       parameters:
@@ -24,7 +24,7 @@ paths:
           $ref: "./common.yml#/components/responses/BadRequest"
     post:
       tags:
-        - group
+        - face identification
       summary: Create group
       operationId: create_group
       requestBody:
@@ -45,7 +45,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - group
+        - face identification
       summary: Get group
       operationId: get_group
       responses:
@@ -57,7 +57,7 @@ paths:
           $ref: "#/components/responses/GroupNotFound"
     put:
       tags:
-        - group
+        - face identification
       summary: Update group
       operationId: update_group
       requestBody:
@@ -76,7 +76,7 @@ paths:
           $ref: "#/components/responses/GroupNotFound"
     delete:
       tags:
-        - group
+        - face identification
       summary: Delete group
       operationId: delete_group
       responses:
@@ -90,7 +90,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - group
+        - face identification
       summary: Get group persons
       operationId: get_all_persons_by_group_id
       parameters:
@@ -113,7 +113,7 @@ paths:
                 $ref: "./common.yml#/components/schemas/OperationLog"
     put:
       tags:
-        - group
+        - face identification
       summary: Add/remove persons to group
       operationId: update_persons_in_group
       requestBody:

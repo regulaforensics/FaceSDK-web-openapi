@@ -5,8 +5,8 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - matching
-      summary: 'Match and Search in one request'
+        - face comparison
+      summary: 'Compare faces and look up a person in a database in one request'
       operationId: match_and_search
       requestBody:
         required: true
