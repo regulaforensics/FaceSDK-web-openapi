@@ -57,8 +57,17 @@ components:
           $ref: "#/components/schemas/OutputImageParams"
         quality:
           $ref: "#/components/schemas/QualityRequest"
-        attributes:
-          $ref: "#/components/schemas/Attributes"
+        attributes:         
+        description: "Whether to evaluate attributes, such as age and emotions."
+        type: boolean
+        default: false
+        properties: 
+          config:
+            type: array
+            description: "The configuration that defines the list of returned attributes."
+            properties:
+              name:
+                $ref: "#/components/schemas/FaceAttribute"
 
     OutputImageParams:
       type: object
@@ -480,18 +489,6 @@ components:
       items:
         type: number
       example: [x, y, width, height]
-
-    Attributes:          
-      description: "Whether to evaluate attributes, such as age and emotions."
-      type: boolean
-      default: false
-      properties: 
-        config:
-          type: array
-          description: "The configuration that defines the list of returned attributes."
-          properties:
-            name:
-              $ref: "#/components/schemas/FaceAttribute"
 
     FaceAttribute:
       type: string
