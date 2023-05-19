@@ -482,15 +482,16 @@ components:
       example: [x, y, width, height]
 
     Attributes:          
-    description: "Whether to evaluate attributes, such as age and emotions."
-    type: boolean
-    default: false
-    properties: 
-      config:
-        description: "The configuration that defines the list of returned attributes."
-        properties:
-          name:
-            $ref: "#/components/schemas/FaceAttribute"
+      description: "Whether to evaluate attributes, such as age and emotions."
+      type: boolean
+      default: false
+      properties: 
+        config:
+          type: array
+          description: "The configuration that defines the list of returned attributes."
+          properties:
+            name:
+              $ref: "#/components/schemas/FaceAttribute"
 
     FaceAttribute:
       type: string
