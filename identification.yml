@@ -54,8 +54,30 @@ components:
             content_type:
               type: string
               description: "The original media type of the uploaded image."
+              required: false
             content:
               $ref: "./common.yml#/components/schemas/ImageData"
+              required: true
+            image_url:
+              type: string
+              required: true
+              description: "todo"
+            resize_options:
+              $ref: "#/components/schemas/ResizeOptions"
+    ResizeOptions:
+      type: object
+      description: "todo"
+      properties:
+        width:
+          type: int
+          description: "todo"
+        height:
+          type: int
+          description: "todo"
+        quality:
+          type: int
+          default: 100
+          description: "todo"
     Image:
       type: object
       description: "Image in the response."
