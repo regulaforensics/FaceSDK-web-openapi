@@ -56,7 +56,6 @@ components:
               description: "The original media type of the uploaded image."
             content:
               $ref: "./common.yml#/components/schemas/ImageData"
-              required: true
             image_url:
               type: string
               description: "todo"
