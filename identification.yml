@@ -18,7 +18,8 @@ components:
         - type: object
           properties:
             id:
-              type: integer
+              type: string
+              format: uuid
               description: "Person ID."
             created_at:
               type: string
@@ -26,6 +27,11 @@ components:
             updated_at:
               type: string
               description: "Person update date."
+            groups:
+              type: array
+              items:
+                type: string
+                format: uuid
     PersonFields:
       type: object
       description: "Person Request body: name and metadata."
@@ -99,7 +105,8 @@ components:
           description: "Additional group data in the response, includes id and created_at."
           properties:
             id:
-              type: integer
+              type: string
+              format: uuid
               description: "Group ID."
             created_at:
               type: string
