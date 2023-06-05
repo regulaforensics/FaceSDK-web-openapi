@@ -58,23 +58,23 @@ components:
               $ref: "./common.yml#/components/schemas/ImageData"
             image_url:
               type: string
-              description: "todo"
+              description: "Image URL, can be a link to Amazon S3, Google Storage, File System, or HTTP(S)."
             resize_options:
               $ref: "#/components/schemas/ResizeOptions"
     ResizeOptions:
       type: object
-      description: "todo"
+      description: "Set to resize the original image."
       properties:
         width:
           type: int
-          description: "todo"
+          description: "The resized image width, px."
         height:
           type: int
-          description: "todo"
+          description: "The resized image height, px."
         quality:
           type: int
           default: 100
-          description: "todo"
+          description: "The resized image quality, percent."
     Image:
       type: object
       description: "Image in the response."
