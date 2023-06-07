@@ -69,7 +69,6 @@ definitions:
         type: object
         additionalProperties: true
         description: "A free-form object containing person's extended attributes."
-          type: string
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
