@@ -481,3 +481,65 @@ components:
       items:
         type: number
       example: [x, y, width, height]
+
+    FaceAttribute:
+      type: string
+      description: "Face attributes."
+      enum:
+        - "Age"
+        - "Emotion"
+        - "EyeLeft"
+        - "EyeRight"
+        - "Smile"
+        - "Glasses"
+        - "HeadCovering"
+        - "ForeheadCovering"
+        - "Mouth"
+        - "MedicalMask"
+        - "Occlusion"
+        - "StrongMakeup"
+        - "Headphones"
+      x-enum-varnames:
+        - AGE
+        - EMOTION
+        - EYE_LEFT
+        - EYE_RIGHT
+        - SMILE
+        - GLASSES
+        - HEAD_COVERING
+        - FOREHEAD_COVERING
+        - MOUTH
+        - MEDICAL_MASK
+        - OCCLUSION
+        - STRONG_MAKEUP
+        - HEADPHONES
+
+    ImageSource:
+      type: integer
+      description: "Face photo image source types: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      x-enum-varnames:
+        - DOCUMENT_PRINTED
+        - DOCUMENT_RFID
+        - LIVE
+        - DOCUMENT_WITH_LIVE
+        - EXTERNAL
+        - GHOST
+
+    FaceLivenessStatus:
+      type: integer
+      description: "The liveness assessment status: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-liveness-status/"
+      enum:
+        - 0
+        - 1
+        - 2
+      x-enum-varnames:
+        - LVC_REAL
+        - LVC_FAKE
+        - LVC_UNKNOWN
