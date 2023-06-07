@@ -51,7 +51,7 @@ definitions:
         type: array
         description: "The IDs of the groups in which the search is performed."
         items:
-          type: integer
+          type: string
 
   RecognizeImage:
     allOf:
