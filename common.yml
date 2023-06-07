@@ -244,12 +244,10 @@ components:
       type: string
       description: "All image characteristics that can be assessed during face image quality assessment."
       enum:
-        - "ArtFace"
         - "ImageWidth"
         - "ImageHeight"
         - "ImageWidthToHeight"
         - "ImageChannelsNumber"
-        - "PaddingRatio"
         - "FaceMidPointHorizontalPosition"
         - "FaceMidPointVerticalPosition"
         - "HeadWidthRatio"
@@ -285,19 +283,20 @@ components:
         - "ShouldersPose"
         - "ExpressionLevel"
         - "MouthOpen"
+        - "ContactLenses"
         - "ForeheadCovering"
         - "Smile"
+        - "MedicalMask"
         - "StrongMakeup"
         - "Headphones"
-        - "MedicalMask"
         - "BackgroundColorMatch"
+        - "PaddingRatio"
+        - "ArtFace"
       x-enum-varnames:
-        - ART_FACE
         - IMAGE_WIDTH
         - IMAGE_HEIGHT
         - IMAGE_WIDTH_TO_HEIGHT
         - IMAGE_CHANNELS_NUMBER
-        - PADDING_RATIO
         - FACE_MID_POINT_HORIZONTAL_POSITION
         - FACE_MID_POINT_VERTICAL_POSITION
         - HEAD_WIDTH_RATIO
@@ -333,12 +332,15 @@ components:
         - SHOULDERS_POSE
         - EXPRESSION_LEVEL
         - MOUTH_OPEN
+        - CONTACT_LENSES
         - FOREHEAD_COVERING
         - SMILE
+        - MEDICAL_MASK
         - STRONG_MAKEUP
         - HEADPHONES
-        - MEDICAL_MASK
         - BACKGROUND_COLOR_MATCH
+        - PADDING_RATIO
+        - ART_FACE
 
     FaceSDKResult:
       type: object
@@ -479,3 +481,65 @@ components:
       items:
         type: number
       example: [x, y, width, height]
+
+    FaceAttribute:
+      type: string
+      description: "Face attributes."
+      enum:
+        - "Age"
+        - "Emotion"
+        - "EyeLeft"
+        - "EyeRight"
+        - "Smile"
+        - "Glasses"
+        - "HeadCovering"
+        - "ForeheadCovering"
+        - "Mouth"
+        - "MedicalMask"
+        - "Occlusion"
+        - "StrongMakeup"
+        - "Headphones"
+      x-enum-varnames:
+        - AGE
+        - EMOTION
+        - EYE_LEFT
+        - EYE_RIGHT
+        - SMILE
+        - GLASSES
+        - HEAD_COVERING
+        - FOREHEAD_COVERING
+        - MOUTH
+        - MEDICAL_MASK
+        - OCCLUSION
+        - STRONG_MAKEUP
+        - HEADPHONES
+
+    ImageSource:
+      type: integer
+      description: "Face photo image source types: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      x-enum-varnames:
+        - DOCUMENT_PRINTED
+        - DOCUMENT_RFID
+        - LIVE
+        - DOCUMENT_WITH_LIVE
+        - EXTERNAL
+        - GHOST
+
+    FaceLivenessStatus:
+      type: integer
+      description: "The liveness assessment status: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-liveness-status/"
+      enum:
+        - 0
+        - 1
+        - 2
+      x-enum-varnames:
+        - LVC_REAL
+        - LVC_FAKE
+        - LVC_UNKNOWN
