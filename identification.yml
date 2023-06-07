@@ -1,6 +1,24 @@
 openapi: 3.0.3
 
 components:
+  responses:
+
+    SearchBadParamsException:
+      description: "Bad request. Check your input data."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                default: "Descriptor already calculated"
+              status_code:
+                type: int
+                default: 400
+              type:
+                type: string
+                default: "BadParamsException"
   schemas:
     PersonsPage:
       allOf:
