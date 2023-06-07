@@ -30,7 +30,7 @@ paths:
               schema:
                 $ref: "#/definitions/PersonCreatedResponse"
         400:
-          $ref: "./common.yml#/components/responses/BadRequest"
+          $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
 definitions:
   SearchRequest:
@@ -64,7 +64,7 @@ definitions:
       persons:
         type: array
         items:
-          $ref: "./identification.yml#/components/schemas/SearchPerson"
+          $ref: "#/components/schemas/SearchPerson"
       metadata:
         type: object
         additionalProperties: true

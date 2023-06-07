@@ -41,7 +41,6 @@ components:
           schema:
             $ref: "#/components/schemas/OperationLog"
 
-
   schemas:
     ProcessParam:
       type: object
