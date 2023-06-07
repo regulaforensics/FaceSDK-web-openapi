@@ -41,7 +41,6 @@ components:
           schema:
             $ref: "#/components/schemas/OperationLog"
 
-
   schemas:
     ProcessParam:
       type: object
@@ -138,7 +137,7 @@ components:
           description: "The ID of the characteristics group."
           $ref: "#/components/schemas/FaceImageQualityGroups"
         name:
-          $ref: "#/components/schemas/FaceQualityConfigName"
+          $ref: "#/components/schemas/FaceImageQualityGroups"
           description: "The name of the characteristics group."
         totalCount:
           type: integer

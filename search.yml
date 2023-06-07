@@ -23,8 +23,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/definitions/SearchResult"
+        201:
+          description: "todo"
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/PersonCreatedResponse"
         400:
-          $ref: "./common.yml#/components/responses/BadRequest"
+          $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
 definitions:
   SearchRequest:
@@ -36,23 +42,33 @@ definitions:
     type: object
     description: "Request search data."
     properties:
-      tag:
-        type: string
-        description: "Session identificator."
-      limit:
-        type: integer
-        default: 100
-        description: "The number of returned Persons limit."
-      threshold:
-        type: float
-        default: 1.0
-        description: "The similarity distance threshold, should be between 0.0 and 2.0, where 0.0 is for returning results for only the most similar persons and 2.0 is for all the persons, even the dissimilar ones. If not set, the default 1.0 value is used."
+      create_person:
+        type: object
+        properties:
+          name:
+            type: string
+          metadata:
+            type: object
+            additionalProperties: true
+            description: "A free-form object containing person's extended attributes."
       group_ids:
         type: array
         description: "The IDs of the groups in which the search is performed."
         items:
           type: integer
-
+  PersonCreatedResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+      persons:
+        type: array
+        items:
+          $ref: "#/components/schemas/SearchPerson"
+      metadata:
+        type: object
+        additionalProperties: true
+        description: "A free-form object containing person's extended attributes."
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
