@@ -8,3 +8,6 @@ build:
 
 validate:
 	openapi-generator-cli validate -i index.yml
+
+clean:
+	rm facesdk-api-doc.html
