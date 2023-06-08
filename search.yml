@@ -24,7 +24,7 @@ paths:
               schema:
                 $ref: "#/definitions/SearchResult"
         201:
-          description: "todo"
+          description: "New person created with the search photo and the data specified."
           content:
             application/json:
               schema:

@@ -7,7 +7,7 @@ paths:
     get:
       tags:
         - diagnostics
-      summary: Readiness (TODO)
+      summary: Checking the license status
       operationId: readiness
       responses:
         200:
@@ -18,12 +18,14 @@ paths:
 components:
   responses:
     ReadinessOK:
+      description: "The license is OK."
       content:
         application/json:
           schema:
             type: object
             additionalProperties: true
     ReadinessBad:
+      description: "Bad license: deactivated, expired, etc."
       content:
         application/json:
           schema:

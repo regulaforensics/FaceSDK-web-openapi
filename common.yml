@@ -248,6 +248,7 @@ components:
         - "ImageHeight"
         - "ImageWidthToHeight"
         - "ImageChannelsNumber"
+        - "PaddingRatio"
         - "FaceMidPointHorizontalPosition"
         - "FaceMidPointVerticalPosition"
         - "HeadWidthRatio"
@@ -283,20 +284,20 @@ components:
         - "ShouldersPose"
         - "ExpressionLevel"
         - "MouthOpen"
-        - "ContactLenses"
         - "ForeheadCovering"
         - "Smile"
-        - "MedicalMask"
         - "StrongMakeup"
         - "Headphones"
+        - "MedicalMask"
         - "BackgroundColorMatch"
-        - "PaddingRatio"
         - "ArtFace"
+        - "ContactLenses"
       x-enum-varnames:
         - IMAGE_WIDTH
         - IMAGE_HEIGHT
         - IMAGE_WIDTH_TO_HEIGHT
         - IMAGE_CHANNELS_NUMBER
+        - PADDING_RATIO
         - FACE_MID_POINT_HORIZONTAL_POSITION
         - FACE_MID_POINT_VERTICAL_POSITION
         - HEAD_WIDTH_RATIO
@@ -332,15 +333,14 @@ components:
         - SHOULDERS_POSE
         - EXPRESSION_LEVEL
         - MOUTH_OPEN
-        - CONTACT_LENSES
         - FOREHEAD_COVERING
         - SMILE
-        - MEDICAL_MASK
         - STRONG_MAKEUP
         - HEADPHONES
+        - MEDICAL_MASK
         - BACKGROUND_COLOR_MATCH
-        - PADDING_RATIO
         - ART_FACE
+        - CONTACT_LENSES
 
     FaceSDKResult:
       type: object
