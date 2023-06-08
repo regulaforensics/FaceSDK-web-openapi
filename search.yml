@@ -64,7 +64,7 @@ definitions:
       persons:
         type: array
         items:
-          $ref: "#/components/schemas/SearchPerson"
+          $ref: "#/definitions/SearchPerson"
       metadata:
         type: object
         additionalProperties: true
