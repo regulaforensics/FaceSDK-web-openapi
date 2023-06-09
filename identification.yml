@@ -75,11 +75,11 @@ components:
           description: "Session identificator."
         image:
           type: object
-          description: "The uploaded image."
+          description: "Uploaded image."
           properties:
             content_type:
               type: string
-              description: "The original media type of the uploaded image."
+              description: "Original media type of the uploaded image."
             content:
               $ref: "./common.yml#/components/schemas/ImageData"
             image_url:
@@ -93,14 +93,14 @@ components:
       properties:
         width:
           type: int
-          description: "The resized image width, px."
+          description: "Resized image width, px."
         height:
           type: int
-          description: "The resized image height, px."
+          description: "Resized image height, px."
         quality:
           type: int
           default: 100
-          description: "The resized image quality, percent."
+          description: "Resized image quality, percent."
     Image:
       type: object
       description: "Image in the response."
@@ -110,19 +110,19 @@ components:
           description: "Response image ID."
         content_type:
           type: string
-          description: "The original media type of the returned image."
+          description: "Original media type of the returned image."
         created_at:
           type: string
-          description: "The returned image creation date."
+          description: "Returned image creation date."
         updated_at:
           type: string
-          description: "The returned image update date."
+          description: "Returned image update date."
         path:
           type: string
-          description: "The returned image S3 path."
+          description: "Returned image S3 path."
         url:
           type: string
-          description: "The returned image URL."
+          description: "Returned image URL."
         metadata:
           type: object
           additionalProperties: true
@@ -133,7 +133,7 @@ components:
           properties:
             items:
               type: array
-              description: "The array of Groups that are found during the search."
+              description: "Array of Groups that are found during the search."
               items:
                 $ref: "#/components/schemas/Group"
         - $ref: './common.yml#/components/schemas/Page'

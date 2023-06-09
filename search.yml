@@ -55,7 +55,7 @@ definitions:
             description: "A free-form object containing person's extended attributes."
       group_ids:
         type: array
-        description: "The IDs of the groups in which the search is performed."
+        description: "IDs of the groups in which the search is performed."
         items:
           type: integer
   PersonCreatedResponse:
@@ -63,9 +63,10 @@ definitions:
     properties:
       code:
         type: integer
+        description: "Result code."
       persons:
         type: array
-        description: "The array of Person images."
+        description: "Array of Person images."
         items:
           $ref: "#/definitions/SearchPerson"
       metadata:
@@ -80,19 +81,20 @@ definitions:
           similarity:
             type: number
             format: float
-            description: "The similarity score."
+            description: "Similarity score."
           distance:
             type: number
             format: float
-            description: "The similarity distance score: the lower the distance, the higher the face's similarity."
+            description: "Similarity distance score: the lower the distance, the higher the face's similarity."
   SearchResult:
     type: object
     properties:
       code:
         type: integer
-        description: "The search result code."
+        description: "Search result code."
       persons:
         type: array
+        description: "Person data."
         items:
           $ref: "#/definitions/SearchPerson"
 
@@ -100,10 +102,10 @@ definitions:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Person"
       - type: object
-        description: "The array of Person images."
+        description: "Person data."
         properties:
           images:
             type: array
-            description: "The array of Person images."
+            description: "Array of Person images."
             items:
               $ref: "#/definitions/RecognizeImage"

@@ -23,7 +23,7 @@ components:
       properties:
         code:
           type: integer
-          description: "The result code, one of the FaceSDKResultCode enum values. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/"
+          description: "Result code, one of the FaceSDKResultCode enum values. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/"
         status:
           type: integer
           default: null
@@ -36,10 +36,10 @@ components:
           description: "Transaction ID, there can be several transactions within one session."
         video:
           type: string
-          description: "An S3 link to the session video."
+          description: "S3 link to the session video."
         portrait:
           type: string
-          description: "An S3 link to the portrait."
+          description: "S3 link to the portrait."
         metadata:
           type: object
           additionalProperties: true          

@@ -34,7 +34,7 @@ components:
               description: "Session identificator."
             images:
               type: array
-              description: "The array of Person images."
+              description: "Array of Person images."
               items:
                 type: object
                 properties:
