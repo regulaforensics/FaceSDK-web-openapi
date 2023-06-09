@@ -7,7 +7,7 @@ paths:
     get:
       tags:
         - liveness 2.0
-      summary: liveness
+      summary: Liveness assessment
       operationId: get_liveness_transaction_info
       responses:
         200:

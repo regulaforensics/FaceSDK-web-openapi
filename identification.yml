@@ -48,6 +48,7 @@ components:
               description: "Person update date."
             groups:
               type: array
+              description: "List of groups this person belongs to."
               items:
                 type: string
                 format: uuid

@@ -21,6 +21,7 @@ components:
     x-request:
       in: header
       name: X-RequestID
+      description: "Request header label."
       schema:
         type: string
     transactionId:
@@ -84,6 +85,7 @@ components:
 
     Crop:
       type: object
+      description: "Whether to return the Base64 of an aligned and cropped portrait in the crop field."
       properties:
         type:
           $ref: "#/components/schemas/FaceImageQualityAlignType"
@@ -112,8 +114,7 @@ components:
 
     QualityConfig:
       type: object
-      description: "The configuration that defines the list of returned quality check characteristics.
-       For every characteristic, includes name, range, unit."
+      description: "The configuration that defines the list of returned quality check characteristics."
       properties:
         name:
           description: "The name of the characteristic."
@@ -178,6 +179,7 @@ components:
 
     RGB:
       type: array
+      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image." 
       items:
         type: integer
       minItems: 3
@@ -198,7 +200,7 @@ components:
 
     FaceQualityScenarios:
       type: string
-      description: "Face detection scenarios."
+      description: "Face detection scenario."
       enum:
         - "OldMode"
         - "QualityFull"

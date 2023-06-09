@@ -8,7 +8,7 @@ paths:
     post:
       tags:
         - search
-      summary: Find person by image in groups.
+      summary: Find person by image in groups
       operationId: search
       requestBody:
         required: true
@@ -44,9 +44,11 @@ definitions:
     properties:
       create_person:
         type: object
+        description: "If a person is not found, a new person entry is created using the descriptor calculated while searching."
         properties:
           name:
             type: string
+            description: "Person's name."
           metadata:
             type: object
             additionalProperties: true
@@ -63,6 +65,7 @@ definitions:
         type: integer
       persons:
         type: array
+        description: "The array of Person images."
         items:
           $ref: "#/definitions/SearchPerson"
       metadata:
@@ -101,5 +104,6 @@ definitions:
         properties:
           images:
             type: array
+            description: "The array of Person images."
             items:
               $ref: "#/definitions/RecognizeImage"

@@ -8,7 +8,7 @@ paths:
     post:
       tags:
         - matching
-      summary: "Detect facial coordinates"
+      summary: "Detect face, evaluate attributes, assess the portrait quality"
       operationId: detect
       requestBody:
         required: true
