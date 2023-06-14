@@ -39,7 +39,7 @@ components:
             id:
               type: string
               format: uuid
-              description: "Person ID."
+              description: "Person ID. The list of persons is sorted by decreasing ID value."
             created_at:
               type: string
               description: "Person creation date."
@@ -68,6 +68,7 @@ components:
           description: "A free-form object containing person's extended attributes."
         groups:
           type: array
+          description: "Groups a person should be placed to. If no group is specified in request, a Default group is created and the person is placed to it."
           items:
             type: string
             format: uuid
