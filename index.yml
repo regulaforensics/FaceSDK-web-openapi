@@ -26,8 +26,6 @@ servers:
 
 # ~1 means '/'
 paths:
-  /api/readiness:
-    $ref: './diagnostics.yml#/paths/~1readiness'
   /api/match:
     $ref: './matching.yml#/paths/~1match'
   /api/match_and_search:
@@ -54,3 +52,5 @@ paths:
     $ref: './search.yml#/paths/~1search'
   /api/v2/liveness:
     $ref: './liveness.yml#/paths/~1v2~1liveness'
+  /api/readiness:
+    $ref: './diagnostics.yml#/paths/~1readiness'  
