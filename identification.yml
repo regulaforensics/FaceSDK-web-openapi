@@ -66,6 +66,11 @@ components:
           type: object
           additionalProperties: true
           description: "A free-form object containing person's extended attributes."
+        groups:
+          type: array
+          items:
+            type: string
+            format: uuid
     ImageFields:
       type: object
       description: "Image in the request data, includes image and content_type."
