@@ -113,7 +113,7 @@ components:
       properties:
         id:
           type: integer
-          description: "Response image ID."
+          description: "Response image ID. The list is sorted by decreasing ID value."
         content_type:
           type: string
           description: "Original media type of the returned image."
