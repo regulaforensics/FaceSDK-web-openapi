@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 5.1.0
+  version: 5.2.0
   title: Regula FaceSDK Web API
   x-logo:
     url: 'https://static-content.regulaforensics.com/Icons/Logos/Regula-logo.svg'
@@ -52,3 +52,5 @@ paths:
     $ref: './search.yml#/paths/~1search'
   /api/v2/liveness:
     $ref: './liveness.yml#/paths/~1v2~1liveness'
+  /api/readiness:
+    $ref: './diagnostics.yml#/paths/~1readiness'  

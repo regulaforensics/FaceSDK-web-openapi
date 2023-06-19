@@ -1,0 +1,33 @@
+openapi: 3.0.3
+
+paths:
+  /readiness:
+    parameters:
+      - $ref: './common.yml#/components/parameters/x-request'
+    get:
+      tags:
+        - diagnostics
+      summary: Checking the license status
+      operationId: readiness
+      responses:
+        200:
+          $ref: "#/components/responses/ReadinessOK"
+        400:
+          $ref: "#/components/responses/ReadinessBad"
+
+components:
+  responses:
+    ReadinessOK:
+      description: "License is OK."
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    ReadinessBad:
+      description: "Bad license: deactivated, expired, etc."
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true

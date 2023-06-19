@@ -5,24 +5,6 @@ paths:
   /persons:
     parameters:
       - $ref: './common.yml#/components/parameters/x-request'
-    get:
-      tags:
-        - person
-      summary: Get persons
-      operationId: get_all_persons
-      parameters:
-        - $ref: './common.yml#/components/parameters/x-request'
-        - $ref: './common.yml#/components/parameters/page'
-        - $ref: './common.yml#/components/parameters/size'
-      responses:
-        200:
-          description: "Successful operation, return all persons."
-          content:
-            application/json:
-              schema:
-                $ref: "./identification.yml#/components/schemas/PersonsPage"
-        400:
-          $ref: "./common.yml#/components/responses/BadRequest"
     post:
       tags:
         - person
@@ -207,14 +189,16 @@ components:
       description: "Person ID."
       required: true
       schema:
-        type: integer
+        format: uuid
+        type: string
     image_id:
       name: image_id
       in: path
       description: "Image ID."
       required: true
       schema:
-        type: integer
+        string: uuid
+        type: string
   responses:
     SuccessEmpty:
       description: "Successful operation, return nothing."
