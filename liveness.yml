@@ -36,7 +36,16 @@ components:
           description: "Transaction ID, there can be several transactions within one session."
         video:
           type: string
-          description: "S3 link to the session video."
+          description: "An S3 link to the session video."
+        images:
+          type: array
+          description: "List of base64 images"
+          items:
+            type: string
+            format: base64
+        estimatedAge:
+          type: integer
+          description: "Approximate age with an accuracy of +-3 years."
         portrait:
           type: string
           description: "S3 link to the portrait."
