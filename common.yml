@@ -130,7 +130,6 @@ components:
           If the returned in the Response value fits this range,
           the value is identified as compliant with the requirements."
           example: [x, y]
-
     QualityDetailsGroups:
       type: object
       properties:

@@ -37,6 +37,15 @@ components:
         video:
           type: string
           description: "An S3 link to the session video."
+        images:
+          type: array
+          description: "List of base64 images"
+          items:
+            type: string
+            format: base64
+        estimatedAge:
+          type: integer
+          description: ""
         portrait:
           type: string
           description: "An S3 link to the portrait."
