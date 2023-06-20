@@ -15,7 +15,7 @@ components:
         msg:
           type: string
           default: "Descriptor already calculated"
-        status_code:
+        statusCode:
           type: int
           default: 400
         type:
@@ -40,10 +40,10 @@ components:
               type: string
               format: uuid
               description: "Person ID. The list of persons is sorted by decreasing ID value."
-            created_at:
+            createdAt:
               type: string
               description: "Person creation date."
-            updated_at:
+            updatedAt:
               type: string
               description: "Person update date."
             groups:
@@ -74,7 +74,7 @@ components:
             format: uuid
     ImageFields:
       type: object
-      description: "Image in the request data, includes image and content_type."
+      description: "Image in the request data, includes image and contentType."
       properties:
         tag:
           type: string
@@ -83,15 +83,15 @@ components:
           type: object
           description: "Uploaded image."
           properties:
-            content_type:
+            contentType:
               type: string
               description: "Original media type of the uploaded image."
             content:
               $ref: "./common.yml#/components/schemas/ImageData"
-            image_url:
+            imageUrl:
               type: string
               description: "Image URL, can be a link to Amazon S3, Google Storage, File System, or HTTP(S)."
-            resize_options:
+            resizeOptions:
               $ref: "#/components/schemas/ResizeOptions"
     ResizeOptions:
       type: object
@@ -114,13 +114,13 @@ components:
         id:
           type: integer
           description: "Response image ID. The list is sorted by decreasing ID value."
-        content_type:
+        contentType:
           type: string
           description: "Original media type of the returned image."
-        created_at:
+        createdAt:
           type: string
           description: "Returned image creation date."
-        updated_at:
+        updatedAt:
           type: string
           description: "Returned image update date."
         path:
@@ -147,13 +147,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/GroupToCreate'
         - type: object
-          description: "Additional group data in the response, includes id and created_at."
+          description: "Additional group data in the response, includes id and createdAt."
           properties:
             id:
               type: string
               format: uuid
               description: "Group ID."
-            created_at:
+            createdAt:
               type: string
               description: "Group creation date."
     GroupToCreate:
