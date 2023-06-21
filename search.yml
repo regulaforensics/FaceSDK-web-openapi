@@ -42,7 +42,7 @@ definitions:
     type: object
     description: "Request search data."
     properties:
-      create_person:
+      createPerson:
         type: object
         description: "If a person is not found, a new person entry is created using the descriptor calculated while searching."
         properties:
@@ -53,7 +53,7 @@ definitions:
             type: object
             additionalProperties: true
             description: "A free-form object containing person's extended attributes."
-      group_ids:
+      groupIds:
         type: array
         description: "IDs of the groups in which the search is performed."
         items:

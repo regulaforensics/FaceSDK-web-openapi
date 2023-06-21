@@ -39,9 +39,9 @@ paths:
           $ref: "#/components/responses/SuccessGroup"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
-  /groups/{group_id}:
+  /groups/{groupId}:
     parameters:
-      - $ref: '#/components/parameters/group_id'
+      - $ref: '#/components/parameters/groupId'
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
@@ -84,9 +84,9 @@ paths:
           $ref: "#/components/responses/SuccessEmpty"
         404:
           $ref: "#/components/responses/GroupNotFound"
-  /groups/{group_id}/persons:
+  /groups/{groupId}/persons:
     parameters:
-      - $ref: "#/components/parameters/group_id"
+      - $ref: "#/components/parameters/groupId"
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
@@ -106,7 +106,7 @@ paths:
         '400':
           $ref: "./common.yml#/components/responses/BadRequest"
         '404':
-          description: "Group with the group_id or persons with the person_ids are not found."
+          description: "Group with the groupId or persons with the personIds are not found."
           content:
             application/json:
               schema:
@@ -133,8 +133,8 @@ paths:
 
 components:
   parameters:
-    group_id:
-      name: group_id
+    groupId:
+      name: groupId
       in: path
       description: "Group ID."
       required: true
@@ -151,7 +151,7 @@ components:
           schema:
             $ref: "./identification.yml#/components/schemas/Group"
     GroupNotFound:
-      description: "Group with the group_id is not found."
+      description: "Group with the groupId is not found."
       content:
         application/json:
           schema:

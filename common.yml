@@ -359,7 +359,7 @@ components:
     OperationLog:
       type: object
       properties:
-        status_code:
+        statusCode:
           type: integer
           description: "Status code."
         type:
@@ -376,7 +376,7 @@ components:
           type: integer
           description: "Current page number."
           example: 1
-        total_pages:
+        totalPages:
           type: integer
           description: "Total number of pages."
           example: 2
