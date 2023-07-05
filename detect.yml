@@ -44,8 +44,10 @@ components:
           default: false
         attributes:
           description: "Whether to evaluate attributes, such as age and emotions."
-          type: boolean
-          default: false
+          type: object
+          properties:
+            config:
+              $ref: "./common.yml#/components/schemas/QualityConfigList"
     
     DetectResponse:
       allOf:

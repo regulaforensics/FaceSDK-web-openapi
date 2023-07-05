@@ -16,7 +16,7 @@ components:
           type: string
           default: "Descriptor already calculated"
         statusCode:
-          type: int
+          type: integer
           default: 400
         type:
           type: string
@@ -101,20 +101,20 @@ components:
           type: float
           description: "The similarity threshold."
         limit:
-          type: int
+          type: integer
           description: "The maximum number of results to be returned."
     ResizeOptions:
       type: object
       description: "Set to resize the original image."
       properties:
         width:
-          type: int
+          type: integer
           description: "Resized image width, px."
         height:
-          type: int
+          type: integer
           description: "Resized image height, px."
         quality:
-          type: int
+          type: integer
           default: 100
           description: "Resized image quality, percent."
     Image:

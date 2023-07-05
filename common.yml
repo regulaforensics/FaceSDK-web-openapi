@@ -118,8 +118,8 @@ components:
       properties:
         name:
           description: "The name of the characteristic."
-          $ref: "#/components/schemas/FaceQualityConfigName"
-          example: "Roll"
+          $ref: "#/components/schemas/FaceAttribute"
+          example: "Emotion"
         range:
           type: array
           items:
