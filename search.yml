@@ -114,28 +114,28 @@ definitions:
 
   SearchDetection:
     type: object
-    description: "todo"
+    description: "The array of identified persons."
     properties:
       code:
         type: integer
-        description: "todo"
+        description: "Internal."
       crop:
         type: string
         format: base64
-        description: "todo"
+        description: "Base64 of the aligned and cropped portrait."
       detectorType:
         type: integer
-        description: "todo"
+        description: "Internal."
       hash:
         type: string
-        description: "todo"
+        description: "Internal."
       idx:
         type: integer
-        description: "todo"
+        description: "Internal."
       image:
         type: string
         format: base64
-        description: "todo"
+        description: "Internal."
       landmarks:
         description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
         type: array
@@ -148,11 +148,11 @@ definitions:
         example: [ [ x, y ] ]
       landmarksType:
         type: integer
-        description: "todo"
+        description: "Internal."
         example: 2
       msg:
         type: string
-        description: "todo"
+        description: "Internal."
       roi:
         $ref: "./common.yml#/components/schemas/FaceRectangular"
       versionSDK:
