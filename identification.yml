@@ -93,15 +93,16 @@ components:
               description: "Image URL, can be a link to Amazon S3, Google Storage, File System, or HTTP(S)."
             resizeOptions:
               $ref: "#/components/schemas/ResizeOptions"
-            outputImageParams:
-              $ref: "./common.yml#/components/schemas/OutputImageParams"
-            data:
-              $ref: "./common.yml#/components/schemas/ImageData"
-            idx:
-              type: int
-              description: "Set 2 to calculate descriptors for all the detected in the image faces, 5 - for only the most central one."
-            detectAll:
-              $ref: "./matching.yml#/components/schemas/detectAll"
+        outputImageParams:
+          $ref: "./common.yml#/components/schemas/OutputImageParams"
+        detectAll:
+          $ref: "./matching.yml#/components/schemas/detectAll"
+        threshold:
+          type: float
+          description: "The similarity threshold."
+        limit:
+          type: int
+          description: "The maximum number of results to be returned."
     ResizeOptions:
       type: object
       description: "Set to resize the original image."

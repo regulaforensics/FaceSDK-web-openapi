@@ -18,7 +18,7 @@ paths:
               $ref: "#/definitions/SearchRequest"
       responses:
         200:
-          description: "Successful operation; search result returned."
+          description: "Successful operation; the search result is returned."
           content:
             application/json:
               schema:
