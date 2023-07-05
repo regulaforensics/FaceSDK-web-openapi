@@ -102,7 +102,7 @@ components:
             description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
             type: array
             items:
-              type: number
+              type: integer
               example: [ x, y ]
           example: [ [ x, y ] ]
         quality:

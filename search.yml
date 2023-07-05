@@ -104,8 +104,57 @@ definitions:
       - type: object
         description: "Person data."
         properties:
+          detection:
+            $ref: "#/definitions/SearchDetection"
           images:
             type: array
             description: "Array of Person images."
             items:
               $ref: "#/definitions/RecognizeImage"
+
+  SearchDetection:
+    type: object
+    description: "The array of identified persons."
+    properties:
+      code:
+        type: integer
+        description: "Internal."
+      crop:
+        type: string
+        format: base64
+        description: "Base64 of the aligned and cropped portrait."
+      detectorType:
+        type: integer
+        description: "Internal."
+      hash:
+        type: string
+        description: "Internal."
+      idx:
+        type: integer
+        description: "Internal."
+      image:
+        type: string
+        format: base64
+        description: "Internal."
+      landmarks:
+        description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
+        type: array
+        items:
+          description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
+          type: array
+          items:
+            type: integer
+            example: [ x, y ]
+        example: [ [ x, y ] ]
+      landmarksType:
+        type: integer
+        description: "Internal."
+        example: 2
+      msg:
+        type: string
+        description: "Internal."
+      roi:
+        $ref: "./common.yml#/components/schemas/FaceRectangular"
+      versionSDK:
+        type: string
+        example: "5.2.245.687"
