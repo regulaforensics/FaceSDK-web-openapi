@@ -104,8 +104,57 @@ definitions:
       - type: object
         description: "Person data."
         properties:
+          detection:
+            $ref: "#/definitions/SearchDetection"
           images:
             type: array
             description: "Array of Person images."
             items:
               $ref: "#/definitions/RecognizeImage"
+
+  SearchDetection:
+    type: object
+    description: "todo"
+    properties:
+      code:
+        type: integer
+        description: "todo"
+      crop:
+        type: string
+        format: base64
+        description: "todo"
+      detectorType:
+        type: integer
+        description: "todo"
+      hash:
+        type: string
+        description: "todo"
+      idx:
+        type: integer
+        description: "todo"
+      image:
+        type: string
+        format: base64
+        description: "todo"
+      landmarks:
+        description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
+        type: array
+        items:
+          description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
+          type: array
+          items:
+            type: integer
+            example: [ x, y ]
+        example: [ [ x, y ] ]
+      landmarksType:
+        type: integer
+        description: "todo"
+        example: 2
+      msg:
+        type: string
+        description: "todo"
+      roi:
+        $ref: "./common.yml#/components/schemas/FaceRectangular"
+      versionSDK:
+        type: string
+        example: "5.2.245.687"
