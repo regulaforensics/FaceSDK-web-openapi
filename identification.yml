@@ -1,7 +1,26 @@
 openapi: 3.0.3
 
 components:
+  responses:
+    SearchBadParamsException:
+      description: "Bad request. Check your input data."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SearchBadParams"
   schemas:
+    SearchBadParams:
+      type: object
+      properties:
+        msg:
+          type: string
+          default: "Descriptor already calculated"
+        statusCode:
+          type: integer
+          default: 400
+        type:
+          type: string
+          default: "BadParamsException"
     PersonsPage:
       allOf:
         - type: object
@@ -18,14 +37,21 @@ components:
         - type: object
           properties:
             id:
-              type: integer
-              description: "Person ID."
-            created_at:
+              type: string
+              format: uuid
+              description: "Person ID. The list of persons is sorted by decreasing ID value."
+            createdAt:
               type: string
               description: "Person creation date."
-            updated_at:
+            updatedAt:
               type: string
               description: "Person update date."
+            groups:
+              type: array
+              description: "List of groups this person belongs to."
+              items:
+                type: string
+                format: uuid
     PersonFields:
       type: object
       description: "Person Request body: name and metadata."
@@ -40,44 +66,79 @@ components:
           type: object
           additionalProperties: true
           description: "A free-form object containing person's extended attributes."
+        groups:
+          type: array
+          description: "Groups a person should be placed to. If no group is specified in request, a Default group is created and the person is placed to it."
+          items:
+            type: string
+            format: uuid
     ImageFields:
       type: object
-      description: "Image in the request data, includes image and content_type."
+      description: "Image in the request data, includes image and contentType."
       properties:
         tag:
           type: string
           description: "Session identificator."
         image:
           type: object
-          description: "The uploaded image."
+          description: "Uploaded image."
           properties:
-            content_type:
+            contentType:
               type: string
-              description: "The original media type of the uploaded image."
+              description: "Original media type of the uploaded image."
             content:
               $ref: "./common.yml#/components/schemas/ImageData"
+            imageUrl:
+              type: string
+              description: "Image URL, can be a link to Amazon S3, Google Storage, File System, or HTTP(S)."
+            resizeOptions:
+              $ref: "#/components/schemas/ResizeOptions"
+        outputImageParams:
+          $ref: "./common.yml#/components/schemas/OutputImageParams"
+        detectAll:
+          $ref: "./matching.yml#/components/schemas/detectAll"
+        threshold:
+          type: float
+          description: "The similarity threshold."
+        limit:
+          type: integer
+          description: "The maximum number of results to be returned."
+    ResizeOptions:
+      type: object
+      description: "Set to resize the original image."
+      properties:
+        width:
+          type: integer
+          description: "Resized image width, px."
+        height:
+          type: integer
+          description: "Resized image height, px."
+        quality:
+          type: integer
+          default: 100
+          description: "Resized image quality, percent."
     Image:
       type: object
       description: "Image in the response."
       properties:
         id:
           type: integer
-          description: "Response image ID."
-        content_type:
+          description: "Response image ID. The list is sorted by decreasing ID value."
+        contentType:
           type: string
-          description: "The original media type of the returned image."
-        created_at:
+          description: "Original media type of the returned image."
+        createdAt:
           type: string
-          description: "The returned image creation date."
-        updated_at:
+          description: "Returned image creation date."
+        updatedAt:
           type: string
-          description: "The returned image update date."
+          description: "Returned image update date."
         path:
           type: string
-          description: "The returned image S3 path."
+          description: "Returned image S3 path."
         url:
           type: string
-          description: "The returned image URL."
+          description: "Returned image URL."
         metadata:
           type: object
           additionalProperties: true
@@ -88,7 +149,7 @@ components:
           properties:
             items:
               type: array
-              description: "The array of Groups that are found during the search."
+              description: "Array of Groups that are found during the search."
               items:
                 $ref: "#/components/schemas/Group"
         - $ref: './common.yml#/components/schemas/Page'
@@ -96,12 +157,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/GroupToCreate'
         - type: object
-          description: "Additional group data in the response, includes id and created_at."
+          description: "Additional group data in the response, includes id and createdAt."
           properties:
             id:
-              type: integer
+              type: string
+              format: uuid
               description: "Group ID."
-            created_at:
+            createdAt:
               type: string
               description: "Group creation date."
     GroupToCreate:

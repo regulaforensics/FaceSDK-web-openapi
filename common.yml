@@ -21,6 +21,7 @@ components:
     x-request:
       in: header
       name: X-RequestID
+      description: "Request header label."
       schema:
         type: string
     transactionId:
@@ -40,7 +41,6 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/OperationLog"
-
 
   schemas:
     ProcessParam:
@@ -85,6 +85,7 @@ components:
 
     Crop:
       type: object
+      description: "Whether to return the Base64 of an aligned and cropped portrait in the crop field."
       properties:
         type:
           $ref: "#/components/schemas/FaceImageQualityAlignType"
@@ -113,13 +114,12 @@ components:
 
     QualityConfig:
       type: object
-      description: "The configuration that defines the list of returned quality check characteristics.
-       For every characteristic, includes name, range, unit."
+      description: "The configuration that defines the list of returned quality check characteristics."
       properties:
         name:
           description: "The name of the characteristic."
-          $ref: "#/components/schemas/FaceQualityConfigName"
-          example: "Roll"
+          $ref: "#/components/schemas/FaceAttribute"
+          example: "Emotion"
         range:
           type: array
           items:
@@ -130,7 +130,6 @@ components:
           If the returned in the Response value fits this range,
           the value is identified as compliant with the requirements."
           example: [x, y]
-
     QualityDetailsGroups:
       type: object
       properties:
@@ -138,7 +137,7 @@ components:
           description: "The ID of the characteristics group."
           $ref: "#/components/schemas/FaceImageQualityGroups"
         name:
-          $ref: "#/components/schemas/FaceQualityConfigName"
+          $ref: "#/components/schemas/FaceImageQualityGroups"
           description: "The name of the characteristics group."
         totalCount:
           type: integer
@@ -179,6 +178,7 @@ components:
 
     RGB:
       type: array
+      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image." 
       items:
         type: integer
       minItems: 3
@@ -199,7 +199,7 @@ components:
 
     FaceQualityScenarios:
       type: string
-      description: "Face detection scenarios."
+      description: "Face detection scenario."
       enum:
         - "OldMode"
         - "QualityFull"
@@ -245,7 +245,6 @@ components:
       type: string
       description: "All image characteristics that can be assessed during face image quality assessment."
       enum:
-        - "ArtFace"
         - "ImageWidth"
         - "ImageHeight"
         - "ImageWidthToHeight"
@@ -292,8 +291,9 @@ components:
         - "Headphones"
         - "MedicalMask"
         - "BackgroundColorMatch"
+        - "ArtFace"
+        - "ContactLenses"
       x-enum-varnames:
-        - ART_FACE
         - IMAGE_WIDTH
         - IMAGE_HEIGHT
         - IMAGE_WIDTH_TO_HEIGHT
@@ -340,6 +340,8 @@ components:
         - HEADPHONES
         - MEDICAL_MASK
         - BACKGROUND_COLOR_MATCH
+        - ART_FACE
+        - CONTACT_LENSES
 
     FaceSDKResult:
       type: object
@@ -357,7 +359,7 @@ components:
     OperationLog:
       type: object
       properties:
-        status_code:
+        statusCode:
           type: integer
           description: "Status code."
         type:
@@ -374,7 +376,7 @@ components:
           type: integer
           description: "Current page number."
           example: 1
-        total_pages:
+        totalPages:
           type: integer
           description: "Total number of pages."
           example: 2
@@ -480,3 +482,65 @@ components:
       items:
         type: number
       example: [x, y, width, height]
+
+    FaceAttribute:
+      type: string
+      description: "Face attributes."
+      enum:
+        - "Age"
+        - "Emotion"
+        - "EyeLeft"
+        - "EyeRight"
+        - "Smile"
+        - "Glasses"
+        - "HeadCovering"
+        - "ForeheadCovering"
+        - "Mouth"
+        - "MedicalMask"
+        - "Occlusion"
+        - "StrongMakeup"
+        - "Headphones"
+      x-enum-varnames:
+        - AGE
+        - EMOTION
+        - EYE_LEFT
+        - EYE_RIGHT
+        - SMILE
+        - GLASSES
+        - HEAD_COVERING
+        - FOREHEAD_COVERING
+        - MOUTH
+        - MEDICAL_MASK
+        - OCCLUSION
+        - STRONG_MAKEUP
+        - HEADPHONES
+
+    ImageSource:
+      type: integer
+      description: "Face photo image source types: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      x-enum-varnames:
+        - DOCUMENT_PRINTED
+        - DOCUMENT_RFID
+        - LIVE
+        - DOCUMENT_WITH_LIVE
+        - EXTERNAL
+        - GHOST
+
+    FaceLivenessStatus:
+      type: integer
+      description: "The liveness assessment status: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-liveness-status/"
+      enum:
+        - 0
+        - 1
+        - 2
+      x-enum-varnames:
+        - LVC_REAL
+        - LVC_FAKE
+        - LVC_UNKNOWN

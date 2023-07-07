@@ -7,7 +7,7 @@ paths:
     post:
       tags:
         - matching
-      summary: "Compare provided face images in all combinations and return the similarity score for each pair."
+      summary: "Compare faces in all combinations"
       operationId: match
       requestBody:
         required: true
@@ -168,5 +168,5 @@ components:
 
     detectAll:
       type: boolean
-      description: "Whether to detect all faces in the image. If set to false, only one face is detected: the most central one."
-      default: true
+      description: "Whether to detect all faces in the image. If set to false, only the most central face is detected."
+      default: false

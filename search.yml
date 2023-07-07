@@ -8,7 +8,7 @@ paths:
     post:
       tags:
         - search
-      summary: Find person by image in groups.
+      summary: Find person by image in groups
       operationId: search
       requestBody:
         required: true
@@ -18,13 +18,19 @@ paths:
               $ref: "#/definitions/SearchRequest"
       responses:
         200:
-          description: "Successful operation; search result returned."
+          description: "Successful operation; the search result is returned."
           content:
             application/json:
               schema:
                 $ref: "#/definitions/SearchResult"
+        201:
+          description: "New person created with the search photo and the data specified."
+          content:
+            application/json:
+              schema:
+                $ref: "#/definitions/PersonCreatedResponse"
         400:
-          $ref: "./common.yml#/components/responses/BadRequest"
+          $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
 definitions:
   SearchRequest:
@@ -36,23 +42,37 @@ definitions:
     type: object
     description: "Request search data."
     properties:
-      tag:
-        type: string
-        description: "Session identificator."
-      limit:
-        type: integer
-        default: 100
-        description: "The number of returned Persons limit."
-      threshold:
-        type: float
-        default: 1.0
-        description: "The similarity distance threshold, should be between 0.0 and 2.0, where 0.0 is for returning results for only the most similar persons and 2.0 is for all the persons, even the dissimilar ones. If not set, the default 1.0 value is used."
-      group_ids:
+      createPerson:
+        type: object
+        description: "If a person is not found, a new person entry is created using the descriptor calculated while searching."
+        properties:
+          name:
+            type: string
+            description: "Person's name."
+          metadata:
+            type: object
+            additionalProperties: true
+            description: "A free-form object containing person's extended attributes."
+      groupIds:
         type: array
-        description: "The IDs of the groups in which the search is performed."
+        description: "IDs of the groups in which the search is performed."
         items:
           type: integer
-
+  PersonCreatedResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        description: "Result code."
+      persons:
+        type: array
+        description: "Array of Person images."
+        items:
+          $ref: "#/definitions/SearchPerson"
+      metadata:
+        type: object
+        additionalProperties: true
+        description: "A free-form object containing person's extended attributes."
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
@@ -61,19 +81,20 @@ definitions:
           similarity:
             type: number
             format: float
-            description: "The similarity score."
+            description: "Similarity score."
           distance:
             type: number
             format: float
-            description: "The similarity distance score: the lower the distance, the higher the face's similarity."
+            description: "Similarity distance score: the lower the distance, the higher the face's similarity."
   SearchResult:
     type: object
     properties:
       code:
         type: integer
-        description: "The search result code."
+        description: "Search result code."
       persons:
         type: array
+        description: "Person data."
         items:
           $ref: "#/definitions/SearchPerson"
 
@@ -81,9 +102,59 @@ definitions:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Person"
       - type: object
-        description: "The array of Person images."
+        description: "Person data."
         properties:
+          detection:
+            $ref: "#/definitions/SearchDetection"
           images:
             type: array
+            description: "Array of Person images."
             items:
               $ref: "#/definitions/RecognizeImage"
+
+  SearchDetection:
+    type: object
+    description: "The array of identified persons."
+    properties:
+      code:
+        type: integer
+        description: "Internal."
+      crop:
+        type: string
+        format: base64
+        description: "Base64 of the aligned and cropped portrait."
+      detectorType:
+        type: integer
+        description: "Internal."
+      hash:
+        type: string
+        description: "Internal."
+      idx:
+        type: integer
+        description: "Internal."
+      image:
+        type: string
+        format: base64
+        description: "Internal."
+      landmarks:
+        description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
+        type: array
+        items:
+          description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
+          type: array
+          items:
+            type: integer
+            example: [ x, y ]
+        example: [ [ x, y ] ]
+      landmarksType:
+        type: integer
+        description: "Internal."
+        example: 2
+      msg:
+        type: string
+        description: "Internal."
+      roi:
+        $ref: "./common.yml#/components/schemas/FaceRectangular"
+      versionSDK:
+        type: string
+        example: "5.2.245.687"

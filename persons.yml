@@ -5,24 +5,6 @@ paths:
   /persons:
     parameters:
       - $ref: './common.yml#/components/parameters/x-request'
-    get:
-      tags:
-        - person
-      summary: Get persons
-      operationId: get_all_persons
-      parameters:
-        - $ref: './common.yml#/components/parameters/x-request'
-        - $ref: './common.yml#/components/parameters/page'
-        - $ref: './common.yml#/components/parameters/size'
-      responses:
-        200:
-          description: "Successful operation, return all persons."
-          content:
-            application/json:
-              schema:
-                $ref: "./identification.yml#/components/schemas/PersonsPage"
-        400:
-          $ref: "./common.yml#/components/responses/BadRequest"
     post:
       tags:
         - person
@@ -39,9 +21,9 @@ paths:
           $ref: "#/components/responses/SuccessPerson"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
-  /persons/{person_id}:
+  /persons/{personId}:
     parameters:
-      - $ref: '#/components/parameters/person_id'
+      - $ref: '#/components/parameters/personId'
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
@@ -86,9 +68,9 @@ paths:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
           $ref: '#/components/responses/PersonNotFound'
-  /persons/{person_id}/images:
+  /persons/{personId}/images:
     parameters:
-      - $ref: '#/components/parameters/person_id'
+      - $ref: '#/components/parameters/personId'
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
@@ -132,9 +114,9 @@ paths:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
           $ref: '#/components/responses/PersonNotFound'
-  /persons/{person_id}/images/{image_id}:
+  /persons/{personId}/images/{imageId}:
     parameters:
-      - $ref: '#/components/parameters/person_id'
+      - $ref: '#/components/parameters/personId'
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
@@ -142,7 +124,7 @@ paths:
       summary: Get person image by id
       operationId: get_image_of_person
       parameters:
-        - $ref: '#/components/parameters/image_id'
+        - $ref: '#/components/parameters/imageId'
       responses:
         404:
           $ref: '#/components/responses/PersonNotFound'
@@ -163,21 +145,21 @@ paths:
       summary: Delete image of person
       operationId: delete_image_of_person
       parameters:
-        - $ref: '#/components/parameters/image_id'
+        - $ref: '#/components/parameters/imageId'
       responses:
         204:
           $ref: "#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
-          description: "Person with the person_id or image with the image_id is not found."
+          description: "Person with the personId or image with the imageId is not found."
           content:
             application/json:
               schema:
                 $ref: "./common.yml#/components/schemas/OperationLog"
-  /persons/{person_id}/groups:
+  /persons/{personId}/groups:
     parameters:
-      - $ref: '#/components/parameters/person_id'
+      - $ref: '#/components/parameters/personId'
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
@@ -201,20 +183,22 @@ paths:
 
 components:
   parameters:
-    person_id:
-      name: person_id
+    personId:
+      name: personId
       in: path
       description: "Person ID."
       required: true
       schema:
-        type: integer
-    image_id:
-      name: image_id
+        format: uuid
+        type: string
+    imageId:
+      name: imageId
       in: path
       description: "Image ID."
       required: true
       schema:
-        type: integer
+        string: uuid
+        type: string
   responses:
     SuccessEmpty:
       description: "Successful operation, return nothing."
@@ -225,7 +209,7 @@ components:
           schema:
             $ref: "./identification.yml#/components/schemas/Person"
     PersonNotFound:
-      description: "Person with the person_id is not found."
+      description: "Person with the personId is not found."
       content:
         application/json:
           schema:
