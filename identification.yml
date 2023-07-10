@@ -90,7 +90,7 @@ components:
               $ref: "./common.yml#/components/schemas/ImageData"
             imageUrl:
               type: string
-              description: "Image URL, can be a link to Amazon S3, Google Storage, File System, or HTTP(S)."
+              description: "Image URL."
             resizeOptions:
               $ref: "#/components/schemas/ResizeOptions"
         outputImageParams:
@@ -135,7 +135,7 @@ components:
           description: "Returned image update date."
         path:
           type: string
-          description: "Returned image S3 path."
+          description: "Returned image path."
         url:
           type: string
           description: "Returned image URL."
