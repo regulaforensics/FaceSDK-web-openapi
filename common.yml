@@ -406,6 +406,13 @@ components:
       description: "The result code, see enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/"
       enum:
         - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
         - 199
         - 200
         - 201
@@ -439,6 +446,13 @@ components:
         - 252
       x-enum-varnames:
         - FACER_OK
+        - FR_IMAGE_EMPTY
+        - FR_FACE_NOT_DETECTED
+        - FR_LANDMARKS_NOT_DETECTED
+        - FR_FACE_ALIGHNER_FAILED
+        - FR_DESCRIPTOR_EXTRACTOR_ERROR
+        - FR_IMAGE_DECODE_ERROR
+        - FR_INTERNAL_ERROR
         - FACER_CONFIG_ERROR
         - FACER_NO_LICENSE
         - FACER_IS_NOT_INITIALIZED
