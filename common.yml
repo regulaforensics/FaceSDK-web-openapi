@@ -137,7 +137,7 @@ components:
           description: "The ID of the characteristics group."
           $ref: "#/components/schemas/FaceImageQualityGroups"
         name:
-          $ref: "#/components/schemas/FaceImageQualityGroups"
+          $ref: "#/components/schemas/FaceImageQualityGroupsStrings"
           description: "The name of the characteristics group."
         totalCount:
           type: integer
@@ -231,6 +231,27 @@ components:
         - 6
         - 7
         - 8
+      x-enum-varnames:
+        - IMAGE_CHARACTERISTICS
+        - HEAD_SIZE_AND_POSITIONS
+        - FACE_QUALITY
+        - EYES_CHARACTERISTICS
+        - SHADOWS_AND_LIGHTNING
+        - POSE_AND_EXPRESSION
+        - HEAD_OCCLUSION
+        - BACKGROUND
+    FaceImageQualityGroupsStrings:
+      type: string
+      description: "Face image quality group types for face image quality assessment."
+      enum:
+        - "ImageCharacteristics"
+        - "HeadSizeAndPosition"
+        - "FaceQuality"
+        - "EyesCharacteristics"
+        - "ShadowsAndLightning"
+        - "PoseAndExpression"
+        - "HeadOcclusion"
+        - "Background"
       x-enum-varnames:
         - IMAGE_CHARACTERISTICS
         - HEAD_SIZE_AND_POSITIONS
