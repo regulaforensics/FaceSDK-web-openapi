@@ -30,7 +30,8 @@ components:
       required: true
       description: "ID of the current liveness transaction."
       schema:
-        type: integer
+        type: string
+        format: uuid
 
   responses:
     BadLicense:
