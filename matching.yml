@@ -44,6 +44,7 @@ components:
           type: boolean
           description: "Deprecated, use the `crop` field in `outputImageParams` instead."
           default: false
+          deprecated: true
         images:
           type: array
           description: "The array of all images included in the comparison."
