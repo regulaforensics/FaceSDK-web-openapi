@@ -39,7 +39,7 @@ components:
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
         thumbnails:
-          description: "Whether to return the cropped portrains with the detected faces."
+          description: "Deprecated, use the `crop` field in `processParam` instead."
           type: boolean
           default: false
         attributes:
