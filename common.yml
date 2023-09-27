@@ -73,7 +73,7 @@ components:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
           $ref: "#/components/schemas/RGB"
         crop:
-          description: "Whether to return the Base64 of an aligned and cropped portrait in the crop field."
+          description: "Whether to return the Base64 of an aligned and cropped portrait in the `crop` field."
           $ref: "#/components/schemas/Crop"
 
     QualityRequest:
@@ -88,11 +88,11 @@ components:
 
     Crop:
       type: object
-      description: "Whether to return the Base64 of an aligned and cropped portrait in the crop field."
+      description: "Whether to return the Base64 image of an aligned and cropped portrait in the `crop` field."
       properties:
         type:
           $ref: "#/components/schemas/FaceImageQualityAlignType"
-          description: "The dimensions ratio to the height of the required pattern."
+          description: "The aspect ratio according to which face alignment is performed during face detection."
           example: 1
         padColor:
           $ref: "#/components/schemas/RGB"
@@ -103,7 +103,7 @@ components:
             type: integer
           minItems: 2
           maxItems: 2
-          description: "The resize value in case type matches this value. If it doesn't, no resize is done."
+          description: "The resize value in case `type` matches this value. If it doesn't, no resize is performed."
           example: [300, 400]
         returnOriginalRect:
           type: boolean
