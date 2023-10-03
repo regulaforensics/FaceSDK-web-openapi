@@ -122,7 +122,7 @@ components:
       description: "Image in the response."
       properties:
         id:
-          type: integer
+          type: string
           description: "Response image ID. The list is sorted by decreasing ID value."
         contentType:
           type: string
