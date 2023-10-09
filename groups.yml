@@ -35,7 +35,7 @@ paths:
             schema:
               $ref: "./identification.yml#/components/schemas/GroupToCreate"
       responses:
-        201:
+        208:
           $ref: "#/components/responses/SuccessGroup"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
