@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 5.2.0
-  title: Regula FaceSDK Web API
+  title: Regula FaceSDK Web api
   x-logo:
     url: 'https://static-content.regulaforensics.com/Icons/Logos/Regula-logo.svg'
     href: 'https://mobile.regulaforensics.com/'
