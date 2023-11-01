@@ -96,16 +96,7 @@ components:
               type: array
               items:
                 type: object
-                properties:
-                  name:
-                    type: string
-                    description: "The name of the attribute."
-                  confidence:
-                    type: number
-                    description: "The confidence score for the attribute."
-                  value:
-                    type: any
-                    description: "Value."
+                additionalProperties: true
             elapsedTime:
               type: number
               description: "The elapsed time for attribute detection."
