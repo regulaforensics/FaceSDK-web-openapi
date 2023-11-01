@@ -104,10 +104,8 @@ components:
                     type: number
                     description: "The confidence score for the attribute."
                   value:
-                    anyOf:
-                      - type: string
-                      - type: number
-                      - type: array
+                    type: any
+                    description: "Value."
             elapsedTime:
               type: number
               description: "The elapsed time for attribute detection."
