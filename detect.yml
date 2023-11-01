@@ -91,10 +91,24 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
-          additionalProperties: true
-          example:
-            age: adult
-            emotion: smile
+          properties:
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: "The name of the attribute."
+                  confidence:
+                    type: number
+                    description: "The confidence score for the attribute."
+                  value:
+                    type: any
+                    description: "Value."
+            elapsedTime:
+              type: number
+              description: "The elapsed time for attribute detection."
         landmarks:
           description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
