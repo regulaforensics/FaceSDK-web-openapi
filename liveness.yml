@@ -37,13 +37,7 @@ components:
         video:
           type: string
           description: "Link to the session video."
-        images:
-          type: array
-          description: "List of base64 images"
-          items:
-            type: string
-            format: base64
-        estimatedAge:
+        age:
           type: integer
           description: "Approximate age with an accuracy of +/-3 years."
         portrait:
