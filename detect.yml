@@ -42,13 +42,7 @@ components:
           description: "Whether to return the cropped portrains with the detected faces."
           type: boolean
           default: false
-        attributes:
-          description: "Whether to evaluate attributes, such as age and emotions."
-          type: object
-          properties:
-            config:
-              $ref: "./common.yml#/components/schemas/QualityConfigList"
-    
+
     DetectResponse:
       allOf:
         - $ref: './common.yml#/components/schemas/FaceSDKResult'
