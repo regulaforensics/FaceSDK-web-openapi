@@ -212,6 +212,7 @@ components:
         - "CropCentralFace"
         - "CropAllFaces"
         - "Thumbnail"
+        - ""
       x-enum-varnames:
         - OLD_MODE
         - QUALITY_FULL
@@ -221,6 +222,7 @@ components:
         - CROP_CENTRAL_FACE
         - CROP_ALL_FACES
         - THUMBNAIL
+        - EMPTY
 
     FaceImageQualityGroups:
       type: integer
