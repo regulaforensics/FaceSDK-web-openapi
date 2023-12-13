@@ -121,7 +121,7 @@ components:
       properties:
         name:
           description: "The name of the characteristic."
-          $ref: "#/components/schemas/FaceAttribute"
+          $ref: "#/components/schemas/FaceQualityConfigName"
           example: "Emotion"
         range:
           type: array
