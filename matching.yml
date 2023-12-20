@@ -27,7 +27,7 @@ paths:
 
 info:
   title: Regula FaceSDK Web API
-  version: 5.2.0
+  version: 6.1.0
 
 components:
   schemas:
