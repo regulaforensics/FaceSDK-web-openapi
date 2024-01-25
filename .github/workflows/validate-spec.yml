@@ -16,7 +16,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: |
           npm install -g redoc-cli
-          redoc-cli bundle index.yml
+          npx @redocly/cli build-docs index.yml
       - run: |
           npm install -g @openapitools/openapi-generator-cli
           openapi-generator-cli validate -i index.yml
