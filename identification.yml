@@ -56,9 +56,6 @@ components:
       type: object
       description: "Person Request body: name and metadata."
       properties:
-        tag:
-          type: string
-          description: "Session identificator."
         name:
           type: string
           description: "Person name."
