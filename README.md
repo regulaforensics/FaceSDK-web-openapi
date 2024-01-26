@@ -2,7 +2,7 @@
 
 ## Main GitHub repository
 
-* [https://github.com/regulaforensics/FaceSDK-web-openapi](https://github.com/regulaforensics/FaceSDK-web-openapi)
+* (Download OpenAPI specification](https://github.com/regulaforensics/FaceSDK-web-openapi)
 
 ## Clients
 
