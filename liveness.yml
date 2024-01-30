@@ -36,13 +36,13 @@ components:
           description: "Transaction ID, there can be several transactions within one session."
         video:
           type: string
-          description: "Link to the session video."
+          description: "Link to the session video, depends on the selected storage type. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/administration/storage/)"
         age:
           type: integer
           description: "Approximate age with an accuracy of +/-3 years."
         portrait:
           type: string
-          description: "Link to the portrait."
+          description: "Link to the portrait, depends on the selected storage type. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/administration/storage/)"
         metadata:
           type: object
           additionalProperties: true          
