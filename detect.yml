@@ -70,7 +70,8 @@ components:
           description: "Scenario from Request processParam."
           $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
         timer:
-          type: float
+          type: number
+          format: float
           description: "The total time taken for the detection."
           example: 0.84793560000000001
 
@@ -126,12 +127,14 @@ components:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
 
             score:
-              type: float
+              type: number
+              format: float
               description: "Returns the estimated portrait quality assessment result,
                a number from 0 to 1, where 1 is for absolute compliance."
               example: -1.0
             timer:
-              type: float
+              type: number
+              format: float
               description: "The total time the quality assessment has taken."
               example: 0.42036411166191101
         roi:

@@ -54,7 +54,8 @@ components:
               items:
                 $ref: './matching.yml#/components/schemas/MatchImageResult'
             elapsedTime:
-              type: float
+              type: number
+              format: float
               example: 1.317137987
             metadata:
               type: object
@@ -93,5 +94,6 @@ components:
               items:
                 $ref: '#/components/schemas/PersonWithImages'
             rotationAngle:
-              type: float
+              type: number
+              format: float
               example: 2.1272900104522705

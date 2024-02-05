@@ -126,7 +126,8 @@ components:
         range:
           type: array
           items:
-            type: float
+            type: number
+            format: float
           minItems: 2
           maxItems: 2
           description: "The range of applicable values for this characteristic.
@@ -166,7 +167,8 @@ components:
           type: array
           description: "The range of set values for this characteristic."
           items:
-            type: float
+            type: number
+            format: float
           minItems: 2
           maxItems: 2
           example: [x, y]
@@ -175,7 +177,8 @@ components:
           example: 1
           description: "The assessment status."
         value:
-          type: float
+          type: number
+          format: float
           description: "The assessed value for the characteristic, returned in the set units."
           example: 0.0
 
