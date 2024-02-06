@@ -95,7 +95,8 @@ components:
         detectAll:
           $ref: "./matching.yml#/components/schemas/detectAll"
         threshold:
-          type: float
+          type: number
+          format: float
           description: "The similarity threshold."
         limit:
           type: integer
