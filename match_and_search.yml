@@ -42,7 +42,12 @@ components:
                     $ref: './common.yml#/components/schemas/ImageData'
                   type:
                     $ref: './matching.yml#/components/schemas/ImageSource'
-        - $ref: './search.yml#/definitions/SearchParameters'
+            groupIds:
+              type: array
+              description: "IDs of the groups in which the search is performed."
+              items:
+                type: string
+                format: uuid
 
     MatchAndSearchResponse:
       allOf:
