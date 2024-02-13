@@ -28,7 +28,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/definitions/PersonCreatedResponse"
+                $ref: "#/definitions/SearchResult"
         400:
           $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
@@ -59,21 +59,6 @@ definitions:
         items:
           type: string
           format: uuid
-  PersonCreatedResponse:
-    type: object
-    properties:
-      code:
-        type: integer
-        description: "Result code."
-      persons:
-        type: array
-        description: "Array of Person images."
-        items:
-          $ref: "#/definitions/SearchPerson"
-      metadata:
-        type: object
-        additionalProperties: true
-        description: "A free-form object containing person's extended attributes."
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
@@ -98,6 +83,35 @@ definitions:
         description: "Person data."
         items:
           $ref: "#/definitions/SearchPerson"
+      id:
+        type: string
+        format: uuid
+        description: "Person ID. The list of persons is sorted by decreasing ID value."
+        nullable: true
+      createdAt:
+        type: string
+        description: "Person creation date."
+        nullable: true
+      updatedAt:
+        type: string
+        description: "Person update date."
+        nullable: true
+      groups:
+        type: array
+        description: "List of groups this person belongs to."
+        nullable: true
+        items:
+          type: string
+          format: uuid
+      name:
+        type: string
+        description: "Person name."
+        nullable: true
+      metadata:
+        type: object
+        additionalProperties: true
+        description: "A free-form object containing person's extended attributes."
+        nullable: true
 
   SearchPerson:
     allOf:
