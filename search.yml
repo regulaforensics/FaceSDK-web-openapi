@@ -77,10 +77,10 @@ definitions:
     properties:
       code:
         type: integer
-        description: "Search result code."
+        description: "Result code. It is returned only with response 200."
       persons:
         type: array
-        description: "Person data."
+        description: "Array of Person images. It is returned only with response 200."
         items:
           $ref: "#/definitions/SearchPerson"
       id:
@@ -110,7 +110,7 @@ definitions:
       metadata:
         type: object
         additionalProperties: true
-        description: "A free-form object containing person's extended attributes."
+        description: "A free-form object containing person's extended attributes. Available when a person is being created"
         nullable: true
 
   SearchPerson:
