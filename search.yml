@@ -28,7 +28,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/definitions/PersonCreatedResponse"
+                $ref: "#/definitions/SearchResult"
         400:
           $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
@@ -59,21 +59,6 @@ definitions:
         items:
           type: string
           format: uuid
-  PersonCreatedResponse:
-    type: object
-    properties:
-      code:
-        type: integer
-        description: "Result code."
-      persons:
-        type: array
-        description: "Array of Person images."
-        items:
-          $ref: "#/definitions/SearchPerson"
-      metadata:
-        type: object
-        additionalProperties: true
-        description: "A free-form object containing person's extended attributes."
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
@@ -92,12 +77,41 @@ definitions:
     properties:
       code:
         type: integer
-        description: "Search result code."
+        description: "Result code. It is returned only with response 200."
       persons:
         type: array
-        description: "Person data."
+        description: "Array of Person images. It is returned only with response 200."
         items:
           $ref: "#/definitions/SearchPerson"
+      id:
+        type: string
+        format: uuid
+        description: "Person ID. The list of persons is sorted by decreasing ID value."
+        nullable: true
+      createdAt:
+        type: string
+        description: "Person creation date."
+        nullable: true
+      updatedAt:
+        type: string
+        description: "Person update date."
+        nullable: true
+      groups:
+        type: array
+        description: "List of groups this person belongs to."
+        nullable: true
+        items:
+          type: string
+          format: uuid
+      name:
+        type: string
+        description: "Person name."
+        nullable: true
+      metadata:
+        type: object
+        additionalProperties: true
+        description: "A free-form object containing person's extended attributes. Available when a person is being created"
+        nullable: true
 
   SearchPerson:
     allOf:
