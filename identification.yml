@@ -55,11 +55,12 @@ components:
     PersonFields:
       type: object
       description: "Person Request body: name and metadata."
+      required:
+        - name
       properties:
         name:
           type: string
           description: "Person name."
-          required: true
         metadata:
           type: object
           additionalProperties: true
@@ -248,27 +249,26 @@ components:
       properties:
         name:
           type: string
-          required: true
           description: "Group to create name."
         metadata:
           type: object
-          required: true
           additionalProperties: true
           description: "A free-form object containing group's extended attributes."
 
     GroupToCreate:
       type: object
       description: "Request body of the group to create data, includes name and metadata."
+      required:
+        - name
+        - metadata
       properties:
         tag:
           type: string
           description: "Session identificator."
         name:
           type: string
-          required: true
           description: "Group to create name."
         metadata:
           type: object
-          required: true
           additionalProperties: true
           description: "A free-form object containing group's extended attributes."
