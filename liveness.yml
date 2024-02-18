@@ -11,6 +11,7 @@ paths:
       operationId: get_liveness_transaction_info
       responses:
         200:
+          description: Get liveness transaction info
           content:
             application/json:
               schema:
@@ -38,8 +39,11 @@ components:
           type: string
           description: "Link to the session video, depends on the selected storage type. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/administration/storage/)"
         age:
-          type: integer
+          type: array
           description: "Approximate age with an accuracy of +/-3 years."
+          items:
+            type: object
+            additionalProperties: true
         portrait:
           type: string
           description: "Link to the portrait, depends on the selected storage type. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/administration/storage/)"
