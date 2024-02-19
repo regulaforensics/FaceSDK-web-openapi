@@ -5,7 +5,6 @@ components:
     page:
       name: page
       in: query
-      required: true
       description: "The page number to get a list of persons or groups."
       schema:
         type: integer
@@ -13,7 +12,6 @@ components:
     size:
       name: size
       in: query
-      required: true
       description: "The page size with a list of persons or groups, items."
       schema:
         type: integer
@@ -412,6 +410,10 @@ components:
         msg:
           type: string
           description: "Error message."
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing group's extended attributes."
     Page:
       type: object
       description: "Information about current page number and total pages count"

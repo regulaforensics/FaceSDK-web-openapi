@@ -55,6 +55,8 @@ components:
     PersonFields:
       type: object
       description: "Person Request body: name and metadata."
+      required:
+        - name
       properties:
         name:
           type: string
@@ -69,6 +71,24 @@ components:
           items:
             type: string
             format: uuid
+    PersonToUpdateFields:
+      type: object
+      description: "Person Request body: name and metadata."
+      properties:
+        name:
+          type: string
+          description: "Person name."
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing person's extended attributes."
+        groups:
+          type: array
+          description: "Groups a person should be placed to. If no group is specified in request, a Default group is created and the person is placed to it."
+          items:
+            type: string
+            format: uuid
+
     ImageFields:
       type: object
       description: "Image in the request data, includes image and contentType."
@@ -101,6 +121,62 @@ components:
         limit:
           type: integer
           description: "The maximum number of results to be returned."
+
+    AddImageToPersonResponse:
+      type: object
+      description: "Image in the response."
+      properties:
+        id:
+          type: string
+          description: "Response image ID. The list is sorted by decreasing ID value."
+        contentType:
+          type: string
+          description: "Original media type of the returned image."
+        createdAt:
+          type: string
+          description: "Returned image creation date."
+        path:
+          type: string
+          description: "Returned image path."
+        url:
+          type: string
+          description: "Returned image URL."
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing person's extended attributes."
+
+    AddImageToPersonRequest:
+      type: object
+      description: "Image in the request data, includes image and contentType."
+      required:
+        - image
+      properties:
+        tag:
+          type: string
+          description: "Session identificator."
+        image:
+          type: object
+          description: "Uploaded image."
+          properties:
+            contentType:
+              type: string
+              description: "Original media type of the uploaded image."
+            content:
+              $ref: "./common.yml#/components/schemas/ImageData"
+            imageUrl:
+              type: string
+              description: "Image URL."
+            resizeOptions:
+              $ref: "#/components/schemas/ResizeOptions"
+        threshold:
+          type: number
+          format: float
+          description: "The similarity threshold."
+        limit:
+          type: integer
+          description: "The maximum number of results to be returned."
+
     ResizeOptions:
       type: object
       description: "Set to resize the original image."
@@ -115,6 +191,7 @@ components:
           type: integer
           default: 100
           description: "Resized image quality, percent."
+
     Image:
       type: object
       description: "Image in the response."
@@ -141,6 +218,7 @@ components:
           type: object
           additionalProperties: true
           description: "A free-form object containing person's extended attributes."
+
     GroupPage:
       allOf:
         - type: object
@@ -153,7 +231,7 @@ components:
         - $ref: './common.yml#/components/schemas/Page'
     Group:
       allOf:
-        - $ref: '#/components/schemas/GroupToCreate'
+        - $ref: '#/components/schemas/GroupResponse'
         - type: object
           description: "Additional group data in the response, includes id and createdAt."
           properties:
@@ -164,9 +242,25 @@ components:
             createdAt:
               type: string
               description: "Group creation date."
+
+    GroupResponse:
+      type: object
+      description: "Response group create data, includes name and metadata."
+      properties:
+        name:
+          type: string
+          description: "Group to create name."
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing group's extended attributes."
+
     GroupToCreate:
       type: object
       description: "Request body of the group to create data, includes name and metadata."
+      required:
+        - name
+        - metadata
       properties:
         tag:
           type: string

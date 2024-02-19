@@ -48,7 +48,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./identification.yml#/components/schemas/PersonFields"
+              $ref: "./identification.yml#/components/schemas/PersonToUpdateFields"
       responses:
         204:
           $ref: "#/components/responses/SuccessEmpty"
@@ -102,14 +102,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./identification.yml#/components/schemas/ImageFields"
+              $ref: "./identification.yml#/components/schemas/AddImageToPersonRequest"
+
       responses:
         200:
           description: "Successful operation; return image ID."
           content:
             application/json:
               schema:
-                $ref: "./identification.yml#/components/schemas/Image"
+                $ref: "./identification.yml#/components/schemas/AddImageToPersonResponse"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
