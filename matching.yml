@@ -1,13 +1,25 @@
 openapi: 3.0.3
 paths:
-
   /match:
     parameters:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
         - matching
-      summary: "Compare faces in all combinations"
+      summary: "compare faces (1:1)"
+      description: "To perform a comparison of faces in the same image or in two different images, use POST `/api/match`. It's possible to compare faces in the same image or in two different images, this is defined by the `images.type` parameter. <br><br> The face detection result is displayed in the `detections` field.
+
+Each face is identified by two parameters: `faceIndex` (the index number of the face) and `imageIndex` (the index number of the image on which the face is detected).
+
+So, if there are two images each of which has two faces in them, the parameters will be the following:
+
+- First face in the first image: `faceIndex: 0`, `imageIndex: 0`
+
+- Second face in the first image: `faceIndex: 1`, `imageIndex: 0`
+
+- First face of the second image: `faceIndex: 0`, `imageIndex: 1`
+
+- Second face in the second image: `faceIndex: 1`, `imageIndex: 1`"
       operationId: match
       requestBody:
         required: true
@@ -39,15 +51,13 @@ components:
       properties:
         tag:
           type: string
-          description: "Session identificator."
+          description: "Session identificator, should be unique for each session."
         thumbnails:
-          type: boolean
-          description: "Deprecated, use the `crop` field in `outputImageParams` instead."
-          default: false
+          description: "Use `outputImageParams.crop` instead."
           deprecated: true
         images:
           type: array
-          description: "The array of all images included in the comparison."
+          description: "All images included in the comparison."
           items:
             $ref: "#/components/schemas/MatchImage"
         outputImageParams:
@@ -62,7 +72,7 @@ components:
                 type: integer
             crop:
               type: object
-              description: "Whether to return the Base64 of an aligned and cropped portrait in the `crop` field."
+              description: "If set, a Base64-encoded aligned and cropped by the indicated settings portrait is returned in the `crop` field."
               properties:
                 padColor:
                   type: array
@@ -72,7 +82,7 @@ components:
                     type: integer
                 returnOriginalRect:
                   type: boolean
-                  description: "Whether to return the coordinates of the rectangle with the face in the original image prepared for the face crop."
+                  description: "Whether to return the coordinates of the rectangle with the face in the original image prepared for the face crop. Can be used only if the face in the original image is not tilted."
                   default: null
                 size:
                   type: array
@@ -82,7 +92,7 @@ components:
                     type: integer
                 type:
                   type: integer
-                  description: "The aspect ratio according to which face alignment is performed during face detection."
+                  description: "The aspect ratio according to which face alignment is performed. See the [FaceImageQualityAlignType enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-align-type/). To get a thumbnail with dimensions 3x4, set `0`."
                   default: null
                   enum:
                     - 0
@@ -93,7 +103,7 @@ components:
 
     MatchImageIndex:
       type: integer
-      description: "The image index number. Can be given; if not given, the index numbers are set automatically starting from 0. All index numbers must be whole and unique—not repeated."
+      description: "The image index number. Can be given; if not given, the index numbers are set automatically starting from `0`. All index numbers must be whole and unique—not repeated."
 
     MatchFaceIndex:
       type: number
@@ -120,12 +130,12 @@ components:
           properties:
             detections:
               type: array
-              description: "The array of detected faces."
+              description: "The detection results."
               items:
                 $ref: "#/components/schemas/MatchImageDetection"
             results:
               type: array
-              description: "The array of matching results."
+              description: "The comparison results."
               items:
                 $ref: "#/components/schemas/MatchImageResult"
             metadata:
@@ -166,7 +176,7 @@ components:
       properties:
         faces:
           type: array
-          description: "The array of detected faces."
+          description: "Detected faces."
           items:
             $ref: "#/components/schemas/DetectionFace"
         imageIndex:
@@ -199,10 +209,10 @@ components:
         crop:
           type: string
           format: byte
-          description: "Base64 of the cropped portrait."
+          description: "Base64-encoded aligned and cropped portrait."
 
     ImageSource:
-      description: "The type of the image, defines the way the comparison is performed. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/"
+      description: "The type of the image, defines the way the comparison is performed, see the [ImageSource enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/)."
       type: integer
       enum:
         - 1
@@ -211,6 +221,7 @@ components:
         - 4
         - 5
         - 6
+        - 7
       x-enum-varnames:
         - DOCUMENT_PRINTED
         - DOCUMENT_RFID
@@ -218,8 +229,8 @@ components:
         - DOCUMENT_WITH_LIVE
         - EXTERNAL
         - GHOST
-
+        - BARCODE
     detectAll:
       type: boolean
-      description: "Whether to detect all faces in the image. If set to false, only the most central face is detected."
+      description: "Whether to detect all faces in the image. If set to `false`, only the most central face is detected."
       default: false

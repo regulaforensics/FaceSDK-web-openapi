@@ -31,7 +31,7 @@ components:
           description: "Whether the liveness detection is confirmed (0) or not (1)."
         tag:
           type: string
-          description: "Session identificator."
+          description: "Session identificator, should be unique for each session."
         transactionId:
           type: string
           description: "Transaction ID, there can be several transactions within one session."

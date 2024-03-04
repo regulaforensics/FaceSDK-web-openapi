@@ -1,6 +1,4 @@
 openapi: 3.0.3
-
-
 paths:
   /detect:
     parameters:
@@ -8,7 +6,8 @@ paths:
     post:
       tags:
         - matching
-      summary: "Detect face, evaluate attributes, assess the portrait quality"
+      summary: "detect faces"
+      description: "Detect face, evaluate attributes, assess the portrait quality"      
       operationId: detect
       requestBody:
         required: true
@@ -33,7 +32,7 @@ components:
       properties:
         tag:
           type: string
-          description: "Session identificator."
+          description: "Session identificator, should be unique for each session."
         processParam:
           $ref: "./common.yml#/components/schemas/ProcessParam"
         image:
