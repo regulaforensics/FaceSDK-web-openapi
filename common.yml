@@ -394,7 +394,7 @@ components:
           $ref: "#/components/schemas/FaceSDKResultCode"
 
     ImageData:
-      description: "Base64 encoded image."
+      description: "Base64-encoded image."
       type: string
       format: byte
 
@@ -449,7 +449,17 @@ components:
 
     FaceSDKResultCode:
       type: integer
-      description: "The result code, see enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/"
+      description: "The result code, see the [FaceSDKResultCode enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/).
+      
+      Some of the values: 
+      
+      - `0`—everything is OK
+
+      - `1`—image is empty, try again with another image
+
+      - `2`—face is not detected
+
+      - `6`—data cannot be decoded as an image"
       enum:
         - 0
         - 1
@@ -490,6 +500,8 @@ components:
         - 250
         - 251
         - 252
+        - 253
+        - 254
       x-enum-varnames:
         - FACER_OK
         - FR_IMAGE_EMPTY
@@ -530,11 +542,12 @@ components:
         - FACER_TIMEOUT_LIVENESS_TRANSACTION
         - FACER_FAILED_LIVENESS_TRANSACTION
         - FACER_ABORTED_LIVENESS_TRANSACTION
+        - FACER_GENERAL_ERROR
+        - FACER_PASSIVE_LIVENESS_FAIL
 
     Thumbnail:
-      description: "Base64 of the cropped portrait."
-      type: string
-      format: byte
+      description: "See `crop` instead."
+      deprecated: true
 
     FaceRectangular:
       description: "The rectangular area of a detected face that is represented by a set of four elements: the X and Y coordinates of the top-left point, and the width and height dimensions of the rectangle."

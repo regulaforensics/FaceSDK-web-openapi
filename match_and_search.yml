@@ -6,7 +6,8 @@ paths:
     post:
       tags:
         - matching
-      summary: 'Match and Search in one request'
+      summary: 'match and search (1:1 + 1:N)'
+      description: "To compare several images from a document and look up a person in the database in one request, use POST `/api/match_and_search`. In this case, the calculation of the descriptor will be performed only once, as opposed to using two requests for the same operation. If only one person is identified, matching is not performed and only search is carried out."
       operationId: match_and_search
       requestBody:
         required: true
@@ -31,10 +32,10 @@ components:
           properties:
             tag:
               type: string
-              description: "Session identificator."
+              description: "Session identificator, should be unique for each session."
             images:
               type: array
-              description: "Array of Person images."
+              description: "Person's images."
               items:
                 type: object
                 properties:
@@ -56,10 +57,12 @@ components:
           properties:
             results:
               type: array
+              description: "The match and search results."
               items:
                 $ref: './matching.yml#/components/schemas/MatchImageResult'
             elapsedTime:
               type: number
+              description: "Time the processing has taken, ms."
               format: float
               example: 1.317137987
             metadata:
@@ -68,11 +71,13 @@ components:
               description: "A free-form object containing person's extended attributes."
             detections:
               type: array
+              description: "The detection results."
               items:
                 type: object
                 properties:
                   faces:
                     type: array
+                    description: "Detected faces."
                     items:
                       $ref: '#/components/schemas/FacesResponse'
                   imageIndex:
@@ -85,6 +90,7 @@ components:
           properties:
             images:
               type: array
+              description: "Detected Persons."
               items:
                 $ref: './search.yml#/definitions/RecognizeImage'
         - $ref: './identification.yml#/components/schemas/Person'
@@ -96,6 +102,7 @@ components:
           properties:
             persons:
               type: array
+              description: "Detected Persons."
               items:
                 $ref: '#/components/schemas/PersonWithImages'
             rotationAngle:
