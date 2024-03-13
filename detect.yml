@@ -6,7 +6,6 @@ paths:
     post:
       tags:
         - matching
-      summary: "detect faces"
       description: "Detect face, evaluate attributes, assess the portrait quality"      
       operationId: detect
       requestBody:
