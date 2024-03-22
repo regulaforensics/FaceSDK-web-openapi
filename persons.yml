@@ -7,7 +7,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - person
+        - Face Identification
       summary: Create person
       operationId: create_person
       requestBody:
@@ -27,7 +27,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - Face Identification
       summary: Get person
       operationId: get_person
       responses:
@@ -39,7 +39,7 @@ paths:
           $ref: '#/components/responses/PersonNotFound'
     put:
       tags:
-        - person
+        - Face Identification
       summary: Update person
       operationId: update_person
       requestBody:
@@ -58,7 +58,7 @@ paths:
           $ref: '#/components/responses/PersonNotFound'
     delete:
       tags:
-        - person
+        - Face Identification
       summary: Delete person
       operationId: delete_person
       responses:
@@ -74,7 +74,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - Face Identification
       summary: Get person images
       operationId: get_all_images_by_person_id
       parameters:
@@ -93,7 +93,7 @@ paths:
           $ref: '#/components/responses/PersonNotFound'
     post:
       tags:
-        - person
+        - Face Identification
       summary: Add person image
       operationId: add_image_to_person
       requestBody:
@@ -121,7 +121,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - Face Identification
       summary: Get person image by id
       operationId: get_image_of_person
       parameters:
@@ -142,7 +142,7 @@ paths:
                 format: binary
     delete:
       tags:
-        - person
+        - Face Identification
       summary: Delete image of person
       operationId: delete_image_of_person
       parameters:
@@ -164,7 +164,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - person
+        - Face Identification
       summary: Get person groups
       operationId: get_all_groups_by_person_id
       parameters:
