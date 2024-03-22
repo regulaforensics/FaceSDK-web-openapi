@@ -5,7 +5,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - matching
+        - Face Comparison
       summary: "compare faces (1:1)"
       description: "To perform a comparison of faces in the same image or in two different images, use POST `/api/match`. It's possible to compare faces in the same image or in two different images, this is defined by the `images.type` parameter. <br><br> The face detection result is displayed in the `detections` field.
 

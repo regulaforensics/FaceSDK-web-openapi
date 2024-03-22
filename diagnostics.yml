@@ -6,7 +6,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     get:
       tags:
-        - diagnostics
+        - Diagnostic
       summary: Checking the license status
       operationId: readiness
       responses:

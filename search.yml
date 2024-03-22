@@ -7,7 +7,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - search
+        - Face Identification
       summary: Find person by image in groups
       operationId: search
       requestBody:
