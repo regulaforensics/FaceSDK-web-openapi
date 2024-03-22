@@ -5,7 +5,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - matching
+        - Face Detection
       summary: "detect faces"
       description: "Detect face, evaluate attributes, assess the portrait quality"      
       operationId: detect

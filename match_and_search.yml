@@ -5,7 +5,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - matching
+        - Face Comparison
       summary: 'match and search (1:1 + 1:N)'
       description: "To compare several images from a document and look up a person in the database in one request, use POST `/api/match_and_search`. In this case, the calculation of the descriptor will be performed only once, as opposed to using two requests for the same operation. If only one person is identified, matching is not performed and only search is carried out."
       operationId: match_and_search
