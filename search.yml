@@ -111,7 +111,6 @@ definitions:
         type: object
         additionalProperties: true
         description: "A free-form object containing person's extended attributes. Available when a person is being created"
-        nullable: true
 
   SearchPerson:
     allOf:
