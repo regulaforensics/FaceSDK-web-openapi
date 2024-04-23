@@ -82,7 +82,7 @@ components:
                     type: integer
                 returnOriginalRect:
                   type: boolean
-                  description: "Whether to return the coordinates of the rectangle with the face in the original image prepared for the face crop. Can be used only if the face in the original image is not tilted."
+                  description: "Whether to return the coordinates of the rectangle with the face in the original image prepared for the face crop."
                   default: null
                 size:
                   type: array
@@ -92,7 +92,7 @@ components:
                     type: integer
                 type:
                   type: integer
-                  description: "The aspect ratio according to which face alignment is performed. See the [FaceImageQualityAlignType enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-align-type/). To get a thumbnail with dimensions 3x4, set `0`."
+                  description: "The aspect ratio according to which face alignment is performed. See the [FaceImageQualityAlignType enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-align-type/). To get a thumbnail with aspect ratio 3:4, set `0`."
                   default: null
                   enum:
                     - 0
