@@ -7,7 +7,22 @@ paths:
     get:
       tags:
         - liveness 2.0
-      summary: Liveness assessment
+      summary: 'liveness check'
+      description: "To verify the presence of a real person in front of a camera, use the GET `/api/v2/liveness` endpoint. When starting, you can specify `tag` which all attempts to read liveness will be bound to. If left unspecified, the application automatically generates one. The calling application returns `tag` and `transactionId`. One session may include many transactions, and from a transaction ID it is clear which session it belongs to.
+
+
+      When specifying `tag`, note that only Latin uppercase and lowercase letters, digits, and symbols `-` and `_` are allowed. The maximum supported number of characters is 127.
+      
+
+      The person's selfie and video from the liveness detection session are stored on the backend at:
+      `faceapi-session/year={year}/month={month}/day={day}/hour={hour}/minute={minute}/{tag}/transactionId`
+      
+
+      By default, liveness checks operate with eventual consistency. This means that when you submit a request and receive a response, the associated data (like the selfie and session video) may be saved after the response is sent. If this doesn't meet your requirements, you can switch to strong consistency; refer to the [Architecture page](https://docs.regulaforensics.com/develop/face-sdk/overview/architecture/#consistency-models) for details.
+
+      
+      To access the liveness transaction data, use GET `/api/v2/liveness?transactionId={transactionId}`.
+      "
       operationId: get_liveness_transaction_info
       responses:
         200:
@@ -24,11 +39,11 @@ components:
       properties:
         code:
           type: integer
-          description: "Result code, one of the FaceSDKResultCode enum values. See the enum: https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/"
+          description: "Result code, see the [FaceSDKResultCode enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/)."
         status:
           type: integer
           default: null
-          description: "Whether the liveness detection is confirmed (0) or not (1)."
+          description: "Whether the liveness detection is confirmed `0` or not `1`."
         tag:
           type: string
           description: "Session identificator, should be unique for each session."
