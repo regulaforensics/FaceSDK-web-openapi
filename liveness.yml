@@ -14,7 +14,7 @@ paths:
       When specifying `tag`, note that only Latin uppercase and lowercase letters, digits, and symbols `-` and `_` are allowed. The maximum supported number of characters is 127.
       
 
-      The person's selfie and video from the liveness detection session are stored on the backend at:
+      The metadata (device model, screen data, frame size, app ID and version, OS version, platform, SDK version, etc.), a person's selfie and video of the liveness detection session are stored on the backend at:
       `faceapi-session/year={year}/month={month}/day={day}/hour={hour}/minute={minute}/{tag}/transactionId`
       
 
