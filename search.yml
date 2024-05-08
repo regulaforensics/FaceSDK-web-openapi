@@ -59,6 +59,30 @@ definitions:
         items:
           type: string
           format: uuid
+      filter:
+        $ref: '#/definitions/FilterSearchRequest'
+
+  FilterSearchRequest:
+    type: object
+    properties:
+      op:
+        $ref: '#/definitions/FilterOpEnum'
+      field:
+        type: string
+      value:
+        type: array
+        items:
+          type: string
+
+  FilterOpEnum:
+    type: string
+    enum:
+      - "in"
+      - "nin"
+    x-enum-varnames:
+      - IN
+      - NOT_IN
+
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
