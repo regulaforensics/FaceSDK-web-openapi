@@ -66,3 +66,15 @@ components:
           type: object
           additionalProperties: true          
           description: "A free-form object containing person's extended attributes."
+        type:
+          $ref: "#/components/schemas/LivenessTypeEnum"
+
+    LivenessTypeEnum:
+      type: integer
+      default: 0
+      enum:
+        - 0
+        - 1
+      x-enum-varnames:
+        - PASSIVE
+        - ACTIVE
