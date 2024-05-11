@@ -71,10 +71,11 @@ components:
 
     LivenessTypeEnum:
       type: integer
+      description: "Liveness detection can be performed in two modes: active `0` and passive `1`. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/liveness/#active-and-passive-modes)"
       default: 0
       enum:
         - 0
         - 1
       x-enum-varnames:
-        - PASSIVE
         - ACTIVE
+        - PASSIVE
