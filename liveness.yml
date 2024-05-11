@@ -67,9 +67,9 @@ components:
           additionalProperties: true          
           description: "A free-form object containing person's extended attributes."
         type:
-          $ref: "#/components/schemas/LivenessTypeEnum"
+          $ref: "#/components/schemas/LivenessType"
 
-    LivenessTypeEnum:
+    LivenessType:
       type: integer
       description: "Liveness detection can be performed in two modes: active `0` and passive `1`. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/liveness/#active-and-passive-modes)"
       default: 0
