@@ -64,18 +64,24 @@ definitions:
 
   FilterSearchRequest:
     type: object
+    description: "Allows to filter the search results based on the Person's `name`." 
     properties:
       op:
         $ref: '#/definitions/FilterOpEnum'
       field:
         type: string
+        description: "`name` of the Person."
       value:
         type: array
+        description: "The list of `name` values against which the `field` is compared."
         items:
           type: string
 
   FilterOpEnum:
     type: string
+    description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, 
+    the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, 
+    the `name` values of the Person should not match any of the values specified in the `value` list."
     enum:
       - "in"
       - "nin"
