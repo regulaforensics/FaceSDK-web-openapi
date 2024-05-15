@@ -64,7 +64,7 @@ definitions:
 
   FilterSearchRequest:
     type: object
-    description: "Allows to filter the search results based on the Person's `name`." 
+    description: "Allows to filter the search results based on the Person's `name`. If enabled, only the search results that meet the filter condition will be returned." 
     properties:
       op:
         $ref: '#/definitions/FilterOp'
