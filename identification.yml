@@ -61,6 +61,9 @@ components:
         name:
           type: string
           description: "Person's name."
+        externalId:
+          type: string
+          description: ""
         metadata:
           type: object
           additionalProperties: true
