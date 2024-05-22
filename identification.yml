@@ -63,7 +63,7 @@ components:
           description: "Person's name."
         externalId:
           type: string
-          description: ""
+          description: "Person's ID, used for linking search results to an ID in an external system. Can be set when creating a Person, stored in the database, and included in the search to return only Persons with the specified ID."
         metadata:
           type: object
           additionalProperties: true
