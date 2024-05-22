@@ -50,7 +50,7 @@ components:
           $ref: "#/components/schemas/FaceQualityScenarios"
         onlyCentralFace:
           type: boolean
-          description: "Whether to process only the central face on the image (true) or all the faces (false)."
+          description: "Whether to process only the central face in the image. If set to `false`, all the faces are processed."
           example: false
         outputImageParams:
           $ref: "#/components/schemas/OutputImageParams"
@@ -65,18 +65,17 @@ components:
 
     OutputImageParams:
       type: object
-      description: "Whether to process the uploaded image according to the indicated settings."
+      description: "Allows to process the uploaded image according to the indicated settings."
       properties:
         backgroundColor:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
           $ref: "#/components/schemas/RGB"
         crop:
-          description: "Whether to return the Base64 of an aligned and cropped portrait in the `crop` field."
           $ref: "#/components/schemas/Crop"
 
     QualityRequest:
       type: object
-      description: "Whether to perform the portrait quality check."
+      description: "If set, the face image quality check is performed according to the set scenario or characteristics."
       properties:
         backgroundMatchColor:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
@@ -86,15 +85,15 @@ components:
 
     Crop:
       type: object
-      description: "Whether to return the Base64 image of an aligned and cropped portrait in the `crop` field."
+      description: "Whether to return a Base64-encoded image of an aligned and cropped portrait in the `crop` field. Alignment is performed according to `type`; if a head on the original image is tilted, for the returned portrait it is aligned in a straight vertical line. If there are more than one face in the photo, all the faces are detected and processed, and separate portraits for each face are returned. So, if there are five people in the photo, you'll get five processed portraits. Each portrait can be downloaded."
       properties:
         type:
           $ref: "#/components/schemas/FaceImageQualityAlignType"
-          description: "The aspect ratio according to which face alignment is performed during face detection."
+          description: "The aspect ratio according to which face alignment is performed, see the [FaceImageQualityAlignType enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-align-type/). <br><br>To get a thumbnail with dimensions 3x4, set `0`."
           example: 1
         padColor:
           $ref: "#/components/schemas/RGB"
-          description: "The RGB value for the color that will complement the image if this is needed for alignment."
+          description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image."
         size:
           type: array
           items:
@@ -110,6 +109,7 @@ components:
 
     QualityConfigList:
       type: array
+      description: "The list of quality check characteristics."
       items:
         $ref: "#/components/schemas/QualityConfig"
 
@@ -128,13 +128,12 @@ components:
             format: float
           minItems: 2
           maxItems: 2
-          description: "The range of applicable values for this characteristic.
-          If the returned in the Response value fits this range,
-          the value is identified as compliant with the requirements."
+          description: "The range of applicable values for this characteristic. If the returned in the response value fits this range, the characteristic is identified as compliant with the requirements."
           example: [x, y]
 
     AttributeConfigList:
       type: array
+      description: "The list of attributes for evaluation."
       items:
         $ref: "#/components/schemas/AttributeConfig"
 
@@ -218,7 +217,13 @@ components:
 
     FaceQualityScenarios:
       type: string
-      description: "Face detection scenario."
+      description: "Face detection scenario. If applied and the scenario is found, the parameters are set automatically and any other parameters mentioned in the request are ignored.
+      
+
+      If not set, left empty, or the name is not found, the processing is performed according to the set parameters.
+
+
+      You can find detailed descriptions of available scenarios on the [Scenarios page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/scenarios/)."
       enum:
         - "OldMode"
         - "QualityFull"
@@ -285,7 +290,7 @@ components:
 
     FaceQualityConfigName:
       type: string
-      description: "All image characteristics that can be assessed during face image quality assessment."
+      description: "The name of the quality check characteristic. For definitions, see the [FaceQualityConfigName enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-quality-config-name/)."
       enum:
         - "ImageWidth"
         - "ImageHeight"
@@ -433,7 +438,7 @@ components:
 
     FaceImageQualityAlignType:
       type: integer
-      description: "The aspect ratio according to which face alignment is performed during face detection."
+      description: "The aspect ratio according to which face alignment is performed. See the [FaceImageQualityAlignType enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-align-type/). To get a thumbnail with aspect ratio 3:4, set `0`."
       enum:
         - 0
         - 1
@@ -550,7 +555,7 @@ components:
 
     FaceAttribute:
       type: string
-      description: "Face attributes."
+      description: "The name of the attribute. For definitions, see the [FaceAttribute enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-attribute/)."
       enum:
         - "Age"
         - "Emotion"

@@ -6,7 +6,22 @@ paths:
     post:
       tags:
         - matching
-      description: "Detect face, evaluate attributes, assess the portrait quality"      
+      summary: "detect and check quality"
+      description: "Use the POST `api/detect` endpoint to analyze images, recognize faces in them, and return cropped and aligned portraits of the detected people. 
+      
+      
+      The Face Detection feature lets you:
+
+      - **Check face image quality**: Assess whether a portrait meets certain standards, for example, ICAO, Schengen visa, USA visa. To perform image quality check, use the `processParam.quality` field.
+
+      - **Evaluate face attributes**: Estimate the age range of a person; check whether the eyes are occluded, closed, or open; detect a facial expression or smile; see if there are glasses, sunglasses, head coverage, medical mask, etc. To evaluate attributes, add the `processParam.attributes` field.
+
+      
+      You can perform Face Detection in two ways:
+
+      - By adding parameters manually. In this case, the configuration is not saved and can not be automatically repeated.
+      
+      - By a processing `scenario` that includes certain parameters. You can use predefined scenarios or add custom ones."      
       operationId: detect
       requestBody:
         required: true
@@ -37,7 +52,8 @@ components:
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
         thumbnails:
-          description: "Deprecated, use the `crop` field in `processParam` instead."
+          description: "Use `processParam.outputImageParams.crop` instead."
+          deprecated: true
           type: boolean
           default: false
 
