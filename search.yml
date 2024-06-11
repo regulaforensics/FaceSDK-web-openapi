@@ -59,6 +59,36 @@ definitions:
         items:
           type: string
           format: uuid
+      filter:
+        $ref: '#/definitions/FilterSearchRequest'
+
+  FilterSearchRequest:
+    type: object
+    description: "Allows to filter the search results based on the Person's `name`. If enabled, only the search results that meet the filter condition will be returned." 
+    properties:
+      op:
+        $ref: '#/definitions/FilterOp'
+      field:
+        type: string
+        description: "`name` of the Person."
+      value:
+        type: array
+        description: "The list of `name` values against which the `field` is compared."
+        items:
+          type: string
+
+  FilterOp:
+    type: string
+    description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, 
+    the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, 
+    the `name` values of the Person should not match any of the values specified in the `value` list."
+    enum:
+      - "in"
+      - "nin"
+    x-enum-varnames:
+      - IN
+      - NOT_IN
+
   RecognizeImage:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Image"
