@@ -67,11 +67,13 @@ components:
 
     DetectResult:
       type: object
+      description: "The detection results."
       required:
         - detections
       properties:
         detections:
           type: array
+          description: "The array of performed checks."
           items:
             $ref: "#/components/schemas/Detection"
         detectorType:
@@ -100,9 +102,11 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
+          description: "The checked attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/basic-detection/#attributes-list) for details."
           properties:
             details:
               type: array
+              description: "The array of checked attributes."
               items:
                 type: object
                 additionalProperties: true
