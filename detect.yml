@@ -93,31 +93,29 @@ components:
 
     DetectAttributesDetails:
       type: object
-      description: ""
       properties:
         name:
           type: string
-          description: ""
+          description: "The name of the attribute."
         value:
           type: array
-          description: ""
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list)."
           items:
             type: integer
 
     DetectDetailsMeta:
       type: object
-      description: ""
       properties:
         confidence:
           type: number
-          description: ""
+          description: "The confidence in the estimated value, `1.0` is for 100% confidence."
           format: float
         value:
           type: string
-          description: ""
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list)."
         name:
           type: string
-          description: ""
+          description: "The name of the attribute."
     Detection:
       type: object
       required:
@@ -129,13 +127,12 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
-          description: "The checked attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/basic-detection/#attributes-list) for details."
+          description: "The checked attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list) for details."
           properties:
             details:
               type: array
-              description: "The array of checked attributes."
+              description: "Attributes assessment details. <br>For some of the attributes, returns the `DetectDetailsMeta` object; for some of the attributes, returns the `DetectAttributesDetails` object."
               items:
-                description: ""
                 items:
                   anyOf:
                     - $ref: '#/components/schemas/DetectAttributesDetails'

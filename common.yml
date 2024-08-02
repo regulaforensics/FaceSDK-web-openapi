@@ -399,7 +399,7 @@ components:
           $ref: "#/components/schemas/FaceSDKResultCode"
 
     ImageData:
-      description: "Base64-encoded image."
+      description: "Thumbnail: Base64-encoded image."
       type: string
       format: byte
 
