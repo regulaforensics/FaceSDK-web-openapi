@@ -91,6 +91,33 @@ components:
           description: "The total time taken for the detection."
           example: 0.84793560000000001
 
+    DetectAttributesDetails:
+      type: object
+      description: ""
+      properties:
+        name:
+          type: string
+          description: ""
+        value:
+          type: array
+          description: ""
+          items:
+            type: integer
+
+    DetectDetailsMeta:
+      type: object
+      description: ""
+      properties:
+        confidence:
+          type: number
+          description: ""
+          format: float
+        value:
+          type: string
+          description: ""
+        name:
+          type: string
+          description: ""
     Detection:
       type: object
       required:
@@ -108,8 +135,12 @@ components:
               type: array
               description: "The array of checked attributes."
               items:
-                type: object
-                additionalProperties: true
+                description: ""
+                items:
+                  anyOf:
+                    - $ref: '#/components/schemas/DetectAttributesDetails'
+                    - $ref: '#/components/schemas/DetectDetailsMeta'
+
             elapsedTime:
               type: number
               description: "The elapsed time for attribute detection."
