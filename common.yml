@@ -205,7 +205,7 @@ components:
 
     FaceImageQualityStatus:
       type: integer
-      description: "The processing status returned for each assessed quality characteristic." 
+      description: "The processing status returned for each assessed quality characteristic, see the [FaceImageQualityStatus enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-status/)." 
       enum:
         - 0
         - 1
@@ -247,7 +247,7 @@ components:
 
     FaceImageQualityGroups:
       type: integer
-      description: "Face image quality group types for face image quality assessment."
+      description: "Face image quality group ID, see the [FaceImageQualityGroups enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-groups/) for details."
       enum:
         - 1
         - 2
@@ -268,7 +268,7 @@ components:
         - BACKGROUND
     FaceImageQualityGroupsStrings:
       type: string
-      description: "Face image quality group types for face image quality assessment."
+      description: "Face image quality assessment group name, see [FaceImageQualityGroups](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-groups/)."
       enum:
         - "ImageCharacteristics"
         - "HeadSizeAndPosition"
