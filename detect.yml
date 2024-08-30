@@ -21,7 +21,7 @@ paths:
 
       - By adding parameters manually. In this case, the configuration is not saved and can not be automatically repeated.
       
-      - By a processing `scenario` that includes certain parameters. You can use predefined scenarios or add custom ones."      
+      - By a processing `scenario` that includes certain parameters. You can use predefined scenarios or add custom ones. For detailed information about scenarios, refer to the [Scenarios page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/scenarios/)."      
       operationId: detect
       requestBody:
         required: true
@@ -127,7 +127,7 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
-          description: "The checked attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list) for details."
+          description: "The evaluated attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list) for details."
           properties:
             details:
               type: array
@@ -142,7 +142,7 @@ components:
               type: number
               description: "The elapsed time for attribute detection."
         landmarks:
-          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
+          description: "Absolute coordinates (X,Y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
           items:
             description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
@@ -157,18 +157,18 @@ components:
           properties:
             nonCompliant:
               type: array
-              description: "The array of all the non-compliant assessment characteristics."
+              description: "Non-compliant assessment characteristics."
               items:
                 $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
               example: ["ImageWidthToHeight", "Yaw"]
             detailsGroups:
-              description: "The array of the assessment results for each group of characteristics."
+              description: "Assessment results for each [group of characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-groups/)."
               type: array
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetailsGroups"
             details:
               type: array
-              description: "The array of the assessment characteristics that were set in the request."
+              description: "Assessment characteristics that were set in the request."
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
 
@@ -176,7 +176,7 @@ components:
               type: number
               format: float
               description: "Returns the estimated portrait quality assessment result,
-               a number from 0 to 1, where 1 is for absolute compliance."
+               a number from `0` to `1`, where `1` is for absolute compliance."
               example: -1.0
             elapsedTime:
               type: number
