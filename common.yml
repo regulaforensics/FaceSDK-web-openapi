@@ -51,7 +51,7 @@ components:
         onlyCentralFace:
           type: boolean
           description: "Whether to process only the central face in the image. If set to `false`, all the faces are processed."
-          example: false
+          example: true
         outputImageParams:
           $ref: "#/components/schemas/OutputImageParams"
         quality:
@@ -214,6 +214,7 @@ components:
     FaceQualityScenarios:
       type: string
       description: "Face detection scenario. If set and the scenario is found, it automatically applies the relevant parameters, overriding any other parameters specified in the request. If the scenario is not set, is empty, or the name is not recognized, processing will follow the parameters directly set in the request. For detailed descriptions of available scenarios, refer to the [Scenarios page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/scenarios/)."
+      example: "QualityICAO"
       enum:
         - "OldMode"
         - "QualityFull"
