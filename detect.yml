@@ -153,7 +153,7 @@ components:
           example: [ [ x, y ] ]
         quality:
           type: object
-          description: "The portrait quality assessment results, see [Face Image Quality Characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/#characteristics). If not set in request, no quality check is performed."
+          description: "The portrait quality assessment results, see [Face Image Quality Characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check). If not set in request, no quality check is performed."
           properties:
             nonCompliant:
               type: array
