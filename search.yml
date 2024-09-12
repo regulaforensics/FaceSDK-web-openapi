@@ -53,6 +53,9 @@ definitions:
             type: object
             additionalProperties: true
             description: "A free-form object containing person's extended attributes."
+          ttl:
+            type: integer
+            description: "The lifespan of the Person's records, seconds."
       groupIds:
         type: array
         description: "IDs of the groups in which the search is performed."
