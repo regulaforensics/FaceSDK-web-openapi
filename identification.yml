@@ -76,7 +76,9 @@ components:
             format: uuid
         ttl:
           type: integer
-          description: "The lifespan of the Person's records, seconds."
+          description: "The lifespan of the Person's records, seconds. Optional."
+          nullable: true
+          default: null
     PersonToUpdateFields:
       type: object
       description: "Person Request body: name and metadata."
