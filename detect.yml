@@ -21,7 +21,7 @@ paths:
 
       - By adding parameters manually. In this case, the configuration is not saved and can not be automatically repeated.
       
-      - By a processing `scenario` that includes certain parameters. You can use predefined scenarios or add custom ones."      
+      - By a processing `scenario` that includes certain parameters. You can use predefined scenarios or add custom ones. For detailed information about scenarios, refer to the [Scenarios page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/scenarios/)."      
       operationId: detect
       requestBody:
         required: true
@@ -67,11 +67,13 @@ components:
 
     DetectResult:
       type: object
+      description: "The detection results."
       required:
         - detections
       properties:
         detections:
           type: array
+          description: "The array of performed checks."
           items:
             $ref: "#/components/schemas/Detection"
         detectorType:
@@ -83,12 +85,37 @@ components:
         scenario:
           description: "Scenario from Request processParam."
           $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
-        timer:
+        elapsedTime:
           type: number
           format: float
           description: "The total time taken for the detection."
           example: 0.84793560000000001
 
+    DetectAttributesDetails:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "The name of the attribute."
+        value:
+          type: array
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list)."
+          items:
+            type: integer
+
+    DetectDetailsMeta:
+      type: object
+      properties:
+        confidence:
+          type: number
+          description: "The confidence in the estimated value, `1.0` is for 100% confidence."
+          format: float
+        value:
+          type: string
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list)."
+        name:
+          type: string
+          description: "The name of the attribute."
     Detection:
       type: object
       required:
@@ -100,17 +127,22 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
+          description: "The evaluated attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list) for details."
           properties:
             details:
               type: array
+              description: "Attributes assessment details. Returns `DetectDetailsMeta` or `DetectAttributesDetails`."
               items:
-                type: object
-                additionalProperties: true
+                items:
+                  anyOf:
+                    - $ref: '#/components/schemas/DetectAttributesDetails'
+                    - $ref: '#/components/schemas/DetectDetailsMeta'
+
             elapsedTime:
               type: number
               description: "The elapsed time for attribute detection."
         landmarks:
-          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
+          description: "Absolute coordinates (X,Y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
           items:
             description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
@@ -121,22 +153,22 @@ components:
           example: [ [ x, y ] ]
         quality:
           type: object
-          description: "Field for checking the portrait quality. If it is not mentioned, no quality check is performed."
+          description: "The portrait quality assessment results, see [Face Image Quality Characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check). If not set in request, no quality check is performed."
           properties:
             nonCompliant:
               type: array
-              description: "The array of all the non-compliant assessment characteristics."
+              description: "Non-compliant assessment characteristics."
               items:
                 $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
               example: ["ImageWidthToHeight", "Yaw"]
             detailsGroups:
-              description: "The array of the assessment results for each group of characteristics."
+              description: "Assessment results for each [group of characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-groups/)."
               type: array
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetailsGroups"
             details:
               type: array
-              description: "The array of the assessment characteristics that were set in the request."
+              description: "Assessment characteristics that were set in the request."
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
 
@@ -144,9 +176,9 @@ components:
               type: number
               format: float
               description: "Returns the estimated portrait quality assessment result,
-               a number from 0 to 1, where 1 is for absolute compliance."
+               a number from `0` to `1`, where `1` is for absolute compliance."
               example: -1.0
-            timer:
+            elapsedTime:
               type: number
               format: float
               description: "The total time the quality assessment has taken."
