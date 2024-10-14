@@ -5,7 +5,7 @@ paths:
       - $ref: './common.yml#/components/parameters/x-request'
     post:
       tags:
-        - matching
+        - match
       summary: "detect and check quality"
       description: "Use the POST `api/detect` endpoint to analyze images, recognize faces in them, and return cropped and aligned portraits of the detected people. 
       
