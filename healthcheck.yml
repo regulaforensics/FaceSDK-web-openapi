@@ -47,8 +47,8 @@ components:
         version:
           type: string
       example:
-        "app": "Regula Face Recognition Web API"
-        "licenseId": "4D43A2AF-E321-496C-9A4E-5A8F3D26DF0E"
-        "licenseSerial": "OL70786"
-        "licenseValidUntil": "9999-12-31T23:59:59Z"
-        "version": "7.5.297907.1721"
+        app: "Regula Face Recognition Web API"
+        licenseId: "4D43A2AF-E321-496C-9A4E-5A8F3D26DF0E"
+        licenseSerial: "OL70786"
+        licenseValidUntil: "9999-12-31T23:59:59Z"
+        version: "7.5.297907.1721"
