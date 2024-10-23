@@ -78,12 +78,12 @@ components:
           description: "Internal."
           type: integer
         scenario:
-          description: "Scenario from Request processParam."
-          $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
+          description: "The face detection scenario that was set in the `processParam.scenario` field of the request."
+          type: string
         elapsedTime:
           type: number
           format: float
-          description: "The total time taken for the detection."
+          description: "Server processing time, ms. Does not include the time taken to receive the request or deliver the response."
           example: 0.84793560000000001
 
     DetectAttributesDetails:
@@ -135,7 +135,7 @@ components:
 
             elapsedTime:
               type: number
-              description: "The elapsed time for attribute detection."
+              description: "Server processing time for attribute detection, ms."
         landmarks:
           description: "Absolute coordinates (X,Y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
@@ -176,7 +176,7 @@ components:
             elapsedTime:
               type: number
               format: float
-              description: "The total time the quality assessment has taken."
+              description: "Server processing time for quality assessment, ms."
               example: 0.42036411166191101
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"

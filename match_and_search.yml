@@ -62,7 +62,7 @@ components:
                 $ref: './matching.yml#/components/schemas/MatchImageResult'
             elapsedTime:
               type: number
-              description: "Time the processing has taken, ms."
+              description: "Server processing time, ms. Does not include the time taken to receive the request or deliver the response."
               format: float
               example: 1.317137987
             metadata:
