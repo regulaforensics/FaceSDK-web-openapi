@@ -52,10 +52,7 @@ components:
         tag:
           type: string
           description: "Session identificator, should be unique for each session."
-        thumbnails:
-          description: "Use `outputImageParams.crop` instead."
-          deprecated: true
-        images:
+        images: 
           type: array
           description: "All images included in the comparison."
           items:
