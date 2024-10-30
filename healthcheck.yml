@@ -39,13 +39,17 @@ components:
           type: string
         licenseId:
           type: string
+          nullable: true
         licenseSerial:
           type: string
+          nullable: true
         licenseValidUntil:
           type: string
           format: date-time
+          nullable: true
         version:
           type: string
+          nullable: true
       example:
         app: "Regula Face Recognition Web API"
         licenseId: "4D43A2AF-E321-496C-9A4E-5A8F3D26DF0E"
