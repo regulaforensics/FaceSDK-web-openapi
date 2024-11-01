@@ -37,18 +37,23 @@ components:
       required: [app, licenseId, licenseSerial, licenseValidUntil, version]
       properties:
         app:
+          description: TBD
           type: string
         licenseId:
+          description: TBD
           type: string
           nullable: true
         licenseSerial:
+          description: TBD
           type: string
           nullable: true
         licenseValidUntil:
+          description: TBD
           type: string
           format: date-time
           nullable: true
         version:
+          description: TBD
           type: string
           nullable: true
       example:
