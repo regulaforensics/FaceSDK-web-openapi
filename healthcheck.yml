@@ -11,7 +11,7 @@ paths:
         - healthcheck
       responses:
         200:
-          description: "Device info"
+          description: "Device info."
           content:
             application/json:
               schema:
@@ -26,9 +26,9 @@ paths:
         - healthcheck
       responses:
         200:
-          description: "License is valid"
+          description: "The license is valid."
         400:
-          description: "License is not valid"
+          description: "The license is not valid."
 
 components:
   schemas:
@@ -37,23 +37,23 @@ components:
       required: [app, licenseId, licenseSerial, licenseValidUntil, version]
       properties:
         app:
-          description: TBD
+          description: Application name.
           type: string
         licenseId:
-          description: TBD
+          description: Unique license identifier.
           type: string
           nullable: true
         licenseSerial:
-          description: TBD
+          description: License serial number.
           type: string
           nullable: true
         licenseValidUntil:
-          description: TBD
+          description: License validity date.
           type: string
           format: date-time
           nullable: true
         version:
-          description: TBD
+          description: Product version.
           type: string
           nullable: true
       example:
