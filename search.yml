@@ -28,7 +28,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/definitions/SearchResult"
+                $ref: "#/definitions/SearchPerson"
         400:
           $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
@@ -118,35 +118,6 @@ definitions:
         description: "Array of Person images. It is returned only with response 200."
         items:
           $ref: "#/definitions/SearchPerson"
-      id:
-        type: string
-        format: uuid
-        description: "Person ID. The list of persons is sorted by decreasing ID value."
-        nullable: true
-      createdAt:
-        type: string
-        description: "Person creation date."
-        nullable: true
-      updatedAt:
-        type: string
-        description: "Person update date."
-        nullable: true
-      groups:
-        type: array
-        description: "List of groups this person belongs to."
-        nullable: true
-        items:
-          type: string
-          format: uuid
-      name:
-        type: string
-        description: "Person's name."
-        nullable: true
-      metadata:
-        type: object
-        additionalProperties: true
-        description: "A free-form object containing person's extended attributes. Available when a person is being created"
-
   SearchPerson:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Person"
