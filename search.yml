@@ -5,6 +5,12 @@ paths:
   /search:
     parameters:
       - $ref: './common.yml#/components/parameters/x-request'
+      - in: query
+        name: withImages
+        required: false
+        schema:
+          type: boolean
+        description: TBD
     post:
       tags:
         - search
