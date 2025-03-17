@@ -10,7 +10,7 @@ paths:
         required: false
         schema:
           type: boolean
-        description: TBD
+        description: "When enabled, the response includes Base64-encoded images of matched persons. Each entry in the `persons` array contains an `images` field with image IDs and content. If omitted or set to false, images are excluded."
     post:
       tags:
         - search
