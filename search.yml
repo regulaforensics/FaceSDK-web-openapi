@@ -90,9 +90,7 @@ definitions:
 
   FilterOp:
     type: string
-    description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, 
-    the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, 
-    the `name` values of the Person should not match any of the values specified in the `value` list."
+    description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, the `name` values of the Person should not match any of the values specified in the `value` list."
     enum:
       - "in"
       - "nin"
