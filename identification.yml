@@ -211,7 +211,7 @@ components:
         content:
           type: string
           format: base64
-          description: "TBD"
+          description: "Base64-encoded image."
         contentType:
           type: string
           description: "Original media type of the returned image."
