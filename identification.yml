@@ -211,7 +211,7 @@ components:
         content:
           type: string
           format: base64
-          description: "Base64-encoded image."
+          description: "Base64-encoded image. Returned only if `withImages` is set to true in the request."
         contentType:
           type: string
           description: "Original media type of the returned image."
