@@ -208,6 +208,10 @@ components:
         id:
           type: string
           description: "Response image ID. The list is sorted by decreasing ID value."
+        content:
+          type: string
+          format: base64
+          description: "TBD"
         contentType:
           type: string
           description: "Original media type of the returned image."
