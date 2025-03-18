@@ -94,7 +94,7 @@ components:
           description: "The name of the attribute."
         value:
           type: array
-          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list)."
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/)."
           items:
             type: integer
 
@@ -107,7 +107,7 @@ components:
           format: float
         value:
           type: string
-          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list)."
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/)."
         name:
           type: string
           description: "The name of the attribute."
@@ -122,7 +122,7 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
-          description: "The evaluated attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/#attributes-list) for details."
+          description: "The evaluated attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/) for details."
           properties:
             details:
               type: array
