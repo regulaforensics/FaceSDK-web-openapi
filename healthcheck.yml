@@ -6,6 +6,7 @@ paths:
       - $ref: "./common.yml#/components/parameters/x-request"
     get:
       summary: "Server healthcheck"
+      description: "The `/api/healthz` endpoint performs a server health check, providing details such as the application name, license ID, serial number, validity, and product version. <br><br>Comprehensive information about service diagnostics is available on the [Monitoring page](https://docs.regulaforensics.com/develop/face-sdk/web-service/administration/monitoring/)."
       operationId: healthz
       tags:
         - healthcheck
@@ -21,6 +22,7 @@ paths:
       - $ref: "./common.yml#/components/parameters/x-request"
     get:
       summary: "License healthcheck"
+      description: "The `/api/readyz` endpoint checks the license's health to determine if the application is ready for operation. It validates the license and returns a response indicating whether the license is valid (`200`) or invalid (`400`)."
       operationId: readyz
       tags:
         - healthcheck
