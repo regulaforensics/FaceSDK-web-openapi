@@ -74,11 +74,9 @@ components:
           items:
             type: string
             format: uuid
-        ttl:
-          type: integer
-          description: "The lifespan of the Person's records, seconds. Optional."
-          nullable: true
-          default: null
+        expireAt:
+          type: string
+          description: "Person expiration date."
     PersonToUpdateFields:
       type: object
       description: "Person Request body: name and metadata."
@@ -124,7 +122,7 @@ components:
         outputImageParams:
           $ref: "./common.yml#/components/schemas/OutputImageParams"
         detectAll:
-          $ref: "./matching.yml#/components/schemas/detectAll"
+          $ref: "./match.yml#/components/schemas/detectAll"
         threshold:
           type: number
           format: float
