@@ -163,8 +163,6 @@ components:
           type: number
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
-        thumbnail:
-          $ref: "./common.yml#/components/schemas/Thumbnail"
         crop:
           type: string
           format: byte
