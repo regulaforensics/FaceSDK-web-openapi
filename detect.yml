@@ -10,18 +10,18 @@ paths:
       description: "Use the POST `api/detect` endpoint to analyze images, recognize faces in them, and return cropped and aligned portraits of the detected people. 
       
       
-      The Face Detection feature lets you:
+      The Face Detection feature lets you additionally:
 
-      - **Check face image quality**: Assess whether a portrait meets certain standards, for example, ICAO, Schengen visa, USA visa. To perform image quality check, use the `processParam.quality` field.
+      - **Check face image quality**: Assess whether a portrait meets certain standards, for example, ICAO, Schengen visa, USA visa. To perform image quality check, use the `processParam.quality` field. For the list of assessed characteristics, see the [Face Image Quality Characteristics page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/).
 
-      - **Evaluate face attributes**: Estimate the age range of a person; check whether the eyes are occluded, closed, or open; detect a facial expression or smile; see if there are glasses, sunglasses, head coverage, medical mask, etc. To evaluate attributes, add the `processParam.attributes` field.
+      - **Evaluate face attributes**: Estimate the age range of a person; check whether the eyes are occluded, closed, or open; detect a facial expression or smile; see if there are glasses, sunglasses, head coverage, medical mask, etc. To evaluate attributes, add the `processParam.attributes` field. For the list of assessed attributes, see the [Attributes List page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/).
 
       
       You can perform Face Detection in two ways:
 
-      - By adding parameters manually. In this case, the configuration is not saved and can not be automatically repeated.
+      - By adding parameters manually. In this case, the configuration is not saved and you will need to add all the necessary parameters to each request.
       
-      - By a processing `scenario` that includes certain parameters. You can use predefined scenarios or add custom ones."      
+      - By a processing `scenario` that includes certain parameters. You can use predefined scenarios or add custom ones. For detailed information about scenarios, refer to the [Scenarios page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/scenarios/)."      
       operationId: detect
       requestBody:
         required: true
@@ -51,11 +51,6 @@ components:
           $ref: "./common.yml#/components/schemas/ProcessParam"
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
-        thumbnails:
-          description: "Use `processParam.outputImageParams.crop` instead."
-          deprecated: true
-          type: boolean
-          default: false
 
     DetectResponse:
       allOf:
@@ -67,11 +62,13 @@ components:
 
     DetectResult:
       type: object
+      description: "The detection results."
       required:
         - detections
       properties:
         detections:
           type: array
+          description: "The array of performed checks."
           items:
             $ref: "#/components/schemas/Detection"
         detectorType:
@@ -81,14 +78,39 @@ components:
           description: "Internal."
           type: integer
         scenario:
-          description: "Scenario from Request processParam."
-          $ref: "./common.yml#/components/schemas/FaceQualityScenarios"
-        timer:
+          description: "The face detection scenario that was set in the `processParam.scenario` field of the request."
+          type: string
+        elapsedTime:
           type: number
           format: float
-          description: "The total time taken for the detection."
+          description: "Server processing time, ms. Does not include the time taken to receive the request or deliver the response."
           example: 0.84793560000000001
 
+    DetectAttributesDetails:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "The name of the attribute."
+        value:
+          type: array
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/)."
+          items:
+            type: integer
+
+    DetectDetailsMeta:
+      type: object
+      properties:
+        confidence:
+          type: number
+          description: "The confidence in the estimated value, `1.0` is for 100% confidence."
+          format: float
+        value:
+          type: string
+          description: "The estimated value for the attribute, see the [Returned values column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/)."
+        name:
+          type: string
+          description: "The name of the attribute."
     Detection:
       type: object
       required:
@@ -100,17 +122,22 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           type: object
+          description: "The evaluated attributes, see the [Attributes List](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/attributes-detection/) for details."
           properties:
             details:
               type: array
+              description: "Attributes assessment details. Returns `DetectDetailsMeta` or `DetectAttributesDetails`."
               items:
-                type: object
-                additionalProperties: true
+                items:
+                  anyOf:
+                    - $ref: '#/components/schemas/DetectAttributesDetails'
+                    - $ref: '#/components/schemas/DetectDetailsMeta'
+
             elapsedTime:
               type: number
-              description: "The elapsed time for attribute detection."
+              description: "Server processing time for attribute detection, ms."
         landmarks:
-          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
+          description: "Absolute coordinates (X,Y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
           items:
             description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
@@ -121,22 +148,22 @@ components:
           example: [ [ x, y ] ]
         quality:
           type: object
-          description: "Field for checking the portrait quality. If it is not mentioned, no quality check is performed."
+          description: "The portrait quality assessment results, see [Face Image Quality Characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/). If not set in request, no quality check is performed."
           properties:
             nonCompliant:
               type: array
-              description: "The array of all the non-compliant assessment characteristics."
+              description: "Non-compliant assessment characteristics."
               items:
                 $ref: "./common.yml#/components/schemas/FaceQualityConfigName"
               example: ["ImageWidthToHeight", "Yaw"]
             detailsGroups:
-              description: "The array of the assessment results for each group of characteristics."
+              description: "Assessment results for each [group of characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-groups/)."
               type: array
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetailsGroups"
             details:
               type: array
-              description: "The array of the assessment characteristics that were set in the request."
+              description: "Assessment characteristics that were set in the request."
               items:
                 $ref: "./common.yml#/components/schemas/QualityDetail"
 
@@ -144,17 +171,15 @@ components:
               type: number
               format: float
               description: "Returns the estimated portrait quality assessment result,
-               a number from 0 to 1, where 1 is for absolute compliance."
+               a number from `0` to `1`, where `1` is for absolute compliance."
               example: -1.0
-            timer:
+            elapsedTime:
               type: number
               format: float
-              description: "The total time the quality assessment has taken."
+              description: "Server processing time for quality assessment, ms."
               example: 0.42036411166191101
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
-        thumbnail:
-          $ref: "./common.yml#/components/schemas/Thumbnail"
 
     FaceAttribute:
       description: "Face attributes for evaluation."

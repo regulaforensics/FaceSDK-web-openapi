@@ -51,13 +51,13 @@ components:
         onlyCentralFace:
           type: boolean
           description: "Whether to process only the central face in the image. If set to `false`, all the faces are processed."
-          example: false
+          example: true
         outputImageParams:
           $ref: "#/components/schemas/OutputImageParams"
         quality:
           $ref: "#/components/schemas/QualityRequest"
         attributes:
-          description: "If set, the selected attributes, such as age or emotions, are evaluated."
+          description: "If set, the selected attributes, such as age or emotions, are evaluated. To check all the available attributes, you can set the `AttributesAll` scenario in `processParam.scenario`."
           type: object
           properties:
             config:
@@ -75,7 +75,7 @@ components:
 
     QualityRequest:
       type: object
-      description: "If set, the face image quality check is performed according to the set scenario or characteristics."
+      description: "If set, the face image quality check is performed according to the given list of [characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/) in `quality.config`."
       properties:
         backgroundMatchColor:
           description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
@@ -85,7 +85,7 @@ components:
 
     Crop:
       type: object
-      description: "Whether to return a Base64-encoded image of an aligned and cropped portrait in the `crop` field. Alignment is performed according to `type`; if a head on the original image is tilted, for the returned portrait it is aligned in a straight vertical line. If there are more than one face in the photo, all the faces are detected and processed, and separate portraits for each face are returned. So, if there are five people in the photo, you'll get five processed portraits. Each portrait can be downloaded."
+      description: "Whether to return a Base64-encoded image of each aligned and cropped portrait in the `crop` field. Faces are aligned to a straight vertical line based on the value in the `crop.type` field, correcting any tilt present in the original image. If the image contains multiple faces, the system will detect and process each face separately, returning individual portraits. For example, if there are five people in the photo, five processed portraits will be returned. Each portrait is available for download."
       properties:
         type:
           $ref: "#/components/schemas/FaceImageQualityAlignType"
@@ -102,10 +102,6 @@ components:
           maxItems: 2
           description: "The resize value in case `type` matches this value. If it doesn't, no resize is performed."
           example: [300, 400]
-        returnOriginalRect:
-          type: boolean
-          description: "Whether to return the coordinates of the rectangle with the face in the original image prepared for the face crop."
-          example: true
 
     QualityConfigList:
       type: array
@@ -128,7 +124,7 @@ components:
             format: float
           minItems: 2
           maxItems: 2
-          description: "The range of applicable values for this characteristic. If the returned in the response value fits this range, the characteristic is identified as compliant with the requirements."
+          description: "The range of applicable values for this characteristic. If the returned in the response value fits this range, the characteristic is identified as compliant with the requirements. For recommended ranges, see [Face Image Quality Assessment](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/)."
           example: [x, y]
 
     AttributeConfigList:
@@ -177,7 +173,7 @@ components:
           example: "Roll"
         range:
           type: array
-          description: "The range of set values for this characteristic."
+          description: "The range of set values for this characteristic, see the [Recommended range column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/)."
           items:
             type: number
             format: float
@@ -191,7 +187,7 @@ components:
         value:
           type: number
           format: float
-          description: "The assessed value for the characteristic, returned in the set units."
+          description: "The result value for the characteristic, returned in set units."
           example: 0.0
 
     RGB:
@@ -205,7 +201,7 @@ components:
 
     FaceImageQualityStatus:
       type: integer
-      description: "The processing status returned for each assessed quality characteristic." 
+      description: "The processing status returned for each quality characteristic, see the [FaceImageQualityStatus enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-status/)." 
       enum:
         - 0
         - 1
@@ -217,13 +213,8 @@ components:
 
     FaceQualityScenarios:
       type: string
-      description: "Face detection scenario. If applied and the scenario is found, the parameters are set automatically and any other parameters mentioned in the request are ignored.
-      
-
-      If not set, left empty, or the name is not found, the processing is performed according to the set parameters.
-
-
-      You can find detailed descriptions of available scenarios on the [Scenarios page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/scenarios/)."
+      description: "Face detection scenario. If set and the scenario is found, it automatically applies the relevant parameters, overriding any other parameters specified in the request. If the scenario is not set, is empty, or the name is not recognized, processing will follow the parameters directly set in the request. For detailed descriptions of available scenarios, refer to the [Scenarios page](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/scenarios/)."
+      example: "QualityICAO"
       enum:
         - "OldMode"
         - "QualityFull"
@@ -233,6 +224,7 @@ components:
         - "CropCentralFace"
         - "CropAllFaces"
         - "Thumbnail"
+        - "AttributesAll"
         - ""
       x-enum-varnames:
         - OLD_MODE
@@ -243,11 +235,12 @@ components:
         - CROP_CENTRAL_FACE
         - CROP_ALL_FACES
         - THUMBNAIL
+        - ATTRIBUTES_ALL
         - EMPTY
 
     FaceImageQualityGroups:
       type: integer
-      description: "Face image quality group types for face image quality assessment."
+      description: "The group ID of the characteristic, see the [FaceImageQualityGroups enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-groups/) for details."
       enum:
         - 1
         - 2
@@ -268,7 +261,7 @@ components:
         - BACKGROUND
     FaceImageQualityGroupsStrings:
       type: string
-      description: "Face image quality group types for face image quality assessment."
+      description: "Face image quality assessment group name, see [FaceImageQualityGroups](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-groups/)."
       enum:
         - "ImageCharacteristics"
         - "HeadSizeAndPosition"
@@ -290,7 +283,7 @@ components:
 
     FaceQualityConfigName:
       type: string
-      description: "The name of the quality check characteristic. For definitions, see the [FaceQualityConfigName enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-quality-config-name/)."
+      description: "The name of the characteristic. For definitions, see the [FaceQualityConfigName enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-quality-config-name/)."
       enum:
         - "ImageWidth"
         - "ImageHeight"
