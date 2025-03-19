@@ -180,8 +180,6 @@ components:
               example: 0.42036411166191101
         roi:
           $ref: "./common.yml#/components/schemas/FaceRectangular"
-        thumbnail:
-          $ref: "./common.yml#/components/schemas/Thumbnail"
 
     FaceAttribute:
       description: "Face attributes for evaluation."
