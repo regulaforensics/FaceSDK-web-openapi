@@ -30,6 +30,13 @@ components:
       schema:
         type: string
         format: uuid
+    tag:
+      in: query
+      name: tag
+      required: true
+      description: "TBD"
+      schema:
+        type: string
 
   responses:
     BadLicense:
