@@ -34,7 +34,7 @@ components:
       in: query
       name: tag
       required: true
-      description: "TBD"
+      description: "A unique tag associated with a liveness transaction session. Used to identify and delete the corresponding transaction."
       schema:
         type: string
 
