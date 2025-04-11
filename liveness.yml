@@ -91,3 +91,6 @@ components:
       x-enum-varnames:
         - ACTIVE
         - PASSIVE
+  responses:
+    SuccessEmpty:
+      description: "Successful operation, return nothing."
