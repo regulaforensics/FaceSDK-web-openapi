@@ -2,9 +2,9 @@ openapi: 3.0.3
 
 paths:
   /v2/liveness:
-    parameters:
-      - $ref: './common.yml#/components/parameters/transactionId'
     get:
+      parameters:
+        - $ref: './common.yml#/components/parameters/transactionId'
       tags:
         - liveness 2.0
       summary: 'liveness check'
@@ -31,6 +31,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TransactionInfo"
+    delete:
+      parameters:
+        - $ref: "./common.yml#/components/parameters/transactionId"
+        - $ref: "./common.yml#/components/parameters/tag"
+      tags:
+        - liveness 2.0
+      summary: delete liveness transaction
+      description: "This endpoint deletes a liveness transaction based on either the specified `tag` or `transactionId`. At least one of the parameters must be provided for the operation to be valid."
+      operationId: delete_liveness_transaction
+      responses:
+        204:
+          $ref: "#/components/responses/SuccessEmpty"
 
 components:
   schemas:
@@ -79,3 +91,6 @@ components:
       x-enum-varnames:
         - ACTIVE
         - PASSIVE
+  responses:
+    SuccessEmpty:
+      description: "Successful operation, return nothing."
