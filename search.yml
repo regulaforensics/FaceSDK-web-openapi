@@ -5,6 +5,12 @@ paths:
   /search:
     parameters:
       - $ref: './common.yml#/components/parameters/x-request'
+      - in: query
+        name: withImages
+        required: false
+        schema:
+          type: boolean
+        description: "When enabled, the response includes Base64-encoded images of matched persons. Each entry in the `persons` array contains an `images` field with image IDs and content. If omitted or set to false, images are excluded."
     post:
       tags:
         - search
@@ -28,7 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/definitions/SearchResult"
+                $ref: "#/definitions/SearchPerson"
         400:
           $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
@@ -84,9 +90,7 @@ definitions:
 
   FilterOp:
     type: string
-    description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, 
-    the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, 
-    the `name` values of the Person should not match any of the values specified in the `value` list."
+    description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, the `name` values of the Person should not match any of the values specified in the `value` list."
     enum:
       - "in"
       - "nin"
@@ -118,35 +122,6 @@ definitions:
         description: "Array of Person images. It is returned only with response 200."
         items:
           $ref: "#/definitions/SearchPerson"
-      id:
-        type: string
-        format: uuid
-        description: "Person ID. The list of persons is sorted by decreasing ID value."
-        nullable: true
-      createdAt:
-        type: string
-        description: "Person creation date."
-        nullable: true
-      updatedAt:
-        type: string
-        description: "Person update date."
-        nullable: true
-      groups:
-        type: array
-        description: "List of groups this person belongs to."
-        nullable: true
-        items:
-          type: string
-          format: uuid
-      name:
-        type: string
-        description: "Person's name."
-        nullable: true
-      metadata:
-        type: object
-        additionalProperties: true
-        description: "A free-form object containing person's extended attributes. Available when a person is being created"
-
   SearchPerson:
     allOf:
       - $ref: "./identification.yml#/components/schemas/Person"
