@@ -77,6 +77,12 @@ components:
         expireAt:
           type: string
           description: "Person expiration date."
+        tenant:
+          type: string
+          description: "Customer name"
+        env:
+          type: string
+          description: "Environment type"
     PersonToUpdateFields:
       type: object
       description: "Person Request body: name and metadata."
@@ -97,6 +103,12 @@ components:
           items:
             type: string
             format: uuid
+        tenant:
+          type: string
+          description: "Customer name"
+        env:
+          type: string
+          description: "Environment type"
 
     ImageFields:
       type: object
@@ -185,6 +197,12 @@ components:
         limit:
           type: integer
           description: "The maximum number of results to be returned."
+        tenant:
+          type: string
+          description: "Customer name"
+        env:
+          type: string
+          description: "Environment type"
 
     ResizeOptions:
       type: object
@@ -285,3 +303,9 @@ components:
           type: object
           additionalProperties: true
           description: "A free-form object containing group's extended attributes."
+        tenant:
+          type: string
+          description: "Customer name"
+        env:
+          type: string
+          description: "Environment type"

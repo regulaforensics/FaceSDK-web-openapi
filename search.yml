@@ -43,6 +43,14 @@ definitions:
     allOf:
       - $ref: "#/definitions/SearchParameters"
       - $ref: "./identification.yml#/components/schemas/ImageFields"
+      - type: object
+        properties:
+          tenant:
+            type: string
+            description: "Customer name"
+          env:
+            type: string
+            description: "Environment type"
 
   SearchParameters:
     type: object

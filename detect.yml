@@ -51,6 +51,12 @@ components:
           $ref: "./common.yml#/components/schemas/ProcessParam"
         image:
           $ref: "./common.yml#/components/schemas/ImageData"
+        tenant:
+          type: string
+          description: "Customer name"
+        env:
+          type: string
+          description: "Environment type"
 
     DetectResponse:
       allOf:

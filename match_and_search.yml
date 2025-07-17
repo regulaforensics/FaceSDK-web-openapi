@@ -49,6 +49,12 @@ components:
               items:
                 type: string
                 format: uuid
+            tenant:
+              type: string
+              description: "Customer name"
+            env:
+              type: string
+              description: "Environment type"
 
     MatchAndSearchResponse:
       allOf:

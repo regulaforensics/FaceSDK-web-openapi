@@ -59,6 +59,12 @@ components:
             $ref: "#/components/schemas/MatchImage"
         outputImageParams:
           $ref: "./common.yml#/components/schemas/ProcessParam/properties/outputImageParams"
+        tenant:
+          type: string
+          description: "Customer name"
+        env:
+          type: string
+          description: "Environment type"
 
     MatchImageIndex:
       type: integer
