@@ -15,7 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./identification.yml#/components/schemas/PersonFields"
+              $ref: "#/definitions/PersonsRequest"
       responses:
         201:
           $ref: "#/components/responses/SuccessPerson"
@@ -227,3 +227,14 @@ definitions:
             type: array
             items:
               $ref: "./identification.yml#/components/schemas/Image"
+  PersonsRequest:
+    allOf:
+      - $ref: "./identification.yml#/components/schemas/PersonFields"
+      - type: object
+        properties:
+          tenant:
+            type: string
+            description: "Customer name"
+          env:
+            type: string
+            description: "Environment type"
