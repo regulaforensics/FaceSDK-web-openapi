@@ -134,11 +134,9 @@ components:
               type: array
               description: "Attributes assessment details. Returns `DetectDetailsMeta` or `DetectAttributesDetails`."
               items:
-                items:
-                  anyOf:
-                    - $ref: '#/components/schemas/DetectAttributesDetails'
-                    - $ref: '#/components/schemas/DetectDetailsMeta'
-
+                anyOf:
+                  - $ref: '#/components/schemas/DetectAttributesDetails'
+                  - $ref: '#/components/schemas/DetectDetailsMeta'
             elapsedTime:
               type: number
               description: "Server processing time for attribute detection, ms."
