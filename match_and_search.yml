@@ -27,34 +27,42 @@ paths:
 components:
   schemas:
     MatchAndSearchRequest:
-      allOf:
-        - type: object
-          properties:
-            tag:
-              type: string
-              description: "Session identificator, should be unique for each session."
-            images:
-              type: array
-              description: "Person's images."
-              items:
-                type: object
-                properties:
-                  content:
-                    $ref: './common.yml#/components/schemas/ImageData'
-                  type:
-                    $ref: './match.yml#/components/schemas/ImageSource'
-            groupIds:
-              type: array
-              description: "IDs of the groups in which the search is performed."
-              items:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: "Session identificator, should be unique for each session."
+        images:
+          type: array
+          description: "Person's images."
+          items:
+            type: object
+            properties:
+              content:
+                $ref: './common.yml#/components/schemas/ImageData'
+              imageUrl:
+                description: "Image URL."
                 type: string
-                format: uuid
-            tenant:
-              type: string
-              description: "A label used to group transactions by customers, applications, or other criteria."
-            env:
-              type: string
-              description: "A label used to differentiate transactions by development stages."
+              type:
+                $ref: './match.yml#/components/schemas/ImageSource'
+        groupIds:
+          type: array
+          description: "IDs of the groups in which the search is performed."
+          items:
+            type: string
+            format: uuid
+        threshold:
+          description: "The similarity threshold."
+          type: number
+        limit:
+          description: "The maximum number of results to be returned."
+          type: integer
+        tenant:
+          type: string
+          description: "A label used to group transactions by customers, applications, or other criteria."
+        env:
+          type: string
+          description: "A label used to differentiate transactions by development stages."
 
     MatchAndSearchResponse:
       allOf:
