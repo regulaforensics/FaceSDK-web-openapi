@@ -53,10 +53,10 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         tenant:
           type: string
-          description: "Customer name"
+          description: "A label used to group transactions by customers, applications, or other criteria."
         env:
           type: string
-          description: "Environment type"
+          description: "A label used to differentiate transactions by development stages."
 
     DetectResponse:
       allOf:
@@ -134,11 +134,9 @@ components:
               type: array
               description: "Attributes assessment details. Returns `DetectDetailsMeta` or `DetectAttributesDetails`."
               items:
-                items:
-                  anyOf:
-                    - $ref: '#/components/schemas/DetectAttributesDetails'
-                    - $ref: '#/components/schemas/DetectDetailsMeta'
-
+                anyOf:
+                  - $ref: '#/components/schemas/DetectAttributesDetails'
+                  - $ref: '#/components/schemas/DetectDetailsMeta'
             elapsedTime:
               type: number
               description: "Server processing time for attribute detection, ms."

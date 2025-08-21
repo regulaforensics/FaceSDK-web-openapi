@@ -47,10 +47,10 @@ definitions:
         properties:
           tenant:
             type: string
-            description: "Customer name"
+            description: "A label used to group transactions by customers, applications, or other criteria."
           env:
             type: string
-            description: "Environment type"
+            description: "A label used to differentiate transactions by development stages."
 
   SearchParameters:
     type: object
