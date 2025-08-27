@@ -15,7 +15,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/PersonsRequest"
+              $ref: "./identification.yml#/components/schemas/PersonFields"
       responses:
         201:
           $ref: "#/components/responses/SuccessPerson"
@@ -227,14 +227,3 @@ definitions:
             type: array
             items:
               $ref: "./identification.yml#/components/schemas/Image"
-  PersonsRequest:
-    allOf:
-      - $ref: "./identification.yml#/components/schemas/PersonFields"
-      - type: object
-        properties:
-          tenant:
-            type: string
-            description: "A label used to group transactions by customers, applications, or other criteria."
-          env:
-            type: string
-            description: "A label used to differentiate transactions by development stages."

@@ -185,6 +185,12 @@ components:
         limit:
           type: integer
           description: "The maximum number of results to be returned."
+        tenant:
+          type: string
+          description: "A label used to group transactions by customers, applications, or other criteria."
+        env:
+          type: string
+          description: "A label used to differentiate transactions by development stages."
 
     ResizeOptions:
       type: object
