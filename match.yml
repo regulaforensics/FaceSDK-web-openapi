@@ -54,11 +54,17 @@ components:
           description: "Session identificator, should be unique for each session."
         images: 
           type: array
-          description: "All images included in the comparison."
+          description: "An array of images to be processed. At least two images must be provided."
           items:
             $ref: "#/components/schemas/MatchImage"
         outputImageParams:
           $ref: "./common.yml#/components/schemas/ProcessParam/properties/outputImageParams"
+        tenant:
+          type: string
+          description: "A label used to group transactions by customers, applications, or other criteria."
+        env:
+          type: string
+          description: "A label used to differentiate transactions by development stages."
 
     MatchImageIndex:
       type: integer

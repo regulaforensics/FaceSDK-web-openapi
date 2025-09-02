@@ -7,7 +7,7 @@ paths:
       tags:
         - match
       summary: 'match and search (1:1 + 1:N)'
-      description: "To compare several images from a document and look up a person in the database in one request, use POST `/api/match_and_search`. In this case, the calculation of the descriptor will be performed only once, as opposed to using two requests for the same operation. If only one person is identified, match is not performed and only search is carried out."
+      description: "To compare several images from a document and look up a person in the database in one request, use POST `/api/match_and_search`. In this case, the calculation of the descriptor will be performed only once, as opposed to using two requests for the same operation. At least two photos are required. If, after processing two or more photos, only one face is detected across them, the match step is skipped, and only the search is carried out."
       operationId: match_and_search
       requestBody:
         required: true
@@ -27,28 +27,42 @@ paths:
 components:
   schemas:
     MatchAndSearchRequest:
-      allOf:
-        - type: object
-          properties:
-            tag:
-              type: string
-              description: "Session identificator, should be unique for each session."
-            images:
-              type: array
-              description: "Person's images."
-              items:
-                type: object
-                properties:
-                  content:
-                    $ref: './common.yml#/components/schemas/ImageData'
-                  type:
-                    $ref: './match.yml#/components/schemas/ImageSource'
-            groupIds:
-              type: array
-              description: "IDs of the groups in which the search is performed."
-              items:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: "Session identificator, should be unique for each session."
+        images:
+          type: array
+          description: "An array of images to be processed. At least two images must be provided."
+          items:
+            type: object
+            properties:
+              content:
+                $ref: './common.yml#/components/schemas/ImageData'
+              imageUrl:
+                description: "Image URL."
                 type: string
-                format: uuid
+              type:
+                $ref: './match.yml#/components/schemas/ImageSource'
+        groupIds:
+          type: array
+          description: "IDs of the groups in which the search is performed."
+          items:
+            type: string
+            format: uuid
+        threshold:
+          description: "The similarity threshold."
+          type: number
+        limit:
+          description: "The maximum number of results to be returned."
+          type: integer
+        tenant:
+          type: string
+          description: "A label used to group transactions by customers, applications, or other criteria."
+        env:
+          type: string
+          description: "A label used to differentiate transactions by development stages."
 
     MatchAndSearchResponse:
       allOf:
