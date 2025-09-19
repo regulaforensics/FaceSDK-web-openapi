@@ -1,10 +1,9 @@
-openapi: 3.0.3
-
+openapi: 3.0.4
 
 paths:
   /search:
     parameters:
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "./common.yml#/components/parameters/x-request"
       - in: query
         name: withImages
         required: false
@@ -21,172 +20,187 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/SearchRequest"
+              $ref: "#/components/schemas/SearchRequest"
       responses:
         200:
           description: "Successful operation; the search result is returned."
           content:
             application/json:
               schema:
-                $ref: "#/definitions/SearchResult"
+                $ref: "#/components/schemas/SearchResult"
         201:
           description: "New person created with the search photo and the data specified."
           content:
             application/json:
               schema:
-                $ref: "#/definitions/SearchPerson"
+                $ref: "#/components/schemas/SearchPerson"
         400:
           $ref: "./identification.yml#/components/responses/SearchBadParamsException"
 
-definitions:
-  SearchRequest:
-    allOf:
-      - $ref: "#/definitions/SearchParameters"
-      - $ref: "./identification.yml#/components/schemas/ImageFields"
-      - type: object
-        properties:
-          tenant:
-            type: string
-            description: "A label used to group transactions by customers, applications, or other criteria."
-          env:
-            type: string
-            description: "A label used to differentiate transactions by development stages."
+components:
+  schemas:
+    SearchRequest:
+      title: "SearchRequest"
+      allOf:
+        - $ref: "#/components/schemas/SearchParameters"
+        - $ref: "./identification.yml#/components/schemas/ImageFields"
+        - $ref: "./common.yml#/components/schemas/TransactionLabels"
 
-  SearchParameters:
-    type: object
-    description: "Request search data."
-    properties:
-      createPerson:
-        type: object
-        description: "If a person is not found, a new person entry is created using the descriptor calculated while searching."
-        properties:
-          name:
+    SearchParameters:
+      title: "SearchParameters"
+      type: object
+      description: "Request search data."
+      properties:
+        createPerson:
+          $ref: "#/components/schemas/SearchParametersCreatePerson"
+        groupIds:
+          type: array
+          description: "IDs of the groups in which the search is performed."
+          items:
             type: string
-            description: "Person's name."
-          metadata:
-            type: object
-            additionalProperties: true
-            description: "A free-form object containing person's extended attributes."
-          ttl:
-            type: integer
-            description: "The lifespan of the Person's records, seconds. Optional."
-            nullable: true
-            default: null
-      groupIds:
-        type: array
-        description: "IDs of the groups in which the search is performed."
-        items:
+            format: uuid
+        filter:
+          $ref: "#/components/schemas/FilterSearchRequest"
+
+    SearchParametersCreatePerson:
+      title: "SearchParametersCreatePerson"
+      type: object
+      description: "If a person is not found, a new person entry is created using the descriptor calculated while searching."
+      properties:
+        name:
           type: string
-          format: uuid
-      filter:
-        $ref: '#/definitions/FilterSearchRequest'
+          description: "Person's name."
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing person's extended attributes."
+        ttl:
+          type: integer
+          description: "The lifespan of the Person's records, seconds. Optional."
+          nullable: true
+          default: null
 
-  FilterSearchRequest:
-    type: object
-    description: "Allows to filter the search results based on the Person's `name`. If enabled, only the search results that meet the filter condition will be returned." 
-    properties:
-      op:
-        $ref: '#/definitions/FilterOp'
-      field:
-        type: string
-        description: "`name` of the Person."
-      value:
-        type: array
-        description: "The list of `name` values against which the `field` is compared."
-        items:
+    FilterSearchRequest:
+      title: "FilterSearchRequest"
+      type: object
+      description: "Allows to filter the search results based on the Person's `name`. If enabled, only the search results that meet the filter condition will be returned."
+      properties:
+        op:
+          $ref: "#/components/schemas/FilterOp"
+        field:
           type: string
+          description: "`name` of the Person."
+        value:
+          type: array
+          description: "The list of `name` values against which the `field` is compared."
+          items:
+            type: string
 
-  FilterOp:
-    type: string
-    description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, the `name` values of the Person should not match any of the values specified in the `value` list."
-    enum:
-      - "in"
-      - "nin"
-    x-enum-varnames:
-      - IN
-      - NOT_IN
+    FilterOp:
+      title: "FilterOp"
+      type: string
+      description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, the `name` values of the Person should not match any of the values specified in the `value` list."
+      enum:
+        - "in"
+        - "nin"
+      x-enum-varnames:
+        - "IN"
+        - "NOT_IN"
 
-  RecognizeImage:
-    allOf:
-      - $ref: "./identification.yml#/components/schemas/Image"
-      - type: object
-        properties:
-          similarity:
-            type: number
-            format: float
-            description: "Similarity score."
-          distance:
-            type: number
-            format: float
-            description: "Similarity distance score: the lower the distance, the higher the face's similarity."
-  SearchResult:
-    type: object
-    properties:
-      code:
-        type: integer
-        description: "Result code. It is returned only with response 200."
-      persons:
-        type: array
-        description: "Array of Person images. It is returned only with response 200."
-        items:
-          $ref: "#/definitions/SearchPerson"
-  SearchPerson:
-    allOf:
-      - $ref: "./identification.yml#/components/schemas/Person"
-      - type: object
-        description: "Person data."
-        properties:
-          detection:
-            $ref: "#/definitions/SearchDetection"
-          images:
-            type: array
-            description: "Array of Person images."
-            items:
-              $ref: "#/definitions/RecognizeImage"
+    RecognizeImage:
+      title: "RecognizeImage"
+      allOf:
+        - $ref: "./identification.yml#/components/schemas/Image"
+        - $ref: "#/components/schemas/RecognizeImageData"
 
-  SearchDetection:
-    type: object
-    description: "The array of identified persons."
-    properties:
-      code:
-        type: integer
-        description: "Internal."
-      crop:
-        type: string
-        format: base64
-        description: "Base64 of the aligned and cropped portrait."
-      detectorType:
-        type: integer
-        description: "Internal."
-      hash:
-        type: string
-        description: "Internal."
-      idx:
-        type: integer
-        description: "Internal."
-      image:
-        type: string
-        format: base64
-        description: "Internal."
-      landmarks:
-        description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
-        type: array
-        items:
-          description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
+    RecognizeImageData:
+      title: "RecognizeImageData"
+      type: object
+      properties:
+        similarity:
+          type: number
+          format: float
+          description: "Similarity score."
+        distance:
+          type: number
+          format: float
+          description: "Similarity distance score: the lower the distance, the higher the face's similarity."
+
+    SearchResult:
+      title: "SearchResult"
+      type: object
+      properties:
+        code:
+          type: integer
+          description: "Result code. It is returned only with response 200."
+        persons:
+          type: array
+          description: "Array of Person images. It is returned only with response 200."
+          items:
+            $ref: "#/components/schemas/SearchPerson"
+
+    SearchPerson:
+      title: "SearchPerson"
+      allOf:
+        - $ref: "./identification.yml#/components/schemas/Person"
+        - $ref: "#/components/schemas/SearchPersonData"
+
+    SearchPersonData:
+      title: "SearchPersonData"
+      type: object
+      properties:
+        detection:
+          $ref: "#/components/schemas/SearchDetection"
+        images:
+          type: array
+          description: "Array of Person images."
+          items:
+            $ref: "#/components/schemas/RecognizeImage"
+
+    SearchDetection:
+      title: "SearchDetection"
+      type: object
+      description: "The array of identified persons."
+      properties:
+        code:
+          type: integer
+          description: "Internal."
+        crop:
+          type: string
+          format: base64
+          description: "Base64 of the aligned and cropped portrait."
+        detectorType:
+          type: integer
+          description: "Internal."
+        hash:
+          type: string
+          description: "Internal."
+        idx:
+          type: integer
+          description: "Internal."
+        image:
+          type: string
+          format: base64
+          description: "Internal."
+        landmarks:
+          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
           type: array
           items:
-            type: integer
-            example: [ x, y ]
-        example: [ [ x, y ] ]
-      landmarksType:
-        type: integer
-        description: "Internal."
-        example: 2
-      msg:
-        type: string
-        description: "Internal."
-      roi:
-        $ref: "./common.yml#/components/schemas/FaceRectangular"
-      versionSDK:
-        type: string
-        example: "5.2.245.687"
+            description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
+            type: array
+            items:
+              type: integer
+              example: [ x, y ]
+          example: [ [ x, y ] ]
+        landmarksType:
+          type: integer
+          description: "Internal."
+          example: 2
+        msg:
+          type: string
+          description: "Internal."
+        roi:
+          $ref: "./common.yml#/components/schemas/FaceRectangular"
+        versionSDK:
+          type: string
+          example: "5.2.245.687"

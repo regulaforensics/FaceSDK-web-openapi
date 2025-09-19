@@ -1,8 +1,9 @@
-openapi: 3.0.3
+openapi: 3.0.4
+
 paths:
   /match:
     parameters:
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "./common.yml#/components/parameters/x-request"
     post:
       tags:
         - match
@@ -37,14 +38,16 @@ So, if there are two images each of which has two faces in them, the parameters 
         403:
           $ref: "./common.yml#/components/responses/BadLicense"
 
-info:
-  title: Regula FaceSDK Web API
-  version: 6.1.0
-
 components:
   schemas:
-
     MatchRequest:
+      title: "MatchRequest"
+      allOf:
+        - $ref: "#/components/schemas/MatchRequestData"
+        - $ref: "./common.yml#/components/schemas/TransactionLabels"
+
+    MatchRequestData:
+      title: "MatchRequestData"
       type: object
       required:
         - images
@@ -52,29 +55,26 @@ components:
         tag:
           type: string
           description: "Session identificator, should be unique for each session."
-        images: 
+        images:
           type: array
           description: "An array of images to be processed. At least two images must be provided."
           items:
             $ref: "#/components/schemas/MatchImage"
         outputImageParams:
           $ref: "./common.yml#/components/schemas/ProcessParam/properties/outputImageParams"
-        tenant:
-          type: string
-          description: "A label used to group transactions by customers, applications, or other criteria."
-        env:
-          type: string
-          description: "A label used to differentiate transactions by development stages."
 
     MatchImageIndex:
+      title: "MatchImageIndex"
       type: integer
       description: "The image index number. Can be given; if not given, the index numbers are set automatically starting from `0`. All index numbers must be whole and unique—not repeated."
 
     MatchFaceIndex:
+      title: "MatchFaceIndex"
       type: number
       description: "The detected face index number."
 
     MatchImage:
+      title: "MatchImage"
       type: object
       required:
         - data
@@ -82,33 +82,39 @@ components:
         index:
           $ref: "#/components/schemas/MatchImageIndex"
         type:
-          $ref: "#/components/schemas/ImageSource"
+          $ref: "./common.yml#/components/schemas/ImageSource"
         data:
           $ref: "./common.yml#/components/schemas/ImageData"
         detectAll:
           $ref: "#/components/schemas/detectAll"
 
     MatchResponse:
+      title: "MatchResponse"
       allOf:
-        - $ref: './common.yml#/components/schemas/FaceSDKResult'
-        - type: object
-          properties:
-            detections:
-              type: array
-              description: "The detection results."
-              items:
-                $ref: "#/components/schemas/MatchImageDetection"
-            results:
-              type: array
-              description: "The comparison results."
-              items:
-                $ref: "#/components/schemas/MatchImageResult"
-            metadata:
-              type: object
-              additionalProperties: true
-              description: "A free-form object containing person's extended attributes."
+        - $ref: "./common.yml#/components/schemas/FaceSDKResult"
+        - $ref: "#/components/schemas/MatchResponseData"
+
+    MatchResponseData:
+      title: "MatchResponseData"
+      type: object
+      properties:
+        detections:
+          type: array
+          description: "The detection results."
+          items:
+            $ref: "#/components/schemas/MatchImageDetection"
+        results:
+          type: array
+          description: "The comparison results."
+          items:
+            $ref: "#/components/schemas/MatchImageResult"
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing person's extended attributes."
 
     MatchImageResult:
+      title: "MatchImageResult"
       type: object
       required:
         - firstIndex
@@ -119,13 +125,13 @@ components:
         firstFaceIndex:
           $ref: "#/components/schemas/MatchFaceIndex"
         first:
-          $ref: "#/components/schemas/ImageSource"
+          $ref: "./common.yml#/components/schemas/ImageSource"
         secondIndex:
           $ref: "#/components/schemas/MatchImageIndex"
         secondFaceIndex:
           $ref: "#/components/schemas/MatchFaceIndex"
         second:
-          $ref: "#/components/schemas/ImageSource"
+          $ref: "./common.yml#/components/schemas/ImageSource"
         score:
           type: number
           description: "A dimensionless number that shows how similar the compared faces are. 0—absolutely identical faces."
@@ -134,6 +140,7 @@ components:
           description: "The detected faces similarity, %. 100%—absolutely identical faces, 0%—absolutely not identical."
 
     MatchImageDetection:
+      title: "MatchImageDetection"
       type: object
       required:
         - imageIndex
@@ -147,9 +154,10 @@ components:
         imageIndex:
           $ref: "#/components/schemas/MatchImageIndex"
         status:
-          $ref: './common.yml#/components/schemas/FaceSDKResultCode'
+          $ref: "./common.yml#/components/schemas/FaceSDKResultCode"
 
     DetectionFace:
+      title: "DetectionFace"
       type: object
       properties:
         faceIndex:
@@ -174,26 +182,8 @@ components:
           format: byte
           description: "Base64-encoded aligned and cropped portrait."
 
-    ImageSource:
-      description: "The type of the image, defines the way the comparison is performed, see the [ImageSource enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/image-source/)."
-      type: integer
-      enum:
-        - 1
-        - 2
-        - 3
-        - 4
-        - 5
-        - 6
-        - 7
-      x-enum-varnames:
-        - DOCUMENT_PRINTED
-        - DOCUMENT_RFID
-        - LIVE
-        - DOCUMENT_WITH_LIVE
-        - EXTERNAL
-        - GHOST
-        - BARCODE
     detectAll:
+      title: "detectAll"
       type: boolean
       description: "Whether to detect all faces in the image. If set to `false`, only the most central face is detected."
       default: false

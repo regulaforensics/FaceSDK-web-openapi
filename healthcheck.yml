@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.4
 
 paths:
   /healthz:
@@ -17,6 +17,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeviceInfo"
+
   /readyz:
     parameters:
       - $ref: "./common.yml#/components/parameters/x-request"
@@ -35,8 +36,14 @@ paths:
 components:
   schemas:
     DeviceInfo:
+      title: "DeviceInfo"
       type: object
-      required: [app, licenseId, licenseSerial, licenseValidUntil, version]
+      required:
+        - app
+        - licenseId
+        - licenseSerial
+        - licenseValidUntil
+        - version
       properties:
         app:
           description: Application name.

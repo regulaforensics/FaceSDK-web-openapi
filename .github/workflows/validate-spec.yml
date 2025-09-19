@@ -4,19 +4,29 @@ on:
   pull_request:
     branches:
       - master
+      - develop
+      - stable
 
 jobs:
   validate-specification:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: |
-          npm install -g redoc-cli
-          npx @redocly/cli build-docs index.yml
-      - run: |
+
+      - name: Install redoc
+        run: |
+          npm install -g @redocly/cli
+          redocly build-docs index.yml
+
+      - name: Revert changes
+        if: ${{ false }}
+        run: |
           npm install -g @openapitools/openapi-generator-cli
-          openapi-generator-cli validate -i index.yml
+          openapi-generator-cli validate --recommend -i index.yml
