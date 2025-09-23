@@ -184,8 +184,8 @@ components:
       type: object
       description: "Image in the request data, includes image and contentType."
       allOf:
-        - $ref: "#/components/schemas/AddImageToPersonRequestData"
         - $ref: "./common.yml#/components/schemas/TransactionLabels"
+        - $ref: "#/components/schemas/AddImageToPersonRequestData"
 
     AddImageToPersonRequestData:
       title: "AddImageToPersonRequestData"

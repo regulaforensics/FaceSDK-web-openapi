@@ -43,8 +43,8 @@ components:
     MatchRequest:
       title: "MatchRequest"
       allOf:
-        - $ref: "#/components/schemas/MatchRequestData"
         - $ref: "./common.yml#/components/schemas/TransactionLabels"
+        - $ref: "#/components/schemas/MatchRequestData"
 
     MatchRequestData:
       title: "MatchRequestData"

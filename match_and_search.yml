@@ -148,5 +148,4 @@ components:
             $ref: "#/components/schemas/PersonWithImages"
         rotationAngle:
           type: number
-          format: float
           example: 2.1272900104522705

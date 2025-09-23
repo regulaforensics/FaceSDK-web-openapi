@@ -42,9 +42,9 @@ components:
     SearchRequest:
       title: "SearchRequest"
       allOf:
+        - $ref: "./common.yml#/components/schemas/TransactionLabels"
         - $ref: "#/components/schemas/SearchParameters"
         - $ref: "./identification.yml#/components/schemas/ImageFields"
-        - $ref: "./common.yml#/components/schemas/TransactionLabels"
 
     SearchParameters:
       title: "SearchParameters"

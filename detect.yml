@@ -46,8 +46,8 @@ components:
       title: "DetectRequest"
       type: object
       allOf:
-        - $ref: "#/components/schemas/DetectRequestData"
         - $ref: "./common.yml#/components/schemas/TransactionLabels"
+        - $ref: "#/components/schemas/DetectRequestData"
 
     DetectRequestData:
       title: "DetectRequestData"
