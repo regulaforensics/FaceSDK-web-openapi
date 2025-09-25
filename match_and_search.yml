@@ -146,6 +146,3 @@ components:
           description: "Detected Persons."
           items:
             $ref: "#/components/schemas/PersonWithImages"
-        rotationAngle:
-          type: number
-          example: 2.1272900104522705
