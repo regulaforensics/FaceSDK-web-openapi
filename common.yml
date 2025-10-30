@@ -77,7 +77,6 @@ components:
       description: "Allows to process the uploaded image according to the indicated settings."
       properties:
         backgroundColor:
-          # description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
           $ref: "#/components/schemas/RGB"
         crop:
           $ref: "#/components/schemas/Crop"
@@ -88,7 +87,6 @@ components:
       description: "If set, the face image quality check is performed according to the given list of [characteristics](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/) in `quality.config`."
       properties:
         backgroundMatchColor:
-          # description: "The RGB value for the background color: the silhouette of a person is cut out and the background is filled with this color."
           $ref: "#/components/schemas/RGB"
         config:
           $ref: "#/components/schemas/QualityConfigList"
@@ -100,11 +98,8 @@ components:
       properties:
         type:
           $ref: "#/components/schemas/FaceImageQualityAlignType"
-          # description: "The aspect ratio according to which face alignment is performed, see the [FaceImageQualityAlignType enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-align-type/). <br><br>To get a thumbnail with dimensions 3x4, set `0`."
-          # example: 1
         padColor:
           $ref: "#/components/schemas/RGB"
-          # description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image."
         size:
           type: array
           items:
@@ -127,9 +122,7 @@ components:
       description: "The configuration that defines the list of returned quality check characteristics."
       properties:
         name:
-          # description: "The name of the characteristic."
           $ref: "#/components/schemas/FaceQualityConfigName"
-          # example: "Emotion"
         range:
           type: array
           items:
@@ -153,20 +146,16 @@ components:
       description: "The configuration that defines the list of returned attribute check characteristics."
       properties:
         name:
-          # description: "The name of the characteristic."
           $ref: "#/components/schemas/FaceAttribute"
-          # example: "Emotion"
 
     QualityDetailsGroups:
       title: "QualityDetailsGroups"
       type: object
       properties:
         groupId:
-          # description: "The ID of the characteristics group."
           $ref: "#/components/schemas/FaceImageQualityGroups"
         name:
           $ref: "#/components/schemas/FaceImageQualityGroupsStrings"
-          # description: "The name of the characteristics group."
         totalCount:
           type: integer
           description: "The total number of characteristics in the group."
@@ -181,13 +170,9 @@ components:
       type: object
       properties:
         groupId:
-          # description: "The ID of the characteristics group."
           $ref: "#/components/schemas/FaceImageQualityGroups"
-          # example: 0
         name:
           $ref: "#/components/schemas/FaceQualityConfigName"
-          # description: "The name of the characteristic."
-          # example: "Roll"
         range:
           type: array
           description: "The range of set values for this characteristic, see the [Recommended range column](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/)."
@@ -199,8 +184,6 @@ components:
           example: [x, y]
         status:
           $ref: "#/components/schemas/FaceImageQualityStatus"
-          # example: 1
-          # description: "The assessment status."
         value:
           type: number
           format: float

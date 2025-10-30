@@ -144,7 +144,6 @@ components:
         - roi
       properties:
         crop:
-          # description: "Base64 of the aligned and cropped portrait. Returned if align is set."
           $ref: "./common.yml#/components/schemas/ImageData"
         attributes:
           $ref: "#/components/schemas/DetectionAttributes"
