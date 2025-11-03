@@ -26,17 +26,12 @@ jobs:
       - name: Verify update Python client
         working-directory: python-client
         run: |
-          ./update-models.sh
+          ./update-models.sh strict
           ./setup.sh
 
   verify-csharp:
     runs-on: ubuntu-latest
     steps:
-      - name: Specify Dotnet Version
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '3.1.x'
-
       - name: Checkout Specification Repo
         uses: actions/checkout@v4
         with:
@@ -52,7 +47,7 @@ jobs:
       - name: Verify update CSharp client
         working-directory: csharp-client
         run: |
-          ./update-models.sh
+          ./update-models.sh strict
           ./setup.sh
 
   verify-js:
@@ -101,5 +96,5 @@ jobs:
       - name: Verify update Java client
         working-directory: java-client
         run: |
-          ./update-models.sh
+          ./update-models.sh strict
           ./gradlew clean :example:run
