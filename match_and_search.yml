@@ -1,12 +1,13 @@
-openapi: 3.0.3
+openapi: 3.0.4
+
 paths:
   /match_and_search:
     parameters:
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "./common.yml#/components/parameters/x-request"
     post:
       tags:
         - match
-      summary: 'match and search (1:1 + 1:N)'
+      summary: "match and search (1:1 + 1:N)"
       description: "To compare several images from a document and look up a person in the database in one request, use POST `/api/match_and_search`. In this case, the calculation of the descriptor will be performed only once, as opposed to using two requests for the same operation. At least two photos are required. If, after processing two or more photos, only one face is detected across them, the match step is skipped, and only the search is carried out."
       operationId: match_and_search
       requestBody:
@@ -14,19 +15,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MatchAndSearchRequest'
+              $ref: "#/components/schemas/MatchAndSearchRequest"
       responses:
         200:
-          description: 'Successful operation; the compare results are returned.'
+          description: "Successful operation; the compare results are returned."
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MatchAndSearchResponse'
+                $ref: "#/components/schemas/MatchAndSearchResponse"
         403:
-          $ref: './common.yml#/components/responses/BadLicense'
+          $ref: "./common.yml#/components/responses/BadLicense"
+
 components:
   schemas:
     MatchAndSearchRequest:
+      title: "MatchAndSearchRequest"
       type: object
       properties:
         tag:
@@ -36,15 +39,7 @@ components:
           type: array
           description: "An array of images to be processed. At least two images must be provided."
           items:
-            type: object
-            properties:
-              content:
-                $ref: './common.yml#/components/schemas/ImageData'
-              imageUrl:
-                description: "Image URL."
-                type: string
-              type:
-                $ref: './match.yml#/components/schemas/ImageSource'
+            $ref: "#/components/schemas/MatchAndSearchRequestImagesItem"
         groupIds:
           type: array
           description: "IDs of the groups in which the search is performed."
@@ -64,62 +59,90 @@ components:
           type: string
           description: "A label used to differentiate transactions by development stages."
 
+    MatchAndSearchRequestImagesItem:
+      title: "MatchAndSearchRequestImagesItem"
+      type: object
+      properties:
+        content:
+          $ref: "./common.yml#/components/schemas/ImageData"
+        imageUrl:
+          description: "Image URL."
+          type: string
+        type:
+          $ref: "./common.yml#/components/schemas/ImageSource"
+
     MatchAndSearchResponse:
+      title: "MatchAndSearchResponse"
       allOf:
-        - $ref: './common.yml#/components/schemas/FaceSDKResult'
-        - type: object
-          properties:
-            results:
-              type: array
-              description: "The match and search results."
-              items:
-                $ref: './match.yml#/components/schemas/MatchImageResult'
-            elapsedTime:
-              type: number
-              description: "Server processing time, ms. Does not include the time taken to receive the request or deliver the response."
-              format: float
-              example: 1.317137987
-            metadata:
-              type: object
-              additionalProperties: true
-              description: "A free-form object containing person's extended attributes."
-            detections:
-              type: array
-              description: "The detection results."
-              items:
-                type: object
-                properties:
-                  faces:
-                    type: array
-                    description: "Detected faces."
-                    items:
-                      $ref: '#/components/schemas/FacesResponse'
-                  imageIndex:
-                    $ref: './match.yml#/components/schemas/MatchImageIndex'
-                  status:
-                    $ref: './common.yml#/components/schemas/FaceSDKResultCode'
+        - $ref: "./common.yml#/components/schemas/FaceSDKResult"
+        - $ref: "#/components/schemas/MatchAndSearchResponseData"
+
+    MatchAndSearchResponseData:
+      title: "MatchAndSearchResponseData"
+      type: object
+      properties:
+        results:
+          type: array
+          description: "The match and search results."
+          items:
+            $ref: "./match.yml#/components/schemas/MatchImageResult"
+        elapsedTime:
+          type: number
+          description: "Server processing time, ms. Does not include the time taken to receive the request or deliver the response."
+          format: float
+          example: 1.317137987
+        metadata:
+          type: object
+          additionalProperties: true
+          description: "A free-form object containing person's extended attributes."
+        detections:
+          type: array
+          description: "The detection results."
+          items:
+            $ref: "#/components/schemas/MatchAndSearchResponseDataDetectionsItem"
+
+    MatchAndSearchResponseDataDetectionsItem:
+      title: "MatchAndSearchResponseDataDetectionsItem"
+      type: object
+      properties:
+        faces:
+          type: array
+          description: "Detected faces."
+          items:
+            $ref: "#/components/schemas/FacesResponse"
+        imageIndex:
+          $ref: "./match.yml#/components/schemas/MatchImageIndex"
+        status:
+          $ref: "./common.yml#/components/schemas/FaceSDKResultCode"
+
     PersonWithImages:
+      title: "PersonWithImages"
       allOf:
-        - type: object
-          properties:
-            images:
-              type: array
-              description: "Detected Persons."
-              items:
-                $ref: './search.yml#/definitions/RecognizeImage'
-        - $ref: './identification.yml#/components/schemas/Person'
+        - $ref: "#/components/schemas/PersonWithImagesData"
+        - $ref: "./identification.yml#/components/schemas/Person"
+
+    PersonWithImagesData:
+      title: "PersonWithImagesData"
+      type: object
+      properties:
+        images:
+          type: array
+          description: "Detected Persons."
+          items:
+            $ref: "./search.yml#/components/schemas/RecognizeImage"
 
     FacesResponse:
+      title: "FacesResponse"
       allOf:
-        - $ref: './match.yml#/components/schemas/DetectionFace'
-        - type: object
-          properties:
-            persons:
-              type: array
-              description: "Detected Persons."
-              items:
-                $ref: '#/components/schemas/PersonWithImages'
-            rotationAngle:
-              type: number
-              format: float
-              example: 2.1272900104522705
+        - $ref: "./match.yml#/components/schemas/DetectionFace"
+        - $ref: "#/components/schemas/FacesResponseData"
+
+    FacesResponseData:
+      title: "FacesResponseData"
+      type: object
+      properties:
+        persons:
+          type: array
+          description: "Detected Persons."
+          items:
+            $ref: "#/components/schemas/PersonWithImages"

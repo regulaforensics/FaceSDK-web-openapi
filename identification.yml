@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.4
 
 components:
   responses:
@@ -8,8 +8,10 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/SearchBadParams"
+
   schemas:
     SearchBadParams:
+      title: "SearchBadParams"
       type: object
       properties:
         msg:
@@ -21,38 +23,46 @@ components:
         type:
           type: string
           default: "BadParamsException"
+
     PersonsPage:
+      title: "PersonsPage"
       allOf:
-        - type: object
-          properties:
-            items:
-              type: array
-              items:
-                $ref: "#/components/schemas/Person"
-        - $ref: './common.yml#/components/schemas/Page'
+        - $ref: "#/components/schemas/PersonItems"
+        - $ref: "./common.yml#/components/schemas/Page"
+
+    PersonItems:
+      title: "PersonItems"
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Person"
+
     Person:
+      title: "Person"
       description: "Person response body: person ID, creation date, update date if any."
       allOf:
-        - $ref: '#/components/schemas/PersonFields'
-        - type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: "Person ID. The list of persons is sorted by decreasing ID value."
-            createdAt:
-              type: string
-              description: "Person creation date."
-            updatedAt:
-              type: string
-              description: "Person update date."
-            groups:
-              type: array
-              description: "List of groups this person belongs to."
-              items:
-                type: string
-                format: uuid
+        - $ref: "#/components/schemas/PersonFields"
+        - $ref: "#/components/schemas/PersonData"
+
+    PersonData:
+      title: "PersonData"
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "Person ID. The list of persons is sorted by decreasing ID value."
+        createdAt:
+          type: string
+          description: "Person creation date."
+        updatedAt:
+          type: string
+          description: "Person update date."
+
     PersonFields:
+      title: "PersonFields"
       type: object
       description: "Person Request body: name and metadata."
       required:
@@ -77,7 +87,9 @@ components:
         expireAt:
           type: string
           description: "Person expiration date."
+
     PersonToUpdateFields:
+      title: "PersonToUpdateFields"
       type: object
       description: "Person Request body: name and metadata."
       properties:
@@ -99,6 +111,7 @@ components:
             format: uuid
 
     ImageFields:
+      title: "ImageFields"
       type: object
       description: "Image in the request data, includes image and contentType."
       properties:
@@ -106,19 +119,7 @@ components:
           type: string
           description: "Session identificator, should be unique for each session."
         image:
-          type: object
-          description: "Uploaded image."
-          properties:
-            contentType:
-              type: string
-              description: "Original media type of the uploaded image."
-            content:
-              $ref: "./common.yml#/components/schemas/ImageData"
-            imageUrl:
-              type: string
-              description: "Image URL."
-            resizeOptions:
-              $ref: "#/components/schemas/ResizeOptions"
+          $ref: "#/components/schemas/ImageFieldsImage"
         outputImageParams:
           $ref: "./common.yml#/components/schemas/OutputImageParams"
         detectAll:
@@ -131,7 +132,24 @@ components:
           type: integer
           description: "The maximum number of results to be returned."
 
+    ImageFieldsImage:
+      title: "ImageFieldsImage"
+      type: object
+      description: "Uploaded image."
+      properties:
+        contentType:
+          type: string
+          description: "Original media type of the uploaded image."
+        content:
+          $ref: "./common.yml#/components/schemas/ImageData"
+        imageUrl:
+          type: string
+          description: "Image URL."
+        resizeOptions:
+          $ref: "#/components/schemas/ResizeOptions"
+
     AddImageToPersonResponse:
+      title: "AddImageToPersonResponse"
       type: object
       description: "Image in the response."
       properties:
@@ -156,8 +174,16 @@ components:
           description: "A free-form object containing person's extended attributes."
 
     AddImageToPersonRequest:
+      title: "AddImageToPersonRequest"
       type: object
       description: "Image in the request data, includes image and contentType."
+      allOf:
+        - $ref: "./common.yml#/components/schemas/TransactionLabels"
+        - $ref: "#/components/schemas/AddImageToPersonRequestData"
+
+    AddImageToPersonRequestData:
+      title: "AddImageToPersonRequestData"
+      type: object
       required:
         - image
       properties:
@@ -165,19 +191,7 @@ components:
           type: string
           description: "Session identificator."
         image:
-          type: object
-          description: "Uploaded image."
-          properties:
-            contentType:
-              type: string
-              description: "Original media type of the uploaded image."
-            content:
-              $ref: "./common.yml#/components/schemas/ImageData"
-            imageUrl:
-              type: string
-              description: "Image URL."
-            resizeOptions:
-              $ref: "#/components/schemas/ResizeOptions"
+          $ref: "#/components/schemas/AddImageToPersonRequestImage"
         threshold:
           type: number
           format: float
@@ -185,14 +199,25 @@ components:
         limit:
           type: integer
           description: "The maximum number of results to be returned."
-        tenant:
+
+    AddImageToPersonRequestImage:
+      title: "AddImageToPersonRequestImage"
+      type: object
+      description: "Uploaded image."
+      properties:
+        contentType:
           type: string
-          description: "A label used to group transactions by customers, applications, or other criteria."
-        env:
+          description: "Original media type of the uploaded image."
+        content:
+          $ref: "./common.yml#/components/schemas/ImageData"
+        imageUrl:
           type: string
-          description: "A label used to differentiate transactions by development stages."
+          description: "Image URL."
+        resizeOptions:
+          $ref: "#/components/schemas/ResizeOptions"
 
     ResizeOptions:
+      title: "ResizeOptions"
       type: object
       description: "Set to resize the original image."
       properties:
@@ -208,6 +233,7 @@ components:
           description: "Resized image quality, percent."
 
     Image:
+      title: "Image"
       type: object
       description: "Image in the response."
       properties:
@@ -239,30 +265,42 @@ components:
           description: "A free-form object containing person's extended attributes."
 
     GroupPage:
+      title: "GroupPage"
       allOf:
-        - type: object
-          properties:
-            items:
-              type: array
-              description: "Array of Groups that are found during the search."
-              items:
-                $ref: "#/components/schemas/Group"
-        - $ref: './common.yml#/components/schemas/Page'
+        - $ref: "#/components/schemas/GroupPageItems"
+        - $ref: "./common.yml#/components/schemas/Page"
+
+    GroupPageItems:
+      title: "GroupPageItems"
+      type: object
+      properties:
+        items:
+          type: array
+          description: "Array of Groups that are found during the search."
+          items:
+            $ref: "#/components/schemas/Group"
+
     Group:
+      title: "Group"
       allOf:
-        - $ref: '#/components/schemas/GroupResponse'
-        - type: object
-          description: "Additional group data in the response, includes id and createdAt."
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: "Group ID."
-            createdAt:
-              type: string
-              description: "Group creation date."
+        - $ref: "#/components/schemas/GroupResponse"
+        - $ref: "#/components/schemas/GroupData"
+
+    GroupData:
+      title: "GroupData"
+      type: object
+      description: "Additional group data in the response, includes id and createdAt."
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "Group ID."
+        createdAt:
+          type: string
+          description: "Group creation date."
 
     GroupResponse:
+      title: "GroupResponse"
       type: object
       description: "Response group create data, includes name and metadata."
       properties:
@@ -275,6 +313,7 @@ components:
           description: "A free-form object containing group's extended attributes."
 
     GroupToCreate:
+      title: "GroupToCreate"
       type: object
       description: "Request body of the group to create data, includes name and metadata."
       required:
