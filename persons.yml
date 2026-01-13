@@ -1,10 +1,9 @@
-openapi: 3.0.3
-
+openapi: 3.0.4
 
 paths:
   /persons:
     parameters:
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "./common.yml#/components/parameters/x-request"
     post:
       tags:
         - person
@@ -21,10 +20,11 @@ paths:
           $ref: "#/components/responses/SuccessPerson"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
+
   /persons/{personId}:
     parameters:
-      - $ref: '#/components/parameters/personId'
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "#/components/parameters/personId"
+      - $ref: "./common.yml#/components/parameters/x-request"
     get:
       tags:
         - person
@@ -67,30 +67,31 @@ paths:
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
-          $ref: '#/components/responses/PersonNotFound'
+          $ref: "#/components/responses/PersonNotFound"
+
   /persons/{personId}/images:
     parameters:
       - $ref: '#/components/parameters/personId'
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "./common.yml#/components/parameters/x-request"
     get:
       tags:
         - person
       summary: Get person images
       operationId: get_all_images_by_person_id
       parameters:
-        - $ref: './common.yml#/components/parameters/page'
-        - $ref: './common.yml#/components/parameters/size'
+        - $ref: "./common.yml#/components/parameters/page"
+        - $ref: "./common.yml#/components/parameters/size"
       responses:
         200:
           description: "Successful operation; return all person images."
           content:
             application/json:
               schema:
-                $ref: "#/definitions/ImagePage"
+                $ref: "#/components/schemas/ImagePage"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
-          $ref: '#/components/responses/PersonNotFound'
+          $ref: "#/components/responses/PersonNotFound"
     post:
       tags:
         - person
@@ -114,21 +115,22 @@ paths:
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
-          $ref: '#/components/responses/PersonNotFound'
+          $ref: "#/components/responses/PersonNotFound"
+
   /persons/{personId}/images/{imageId}:
     parameters:
-      - $ref: '#/components/parameters/personId'
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "#/components/parameters/personId"
+      - $ref: "./common.yml#/components/parameters/x-request"
     get:
       tags:
         - person
       summary: Get person image by id
       operationId: get_image_of_person
       parameters:
-        - $ref: '#/components/parameters/imageId'
+        - $ref: "#/components/parameters/imageId"
       responses:
         404:
-          $ref: '#/components/responses/PersonNotFound'
+          $ref: "#/components/responses/PersonNotFound"
           description: "Such an image does not exists."
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
@@ -146,7 +148,7 @@ paths:
       summary: Delete image of person
       operationId: delete_image_of_person
       parameters:
-        - $ref: '#/components/parameters/imageId'
+        - $ref: "#/components/parameters/imageId"
       responses:
         204:
           $ref: "#/components/responses/SuccessEmpty"
@@ -158,18 +160,19 @@ paths:
             application/json:
               schema:
                 $ref: "./common.yml#/components/schemas/OperationLog"
+
   /persons/{personId}/groups:
     parameters:
-      - $ref: '#/components/parameters/personId'
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "#/components/parameters/personId"
+      - $ref: "./common.yml#/components/parameters/x-request"
     get:
       tags:
         - person
       summary: Get person groups
       operationId: get_all_groups_by_person_id
       parameters:
-        - $ref: './common.yml#/components/parameters/page'
-        - $ref: './common.yml#/components/parameters/size'
+        - $ref: "./common.yml#/components/parameters/page"
+        - $ref: "./common.yml#/components/parameters/size"
       responses:
         200:
           description: "Successful operation; return all groups."
@@ -180,9 +183,25 @@ paths:
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
-          $ref: '#/components/responses/PersonNotFound'
+          $ref: "#/components/responses/PersonNotFound"
 
 components:
+  schemas:
+    ImagePage:
+      title: "ImagePage"
+      allOf:
+        - $ref: "./common.yml#/components/schemas/Page"
+        - $ref: '#/components/schemas/ImagePageItems'
+
+    ImagePageItems:
+      title: "ImagePageItems"
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "./identification.yml#/components/schemas/Image"
+
   parameters:
     personId:
       name: personId
@@ -215,15 +234,3 @@ components:
         application/json:
           schema:
             $ref: "./common.yml#/components/schemas/OperationLog"
-
-definitions:
-  ImagePage:
-    allOf:
-      - $ref: './common.yml#/components/schemas/Page'
-      - type: object
-        description: "Image page."
-        properties:
-          items:
-            type: array
-            items:
-              $ref: "./identification.yml#/components/schemas/Image"

@@ -11,22 +11,28 @@
 * [Python](https://github.com/regulaforensics/FaceSDK-web-python-client) 3.5+ client
 * [C#](https://github.com/regulaforensics/FaceSDK-web-csharp-client) client for .NET & .NET Core
 
-
-## Generate html page
-```bash
-npx redoc-cli build "$PWD/index.yml" --output facesdk-api-doc.html \
---options.maxDisplayedEnumValues=5 --options.theme.logo.gutter="20px" \
---options.theme.colors.primary.main="#8a53cb" --options.expandResponses="all" \
---options.expandSingleSchemaField --options.hideDownloadButton --options.jsonSampleExpandLevel="6"
-```
-
-
 ## Updating clients according to the current spec
 
-To update clients, use `update clients` GitHub action. Specify title PR and press run. For each client **PR** with changes will be created.
+When changes are added, the `update clients` action is automatically triggered. For each client **PR** with changes will be created.
 
-:warning: NOTE: Static typed clients, such as Java or C#, require adding all new **enums** to `update-models.sh` ENUM_MAPPINGS section.
+:warning: NOTE: Before working with a client, read `dev.md` which is available in each client repository.
 
-:warning: NOTE: For some clients generator produces not-valid client code. See `update-models.sh` for ad-hocks fixing generator issues.   
+:warning: NOTE: Do **not edit** generated code. Create wrappers, decorators, etc. in ext folder.
 
-:warning: NOTE: Do **not edit** generated code. Create wrappers, decorators, etc in ext folder.
+##  Spec validation
+
+```bash
+docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli validate --recommend -i /local/index.yml
+```
+
+## Building Redoc single page html documentation
+
+```bash
+npx @redocly/cli build-docs index.yml -o=facesdk-api-doc.html
+```
+
+## Bundle scheme to single .json file
+
+```bash
+npx @openapitools/openapi-generator-cli generate -i index.yml -g openapi --skip-validate-spec
+```

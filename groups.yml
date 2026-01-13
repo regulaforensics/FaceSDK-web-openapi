@@ -1,18 +1,17 @@
-openapi: 3.0.3
-
+openapi: 3.0.4
 
 paths:
   /groups:
     parameters:
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "./common.yml#/components/parameters/x-request"
     get:
       tags:
         - group
       summary: Get groups
       operationId: get_all_groups
       parameters:
-        - $ref: './common.yml#/components/parameters/page'
-        - $ref: './common.yml#/components/parameters/size'
+        - $ref: "./common.yml#/components/parameters/page"
+        - $ref: "./common.yml#/components/parameters/size"
       responses:
         200:
           description: "Successful operation, return all groups."
@@ -39,10 +38,11 @@ paths:
           $ref: "#/components/responses/SuccessGroup"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
+
   /groups/{groupId}:
     parameters:
-      - $ref: '#/components/parameters/groupId'
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "#/components/parameters/groupId"
+      - $ref: "./common.yml#/components/parameters/x-request"
     get:
       tags:
         - group
@@ -84,28 +84,29 @@ paths:
           $ref: "#/components/responses/SuccessEmpty"
         404:
           $ref: "#/components/responses/GroupNotFound"
+
   /groups/{groupId}/persons:
     parameters:
       - $ref: "#/components/parameters/groupId"
-      - $ref: './common.yml#/components/parameters/x-request'
+      - $ref: "./common.yml#/components/parameters/x-request"
     get:
       tags:
         - group
       summary: Get group persons
       operationId: get_all_persons_by_group_id
       parameters:
-        - $ref: './common.yml#/components/parameters/page'
-        - $ref: './common.yml#/components/parameters/size'
+        - $ref: "./common.yml#/components/parameters/page"
+        - $ref: "./common.yml#/components/parameters/size"
       responses:
-        '200':
+        "200":
           description: "Successful operation, return all persons."
           content:
             application/json:
               schema:
                 $ref: "./identification.yml#/components/schemas/PersonsPage"
-        '400':
+        "400":
           $ref: "./common.yml#/components/responses/BadRequest"
-        '404':
+        "404":
           description: "Group with the groupId or persons with the personIds are not found."
           content:
             application/json:
@@ -122,7 +123,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/UpdateGroup"
+              $ref: "#/components/schemas/UpdateGroup"
       responses:
         204:
           $ref: "#/components/responses/SuccessEmpty"
@@ -141,6 +142,7 @@ components:
       schema:
         type: string
         format: uuid
+
   responses:
     SuccessEmpty:
       description: "Successful operation, return nothing."
@@ -157,20 +159,21 @@ components:
           schema:
             $ref: "./common.yml#/components/schemas/OperationLog"
 
-definitions:
-  UpdateGroup:
-    type: object
-    description: "Update group."
-    properties:
-      addItems:
-        type: array
-        description: "Add items."
-        items:
-          type: string
-          format: uuid
-      removeItems:
-        type: array
-        description: "Remove items."
-        items:
-          type: string
-          format: uuid
+  schemas:
+    UpdateGroup:
+      title: "UpdateGroup"
+      type: object
+      description: "Update group."
+      properties:
+        addItems:
+          type: array
+          description: "Add items."
+          items:
+            type: string
+            format: uuid
+        removeItems:
+          type: array
+          description: "Remove items."
+          items:
+            type: string
+            format: uuid

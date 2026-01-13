@@ -1,10 +1,10 @@
-openapi: 3.0.3
+openapi: 3.0.4
 info:
   version: 7.2.0
   title: Regula Face SDK Web API
   x-logo:
-    url: 'https://static-content.regulaforensics.com/Icons/Logos/Regula-logo.svg'
-    href: 'https://mobile.regulaforensics.com/'
+    url: "https://static-content.regulaforensics.com/Icons/Logos/Regula-logo.svg"
+    href: "https://mobile.regulaforensics.com/"
   description: |
     <a href="https://regulaforensics.com/products/face-recognition-sdk/  " target="_blank">Regula Face SDK</a> is a cross-platform biometric verification solution for a digital identity verification process and image quality assurance. The SDK enables convenient and reliable face capture on the client side (mobile, web, and desktop) and further processing on the client or server side. 
 
@@ -36,39 +36,41 @@ x-tagGroups:
       - healthcheck
 
 servers:
+  - url: https://faceapi.regulaforensics.com/
+    description: Latest stable Regula face demo endpoint
+  - url: https://nightly-faceapi.regulaforensics.com/
+    description: Nightly Regula face demo endpoint
   - url: http://localhost:41101/
     description: Local on-premise installation
 
-
-
-# ~1 means '/'
+# ~1 means '/', %7B means '{', %7D means '}'
 paths:
   /api/match:
-    $ref: './match.yml#/paths/~1match'
+    $ref: "./match.yml#/paths/~1match"
   /api/match_and_search:
-    $ref: './match_and_search.yml#/paths/~1match_and_search'
+    $ref: "./match_and_search.yml#/paths/~1match_and_search"
   /api/detect:
-    $ref: './detect.yml#/paths/~1detect'
+    $ref: "./detect.yml#/paths/~1detect"
   /api/persons:
-    $ref: './persons.yml#/paths/~1persons'
+    $ref: "./persons.yml#/paths/~1persons"
   /api/persons/{personId}:
-    $ref: './persons.yml#/paths/~1persons~1{personId}'
+    $ref: "./persons.yml#/paths/~1persons~1%7BpersonId%7D"
   /api/persons/{personId}/images:
-    $ref: './persons.yml#/paths/~1persons~1{personId}~1images'
+    $ref: "./persons.yml#/paths/~1persons~1%7BpersonId%7D~1images"
   /api/persons/{personId}/images/{imageId}:
-    $ref: './persons.yml#/paths/~1persons~1{personId}~1images~1{imageId}'
+    $ref: "./persons.yml#/paths/~1persons~1%7BpersonId%7D~1images~1%7BimageId%7D"
   /api/persons/{personId}/groups:
-    $ref: './persons.yml#/paths/~1persons~1{personId}~1groups'
+    $ref: "./persons.yml#/paths/~1persons~1%7BpersonId%7D~1groups"
   /api/groups:
-    $ref: './groups.yml#/paths/~1groups'
+    $ref: "./groups.yml#/paths/~1groups"
   /api/groups/{groupId}:
-    $ref: './groups.yml#/paths/~1groups~1{groupId}'
+    $ref: "./groups.yml#/paths/~1groups~1%7BgroupId%7D"
   /api/groups/{groupId}/persons:
-    $ref: './groups.yml#/paths/~1groups~1{groupId}~1persons'
+    $ref: "./groups.yml#/paths/~1groups~1%7BgroupId%7D~1persons"
   /api/search:
-    $ref: './search.yml#/paths/~1search'
+    $ref: "./search.yml#/paths/~1search"
   /api/v2/liveness:
-    $ref: './liveness.yml#/paths/~1v2~1liveness'
+    $ref: "./liveness.yml#/paths/~1v2~1liveness"
   /api/healthz:
     $ref: "./healthcheck.yml#/paths/~1healthz"
   /api/readyz:

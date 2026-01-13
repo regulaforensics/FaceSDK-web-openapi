@@ -1,10 +1,10 @@
-openapi: 3.0.3
+openapi: 3.0.4
 
 paths:
   /v2/liveness:
     get:
       parameters:
-        - $ref: './common.yml#/components/parameters/transactionId'
+        - $ref: "./common.yml#/components/parameters/transactionId"
       tags:
         - liveness 2.0
       summary: 'liveness check'
@@ -47,6 +47,7 @@ paths:
 components:
   schemas:
     TransactionInfo:
+      title: "TransactionInfo"
       type: object
       properties:
         code:
@@ -82,15 +83,16 @@ components:
           $ref: "#/components/schemas/LivenessType"
 
     LivenessType:
+      title: "LivenessType"
       type: integer
       description: "Liveness detection can be performed in two modes: active `0` and passive `1`. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/liveness/#active-and-passive-modes)"
-      default: 0
       enum:
         - 0
         - 1
       x-enum-varnames:
         - ACTIVE
         - PASSIVE
+
   responses:
     SuccessEmpty:
       description: "Successful operation, return nothing."
