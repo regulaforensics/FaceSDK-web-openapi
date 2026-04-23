@@ -7,32 +7,37 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Specifications
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: 'master-branch'
+
       - name: Install redoc-cli
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+
       - name: Build html page
         working-directory: master-branch
         run: |
           npm install -g @redocly/cli;
           npx @redocly/cli build-docs index.yml -o=doc.html;
+
       - name: Checkout pages branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: 'pages-branch'
           ref: 'gh-pages'
+
       - name: Rewrite html page
         working-directory: pages-branch
         run: |
           rm index.html
           mv ../master-branch/doc.html index.html
+
       - name: Push changes
         working-directory: pages-branch
         run: |
