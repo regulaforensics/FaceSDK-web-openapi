@@ -8,7 +8,7 @@ paths:
       tags:
         - match
       summary: "compare faces (1:1)"
-      description: "To perform a comparison of faces in the same image or in two different images, use POST `/api/match`. It's possible to compare faces in the same image or in two different images, this is defined by the `images.type` parameter. <br><br> The face detection result is displayed in the `detections` field.
+      description: "To perform a comparison of faces in the same image or in two different images, use POST `/api/match`. It's possible to compare faces in the same image or in two different images, this is defined by the `images.type` parameter. <br><br> Note that no more than two images of the same `type` are allowed for comparison.<br><br> The face detection result is displayed in the `detections` field.
 
 Each face is identified by two parameters: `faceIndex` (the index number of the face) and `imageIndex` (the index number of the image on which the face is detected).
 
