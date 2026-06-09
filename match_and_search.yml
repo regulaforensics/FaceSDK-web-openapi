@@ -70,6 +70,9 @@ components:
           type: string
         type:
           $ref: "./common.yml#/components/schemas/ImageSource"
+        livenessTransactionId:
+          type: string
+          description: ""
 
     MatchAndSearchResponse:
       title: "MatchAndSearchResponse"

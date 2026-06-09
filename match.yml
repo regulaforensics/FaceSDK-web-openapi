@@ -87,6 +87,9 @@ components:
           $ref: "./common.yml#/components/schemas/ImageData"
         detectAll:
           $ref: "#/components/schemas/detectAll"
+        livenessTransactionId:
+          type: string
+          description: ""
 
     MatchResponse:
       title: "MatchResponse"
