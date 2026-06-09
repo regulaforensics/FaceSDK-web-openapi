@@ -89,7 +89,7 @@ components:
           $ref: "#/components/schemas/detectAll"
         livenessTransactionId:
           type: string
-          description: ""
+          description: "Identifier of the completed liveness transaction whose captured face is used as one of the comparison inputs. If this parameter is provided, it replaces one of the images in the matching request."
 
     MatchResponse:
       title: "MatchResponse"
