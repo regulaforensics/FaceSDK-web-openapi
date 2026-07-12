@@ -130,7 +130,8 @@ components:
           description: "The similarity threshold."
         limit:
           type: integer
-          description: "The maximum number of results to be returned."
+          description: "The maximum number of results to be returned. If not specified, the default value is 100."
+          example: 5
 
     ImageFieldsImage:
       title: "ImageFieldsImage"
