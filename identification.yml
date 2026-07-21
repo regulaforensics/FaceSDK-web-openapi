@@ -320,7 +320,6 @@ components:
       description: "Request body of the group to create data, includes name and metadata."
       required:
         - name
-        - metadata
       properties:
         tag:
           type: string
