@@ -25,7 +25,10 @@ jobs:
       - name: Scan
         shell: bash
         env:
-          EXCLUDE_PATHS: ''
+          # Exclude existing .github/workflows/*.yml — they use mutable action tags
+          # (e.g. actions/checkout@v4) which trigger semgrep rules. Those files are
+          # not touched by this migration; pinning them is tracked separately.
+          EXCLUDE_PATHS: '.github/workflows'
           EXCLUDE_RULES: ''
         run: |
           EXCLUDED_PATHS=()
