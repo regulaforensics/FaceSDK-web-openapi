@@ -33,6 +33,16 @@
       ],
       "automerge": false,
       "enabled": true
+    },
+    {
+      "description": "aquasecurity/trivy-action uses a dynamic version input in reusable workflows and cannot be resolved by Renovate digest lookup",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "aquasecurity/trivy-action"
+      ],
+      "pinDigests": false
     }
   ],
   "github-actions": {
