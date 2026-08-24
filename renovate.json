@@ -32,7 +32,8 @@
         "before 6am on wednesday"
       ],
       "automerge": false,
-      "enabled": true
+      "enabled": true,
+      "minimumReleaseAge": "7 days"
     },
     {
       "description": "aquasecurity/trivy-action uses a dynamic version input in reusable workflows and cannot be resolved by Renovate digest lookup",
@@ -42,7 +43,8 @@
       "matchPackageNames": [
         "aquasecurity/trivy-action"
       ],
-      "pinDigests": false
+      "pinDigests": false,
+      "minimumReleaseAge": "7 days"
     }
   ],
   "github-actions": {
