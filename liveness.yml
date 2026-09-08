@@ -12,15 +12,15 @@ paths:
 
 
       When specifying `tag`, note that only Latin uppercase and lowercase letters, digits, and symbols `-` and `_` are allowed. The maximum supported number of characters is 127.
-      
+
 
       The metadata (device model, screen data, frame size, app ID and version, OS version, platform, SDK version, etc.), a person's selfie and video of the liveness detection session are stored on the backend at:
       `faceapi-session/year={year}/month={month}/day={day}/hour={hour}/minute={minute}/{tag}/transactionId`
-      
+
 
       By default, liveness checks operate with eventual consistency. This means that when you submit a request and receive a response, the associated data (like the selfie and session video) may be saved after the response is sent. If this doesn't meet your requirements, you can switch to strong consistency; refer to the [Architecture page](https://docs.regulaforensics.com/develop/face-sdk/overview/architecture/#consistency-models) for details.
 
-      
+
       To access the liveness transaction data, use GET `/api/v2/liveness?transactionId={transactionId}`.
       "
       operationId: get_liveness_transaction_info
@@ -77,10 +77,68 @@ components:
           description: "Link to the portrait, depends on the selected storage type. [Learn more](https://docs.regulaforensics.com/develop/face-sdk/web-service/administration/storage/)"
         metadata:
           type: object
-          additionalProperties: true          
+          additionalProperties: true
           description: "A free-form object containing person's extended attributes."
         type:
           $ref: "#/components/schemas/LivenessType"
+        enrollResult:
+          $ref: "#/components/schemas/EnrollResult"
+        verifyResult:
+          $ref: "#/components/schemas/VerifyResult"
+
+    EnrollResult:
+      title: "EnrollResult"
+      type: object
+      description: "Result of the enrollment that was requested for the session at its start (via the `enroll` parameter). Returned only when enrollment was requested and the enrollment module is enabled. Populated once the transaction reaches a successful liveness result."
+      properties:
+        enrolled:
+          type: boolean
+          description: "`true` when a new Person was created from the liveness portrait. `false` when the Person was not created because the preliminary 1:N search found matching Persons (see `search`)."
+        person:
+          allOf:
+            - $ref: "./identification.yml#/components/schemas/Person"
+          description: "The Person created by the enrollment. Present only when `enrolled` is `true`."
+        search:
+          $ref: "#/components/schemas/EnrollSearchResult"
+
+    EnrollSearchResult:
+      title: "EnrollSearchResult"
+      type: object
+      description: "Result of the preliminary 1:N search performed before enrollment when the `enroll.search` parameter was provided at session start. Present only when at least one matching Person was found; in that case the Person is not enrolled."
+      properties:
+        persons:
+          type: array
+          description: "Persons matched during the preliminary search."
+          items:
+            $ref: "./search.yml#/components/schemas/SearchPerson"
+
+    VerifyResult:
+      title: "VerifyResult"
+      type: object
+      description: "Result of the verification that was requested for the session at its start (via the `verify` parameter). Returned only when verification was requested and the enrollment module is enabled."
+      properties:
+        verified:
+          type: boolean
+          description: "`true` when liveness is confirmed and the liveness portrait matches the target Person above the requested threshold. `false` when liveness failed or the faces did not match."
+        person:
+          allOf:
+            - $ref: "./identification.yml#/components/schemas/Person"
+          description: "The target Person the portrait was verified against."
+        match:
+          $ref: "#/components/schemas/VerifyResultMatch"
+
+    VerifyResultMatch:
+      title: "VerifyResultMatch"
+      type: object
+      description: "Face comparison details. Absent when liveness was not confirmed."
+      properties:
+        verified:
+          type: boolean
+          description: "`true` when the face similarity is above the requested threshold."
+        similarity:
+          type: number
+          format: float
+          description: "Face similarity score in the range 0..1."
 
     LivenessType:
       title: "LivenessType"
