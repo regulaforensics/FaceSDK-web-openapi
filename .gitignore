@@ -2,3 +2,7 @@
 *.DS_Store
 *.html
 /sample.json
+openapi.json
+openapitools.json
+.openapi-generator-ignore
+.openapi-generator/
