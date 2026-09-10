@@ -24,8 +24,7 @@ paths:
 
         To access the liveness transaction data, use GET `/api/v2/liveness?transactionId={transactionId}`.
 
-        You can also use liveness as part of the Enroll and Verify flow. For Enroll, provide the `enroll` object with `person`; after a successful liveness check, the captured portrait is used to create a new Person. You can optionally add `search` to look for an existing Person before enrollment. 
-        For Verify, provide the `verify` object with either `personId` or `externalId`; after a successful liveness check, the captured portrait is compared with the enrolled Person using the specified similarity threshold. For details, see <a href="https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/enroll-verify/" target="_blank">Enroll and Verify</a>.
+        You can also use liveness as part of the <a href="https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/enroll-verify/" target="_blank">Enroll and Verify</a> flow.
 
       operationId: get_liveness_transaction_info
       responses:
