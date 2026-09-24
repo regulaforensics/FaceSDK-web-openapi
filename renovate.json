@@ -45,6 +45,13 @@
       ],
       "pinDigests": false,
       "minimumReleaseAge": "7 days"
+    },
+    {
+      "description": "Ignore regulaforensics/reusable-workflows — private repo, Renovate cannot resolve digests",
+      "matchPackageNames": [
+        "regulaforensics/reusable-workflows"
+      ],
+      "enabled": false
     }
   ],
   "github-actions": {
