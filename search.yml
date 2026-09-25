@@ -82,16 +82,16 @@ components:
     FilterSearchRequest:
       title: "FilterSearchRequest"
       type: object
-      description: "Allows to filter the search results based on the Person's `name`. If enabled, only the search results that meet the filter condition will be returned."
+      description: "Allows you to filter search results by Person fields. Currently, filtering is supported only by the `name` field."
       properties:
         op:
           $ref: "#/components/schemas/FilterOp"
         field:
           type: string
-          description: "`name` of the Person."
+          description: "The Person field to which the filter is applied. Currently, only `name` is supported. If another field is specified, the filter is ignored."
         value:
           type: array
-          description: "The list of `name` values against which the `field` is compared."
+          description: "The list of values against which the specified `field` is compared."
           items:
             type: string
 
