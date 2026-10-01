@@ -47,7 +47,7 @@ components:
             type: string
             format: uuid
         threshold:
-          description: "The similarity threshold."
+          description: "Maximum distance allowed for a match (lower value = stricter match)."
           type: number
         limit:
           description: "The maximum number of results to be returned."
