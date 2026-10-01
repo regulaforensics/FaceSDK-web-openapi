@@ -100,7 +100,7 @@ components:
         person:
           allOf:
             - $ref: "./identification.yml#/components/schemas/Person"
-          description: "The Person created during enrollment. Present only when `enrolled` is `true`."
+          description: "The Person created during enrollment. Present only when `enrolled` is `true`. If enrollment was started with an empty person object (`{}`), the Person is created with a randomly generated UUID as its `name`."
         search:
           $ref: "#/components/schemas/EnrollSearchResult"
 
@@ -126,7 +126,7 @@ components:
         person:
           allOf:
             - $ref: "./identification.yml#/components/schemas/Person"
-          description: "The Person the liveness portrait was verified against."
+          description: "The Person the liveness portrait was verified against. Absent when the liveness check fails."
         match:
           $ref: "#/components/schemas/VerifyResultMatch"
 
