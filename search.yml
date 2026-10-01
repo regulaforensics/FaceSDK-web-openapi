@@ -78,6 +78,7 @@ components:
           type: integer
           description: "The lifespan of the Person's records, seconds. Optional."
           default: null
+          nullable: true
 
     FilterSearchRequest:
       title: "FilterSearchRequest"
@@ -189,8 +190,8 @@ components:
             type: array
             items:
               type: integer
-              example: [ x, y ]
-          example: [ [ x, y ] ]
+              example: [ 10, 20 ]
+          example: [ [ 10, 20 ] ]
         landmarksType:
           type: integer
           description: "Internal."

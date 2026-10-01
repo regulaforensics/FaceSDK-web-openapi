@@ -131,7 +131,7 @@ components:
           minItems: 2
           maxItems: 2
           description: "The range of applicable values for this characteristic. If the returned in the response value fits this range, the characteristic is identified as compliant with the requirements. For recommended ranges, see [Face Image Quality Assessment](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/)."
-          example: [x, y]
+          example: [0, 1]
 
     AttributeConfigList:
       title: "AttributeConfigList"
@@ -181,7 +181,7 @@ components:
             format: float
           minItems: 2
           maxItems: 2
-          example: [x, y]
+          example: [0, 0.1]
         status:
           $ref: "#/components/schemas/FaceImageQualityStatus"
         value:
@@ -193,7 +193,7 @@ components:
     RGB:
       title: "RGB"
       type: array
-      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image." 
+      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image."
       items:
         type: integer
       minItems: 3
@@ -203,7 +203,7 @@ components:
     FaceImageQualityStatus:
       title: "FaceImageQualityStatus"
       type: integer
-      description: "The processing status returned for each quality characteristic, see the [FaceImageQualityStatus enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-status/)." 
+      description: "The processing status returned for each quality characteristic, see the [FaceImageQualityStatus enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-status/)."
       enum:
         - 0
         - 1
@@ -557,11 +557,11 @@ components:
 
     FaceRectangular:
       title: "FaceRectangular"
-      description: "The rectangular area of a detected face that is represented by a set of four elements: the X and Y coordinates of the top-left point, and the width and height dimensions of the rectangle."
+      description: "The rectangular area of a detected face that is represented by a set of four elements [x, y, width, height]: the X and Y coordinates of the top-left point, and the width and height dimensions of the rectangle."
       type: array
       items:
         type: number
-      example: [x, y, width, height]
+      example: [120, 80, 200, 240]
 
     FaceAttribute:
       title: "FaceAttribute"
