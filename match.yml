@@ -76,8 +76,6 @@ components:
     MatchImage:
       title: "MatchImage"
       type: object
-      required:
-        - data
       properties:
         index:
           $ref: "#/components/schemas/MatchImageIndex"
@@ -157,7 +155,8 @@ components:
         imageIndex:
           $ref: "#/components/schemas/MatchImageIndex"
         status:
-          $ref: "./common.yml#/components/schemas/FaceSDKResultCode"
+          type: integer
+          description: "Result code, see the [FaceSDKResultCode enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/)."
 
     DetectionFace:
       title: "DetectionFace"
