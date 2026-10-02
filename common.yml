@@ -193,7 +193,7 @@ components:
     RGB:
       title: "RGB"
       type: array
-      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image." 
+      description: "The RGB value of a color for filling background behind a person's silhouette and for aligning the image."
       items:
         type: integer
       minItems: 3
@@ -203,7 +203,7 @@ components:
     FaceImageQualityStatus:
       title: "FaceImageQualityStatus"
       type: integer
-      description: "The processing status returned for each quality characteristic, see the [FaceImageQualityStatus enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-status/)." 
+      description: "The processing status returned for each quality characteristic, see the [FaceImageQualityStatus enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-image-quality-status/)."
       enum:
         - 0
         - 1
@@ -395,9 +395,13 @@ components:
       type: object
       required:
         - code
+        - transactionId
       properties:
         code:
           $ref: "#/components/schemas/FaceSDKResultCode"
+        transactionId:
+          type: string
+          description: "Transaction identifier"
 
     ImageData:
       title: "ImageData"
