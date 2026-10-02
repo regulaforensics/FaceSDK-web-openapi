@@ -217,7 +217,7 @@ components:
       description: "Image ID."
       required: true
       schema:
-        string: uuid
+        format: uuid
         type: string
   responses:
     SuccessEmpty:
