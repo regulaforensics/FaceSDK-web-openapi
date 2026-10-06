@@ -73,7 +73,6 @@ components:
           description: "Result code, see the [FaceSDKResultCode enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/)."
         status:
           type: integer
-          default: null
           nullable: true
           description: "Whether the liveness detection is confirmed `0` or not `1`."
         tag:

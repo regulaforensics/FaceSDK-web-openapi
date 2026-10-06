@@ -77,7 +77,6 @@ components:
         ttl:
           type: integer
           description: "The lifespan of the Person's records, seconds. Optional."
-          default: null
           nullable: true
 
     FilterSearchRequest:
