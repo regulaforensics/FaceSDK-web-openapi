@@ -4,7 +4,13 @@ paths:
   /v2/liveness:
     get:
       parameters:
-        - $ref: "./common.yml#/components/parameters/transactionId"
+        - in: query
+          name: transactionId
+          required: true
+          description: "ID of the current liveness transaction."
+          schema:
+            type: string
+            format: uuid
       tags:
         - liveness 2.0
       summary: 'liveness check'
@@ -36,8 +42,17 @@ paths:
                 $ref: "#/components/schemas/TransactionInfo"
     delete:
       parameters:
-        - $ref: "./common.yml#/components/parameters/transactionId"
-        - $ref: "./common.yml#/components/parameters/tag"
+        - in: query
+          name: transactionId
+          description: "ID of the current liveness transaction."
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: tag
+          description: "A unique tag associated with a liveness transaction session. Used to identify and delete the corresponding transaction."
+          schema:
+            type: string
       tags:
         - liveness 2.0
       summary: delete liveness transaction

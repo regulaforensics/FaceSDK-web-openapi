@@ -22,19 +22,6 @@ components:
       description: "Request header label."
       schema:
         type: string
-    transactionId:
-      in: query
-      name: transactionId
-      description: "ID of the current liveness transaction."
-      schema:
-        type: string
-        format: uuid
-    tag:
-      in: query
-      name: tag
-      description: "A unique tag associated with a liveness transaction session. Used to identify and delete the corresponding transaction."
-      schema:
-        type: string
 
   responses:
     BadLicense:
