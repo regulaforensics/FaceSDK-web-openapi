@@ -447,7 +447,7 @@ components:
     FaceSDKResultCode:
       title: "FaceSDKResultCode"
       type: integer
-      description: "The result code, see the [FaceSDKResultCode enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/)."
+      description: "The result code."
       enum:
         - 0
         - 1
