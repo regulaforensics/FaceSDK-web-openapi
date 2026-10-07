@@ -116,8 +116,7 @@ components:
         imageIndex:
           $ref: "./match.yml#/components/schemas/MatchImageIndex"
         status:
-          type: integer
-          description: "Result code, see the [FaceSDKResultCode enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/)."
+          $ref: "./common.yml#/components/schemas/FaceSDKResultCode"
 
     PersonWithImages:
       title: "PersonWithImages"
