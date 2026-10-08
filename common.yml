@@ -22,21 +22,6 @@ components:
       description: "Request header label."
       schema:
         type: string
-    transactionId:
-      in: query
-      name: transactionId
-      required: true
-      description: "ID of the current liveness transaction."
-      schema:
-        type: string
-        format: uuid
-    tag:
-      in: query
-      name: tag
-      required: true
-      description: "A unique tag associated with a liveness transaction session. Used to identify and delete the corresponding transaction."
-      schema:
-        type: string
 
   responses:
     BadLicense:
@@ -131,7 +116,7 @@ components:
           minItems: 2
           maxItems: 2
           description: "The range of applicable values for this characteristic. If the returned in the response value fits this range, the characteristic is identified as compliant with the requirements. For recommended ranges, see [Face Image Quality Assessment](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/usage/face-detection/face-image-quality-check/)."
-          example: [x, y]
+          example: [0, 1]
 
     AttributeConfigList:
       title: "AttributeConfigList"
@@ -181,7 +166,7 @@ components:
             format: float
           minItems: 2
           maxItems: 2
-          example: [x, y]
+          example: [0, 0.1]
         status:
           $ref: "#/components/schemas/FaceImageQualityStatus"
         value:
@@ -466,7 +451,7 @@ components:
     FaceSDKResultCode:
       title: "FaceSDKResultCode"
       type: integer
-      description: "The result code, see the [FaceSDKResultCode enum](https://docs.regulaforensics.com/develop/face-sdk/web-service/development/enums/face-sdk-result-code/)."
+      description: "The result code."
       enum:
         - 0
         - 1
@@ -509,6 +494,62 @@ components:
         - 252
         - 253
         - 254
+        - 255
+        - 256
+        - 257
+        - 258
+        - 259
+        - 260
+        - 261
+      x-enum-descriptions:
+        - "No issues. The process completed successfully."
+        - "Cannot read image. The file may not be a valid image format or could be corrupted."
+        - "Face not detected."
+        - "Landmarks not detected."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "Cannot read image. The image may be corrupted."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "No appropriate license. Ensure that your license is valid, the required features are enabled, and the environment is configured correctly."
+        - "An internal processing error occurred."
+        - "Incorrect request parameters. Check that the request matches the specification."
+        - "The worker failed because the request parameters are invalid. Check that the request follows the correct format."
+        - "While using Match, fewer than two images were provided."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "An internal processing error occurred."
+        - "Liveness spoofing attempt detected."
+        - "For the Match function, only two images of the same type are allowed."
+        - "An internal processing error occurred."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "The user did not complete the liveness verification within the allowed time."
+        - "A system error occurred during the liveness verification process."
+        - "The user aborted the liveness verification process by clicking the Close button or exiting the application."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Liveness spoofing attempt detected."
+        - "Request processing has been blocked."
+        - "The request cannot be processed because data integrity was violated during transmission."
+        - "Liveness spoofing attempt detected."
+        - "Blink check failed on the backend. This error applies only to the liveness mode with blinking enabled."
+        - "The quality of the captured images is too low to perform reliable detection. The user must pass liveness verification again with better lighting, a clearer background, and a properly positioned camera."
+        - "The frame size is below the required minimum. Liveness verification requires at least HD-quality frames."
       x-enum-varnames:
         - "FACER_OK"
         - "FR_IMAGE_EMPTY"
@@ -551,6 +592,13 @@ components:
         - "FACER_ABORTED_LIVENESS_TRANSACTION"
         - "FACER_GENERAL_ERROR"
         - "FACER_PASSIVE_LIVENESS_FAIL"
+        - "FACER_PRINTED_FACE_DETECTED"
+        - "FACER_BLOCKED_REQUEST"
+        - "FACER_CORRUPTED_REQUEST"
+        - "FACER_GENERAL_CHECK_FAIL_RTD"
+        - "FACER_BLINK_FAILED"
+        - "FACER_BAD_FACE_QUALITY_LIVENESS_TRANSACTION"
+        - "FACER_BAD_FRAME_SIZE"
 
     Thumbnail:
       title: "Thumbnail"
@@ -561,11 +609,11 @@ components:
 
     FaceRectangular:
       title: "FaceRectangular"
-      description: "The rectangular area of a detected face that is represented by a set of four elements: the X and Y coordinates of the top-left point, and the width and height dimensions of the rectangle."
+      description: "The rectangular area of a detected face that is represented by a set of four elements [x, y, width, height]: the X and Y coordinates of the top-left point, and the width and height dimensions of the rectangle."
       type: array
       items:
         type: number
-      example: [x, y, width, height]
+      example: [120, 80, 200, 240]
 
     FaceAttribute:
       title: "FaceAttribute"
