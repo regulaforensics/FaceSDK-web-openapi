@@ -31,9 +31,9 @@
       "schedule": [
         "before 6am on wednesday"
       ],
-      "minimumReleaseAge": "7 days",
       "automerge": false,
-      "enabled": true
+      "enabled": true,
+      "minimumReleaseAge": "7 days"
     },
     {
       "description": "Ignore regulaforensics/reusable-workflows — private repo, Renovate cannot resolve digests",
