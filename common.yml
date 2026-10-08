@@ -380,9 +380,13 @@ components:
       type: object
       required:
         - code
+        - transactionId
       properties:
         code:
           $ref: "#/components/schemas/FaceSDKResultCode"
+        transactionId:
+          type: string
+          description: "Transaction identifier"
 
     ImageData:
       title: "ImageData"
