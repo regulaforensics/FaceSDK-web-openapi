@@ -131,10 +131,8 @@ paths:
       responses:
         404:
           $ref: "#/components/responses/PersonNotFound"
-          description: "Such an image does not exists."
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
-          description: "Person does not have such an image."
         200:
           description: "Successful operation, return image."
           content:
@@ -217,7 +215,6 @@ components:
       description: "Image ID."
       required: true
       schema:
-        string: uuid
         type: string
   responses:
     SuccessEmpty:

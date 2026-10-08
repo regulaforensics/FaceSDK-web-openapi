@@ -76,8 +76,6 @@ components:
     MatchImage:
       title: "MatchImage"
       type: object
-      required:
-        - data
       properties:
         index:
           $ref: "#/components/schemas/MatchImageIndex"
@@ -173,8 +171,8 @@ components:
             type: array
             items:
               type: number
-              example: [ x, y ]
-          example: [ [ x, y ] ]
+              example: [ 10, 20 ]
+          example: [ [ 10, 20 ] ]
         rotationAngle:
           description: "Angle of rotation of the face from the vertical axis, degrees."
           type: number
