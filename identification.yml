@@ -127,7 +127,7 @@ components:
         threshold:
           type: number
           format: float
-          description: "The similarity threshold."
+          description: "Maximum distance allowed for a match (lower value = stricter match)."
         limit:
           type: integer
           default: 100
@@ -197,7 +197,7 @@ components:
         threshold:
           type: number
           format: float
-          description: "The similarity threshold."
+          description: "Maximum distance allowed for a match (lower value = stricter match)."
         limit:
           type: integer
           description: "The maximum number of results to be returned."
