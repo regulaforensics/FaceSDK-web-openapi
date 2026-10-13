@@ -36,15 +36,12 @@
       "minimumReleaseAge": "7 days"
     },
     {
-      "description": "aquasecurity/trivy-action uses a dynamic version input in reusable workflows and cannot be resolved by Renovate digest lookup",
-      "matchManagers": [
-        "github-actions"
-      ],
+      "description": "Ignore regulaforensics/reusable-workflows — private repo, Renovate cannot resolve digests",
       "matchPackageNames": [
-        "aquasecurity/trivy-action"
+        "regulaforensics/reusable-workflows"
       ],
-      "pinDigests": false,
-      "minimumReleaseAge": "7 days"
+      "minimumReleaseAge": false,
+      "enabled": false
     }
   ],
   "github-actions": {
