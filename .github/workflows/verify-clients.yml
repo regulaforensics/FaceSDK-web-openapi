@@ -25,6 +25,8 @@ jobs:
 
       - name: Verify update Python client
         working-directory: python-client
+        env:
+          API_BASE_PATH: ${{ github.base_ref == 'develop' && 'https://nightly-faceapi.regulaforensics.com' || github.base_ref == 'stable' && 'https://rc-faceapi.regulaforensics.com' || github.base_ref == 'master' && 'https://faceapi.regulaforensics.com' || 'https://nightly-faceapi.regulaforensics.com' }}
         run: |
           ./update-models.sh strict
           ./setup.sh
@@ -46,6 +48,8 @@ jobs:
 
       - name: Verify update CSharp client
         working-directory: csharp-client
+        env:
+          API_BASE_PATH: ${{ github.base_ref == 'develop' && 'https://nightly-faceapi.regulaforensics.com' || github.base_ref == 'stable' && 'https://rc-faceapi.regulaforensics.com' || github.base_ref == 'master' && 'https://faceapi.regulaforensics.com' || 'https://nightly-faceapi.regulaforensics.com' }}
         run: |
           ./update-models.sh strict
           ./setup.sh
@@ -67,6 +71,8 @@ jobs:
 
       - name: Verify update JS client
         working-directory: js-client
+        env:
+          API_BASE_PATH: ${{ github.base_ref == 'develop' && 'https://nightly-faceapi.regulaforensics.com' || github.base_ref == 'stable' && 'https://rc-faceapi.regulaforensics.com' || github.base_ref == 'master' && 'https://faceapi.regulaforensics.com' || 'https://nightly-faceapi.regulaforensics.com' }}
         run: |
           ./update-models.sh
           ./setup.sh
@@ -95,6 +101,8 @@ jobs:
 
       - name: Verify update Java client
         working-directory: java-client
+        env:
+          API_BASE_PATH: ${{ github.base_ref == 'develop' && 'https://nightly-faceapi.regulaforensics.com' || github.base_ref == 'stable' && 'https://rc-faceapi.regulaforensics.com' || github.base_ref == 'master' && 'https://faceapi.regulaforensics.com' || 'https://nightly-faceapi.regulaforensics.com' }}
         run: |
           ./update-models.sh strict
           ./gradlew clean :example:run
