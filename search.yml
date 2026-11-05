@@ -189,7 +189,7 @@ components:
             type: array
             items:
               type: integer
-              example: [ 10, 20 ]
+            example: [ 10, 20 ]
           example: [ [ 10, 20 ] ]
         landmarksType:
           type: integer
