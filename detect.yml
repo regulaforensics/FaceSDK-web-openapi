@@ -155,7 +155,7 @@ components:
             type: array
             items:
               type: integer
-              example: [ 10, 20 ]
+            example: [ 10, 20 ]
           example: [ [ 10, 20 ] ]
         quality:
           $ref: "#/components/schemas/DetectionQuality"
