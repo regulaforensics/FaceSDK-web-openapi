@@ -502,6 +502,8 @@ components:
         - 259
         - 260
         - 261
+        - 263
+        - 264
       x-enum-descriptions:
         - "No issues. The process completed successfully."
         - "Cannot read image. The file may not be a valid image format or could be corrupted."
@@ -551,6 +553,8 @@ components:
         - "Blink check failed on the backend. This error applies only to the liveness mode with blinking enabled."
         - "The quality of the captured images is too low to perform reliable detection. The user must pass liveness verification again with better lighting, a clearer background, and a properly positioned camera."
         - "The frame size is below the required minimum. Liveness verification requires at least HD-quality frames."
+        - "Multiple faces were detected during a liveness check with the Single Face mode enabled."
+        - "An internal processing error occurred."
       x-enum-varnames:
         - "FACER_OK"
         - "FR_IMAGE_EMPTY"
@@ -600,6 +604,8 @@ components:
         - "FACER_BLINK_FAILED"
         - "FACER_BAD_FACE_QUALITY_LIVENESS_TRANSACTION"
         - "FACER_BAD_FRAME_SIZE"
+        - "FACER_SINGLE_FACE_ERROR"
+        - "FACER_IN_PROCESS_STATUS_SESSION_ERROR"
 
     Thumbnail:
       title: "Thumbnail"
