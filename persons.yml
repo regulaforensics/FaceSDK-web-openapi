@@ -8,8 +8,10 @@ paths:
       tags:
         - person
       summary: Create person
+      description: "Creates a Person record. To associate one or more face images with the Person, add the images separately using `POST /persons/{personId}/images` after the Person is created."
       operationId: create_person
       requestBody:
+        description: "Attributes of the Person to create."
         required: true
         content:
           application/json:
@@ -29,6 +31,7 @@ paths:
       tags:
         - person
       summary: Get person
+      description: "Returns the Person identified by `personId`."
       operationId: get_person
       responses:
         200:
@@ -41,9 +44,10 @@ paths:
       tags:
         - person
       summary: Update person
+      description: "Updates the Person identified by `personId`."
       operationId: update_person
       requestBody:
-        description: "Request body for the Person to update."
+        description: "Attributes of the Person to update."
         required: true
         content:
           application/json:
@@ -60,6 +64,7 @@ paths:
       tags:
         - person
       summary: Delete person
+      description: "Deletes the Person identified by `personId`."
       operationId: delete_person
       responses:
         204:
@@ -77,13 +82,14 @@ paths:
       tags:
         - person
       summary: Get person images
+      description: "Returns the images associated with the specified Person. Use `page` and `size` to paginate the result."
       operationId: get_all_images_by_person_id
       parameters:
         - $ref: "./common.yml#/components/parameters/page"
         - $ref: "./common.yml#/components/parameters/size"
       responses:
         200:
-          description: "Successful operation; return all person images."
+          description: "Returns a page of images associated with the Person."
           content:
             application/json:
               schema:
@@ -96,9 +102,10 @@ paths:
       tags:
         - person
       summary: Add person image
+      description: "Adds a face image to an existing Person. The image can be submitted directly as Base64-encoded content or provided by reference using an accessible image URL."
       operationId: add_image_to_person
       requestBody:
-        description: "Image to add."
+        description: "Face image to associate with the Person."
         required: true
         content:
           application/json:
@@ -107,7 +114,7 @@ paths:
 
       responses:
         200:
-          description: "Successful operation; return image ID."
+          description: "Image added successfully. Returns information about the added image."
           content:
             application/json:
               schema:
@@ -124,7 +131,8 @@ paths:
     get:
       tags:
         - person
-      summary: Get person image by id
+      summary: Get person image by ID
+      description: "Returns the image identified by `imageId` for the specified Person."
       operationId: get_image_of_person
       parameters:
         - $ref: "#/components/parameters/imageId"
@@ -134,7 +142,7 @@ paths:
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         200:
-          description: "Successful operation, return image."
+          description: "Image returned successfully."
           content:
             image/*:
               schema:
@@ -143,7 +151,8 @@ paths:
     delete:
       tags:
         - person
-      summary: Delete image of person
+      summary: Delete person image
+      description: "Deletes the image identified by `imageId` from the specified Person."
       operationId: delete_image_of_person
       parameters:
         - $ref: "#/components/parameters/imageId"
@@ -153,7 +162,7 @@ paths:
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
-          description: "Person with the personId or image with the imageId is not found."
+          description: "The Person specified by `personId` or the image specified by `imageId` was not found."
           content:
             application/json:
               schema:
@@ -167,13 +176,14 @@ paths:
       tags:
         - person
       summary: Get person groups
+      description: "Returns the groups associated with the specified Person. Use `page` and `size` to paginate the result."
       operationId: get_all_groups_by_person_id
       parameters:
         - $ref: "./common.yml#/components/parameters/page"
         - $ref: "./common.yml#/components/parameters/size"
       responses:
         200:
-          description: "Successful operation; return all groups."
+          description: "Returns a page of groups associated with the Person."
           content:
             application/json:
               schema:
@@ -187,6 +197,7 @@ components:
   schemas:
     ImagePage:
       title: "ImagePage"
+      description: "Paginated response containing images associated with a Person."
       allOf:
         - $ref: "./common.yml#/components/schemas/Page"
         - $ref: '#/components/schemas/ImagePageItems'
@@ -197,6 +208,7 @@ components:
       properties:
         items:
           type: array
+          description: "Images returned on the current page."
           items:
             $ref: "./identification.yml#/components/schemas/Image"
 
@@ -216,17 +228,18 @@ components:
       required: true
       schema:
         type: string
+        format: uuid
   responses:
     SuccessEmpty:
-      description: "Successful operation, return nothing."
+      description: "The operation completed successfully. No response body is returned."
     SuccessPerson:
-      description: "Successful operation; return person."
+      description: "Returns the Person."
       content:
         application/json:
           schema:
             $ref: "./identification.yml#/components/schemas/Person"
     PersonNotFound:
-      description: "Person with the personId is not found."
+      description: "The Person specified by `personId` was not found."
       content:
         application/json:
           schema:

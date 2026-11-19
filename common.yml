@@ -5,14 +5,14 @@ components:
     page:
       name: page
       in: query
-      description: "The page number to get a list of persons or groups."
+      description: "Page number of the returned collection."
       schema:
         type: integer
         default: 1
     size:
       name: size
       in: query
-      description: "The page size with a list of persons or groups, items."
+      description: "Maximum number of items returned per page."
       schema:
         type: integer
         default: 1000
@@ -411,7 +411,7 @@ components:
         metadata:
           type: object
           additionalProperties: true
-          description: "A free-form object containing group's extended attributes."
+          description: "Additional diagnostic information associated with the error."
 
     Page:
       title: "Page"
