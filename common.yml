@@ -19,7 +19,7 @@ components:
     x-request:
       in: header
       name: X-RequestID
-      description: "Request header label."
+      description: "Identifier used to label requests related to the same context. The value is included in logs for all labeled requests."
       schema:
         type: string
 
@@ -32,6 +32,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/OperationLog"
+    SuccessEmpty:
+      description: "The operation completed successfully. No response body is returned."
 
   schemas:
     ProcessParam:

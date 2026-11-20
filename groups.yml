@@ -75,7 +75,7 @@ paths:
               $ref: "./identification.yml#/components/schemas/GroupToCreate"
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -89,7 +89,7 @@ paths:
       operationId: delete_group
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         404:
           $ref: "#/components/responses/GroupNotFound"
 
@@ -137,7 +137,7 @@ paths:
               $ref: "#/components/schemas/UpdateGroup"
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -155,9 +155,6 @@ components:
         format: uuid
 
   responses:
-    SuccessEmpty:
-      description: "The operation completed successfully. No response body is returned."
-
     SuccessGroup:
       description: "Returns the Group."
       content:
@@ -177,6 +174,11 @@ components:
       title: "UpdateGroup"
       type: object
       description: "Specifies the Persons to add to or remove from a Group."
+      anyOf:
+        - required:
+            - addItems
+        - required:
+            - removeItems
       properties:
         addItems:
           type: array

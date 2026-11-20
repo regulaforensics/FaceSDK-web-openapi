@@ -55,7 +55,7 @@ paths:
               $ref: "./identification.yml#/components/schemas/PersonToUpdateFields"
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -68,7 +68,7 @@ paths:
       operationId: delete_person
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -158,7 +158,7 @@ paths:
         - $ref: "#/components/parameters/imageId"
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -219,8 +219,8 @@ components:
       description: "Person ID."
       required: true
       schema:
-        format: uuid
         type: string
+        format: uuid
     imageId:
       name: imageId
       in: path
@@ -228,10 +228,7 @@ components:
       required: true
       schema:
         type: string
-        format: uuid
   responses:
-    SuccessEmpty:
-      description: "The operation completed successfully. No response body is returned."
     SuccessPerson:
       description: "Returns the Person."
       content:

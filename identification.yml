@@ -57,10 +57,12 @@ components:
           description: "Person ID."
         createdAt:
           type: string
-          description: "Person creation date."
+          format: date-time
+          description: "Person creation date and time."
         updatedAt:
           type: string
-          description: "Person update date."
+          format: date-time
+          description: "Person update date and time."
 
     PersonFields:
       title: "PersonFields"
@@ -87,7 +89,8 @@ components:
             format: uuid
         expireAt:
           type: string
-          description: "Person expiration date."
+          format: date-time
+          description: "Person expiration date and time."
 
     PersonToUpdateFields:
       title: "PersonToUpdateFields"
@@ -96,7 +99,7 @@ components:
       properties:
         externalId:
           type: string
-          description: "Person's ID, used for linking search results to an ID in an external system. Can be set when creating a Person, stored in the database, and included in the search to return only Persons with the specified ID. Optional."
+          description: "Identifier used to associate the Person with a record in an external system. The value is stored with the Person and returned in Person data."
         name:
           type: string
           description: "Person's name."
@@ -104,12 +107,6 @@ components:
           type: object
           additionalProperties: true
           description: "A free-form object containing additional Person attributes."
-        groups:
-          type: array
-          description: "Groups a person should be placed to. If no group is specified in request, a Default group is created and the person is placed to it."
-          items:
-            type: string
-            format: uuid
 
     ImageFields:
       title: "ImageFields"
@@ -128,7 +125,8 @@ components:
         threshold:
           type: number
           format: float
-          description: "Maximum face distance allowed for a result to qualify as a match. A result is considered a match when its distance does not exceed this value. Lower values make matching stricter."
+          default: 0.2
+          description: "Maximum face distance allowed for a result to qualify as a match. A result is considered a match when its distance does not exceed this value. Lower values make matching stricter. If omitted, the default value is `0.2`."
         limit:
           type: integer
           default: 100
@@ -138,18 +136,34 @@ components:
     ImageFieldsImage:
       title: "ImageFieldsImage"
       type: object
-      description: "Image submitted for face identification."
+      description: |
+        Image submitted for face identification.
+
+        Provide at least one image source: `content`, `livenessTransactionId`, or `imageUrl`.
+        If multiple sources are provided, they are used in the following priority order:
+        `livenessTransactionId` → `content` → `imageUrl`.
+      anyOf:
+        - required:
+          - content
+        - required:
+          - livenessTransactionId
+        - required:
+          - imageUrl
       properties:
         contentType:
           type: string
           description: "Original media type of the uploaded image."
         content:
           $ref: "./common.yml#/components/schemas/ImageData"
+        livenessTransactionId:
+          type: string
+          format: uuid
+          description: "ID of the liveness transaction whose captured face image is used for the search."
         imageUrl:
           type: string
-          description: "Location of the image to process. Supported schemes are `s3://`, `gs://`, `file://`, `http://`, and `https://`. The service must have access to the referenced resource. If both `content` and `imageUrl` are provided, `content` takes precedence."
+          description: "Location of the image to process. Supported schemes are `s3://`, `gs://`, `file://`, `http://`, and `https://`. The service must have access to the referenced resource. If multiple sources are provided, they are used in the following priority order: `livenessTransactionId` → `content` → `imageUrl`."
         resizeOptions:
-          $ref: "#/components/schemas/ResizeOptions"
+            $ref: "#/components/schemas/ResizeOptions"
 
     AddImageToPersonResponse:
       title: "AddImageToPersonResponse"
@@ -164,7 +178,8 @@ components:
           description: "Original media type of the returned image."
         createdAt:
           type: string
-          description: "Returned image creation date."
+          format: date-time
+          description: "Returned image creation date and time."
         path:
           type: string
           description: "Returned image path."
@@ -195,13 +210,6 @@ components:
           description: "Session identifier."
         image:
           $ref: "#/components/schemas/AddImageToPersonRequestImage"
-        threshold:
-          type: number
-          format: float
-          description: "Maximum distance allowed for a match (lower value = stricter match)."
-        limit:
-          type: integer
-          description: "The maximum number of results to be returned."
 
     AddImageToPersonRequestImage:
       title: "AddImageToPersonRequestImage"
@@ -252,10 +260,12 @@ components:
           description: "Original media type of the returned image."
         createdAt:
           type: string
-          description: "Returned image creation date."
+          format: date-time
+          description: "Returned image creation date and time."
         updatedAt:
           type: string
-          description: "Returned image update date."
+          format: date-time
+          description: "Returned image update date and time."
         path:
           type: string
           description: "Returned image path."
@@ -300,7 +310,8 @@ components:
           description: "Group ID."
         createdAt:
           type: string
-          description: "Group creation date."
+          format: date-time
+          description: "Group creation date and time."
 
     GroupResponse:
       title: "GroupResponse"

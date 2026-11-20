@@ -65,6 +65,9 @@ components:
         - $ref: "./common.yml#/components/schemas/TransactionLabels"
         - $ref: "#/components/schemas/SearchParameters"
         - $ref: "./identification.yml#/components/schemas/ImageFields"
+        - type: object
+          required:
+            - image
 
     SearchParameters:
       title: "SearchParameters"
@@ -75,7 +78,7 @@ components:
           $ref: "#/components/schemas/SearchParametersCreatePerson"
         groupIds:
           type: array
-          description: "IDs of the groups in which the search is performed."
+          description: "IDs of the groups in which the search is performed. If omitted, the search is performed in the `default` group."
           items:
             type: string
             format: uuid
@@ -102,7 +105,11 @@ components:
     FilterSearchRequest:
       title: "FilterSearchRequest"
       type: object
-      description: "Applies an additional filter to Persons considered during the face search. Currently, filtering is supported only by the `name` field."
+      description: |
+        Applies an additional filter to Persons considered during the face search.
+        For the filter to be applied, `op`, `field`, and `value` must all be provided.
+        If any of these fields is omitted, the filter is ignored.
+        Currently, filtering is supported only by the `name` field. Filters using other fields are ignored.
       properties:
         op:
           $ref: "#/components/schemas/FilterOp"
@@ -143,15 +150,16 @@ components:
         similarity:
           type: number
           format: float
-          description: "Similarity score."
+          minimum: 0
+          maximum: 1
+          description: "Face similarity score calculated from `distance`. The value ranges from `0` to `1`, where `0` means no similarity and `1` means identical faces."
+
         distance:
           type: number
           format: float
-          description: |
-            Face distance between the submitted search face and this Person image.
-            Lower values indicate greater face similarity.
-            The search `threshold` is applied to this value to determine whether
-            the result qualifies as a match.
+          minimum: 0
+          maximum: 2
+          description: "L2 vector distance between the submitted search face and this Person image. The value ranges from `0` to `2`: `0` means identical face descriptors, while `2` means maximally different descriptors. Lower values indicate greater face similarity. The search `threshold` is applied to this value to determine whether the result qualifies as a match."
 
     SearchResult:
       title: "SearchResult"

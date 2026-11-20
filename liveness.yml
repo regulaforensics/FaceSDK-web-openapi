@@ -60,7 +60,7 @@ paths:
       operationId: delete_liveness_transaction
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
 
 components:
   schemas:
@@ -169,7 +169,3 @@ components:
         - ACTIVE
         - PASSIVE
         - PASSIVE_WITH_BLINK
-
-  responses:
-    SuccessEmpty:
-      description: "Successful operation, return nothing."
