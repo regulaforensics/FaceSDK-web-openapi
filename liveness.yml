@@ -60,7 +60,7 @@ paths:
       operationId: delete_liveness_transaction
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
 
 components:
   schemas:
@@ -76,7 +76,7 @@ components:
           description: "Whether the liveness detection is confirmed `0` or not `1`."
         tag:
           type: string
-          description: "Session identificator, should be unique for each session."
+          description: "Session identifier, should be unique for each session."
         transactionId:
           type: string
           description: "Transaction ID, there can be several transactions within one session."
@@ -169,7 +169,3 @@ components:
         - ACTIVE
         - PASSIVE
         - PASSIVE_WITH_BLINK
-
-  responses:
-    SuccessEmpty:
-      description: "Successful operation, return nothing."

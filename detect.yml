@@ -55,7 +55,7 @@ components:
       properties:
         tag:
           type: string
-          description: "Session identificator, should be unique for each session."
+          description: "Session identifier, should be unique for each session."
         processParam:
           $ref: "./common.yml#/components/schemas/ProcessParam"
         image:

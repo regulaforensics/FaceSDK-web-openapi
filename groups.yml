@@ -8,26 +8,29 @@ paths:
       tags:
         - group
       summary: Get groups
+      description: "Returns the Groups available in the identification database. Use `page` and `size` to paginate the result."
       operationId: get_all_groups
       parameters:
         - $ref: "./common.yml#/components/parameters/page"
         - $ref: "./common.yml#/components/parameters/size"
       responses:
         200:
-          description: "Successful operation, return all groups."
+          description: "Returns a page of Groups."
           content:
             application/json:
               schema:
                 $ref: "./identification.yml#/components/schemas/GroupPage"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
+
     post:
       tags:
         - group
       summary: Create group
+      description: "Creates a Group in the identification database."
       operationId: create_group
       requestBody:
-        description: "Request body for the group to create."
+        description: "Attributes of the Group to create."
         required: true
         content:
           application/json:
@@ -47,6 +50,7 @@ paths:
       tags:
         - group
       summary: Get group
+      description: "Returns the Group identified by `groupId`."
       operationId: get_group
       responses:
         200:
@@ -55,13 +59,15 @@ paths:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
           $ref: "#/components/responses/GroupNotFound"
+
     put:
       tags:
         - group
       summary: Update group
+      description: "Updates the Group identified by `groupId`."
       operationId: update_group
       requestBody:
-        description: "Request body for the group to update."
+        description: "Attributes of the Group to update."
         required: true
         content:
           application/json:
@@ -69,19 +75,21 @@ paths:
               $ref: "./identification.yml#/components/schemas/GroupToCreate"
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
           $ref: "#/components/responses/GroupNotFound"
+
     delete:
       tags:
         - group
       summary: Delete group
+      description: "Deletes the Group identified by `groupId`."
       operationId: delete_group
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         404:
           $ref: "#/components/responses/GroupNotFound"
 
@@ -93,13 +101,14 @@ paths:
       tags:
         - group
       summary: Get group persons
+      description: "Returns the Persons associated with the specified Group. Use `page` and `size` to paginate the result."
       operationId: get_all_persons_by_group_id
       parameters:
         - $ref: "./common.yml#/components/parameters/page"
         - $ref: "./common.yml#/components/parameters/size"
       responses:
         "200":
-          description: "Successful operation, return all persons."
+          description: "Returns a page of Persons associated with the Group."
           content:
             application/json:
               schema:
@@ -107,18 +116,20 @@ paths:
         "400":
           $ref: "./common.yml#/components/responses/BadRequest"
         "404":
-          description: "Group with the groupId or persons with the personIds are not found."
+          description: "The Group specified by `groupId` was not found."
           content:
             application/json:
               schema:
                 $ref: "./common.yml#/components/schemas/OperationLog"
+
     put:
       tags:
         - group
       summary: Add/remove persons to group
+      description: "Adds Persons to or removes Persons from the Group identified by `groupId`."
       operationId: update_persons_in_group
       requestBody:
-        description: "Request body for person IDs to add or remove."
+        description: "IDs of the Persons to add to or remove from the Group."
         required: true
         content:
           application/json:
@@ -126,7 +137,7 @@ paths:
               $ref: "#/components/schemas/UpdateGroup"
       responses:
         204:
-          $ref: "#/components/responses/SuccessEmpty"
+          $ref: "./common.yml#/components/responses/SuccessEmpty"
         400:
           $ref: "./common.yml#/components/responses/BadRequest"
         404:
@@ -144,16 +155,15 @@ components:
         format: uuid
 
   responses:
-    SuccessEmpty:
-      description: "Successful operation, return nothing."
     SuccessGroup:
-      description: "Successful operation; return group."
+      description: "Returns the Group."
       content:
         application/json:
           schema:
             $ref: "./identification.yml#/components/schemas/Group"
+
     GroupNotFound:
-      description: "Group with the groupId is not found."
+      description: "The Group specified by `groupId` was not found."
       content:
         application/json:
           schema:
@@ -163,17 +173,22 @@ components:
     UpdateGroup:
       title: "UpdateGroup"
       type: object
-      description: "Update group."
+      description: "Specifies the Persons to add to or remove from a Group."
+      anyOf:
+        - required:
+            - addItems
+        - required:
+            - removeItems
       properties:
         addItems:
           type: array
-          description: "Add items."
+          description: "IDs of the Persons to add to the Group."
           items:
             type: string
             format: uuid
         removeItems:
           type: array
-          description: "Remove items."
+          description: "IDs of the Persons to remove from the Group."
           items:
             type: string
             format: uuid

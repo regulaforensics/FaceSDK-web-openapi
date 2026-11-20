@@ -9,11 +9,30 @@ paths:
         required: false
         schema:
           type: boolean
-        description: "When enabled, the response includes Base64-encoded images of matched persons. Each entry in the `persons` array contains an `images` field with image IDs and content. If omitted or set to false, images are excluded."
+        description: "Whether to include the matched Persons' images and their Base64-encoded content in the response. If set to `true`, each Person in the `persons` array includes the `images` field. If omitted or set to `false`, the `images` field is not returned."
     post:
       tags:
         - search
       summary: Find person by image in groups
+      description: |
+        Searches for Persons by a face image.
+
+        Use `groupIds` to limit the search to specific groups and `filter` to additionally
+        filter Persons by supported fields.
+
+        By default, the operation only searches for existing Persons. To create a new Person
+        when no matching Person is found, provide the `createPerson` object. In this case,
+        the new Person is created using the descriptor calculated from the submitted search image.
+
+        The `threshold` parameter defines the maximum face distance allowed for a match:
+        lower values make the search stricter. The returned `distance` value indicates
+        how close the matched face is to the submitted face; lower values indicate greater similarity.
+
+        Set `detectAll` to `true` to detect and search for all faces in the submitted image.
+        Otherwise, only the most central face is processed.
+
+        Set the `withImages` query parameter to `true` to include the matched Persons'
+        images and their Base64-encoded content in the response.
       operationId: search
       requestBody:
         required: true
@@ -23,13 +42,13 @@ paths:
               $ref: "#/components/schemas/SearchRequest"
       responses:
         200:
-          description: "Successful operation; the search result is returned."
+          description: "Search completed successfully; matching Persons are returned."
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchResult"
         201:
-          description: "New person created with the search photo and the data specified."
+          description: "A new Person was created because no matching Person was found and `createPerson` was provided in the request. The Person is created using the submitted search image and the data specified in `createPerson`."
           content:
             application/json:
               schema:
@@ -41,21 +60,25 @@ components:
   schemas:
     SearchRequest:
       title: "SearchRequest"
+      description: "Search request containing transaction labels, search options, and parameters of the image used to find matching Persons."
       allOf:
         - $ref: "./common.yml#/components/schemas/TransactionLabels"
         - $ref: "#/components/schemas/SearchParameters"
         - $ref: "./identification.yml#/components/schemas/ImageFields"
+        - type: object
+          required:
+            - image
 
     SearchParameters:
       title: "SearchParameters"
       type: object
-      description: "Request search data."
+      description: "Parameters that control the search scope, filtering, and optional creation of a new Person when no match is found."
       properties:
         createPerson:
           $ref: "#/components/schemas/SearchParametersCreatePerson"
         groupIds:
           type: array
-          description: "IDs of the groups in which the search is performed."
+          description: "IDs of the groups in which the search is performed. If omitted, the search is performed in the `default` group."
           items:
             type: string
             format: uuid
@@ -65,24 +88,28 @@ components:
     SearchParametersCreatePerson:
       title: "SearchParametersCreatePerson"
       type: object
-      description: "If a person is not found, a new person entry is created using the descriptor calculated while searching."
+      description: "Enables automatic Person creation when the search returns no matching Person. When this object is provided and no match is found, a new Person is created using the descriptor calculated from the submitted search image and the data specified in this object. The operation returns HTTP 201. <br><br>If this object is omitted, the search does not create a Person."
       properties:
         name:
           type: string
-          description: "Person's name."
+          description: "Name assigned to the Person if a new Person is created."
         metadata:
           type: object
           additionalProperties: true
-          description: "A free-form object containing person's extended attributes."
+          description: "Free-form metadata assigned to the Person if a new Person is created."
         ttl:
           type: integer
-          description: "The lifespan of the Person's records, seconds. Optional."
+          description: "Lifetime of the Person created through `createPerson`, seconds. This parameter applies only when the search creates a new Person."
           nullable: true
 
     FilterSearchRequest:
       title: "FilterSearchRequest"
       type: object
-      description: "Allows you to filter search results by Person fields. Currently, filtering is supported only by the `name` field."
+      description: |
+        Applies an additional filter to Persons considered during the face search.
+        For the filter to be applied, `op`, `field`, and `value` must all be provided.
+        If any of these fields is omitted, the filter is ignored.
+        Currently, filtering is supported only by the `name` field. Filters using other fields are ignored.
       properties:
         op:
           $ref: "#/components/schemas/FilterOp"
@@ -98,7 +125,11 @@ components:
     FilterOp:
       title: "FilterOp"
       type: string
-      description: "The filter condition, determines the type of comparison to be performed on the `name` values of the Person entity. <br><br>When set to `in`, the `name` values of the Person should match any of the values specified in the `value` list. <br><br>When set to `nin`, the `name` values of the Person should not match any of the values specified in the `value` list."
+      description: |
+        Comparison operator applied to the Person `name` field.
+
+        - `in` — the Person name must match one of the values specified in `value`.
+        - `nin` — the Person name must not match any of the values specified in `value`.
       enum:
         - "in"
         - "nin"
@@ -119,11 +150,16 @@ components:
         similarity:
           type: number
           format: float
-          description: "Similarity score."
+          minimum: 0
+          maximum: 1
+          description: "Face similarity score calculated from `distance`. The value ranges from `0` to `1`, where `0` means no similarity and `1` means identical faces."
+
         distance:
           type: number
           format: float
-          description: "Similarity distance score: the lower the distance, the higher the face's similarity."
+          minimum: 0
+          maximum: 2
+          description: "L2 vector distance between the submitted search face and this Person image. The value ranges from `0` to `2`: `0` means identical face descriptors, while `2` means maximally different descriptors. Lower values indicate greater face similarity. The search `threshold` is applied to this value to determine whether the result qualifies as a match."
 
     SearchResult:
       title: "SearchResult"
@@ -131,10 +167,10 @@ components:
       properties:
         code:
           type: integer
-          description: "Result code. It is returned only with response 200."
+          description: "Result code of the successful search operation."
         persons:
           type: array
-          description: "Array of Person images. It is returned only with response 200."
+          description: "Persons matched against the submitted search image. Each item contains Person data and search-specific match information."
           items:
             $ref: "#/components/schemas/SearchPerson"
 
@@ -152,14 +188,14 @@ components:
           $ref: "#/components/schemas/SearchDetection"
         images:
           type: array
-          description: "Array of Person images."
+          description: "Images associated with the matched Person. This field is returned only when the `withImages` query parameter is `true`. Each image includes its Base64-encoded content."
           items:
             $ref: "#/components/schemas/RecognizeImage"
 
     SearchDetection:
       title: "SearchDetection"
       type: object
-      description: "The array of identified persons."
+      description: "Detection data for the face from the submitted search image that produced this search result. The object contains the detected face region, facial landmarks, and processed portrait data returned according to the request settings."
       properties:
         code:
           type: integer
@@ -167,7 +203,7 @@ components:
         crop:
           type: string
           format: base64
-          description: "Base64 of the aligned and cropped portrait."
+          description: "Base64-encoded aligned and cropped portrait of the detected face. The output is generated according to the applicable `outputImageParams` settings in the search request."
         detectorType:
           type: integer
           description: "Internal."
@@ -182,15 +218,20 @@ components:
           format: base64
           description: "Internal."
         landmarks:
-          description: "Absolute coordinates (x,y) of five points of each detected face: left eye, right eye, nose, left point of lips, right point of lips."
+          description: "Absolute coordinates of five facial landmarks, in this order: left eye, right eye, nose, left corner of the mouth, and right corner of the mouth."
           type: array
           items:
-            description: "Cartesian points. First element - X-axis coordinate. Second element - Y-axis coordinate."
+            description: "Facial landmark coordinates in the `[x, y]` format."
             type: array
             items:
               type: integer
             example: [ 10, 20 ]
-          example: [ [ 10, 20 ] ]
+          example:
+            - [10, 20]
+            - [30, 20]
+            - [20, 30]
+            - [14, 40]
+            - [26, 40]
         landmarksType:
           type: integer
           description: "Internal."

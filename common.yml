@@ -5,21 +5,21 @@ components:
     page:
       name: page
       in: query
-      description: "The page number to get a list of persons or groups."
+      description: "Page number of the returned collection."
       schema:
         type: integer
         default: 1
     size:
       name: size
       in: query
-      description: "The page size with a list of persons or groups, items."
+      description: "Maximum number of items returned per page."
       schema:
         type: integer
         default: 1000
     x-request:
       in: header
       name: X-RequestID
-      description: "Request header label."
+      description: "Identifier used to label requests related to the same context. The value is included in logs for all labeled requests."
       schema:
         type: string
 
@@ -32,6 +32,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/OperationLog"
+    SuccessEmpty:
+      description: "The operation completed successfully. No response body is returned."
 
   schemas:
     ProcessParam:
@@ -411,7 +413,7 @@ components:
         metadata:
           type: object
           additionalProperties: true
-          description: "A free-form object containing group's extended attributes."
+          description: "Additional diagnostic information associated with the error."
 
     Page:
       title: "Page"

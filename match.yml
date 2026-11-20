@@ -54,7 +54,7 @@ components:
       properties:
         tag:
           type: string
-          description: "Session identificator, should be unique for each session."
+          description: "Session identifier, should be unique for each session."
         images:
           type: array
           description: "An array of images to be processed. At least two images must be provided."
@@ -87,6 +87,7 @@ components:
           $ref: "#/components/schemas/detectAll"
         livenessTransactionId:
           type: string
+          format: uuid
           description: "Identifier of the completed liveness transaction whose captured face is used as one of the comparison inputs. If this parameter is provided, it replaces one of the images in the matching request."
 
     MatchResponse:
